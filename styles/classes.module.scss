@@ -1,0 +1,29 @@
+.flx {
+  @include flex;
+}
+
+.flxAll {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flxAI {
+  align-items: center;
+}
+
+.flxJC {
+  justify-content: center;
+}
+
+.flx_col {
+  flex-direction: column;
+}
+
+.flx_row {
+  flex-direction: row;
+}
+
+.toRight {
+  margin-left: auto;
+}

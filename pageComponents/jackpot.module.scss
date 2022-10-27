@@ -1,0 +1,117 @@
+@function stroke($stroke, $color) {
+  $shadow: ();
+  $from: $stroke*-1;
+
+  @for $i from $from through $stroke {
+    @for $j from $from through $stroke {
+      $shadow: append($shadow, $i*1px $j*1px 0 $color, comma);
+    }
+  }
+
+  @return $shadow;
+}
+
+/// Stroke font-character
+/// @param  {Integer} $stroke - Stroke width
+/// @param  {Color}   $color  - Stroke color
+/// @return {Style}           - text-shadow
+@mixin stroke($stroke, $color) {
+  text-shadow: stroke($stroke, $color);
+}
+
+
+.container {
+  width: 100%;
+  position: relative;
+
+  .boxArea {}
+
+  .giftBox {
+    height: 982px;
+    width: 982px;
+    right: -300px;
+    position: absolute;
+    top: 0;
+    user-select: none;
+  }
+
+  .giftImage {}
+
+  .textWrap {
+    @include flex;
+    flex-direction: column;
+
+  }
+
+
+  .testTitle {}
+
+  .giftArea {
+    @include flex;
+    margin-top: 30px;
+
+    .imageArea {}
+
+    .textArea {
+      padding-left: 40px;
+      @include flex;
+      justify-content: flex-end;
+      flex-direction: column;
+
+      h4,
+      h5 {
+        padding: 0;
+        margin: 0;
+      }
+
+      h4 {
+        @include Font_Avenir(80px);
+        margin-bottom: 20px;
+        font-weight: 400;
+        font-size: 80px;
+        line-height: 114px;
+
+        /* identical to box height */
+        letter-spacing: 0.1em;
+        color: $main_red;
+        -webkit-text-stroke-width: 5px;
+        -webkit-text-stroke-color: $main_gold;
+      }
+
+      h5 {
+        @include Font_Avenir(48px);
+        font-weight: 400;
+        line-height: 68px;
+        letter-spacing: 0.1em;
+        color: $color_white;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: $main_gold;
+        margin-bottom: 50px;
+      }
+    }
+  }
+
+  .titleArea {
+    @include Font_Avenir(128px);
+    width: 717px;
+    height: 182px;
+    font-weight: 900;
+    paint-order: stroke;
+    stroke: $main_gold;
+    fill: $color_white;
+    stroke-width: 12px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    letter-spacing: 0.1em;
+
+    text {
+      fill: #FFF;
+    }
+    
+    h4 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+}

@@ -1,0 +1,62 @@
+.searchArea {
+  width: 100%;
+  height: px($SEARCH_INPUT_HEIGHT);
+
+  .wrap {
+    @include flex;
+    height: inherit;
+    border-radius: 8px;
+    // overflow: hidden;
+  }
+
+  .inputWrap {
+    width: 100%;
+
+    input {
+      padding: 14px 24px;
+      outline: none;
+      border: none;
+      background: rgba($color_gray, .04);
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      height: 100%;
+      width: 100%;
+      color: rgba($color_gray, .5);
+      line-height: 20px;
+      @include Font_Avenir(14px);
+
+      &::placeholder {
+        color: rgba($color_gray, .5)
+      }
+    }
+  }
+
+  .btnWrap {
+    button {
+      @include btn-style($main_gold);
+      height: 100%;
+      color: #FFF;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      @include flex;
+
+      @include Font_Avenir(14px);
+      font-weight: 400;
+      line-height: 20px;
+
+      &:focus {
+        outline: rgba($dark_gold, .2) solid 1px;
+        outline-offset: 2px;
+      }
+
+      &:hover {
+        background-color: $main_gold;
+      }
+    }
+    .icon-area {
+      @include size(24px);
+      margin-right: 12px;
+      margin-top: -2px;
+    }
+  }
+}

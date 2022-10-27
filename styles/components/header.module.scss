@@ -1,0 +1,37 @@
+  .content {
+    height: px($HEADER_HEIGHT);
+  }
+
+  .wrap {
+    height: px($HEADER_HEIGHT);
+    width: 100%;
+    height: 100%;
+    @include layoutWrap();
+    @include flex;
+
+    @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
+      padding: 0 20px;
+    }
+  }
+
+  .logoArea {
+    @include flex;
+    align-items: center;
+    width: 329px;
+    // !!!
+    padding-top: 3px;
+  }
+
+  .searchArea {
+    @include flex;
+    align-items: center;
+    flex: 1;
+    max-width: 940px;
+  }
+
+  .authArea {
+    width: 250px;
+    @include flex;
+    align-items: center;
+    justify-content: flex-end;
+  }

@@ -1,0 +1,25 @@
+
+
+@function px($size) {
+  @return #{$size} + px;
+}
+
+
+@mixin layoutWrap {
+  max-width: px($LAYOUT_WRAP_SIZE);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@mixin btn-style($bgColor) {
+  padding: 14px 23px;
+  background-color: $bgColor;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+@mixin Font_Avenir($size: 14px) {
+  font-family:'Avenir Next Georgian';
+  font-size: $size;
+}
