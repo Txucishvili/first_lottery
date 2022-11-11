@@ -9,14 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "^3.0.0-beta.18",
+    "bootstrap": "^5.2.2",
     "classnames": "^2.3.2",
+    "date-fns": "^2.29.3",
+    "framer-motion": "^7.6.2",
+    "lodash": "^4.17.21",
+    "mini-css-extract-plugin": "^2.6.1",
     "next": "13.0.0",
     "react": "18.2.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
+    "rsuite": "^5.22.0",
     "sass": "^1.55.0",
-    "sassync": "^1.0.11"
+    "sassync": "^1.0.11",
+    "styled-components": "^5.3.6",
+    "swiper": "^8.4.4"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0"
   }

@@ -1,11 +1,16 @@
 .smallHeader {
   background-color: $color_gray;
-  height: 46px;
+  height: px($HEADER_SMALL_HEIGHT);
 
   .wrap {
     @include layoutWrap();
 
-    @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
+    @include max-min(max px($BP_MOBILE)) {
+      display: none;
+    }
+
+    
+    @include max-min(max px($LAYOUT_WRAP_SIZE + 20) min px(390)) {
       padding: 0 20px;
     }
   }
@@ -14,18 +19,33 @@
     display: block;
     color: $color_white;
     height: inherit;
+
+    @include max-min(max px($BP_TABLET)) {
+      // display: none;
+    }
   }
 
   .list {
     gap: 24px;
     height: 46px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
+    li {
+      margin: 0;
+      padding: 0;
+      @include flex;
+      position: relative;
+    }
   }
 
   .listItem {
     line-height: 17px;
     font-weight: 400;
     @include Font_Avenir(12px);
+    margin: auto;
+    height: 100%;
 
     &:hover {
       color: $main_gold;
@@ -37,7 +57,19 @@
     }
   }
 
-  .infoArea {}
+  .infoArea {
+    .userInfoToggle {
+      display: none;
+    }
+    @include max-min(max px($BP_TABLET)) {
+      .divideList {
+        display: none;
+      }
+      .userInfoToggle {
+        display: block;
+      }
+    }
+  }
 
   .languageSwitcher {
     height: 100%;
@@ -86,8 +118,11 @@
   .divideList {
     @include flex;
     // padding-right: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-    >div {
+    >div, >li {
       position: relative;
       padding: 0 30px;
       font-size: 14px;

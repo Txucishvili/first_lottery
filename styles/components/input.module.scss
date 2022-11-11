@@ -1,0 +1,186 @@
+.root {
+  display: initial;
+  height: inherit;
+
+  :global {
+    .container {
+      height: inherit;
+
+      .wrap {
+        position: relative;
+        @include flex;
+        height: inherit;
+
+        .withIcon {
+          .clearBtn {
+            right: 65px;
+          }
+        }
+      }
+
+      .inputWrap {
+        width: 100%;
+        // position: relative;
+
+
+        input {
+          width: inherit;
+          height: inherit;
+          outline: none;
+          border: none;
+          border-radius: 12px;
+          font-weight: 400;
+          font-size: inherit;
+          line-height: 27px;
+          padding: 20px;
+
+          color: #3F3F46;
+          position: relative;
+          z-index: 5;
+          background-color: transparent;
+        }
+      }
+
+      .bg {
+        background-color: transparent;
+        border: 1px solid transparent;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 12px;
+      }
+
+      &.size {
+        &--small {}
+
+        &--normal {
+          .inputWrap {
+            height: 44px;
+          }
+        }
+
+        &--large {
+          .inputWrap {
+            height: 64px;
+          }
+        }
+
+        &--full {
+          .inputWrap {
+            height: 100%;
+
+            input {
+              padding: 5px;
+            }
+          }
+        }
+      }
+
+      &.variant {
+        &--simple {
+          .bg {
+            border-color: transparent;
+          }
+
+          ;
+        }
+
+        &--default {
+          .bg {
+            border-color: rgba($color_gray, 0.2);
+            border-radius: 8px;
+          }
+        }
+
+        &--outline {
+
+          input {
+            &+.bg {
+              border-color: rgba($color_gray, 0.2);
+            }
+
+            &:focus {
+              &+.bg {
+                border-color: $main_gold;
+              }
+
+              border-color: $main_gold;
+            }
+          }
+        }
+      }
+    }
+
+
+    .searchBtn {
+      position: absolute;
+      top: 50%;
+      right: 50%;
+
+    }
+
+
+    .bottom {
+      margin: auto 20px auto 0px !important;
+    }
+
+
+
+    .withIconWrap {
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      z-index: 5;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      margin: auto 0px auto 20px;
+
+
+      svg {
+        path {
+          stroke: gray;
+        }
+      }
+    }
+
+    .clearBtn {
+      position: absolute;
+      top: 50%;
+      right: px(20);
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      z-index: 10;
+      border-radius: 100px;
+
+      &.withIconClear {
+        right: px(64);
+      }
+
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+
+      background: rgba(63, 63, 70, 0.06);
+      @include flex-all;
+
+      &:hover {
+        background: rgba(63, 63, 70, 0.26);
+      }
+
+      svg {
+        width: 16px;
+
+        path {
+          // stroke: gray;
+        }
+      }
+    }
+  }
+}

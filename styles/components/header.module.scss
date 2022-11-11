@@ -17,7 +17,7 @@
   .logoArea {
     @include flex;
     align-items: center;
-    width: 329px;
+    // width: 329px;
     // !!!
     padding-top: 3px;
   }
@@ -26,12 +26,27 @@
     @include flex;
     align-items: center;
     flex: 1;
-    max-width: 940px;
+    // max-width: 940px;
+
+    > * {
+      max-width: 807px;
+      margin-inline: auto;
+    }
+
+    @include max-min(max 790px) {
+      display: none;
+    }
+    @include max-min(max 1170px) {
+      // display: none;
+      padding: 0 20px;
+    }
+    
   }
 
   .authArea {
-    width: 250px;
+    // width: 250px;
     @include flex;
     align-items: center;
     justify-content: flex-end;
+    margin-left: auto;
   }

@@ -1,27 +1,147 @@
 .button {
-  &--wrap {
-    padding: 0 16px;
-    @include flex;
-    height: 48px;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    @include Font_Avenir(14px);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    user-select: none;
+  display: initial;
 
-    &:hover {
-      background-color: rgba($color_gray, .05);
-    }
+  :global {
+    .content {
+      &.fontMT {
+        @include Font_LBet_MT(14px);
+      }
 
-    .icon-wrapper {
-      margin-left: 5px;
-    }
+      &:not(.fontMT) {
+        @include Font_Avenir(14px);
+      }
 
-    .textArea {
-      
+      // !!
+      display: contents;
+
+      .button--wrap {
+
+        @include flex-all;
+        // width: 100%;
+        // height: 48px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        font-family: inherit;
+
+
+        user-select: none;
+        border: none;
+        outline: none;
+        transition: all .25s ease-in-out;
+
+        >div {
+          gap: 7px;
+        }
+
+        &:not(.reset) {
+          padding: 0 16px;
+        }
+
+        &.reset {
+          padding: 0;
+        }
+
+        &:active {
+          // background-color: gray;
+        }
+
+        &.icon-wrapper {
+          margin-left: 5px;
+        }
+
+        &.textArea {}
+
+
+        &.full,
+        &.wide {
+          width: 100%;
+          height: 100%;
+        }
+
+        &.size {
+          &--normal {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+
+            &:not(.full) {
+              &:not(.reset) {
+                height: 44px;
+              }
+            }
+          }
+
+          &--medium {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+
+
+            &:not(.full) {
+              height: 48px;
+            }
+
+            &:not(.reset) {
+              &:not(.full) {
+                height: 48px;
+              }
+            }
+          }
+
+          &--large {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+
+            &:not(.full) {
+              &:not(.reset) {
+                height: 60px;
+              }
+            }
+          }
+        }
+
+        &.variant {
+          &--primary {
+            background-color: $main_gold;
+            color: $color_white;
+
+            &:hover {
+              background-color: darken($main_gold, 5%);
+            }
+          }
+
+          &--secondary {
+            background-color: $secondary_yellow;
+            color: $color_white;
+
+            &:hover {
+              background-color: darken($secondary_yellow, 9%);
+            }
+          }
+
+          &--outline {
+            background-color: transparent;
+            color: $color_gray;
+            border: 1px solid rgba($color_gray, .2);
+
+            &:hover {
+              background-color: rgba($color_gray, .07);
+              border-color: 1px solid rgba($color_gray, .2);
+            }
+          }
+
+          &--text {
+            background-color: transparent;
+
+            &:hover {
+              background-color: rgba($color_gray, .05);
+            }
+
+          }
+        }
+      }
     }
   }
 }

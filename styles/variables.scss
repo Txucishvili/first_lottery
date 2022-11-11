@@ -1,6 +1,6 @@
 $light_gray: #D8D8D8;
 
-$main_gold: #D6B100;
+$main_gold: #EDC522;
 $dark_gold: #AE7A16;
 
 $color_gray: #3F3F46;
@@ -8,10 +8,26 @@ $color_white: #FFF;
 
 $main_green: #019E08;
 $main_yellow: #F7B248;
+$secondary_yellow: #DBB246;
 $main_red: #E00000;
+
+$color_light_gray: #ECECEC;
 
 $LAYOUT_WRAP_SIZE: 1530;
 
 $HEADER_HEIGHT: 72;
+$HEADER_SMALL_HEIGHT: 46;
+$HEADER_NAVIGATION_HEIGHT: 41;
 
 $SEARCH_INPUT_HEIGHT: 48;
+
+// bp
+
+$BP_MOBILE: 360;
+$BP_TABLET_SM: 768;
+$BP_TABLET: 970;
+$BP_LAPTOP_SM: 1080;
+$BP_LAPTOP_MEDIUM: 1280;
+$BP_LAPTOP: 1440;
+$BP_LAPTOP_XL: 1992;
+$BP_LAPTOP_XXL: 390;

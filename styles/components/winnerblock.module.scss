@@ -1,0 +1,282 @@
+.root {
+  width: 100%;
+  height: 100%;
+  
+  :global {
+    .ticketBlock {
+      display: block;
+
+      .ticketBlockWrap {
+        padding: 9px 25px;
+        background: rgba(63, 63, 70, 0.03);
+        position: relative;
+        min-height: 44px;
+        @include flex-all;
+
+
+        font-family: 'Avenir Next Georgian';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 31px;
+
+        transition: width .125s ease-in-out, height .125s ease-in-out;
+
+        /* Text */
+        color: #3F3F46;
+
+        &:after,
+        &:before {
+          content: '';
+          width: 16px;
+          height: 16px;
+          background-color: #FFF;
+          border-radius: 100px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        &:after {
+          right: -8px;
+        }
+
+        &::before {
+          left: -8px;
+        }
+      }
+
+      .text {}
+
+      .symbol {
+        margin-right: 7px;
+      }
+
+      .number {}
+    }
+
+    .container {
+
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: height .125s ease-in-out;
+
+
+      .wrap {
+        width: 100%;
+        height: 100%;
+        box-shadow: 0px 0px 24px rgba(55, 55, 104, 0.08);
+        border-radius: 16px;
+        padding-top: 40px;
+        padding-inline: 30px;
+        padding-bottom: 40px;
+        @include flex-all;
+        flex-direction: column;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        transition: all .225s ease-in-out;
+
+        // divide on hover
+      }
+
+
+      .image {
+        @include winnerBlockWrap(160, 160);
+        // background-color: aliceblue;
+        border-radius: 100%;
+        // overflow: hidden;
+        flex-shrink: 0;
+        transition: all .25s ease-in-out;
+      }
+
+      .winNumber {
+        font-family: 'Avenir Next Georgian';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+
+        /* identical to box height */
+        letter-spacing: 0.15em;
+
+        /* White */
+        color: #000;
+
+        padding-top: 24px;
+        height: 54px;
+
+        svg {
+          paint-order: stroke;
+          stroke: #EDC522;
+          fill: #FFF;
+          stroke-width: 4px;
+        }
+      }
+
+      .ticketNumber {
+        padding-top: 24px;
+      }
+
+      &.activeBlock {
+        margin: 0 auto;
+        height: 483px;
+
+        .ticketBlockWrap {
+          width: 204px;
+          height: 50px;
+        }
+
+        .winNumber {
+          // background-color: red;
+          height:65px;
+          font-size: 36px;
+        }
+
+        .container {
+          width: 100%;
+          height: 100%;
+        }
+
+
+        .image {
+          @include winnerBlockWrap(220, 220);
+          // transform: scale(1.32000000);
+
+          img {
+            height: 130px;
+          }
+        }
+
+        .wrap {
+          width: 330px;
+          height: 483px;
+        }
+      }
+
+      .userAvatar {
+        transition: all .45s ease-in-out;
+      }
+
+    }
+
+
+
+
+
+    .sliderWrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+    
+      :global {
+    
+        .wrap {
+          width: 250px;
+          height: 384px;
+          // background-color: red;
+        }
+    
+        .image {
+          // background-color: #000;
+          @include winnerBlockWrap(160, 160);
+          transition: all .125s ease-in-out;
+        }
+      }
+    }
+
+
+
+  }
+}
+
+
+
+.userAvatar {
+  width: 100%;
+  height: 100%;
+  // margin: 0 14px;
+  padding: 14px;
+  flex-shrink: 0;
+  transition: all .124s ease-in-out;
+
+  .uAwrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+
+  .outline {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: -5px;
+    transform: scale(1.13);
+    z-index: 2;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+
+  .circlebg {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 100%;
+  }
+
+
+  .name {
+    width: 64px;
+    height: 34px;
+    background: #AE7A16;
+    border-radius: 8px;
+    color: #FFFFFF;
+
+    font-family: 'Avenir Next Georgian';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+
+    position: absolute;
+    bottom: -10px;
+
+    @include flex-all;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    width: inherit;
+    height: inherit;
+    @include flex-all;
+    // padding: 40px;
+
+    img {
+      height: 100px;
+    }
+  }
+
+
+}
+
+.el {
+  width: 100%;
+  background-color: orange;
+}

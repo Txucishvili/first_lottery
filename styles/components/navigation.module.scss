@@ -1,0 +1,23 @@
+.container {
+  background-color: $color_light_gray;
+
+  .wrap {
+    @include layoutWrap(true);
+    height: px($HEADER_NAVIGATION_HEIGHT);
+  }
+
+  .list {
+    @include flex;
+    align-items: center;
+    gap: 30px;
+    height: inherit
+  }
+
+  .listItem {
+    @include Font_Avenir(15px);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 21px;
+    color: $color_gray;
+  }
+}

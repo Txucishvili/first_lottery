@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { createRef, useCallback, useEffect, useRef, useState } from "react";
 
 export function useOutsideClick(initialIsVisible, customEvent) {
   const [isOpen, setIsOpen] = useState(
@@ -6,7 +6,8 @@ export function useOutsideClick(initialIsVisible, customEvent) {
   );
   const [event, setLastEvent] = useState(null);
 
-  const ref = useRef(null);
+  const ref = createRef();
+
 
   const handleHideDropdown = (event) => {
     if (event.key === "Escape") {
@@ -15,16 +16,16 @@ export function useOutsideClick(initialIsVisible, customEvent) {
     }
   };
 
-  const handleClickOutside = event => {
+  const handleClickOutside = useCallback((event) => {
     if (customEvent) {
       customEvent(event);
       return;
     }
-    if (ref.current && !ref.current.contains(event.target)) {
+    if (ref && ref.current && !ref.current.contains(event.target)) {
       setIsOpen(false);
       setLastEvent(event);
     }
-  };
+  }, [customEvent, ref]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleHideDropdown, true);

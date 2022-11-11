@@ -14,7 +14,7 @@ export default function Header() {
     <div className={classNames(styles.content, 'flx')}>
       <div className={styles.wrap}>
         <div className={styles.logoArea}>
-          <Link href={'basepath'} legacyBehavior>
+          <Link  href={'/'} legacyBehavior>
             <a>
               <Logo />
             </a>
@@ -24,9 +24,9 @@ export default function Header() {
           <Search />
         </div>
         <div className={styles.authArea}>
-        <Button text="შესვლა">
-            <IconWrap name="UserIcon" />
-            <div>შესვლა</div>
+          <Button variant="text">
+            <IconWrap name="UserIcon" size={22} />
+            <span>შესვლა</span>
           </Button>
         </div>
 

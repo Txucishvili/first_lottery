@@ -1,129 +1,591 @@
-.container {
-  padding: 0 2rem;
+.promotions {
+  .promoContainer {
+    background-color: gray;
+
+  }
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+.blockWrap {
+  @include flex;
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
+  @include max-min(max px($BP_TABLET)) {
     flex-direction: column;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
+.block {
+  //  : 305px;
+  background-color: gray;
+  border-radius: 16px;
+}
+
+.title {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  margin: 18px auto 26px auto;
+  text-align: center;
+  padding: 0 20px;
+
+  color: $color_gray;
+
+
+}
+
+.smallBlockWide {
+  width: #{(879 / $LAYOUT_WRAP_SIZE) * 100  + '%'};
+
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 65px;
+  line-height: 92px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+
+  @include max-min(max px($BP_TABLET)) {
+    width: 100%;
+    height: 270px;
   }
-  .code {
-    background: #111;
+
+  svg {
+    paint-order: stroke;
+    stroke: $dark_gold;
+    fill: $color_white;
+    stroke-width: 8px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
   }
-  .logo img {
-    filter: invert(1);
+}
+
+.smallBlock {
+  flex: 1;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.07);
+  border-radius: 16px;
+}
+
+
+.title {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  margin: 18px auto 26px auto;
+  text-align: center;
+  padding: 0 20px;
+
+  color: $color_gray;
+
+
+}
+
+.timeBlockLabel {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+
+  color: #3F3F46;
+}
+
+.timeBlockWrap {
+  gap: 13px;
+  padding: 0 20px 38px 20px;
+}
+
+.timeBlock {
+  maw-width: 135px;
+  width: 100%;
+  // height: 149px;
+
+  background: rgba(63, 63, 70, 0.03);
+  border-radius: 12px;
+
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 900;
+  // font-size: 80px;
+  // line-height: 114px;
+  // height: 64px;
+  font-size: 24px;
+  height: 64px;
+
+
+  @include max-min(min px($BP_MOBILE)) {
+    // width: 100%;
+    // font-size: 24px;
+    // height: 64px;
+  }
+
+
+  @include max-min(min px($BP_LAPTOP_SM)) {
+    width: 100%;
+    height: 100px;
+    font-size: 35px;
+  }
+
+
+  @include max-min(min px($BP_LAPTOP_MEDIUM)) {
+    width: 100%;
+    height: 100px;
+    font-size: 50px;
+  }
+
+
+  @include max-min(min px($LAYOUT_WRAP_SIZE)) {
+    width: 100%;
+    height: 149px;
+
+    font-size: 80px;
+    // font-size: 60px;
+  }
+
+
+
+
+  svg {
+
+    paint-order: stroke;
+    stroke: #D6B100;
+    fill: $color_white;
+    stroke-width: 4px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+  }
+}
+
+
+
+.swipeList {
+  margin-top: 50px;
+
+  :global {
+
+    .swiper {
+      overflow: hidden !important;
+    }
+
+    .swiper-slide {
+      width: 285px !important;
+    }
+  }
+}
+
+
+.winnerBlock {
+
+  &--wrap {
+    @include flex;
+    flex-direction: column;
+    align-items: center;
+    // gap: 20px;
+    padding: 41px 30px;
+    clip-path: url(#myClip);
+    background-color: rgba(212, 139, 34, 0.04);
+
+    width: 285px;
+    height: 394px;
+    left: 203px;
+    top: 2369px;
+
+    background: rgba(212, 139, 34, 0.04);
+    border-radius: 12px;
+
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 285px;
+    height: 11px;
+    left: 0;
+    bottom: 0;
+
+    background: #D48B22;
+    border-radius: 12px;
+  }
+
+  .ticketNumber {
+
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 24px;
+
+    /* Main Gold */
+    color: #D6B100;
+  }
+
+  .title {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 31px;
+
+    color: #3F3F46;
+    margin-top: 33px;
+  }
+
+  .winNumber {
+    width: 66px;
+    height: 61px;
+    background: rgba(63, 63, 70, 0.03);
+    border-radius: 16px;
+    @include flex-all;
+    flex-shrink: 0;
+
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 34px;
+
+    color: #3F3F46;
+
+
+  }
+
+  .status {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 22px;
+
+    color: #3F3F46;
+  }
+
+  .amount {
+    margin-top: 9px;
+    min-height: 40px;
+    @include flex;
+  }
+
+  .amountNumber {
+
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 40px;
+
+    /* identical to box height */
+
+    color: #019E08
+  }
+
+  .line {
+    width: 100px;
+    height: 2px;
+    margin-top: auto;
+    margin-bottom: 5px;
+
+    border: 1px solid rgba(63, 63, 70, 0.37);
+  }
+
+  .playButton {
+    margin-top: 15px;
+    width: 42px;
+    height: 42px;
+    background: #FDFAF6;
+    border: 2px solid #D6B100;
+    @include flex-all;
+    border-radius: 100px;
+    flex-shrink: 0;
+    padding: 1px 0 0 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($main_gold, .09);
+    }
+
+    svg {
+      path {
+        fill: #D6B100;
+      }
+    }
+  }
+}
+
+.infoLineContainer {
+  width: 100%;
+  background: linear-gradient(180deg, #D6B001 0%, #AD6E01 100%);
+  box-shadow: 0px 0px 22px rgba(164, 66, 66, 0.25);
+  min-height: 466px;
+  margin-top: 100px;
+
+  .infoLineWrap {
+    @include layoutWrap(true);
+    padding: 64px 0;
+    @include flex;
+
+
+    @include max-min(max px(BP_TABLET)) {
+      flex-direction: column;
+    }
+
+  }
+
+
+  .infoLineTextArea {}
+
+  .infoLineText {
+    padding-left: 20px;
+
+    @include max-min(max px($BP_MOBILE)) {
+      padding-left: 0;
+    }
+
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 37px;
+
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+
+  }
+
+  .infoLineDivide {
+    margin-top: 31px;
+  }
+
+  .infoLineDivideXl {
+    margin-top: 62px;
+  }
+
+  .blockArea {
+    margin-left: 62px;
+    width: 432px;
+    height: 338px;
+    flex-shrink: 0;
+    padding: 32px 51px;
+
+    background: linear-gradient(180deg, #D6B001 0%, #AD6E01 100%);
+    box-shadow: 0px 0px 22px rgba(164, 66, 66, 0.25);
+    border-radius: 16px;
+    @include flex;
+    flex-wrap: wrap;
+    // gap: 20px;
+
+
+    @include max-min(max px($BP_MOBILE)) {
+      width: 100%;
+      padding: 24px 44px;
+      ;
+    }
+
+    @include max-min(max px($BP_TABLET)) {
+      margin: 40px auto 40px auto;
+    }
+
+
+    >div {
+      &:nth-child(odd) {
+        padding-right: 10px;
+      }
+
+      &:nth-child(even) {
+        padding-left: 10px;
+      }
+    }
+
+    .blockAreaItemWrap {
+      width: 50%;
+      height: 55px;
+      // background: #FFFFFF;
+      border-radius: 16px;
+
+    }
+
+    .blockAreaItem {
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+      border-radius: 16px;
+      text-align: center;
+      @include flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Avenir Next Georgian';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 34px;
+      text-align: center;
+
+
+
+    }
+  }
+
+}
+
+.sectionContainer {
+  .containerTitle {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 40px;
+
+    /* identical to box height */
+
+    /* Main Gold */
+    color: #3F3F46;
+
+
+    text-align: center;
+
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    span {
+      margin-left: 8px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .containerList {
+    gap: 40px;
+    padding-left: px(336 + 80);
+
+
+    @include max-min(max px($BP_LAPTOP_MEDIUM)) {
+      padding-left: px(250);
+    }
+
+    @include max-min(max px($BP_TABLET)) {
+      padding-left: px(150);
+    }
+
+    @include max-min(max px($BP_TABLET_SM)) {
+      padding-left: px(0);
+    }
+  }
+
+  .containerItem {
+    @include flex;
+    height: 244px;
+
+    // background-color: gainsboro;
+    @include max-min(max px($BP_TABLET_SM)) {
+      height: initial;
+    }
+  }
+
+  .containerItemImage {
+    width: 244px;
+    height: 244px;
+    // background-color: #3F3F46;
+    @include flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    @include max-min(max px($BP_TABLET_SM)) {
+      width: 144px;
+      height: 144px;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  .containerItemText {
+    padding-top: 69px;
+
+    @include max-min(max px($BP_TABLET_SM)) {
+      padding-top: 0px;
+    }
+  }
+
+  .containerItemTitle {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0.05em;
+
+    /* Text */
+    color: #3F3F46;
+
+
+  }
+
+  .containerContent {
+    @include flex;
+  }
+
+  .sideArea {
+    background-color: gray;
+    position: relative;
+
+    @include max-min(max px($BP_TABLET_SM)) {
+      display: none;
+    }
+  }
+
+  .circle {
+    position: absolute;
+    width: 812px;
+    height: 812px;
+    left: -606px;
+    top: 50%;
+    border-radius: 100%;
+    transform: translateY(-50%);
+    background: #539AFF;
+
+    @include max-min(max px($BP_TABLET)) {
+      width: 580px;
+      height: 580px;
+      left: -406px;
+    }
+  }
+
+  .imageArea {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -152px;
+  }
+
+  .containerSpace {
+    padding-left: 140px;
+
+
+    @include max-min(max px($BP_TABLET_SM)) {
+      padding-left: px(0);
+    }
+  }
+
+  .containerItemDesc {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 16px;
+    max-width: 660px;
+    width: 100%;
+    margin-left: auto;
+
+    /* Text */
+    color: #3F3F46;
   }
 }

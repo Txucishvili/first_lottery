@@ -1,0 +1,78 @@
+.container {
+  padding: 50px 80px;
+  max-width: 100%;
+  width: 749px;
+
+  .wrap {
+    max-width: 580px;
+    margin-inline: auto;
+  }
+
+  .headLine {
+    @include Font_LBet_MT(px(35));
+    font-weight: 500;
+    line-height: 41px;
+    color: #3F3F46;
+    text-align: center
+  }
+
+  .inputField {
+    .wrap {}
+
+    button {
+      height: 100%;
+    }
+  }
+
+  .inputWrap {
+    &.outlined {
+      border: 1px solid rgba($color_gray, 0.2);
+      border-radius: 8px;
+    }
+  }
+
+  .inputFieldTitle {
+    margin-bottom: 16px;
+    text-align: center;
+    @include Font_LBet_MT(16px);
+    font-weight: 400;
+    line-height: 22px;
+    color: #3F3F46;
+
+
+  }
+
+  .btnWrap {
+    // background-color: gray;
+    width: 150px;
+  }
+
+  .textArea {
+    @include Font_LBet_NUS(px(16));
+    font-weight: 400;
+    line-height: 28px;
+    text-align: center;
+    color: #3F3F46;
+  }
+
+  .countArea {
+    margin-top: 60px;
+    // max-width: 416px;
+    margin-inline: auto;
+    @include flex;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  .btnsWrap {
+    @include flex;
+    gap: 40px;
+    margin-top: 80px;
+  }
+
+  .btn {
+    width: 220px;
+    height: 60px;
+  }
+
+}

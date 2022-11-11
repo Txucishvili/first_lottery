@@ -1,0 +1,147 @@
+.container {
+  padding-top: 340px;
+  position: relative;
+  // height: 500px;
+  overflow: hidden;
+  margin-top: auto;
+
+  .wrap {
+    @include layoutWrap(true);
+  }
+
+  .navigationArea {
+    @include flex;
+    gap: 120px;
+    @include max-min(max px($BP_TABLET)) {
+      gap: 20px;
+    }
+  }
+
+  .navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    >* {
+      margin-top: 20px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .navListTitle {
+
+    /* 18 Regular */
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 30px;
+
+    /* identical to box height */
+
+    /* Text */
+    color: #3F3F46;
+  }
+
+  .navListItem {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+
+    /* identical to box height */
+
+    /* Text */
+    color: #3F3F46;
+  }
+
+  .navListBox {
+    @include max-min(max px($BP_TABLET)) {
+      flex: 1;
+    }
+  }
+
+  .navListBottom {
+    margin-top: 64px;
+    height: 32px;
+    @include flex;
+
+    p {
+      margin: auto;
+      font-family: 'Sofia Pro';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+
+      /* identical to box height */
+
+      /* Dark */
+      color: rgba(#383838, .5);
+
+    }
+  }
+
+  .infoArea {
+    margin-top: 64px;
+  }
+
+  .navSocialList {
+    gap: 30px;
+  }
+
+  .navSocialItem {
+    @include size(32px);
+
+    svg {
+      height: 100%;
+      width: initial;
+    }
+  }
+
+}
+
+.imageBg {
+  position: relative;
+  // bottom: -170px;
+  // right: 0;
+  z-index: -1;
+  // margin-left: auto;
+  // width: 0px;
+  max-width: px($LAYOUT_WRAP_SIZE);
+  margin: 0 auto;
+  width: 100%;
+  user-select: none;
+
+  img {
+    display: block;
+    position: absolute;
+    right: -200px;
+    bottom: 0px;
+    z-index: 5;
+  }
+}
+
+.circle {
+  position: absolute;
+  top: -400px;
+  right: -635px;
+  width: 1300px;
+  height: 1300px;
+  background: #EDC522;
+  border-radius: 100%;
+  // opacity: .2;
+  z-index: 5;
+  // position: absolute;
+  // width: 812px;
+  // height: 812px;
+  // left: -406px;
+  // top: 4420px;
+
+  // background: #539AFF;
+}
