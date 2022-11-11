@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from '../styles/Home.module.scss'
 import SwipeSlider from 'src/Shared/SwipeSlider'
 import IconWrap from '@/components/IconWrap'
-import ModalWrapper, { CloseAction, SimpleModal } from 'src/Shared/Modal/ModalWrapper'
+import ModalWrapper, { CloseAction, ModalBase, SimpleModal } from 'src/Shared/Modal/ModalWrapper'
 import styled from 'styled-components'
 
 const PlayButton = () => {
@@ -90,21 +90,15 @@ export default function WinnersSlider(props) {
         onClose={() => setOpen(false)}
         open={isOpen}>
 
-        <SimpleModal
-          width={'auto'}
-          height={'auto'}
+        <ModalBase
           variant="center"
-          closeComponent={
-            <CloseAction>
-              CloseEl
-            </CloseAction>
-          }
         >
 
-          <div style={{ width: 825, height: 550 }}>
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/BcJCNLgEsHs" title="YouTube video player" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+          <div className='flxAll' style={{ width: 825, height: 550 }}>
+            video Container
+            {/* <iframe width="100%" height="100%" src="https://www.youtube.com/embed/BcJCNLgEsHs" title="YouTube video player" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
           </div>
-        </SimpleModal>
+        </ModalBase>
 
       </ModalWrapper>
     </div>

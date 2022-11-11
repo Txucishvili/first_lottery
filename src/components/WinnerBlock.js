@@ -4,9 +4,7 @@ import { SVGTextEl } from 'src/utils';
 import { useSwiper, useSwiperSlide } from 'swiper/react';
 import styles from '../../styles/components/winnerblock.module.scss';
 
-console.log('styles', styles)
-
-const UserAvatar = ({ children }) => {
+export const UserAvatar = ({ children, name }) => {
   return <div className={classNames(styles.userAvatar, 'simpleWrap')}>
     <div className={styles.uAwrap}>
       <div className={styles.outline}>
@@ -26,22 +24,23 @@ const UserAvatar = ({ children }) => {
       <div className={styles.content}>
         {children}
         <div className={styles.name}>
-          ს.ხ
+          {name ?? 'ს.ხ'}
         </div>
       </div>
     </div>
   </div>
 }
 
-const TicketBlock = (props) => {
-  return <div className={'ticketBlock'}>
-    <div className={'ticketBlockWrap'}>
-      <span className={'symbol'}>#</span>
-      <span className={'number'}>{props.number}</span>
+export const TicketBlock = (props) => {
+  return <div className={styles.ticketBlock}>
+    <div className='container'>
+      <div className={'ticketBlockWrap'}>
+        <span className={'symbol'}>#</span>
+        <span className={'number'}>{props.number}</span>
+      </div>
     </div>
   </div>
 }
-
 
 export default function WinnerBlock({ isActive }) {
   // const swiper = useSwiper();

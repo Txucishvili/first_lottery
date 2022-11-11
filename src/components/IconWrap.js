@@ -6,7 +6,6 @@ export default function IconWrap({ children, name, size = 14 }) {
 
   const IconComp = ICON_SET[name];
 
-  console.log('size', size)
   
   return (
     <div

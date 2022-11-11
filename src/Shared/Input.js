@@ -38,7 +38,7 @@ export const Input = forwardRef((props, ref) => {
 
   useEffect(() => {
     // !!!
-    console.log('object', value)
+    // console.log('object', value)
     inputRef.current.value = value;
   }, [value])
 

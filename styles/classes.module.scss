@@ -768,12 +768,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 4px;
+
+    &--range-start,  &--range-end {
+
+      // background-color: $dark_gold;
+      &:not(.react-datepicker__day--outside-month) {
+
+        background: #DBB246 !important;
+      }
+    }
 
     &--in-range {
 
       // background-color: $dark_gold;
       &:not(.react-datepicker__day--outside-month) {
-        background-color: orange;
+        background: rgba(219, 178, 70, 0.16);
       }
     }
 
@@ -781,15 +791,18 @@
     &--in-selecting-range {
 
       // background-color: $color_gray;
-      background-color: rgba(orange, .15);
+      // background-color: rgba(219, 178, 70, 0.16);
+
       &:not(.react-datepicker__day--outside-month) {
-        background-color: orange;
+        background-color: rgba(219, 178, 70, 0.16);
       }
     }
 
     &:hover {
-      background-color: $color_gray;
-      color: #fff;
+      &:not(.react-datepicker__day--outside-month) {
+        background-color: rgba(219, 178, 70, 0.16);
+      }
+      // color: rgba(219, 178, 70, 0.16);
     }
   }
 

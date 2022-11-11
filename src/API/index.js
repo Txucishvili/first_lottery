@@ -1,105 +1,25 @@
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+  }
+
+const getRandomName = () => {
+  const firstLetter = String.fromCharCode(getRndInteger(4304, 4336)); 
+  return `${firstLetter}.${String.fromCharCode(getRndInteger(4304, 4336))}`
+}
+
+const withUniqueNumber = () => {
+  return new Date(`${getRndInteger(10, 12)}, ${getRndInteger(1, 25)}, 2022`).getTime();
+}
+
 export const WinnerListAPI =
 {
-  "data": [
-    {
-      name: 'Name',
-      id: 1,
-    },
-    {
-      name: 'Name',
-      id: 2,
-    },
-    {
-      name: 'Name',
-      id: 3,
-    },
-    {
-      name: 'Name',
-      id: 4,
-    },
-    {
-      name: 'Name',
-      id: 5,
-    },
-    {
-      name: 'Name',
-      id: 6,
-    },
-    {
-      name: 'Name',
-      id: 7,
-    },
-    {
-      name: 'Name',
-      id: 8,
+  "data": Array(28).fill(null).map((i, k) => {
+    console.log('getRandomName()', getRandomName())
+    return {
+      name: getRandomName(),
+      id: k,
+      winningDate: withUniqueNumber(),
+      winNumber: getRndInteger(10000, 1000000)
     }
-  ,
-
-  {
-    name: 'Name',
-    id: 1,
-  },
-  {
-    name: 'Name',
-    id: 2,
-  },
-  {
-    name: 'Name',
-    id: 3,
-  },
-  {
-    name: 'Name',
-    id: 4,
-  },
-  {
-    name: 'Name',
-    id: 5,
-  },
-  {
-    name: 'Name',
-    id: 6,
-  },
-  {
-    name: 'Name',
-    id: 7,
-  },
-  {
-    name: 'Name',
-    id: 8,
-  }
-,
-
-{
-  name: 'Name',
-  id: 1,
-},
-{
-  name: 'Name',
-  id: 2,
-},
-{
-  name: 'Name',
-  id: 3,
-},
-{
-  name: 'Name',
-  id: 4,
-},
-{
-  name: 'Name',
-  id: 5,
-},
-{
-  name: 'Name',
-  id: 6,
-},
-{
-  name: 'Name',
-  id: 7,
-},
-{
-  name: 'Name',
-  id: 8,
-}
-]
+  })
 }

@@ -1,21 +1,12 @@
 import WinnerBlock from '@/components/WinnerBlock'
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
-import useFilter from 'src/hooks/useFilter'
+import React, { useRef } from 'react'
 import SwipeSlider from 'src/Shared/SwipeSlider'
 import { copyArray, isInt } from 'src/utils'
-import { EffectCreative } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { CasinosList, WinnerListAPI } from '../src/API/index'
-import { DateRangePimport } from 'date-fns/subDays';
-import subDays from 'date-fns/subDays';
-import { useVirtualizer } from '@tanstack/react-virtual';
-import DateRangePicker from '@/components/DateRangePicker'
-import DropDown, { DropContent, Toggler } from '@/components/DropDown'
-import Input from 'src/Shared/Input'
-import ICON_SET from 'src/icons'
-import { useOutsideClick } from 'src/hooks/useOutsideClick'
-import Button from 'src/Shared/Button'
+import { WinnerListAPI } from '../src/API/index'
 import LastWinnerFilter from 'pageComponents/LastWinners/LastWinnersFilter'
+import { m } from 'framer-motion'
+
 
 
 const LastWinnerSlide = ({ list }) => {
@@ -82,23 +73,23 @@ const winningRangeValues = [
 const filters = {
   from_range: {
     value: '',
-    targetField: 'id',
-    condition: '{{id}} > {{value}}',
+    targetField: 'winNumber',
+    condition: '{{winNumber}} > {{value}}',
     filter: (target, field) => {
       const targetId = isInt(target.id) ? parseInt(target.id) : target.id;
       const value = isInt(field.value) ? parseInt(field.value) : field.value;
 
-      return targetId > value;
+      return target.winNumber > value;
     }
   },
   to_range: {
     value: '',
-    targetField: 'id',
-    condition: '{{id}} < {{value}}',
+    targetField: 'winNumber',
+    condition: '{{winNumber}} < {{value}}',
     filter: (target, field) => {
       const targetId = isInt(target.id) ? parseInt(target.id) : target.id;
       const value = isInt(field.value) ? parseInt(field.value) : field.value;
-      return targetId < value;
+      return target.winNumber < value;
     }
   },
   name: {
@@ -107,6 +98,32 @@ const filters = {
     condition: '{{name}}.includes({{value}})',
     filter: (target, field) => {
       return target.name.includes(field.value);
+    }
+  },
+  winningDate_from: {
+    value: '',
+    targetField: 'winningDate',
+    condition: '{{name}}.includes({{value}})',
+    filter: (target, field) => {
+      if (field.value) {
+        return new Date(field.value).getTime() <= new Date(target.winningDate).getTime()
+      }
+      return true;
+    }
+  },
+  winningDate_to: {
+    value: '',
+    targetField: 'winningDate',
+    condition: '{{name}}.includes({{value}})',
+    filter: (target, field) => {
+
+      console.log('value', field.value)
+
+      if (field.value) {
+        return new Date(target.winningDate).getTime() <= new Date(field.value).getTime()
+      }
+      return true;
+
     }
   }
 }

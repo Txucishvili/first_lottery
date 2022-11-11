@@ -1,0 +1,109 @@
+.filterInput {
+  :global {
+    .wrap {
+      .bg {
+        border-color: rgba(63, 63, 70, 0.08) !important;
+      }
+    }
+  }
+}
+
+.filterItem {
+  // width: 368px;
+  height: 414px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding-top: px(48 - 14);
+
+  flex-basis: 100%;
+  position: relative;
+  z-index: 2;
+
+  @include max-min(min px($BP_MOBILE)) {
+    // flex-basis: calc(25% - 15px);
+  }
+
+  @include max-min(min px($BP_TABLET)) {
+    flex-basis: calc(50% - 15px);
+  }
+
+  @include max-min(min px(1200)) {
+    flex-basis: calc(25% - 15px);
+
+  }
+
+  &:hover {
+    background-color: rgba(gray, .05);
+  }
+
+  :global {
+
+    .image {
+      @include winnerBlockWrap(160, 160);
+      // background-color: aliceblue;
+      border-radius: 100%;
+      // overflow: hidden;
+      flex-shrink: 0;
+      transition: all .25s ease-in-out;
+      margin-inline: auto;
+    }
+
+    .winNumber {
+      font-family: 'Avenir Next Georgian';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 40px;
+      margin-inline: auto;
+
+      /* identical to box height */
+      letter-spacing: 0.15em;
+
+      /* White */
+      color: #000;
+
+      padding-top: 28px;
+      height: 62px;
+
+      svg {
+        paint-order: stroke;
+        stroke: #EDC522;
+        fill: #FFF;
+        stroke-width: 4px;
+      }
+    }
+
+    .ticketNumber {
+      padding-top: 28px;
+      margin-inline: auto;
+      min-width: px(204 + 16);
+      max-width: px(204 + 16);
+    }
+  }
+
+  &:hover {
+    :global {
+      .ticketNumber {
+        .container {
+
+          &:after,
+          &::before {
+            background-color: transparent
+          }
+        }
+      }
+    }
+  }
+}
+
+.filterList {
+  @include flex;
+  flex-wrap: wrap;
+  gap: 19px;
+  padding: 40px 0 0 0;
+}
+
+.filterRow {
+  position: relative;
+  z-index: 4;
+}

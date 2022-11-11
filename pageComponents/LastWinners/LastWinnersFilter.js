@@ -9,10 +9,15 @@ import Button from 'src/Shared/Button'
 import { WinnerListAPI } from 'src/API';
 import { format, getMonth, setMonth } from 'date-fns';
 import IconWrap from '@/components/IconWrap';
+import WinnerBlock, { TicketBlock, UserAvatar } from '@/components/WinnerBlock';
+import { SVGTextEl } from 'src/utils';
+import classNames from 'classnames';
+import styles from './LastWinnersFilter.module.scss';
 
 
 const RangeToggler = ({ activeRange, isOpen, label, children }) => {
-  console.log('RangeToggler isOpen', isOpen)
+  // !!
+  // console.log('RangeToggler isOpen', isOpen)
   return <div className='rangeToggler'>
     <div className='flx flxJSB flxAI'>
       <div className='labels'><div className='label'>{label}</div></div>
@@ -26,17 +31,42 @@ const RangeToggler = ({ activeRange, isOpen, label, children }) => {
   </div>
 }
 
+const FilterItem = (props) => {
+  return <div className={styles.filterItem}>
+    <div className={'sliderWrapper'}>
+      <div className={classNames('container')}>
+        <div className={'wrap'}>
+          <div className={'image'}>
+            <UserAvatar name={props.name}>
+              <img src='/assets/images/avatar.png' />
+            </UserAvatar>
+          </div>
+          <div className={'winNumber'}>
+            <SVGTextEl>{props.winNumber}</SVGTextEl>
+
+          </div>
+          {/* {new Date(props.winningDate).getDay() + ' - ' + new Date(props.winningDate).toString()} */}
+          <div className={'ticketNumber'}>
+            <TicketBlock number='358-129-7' />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
 const LastWinnerFilter = (props) => {
   const { list, filters, winnerFilters } = props;
   const inputRefMain = useRef();
   const dropRef = useRef();
+  const calendarDrop = useRef();
   const parentRef = useRef()
-  const [filterList, setFilterList] = useState([]);
+  const [filterList, setFilterList] = useState(list.data);
   const { filteredList, setFilter, commit, reset, options } = useFilter({ list: filterList, filterOptions: filters });
   const rowVirtualizer = useVirtualizer({
     count: filterList.length || 20,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 35,
+    estimateSize: () => 385,
     overscan: 5,
   });
 
@@ -49,11 +79,11 @@ const LastWinnerFilter = (props) => {
 
   useEffect(() => {
     setFilterList(WinnerListAPI.data);
-    console.log('object', WinnerListAPI.data)
+    // console.log('object', WinnerListAPI.data)
   }, [])
 
   useEffect(() => {
-    console.log('----- filteredList', filteredList);
+    // console.log('----- filteredList', filteredList);
   }, [filteredList])
 
   const searchFilter = (e) => {
@@ -83,8 +113,8 @@ const LastWinnerFilter = (props) => {
 
   return <div>
     <div className='grid-container'>
-      <div className='grid-row'>
-        <div style={{ fontSize: 16 }} className='col-md-3'>
+      <div className={classNames(styles.filterRow, 'grid-row')}>
+        <div style={{ fontSize: 16 }} className={classNames('col-md-3', styles.filterInput)}>
           <Input
             value={inputValue}
             ref={inputRefMain}
@@ -139,7 +169,7 @@ const LastWinnerFilter = (props) => {
                       <div style={{ flexShrink: 0 }}> - მდე</div>
                     </div>
                   </div>
-                  : <div>
+                  : <div className='flx gap-12'>
                     <span>{rangeFilter.from ?? 0} - დან</span>
                     <span>{rangeFilter.to ?? 0} - მდე</span>
                   </div>}
@@ -162,12 +192,12 @@ const LastWinnerFilter = (props) => {
           </DropDown>
         </div>
         <div className='col-md-3'>
-          <DropDown variant="out">
+          <DropDown ref={calendarDrop} variant="out">
             <Toggler>
               <RangeToggler label="პერიოდი:">
                 <div className='flx gap-12'>
                   {startDate ? <span>{format(startDate.getTime(), "dd-LL-yy", 'en')}  - დან</span> : null}
-                  <span>-</span>
+                  <span>{startDate ? '-'  : 'აირჩიეთ თარიღი'}</span>
                   {endDate ? <span>{endDate ? format(endDate.getTime(), "dd-LL-yy", 'en') : null}  - მდე</span> : null}
 
                 </div>
@@ -180,6 +210,7 @@ const LastWinnerFilter = (props) => {
               </div>
               <div style={{ width: 616, height: 282 }}>
                 <DateRangePicker
+
                   startDate={startDate}
                   renderCustomHeader={({
                     monthDate,
@@ -188,44 +219,12 @@ const LastWinnerFilter = (props) => {
                     increaseMonth,
                   }) => (
                     <div className="react-datepicker__current-month--center">
-                      {/* <button
-                        aria-label="Previous Month"
-                        className={
-                          "react-datepicker__navigation react-datepicker__navigation--previous"
-                        }
-                        style={customHeaderCount === 1 ? { visibility: "hidden" } : null}
-                        onClick={decreaseMonth}
-                      >
-                        <span
-                          className={
-                            "react-datepicker__navigation-icon react-datepicker__navigation-icon--previous"
-                          }
-                        >
-                          {"<"}
-                        </span>
-                      </button> */}
                       <span >
                         {monthDate.toLocaleString("ka-GE", {
                           month: "long",
                           year: "numeric",
                         })}
                       </span>
-                      {/* <button
-                        aria-label="Next Month"
-                        className={
-                          "react-datepicker__navigation react-datepicker__navigation--next"
-                        }
-                        style={customHeaderCount === 0 ? { visibility: "hidden" } : null}
-                        onClick={increaseMonth}
-                      >
-                        <span
-                          className={
-                            "react-datepicker__navigation-icon react-datepicker__navigation-icon--next"
-                          }
-                        >
-                          {">"}
-                        </span>
-                      </button> */}
                     </div>
                   )}
                   endDate={endDate}
@@ -233,7 +232,13 @@ const LastWinnerFilter = (props) => {
                   onChange={(update) => {
                     setStartDate(update[0])
                     setEndDate(update[1])
+                    setFilter({ winningDate_from: update[0] })
+                    if (update[1]) {
+                      setFilter({ winningDate_to: update[1] })
+                    }
                   }}
+                  isClearable
+                  selectsRange={true}
                 />
               </div>
               <div className='flxAll gap-30'>
@@ -242,7 +247,11 @@ const LastWinnerFilter = (props) => {
                   height={42}
                   className={"fontMT"}
                   onClick={() => {
-
+                    console.log('calendarDrop', calendarDrop)
+                    calendarDrop.current.open(false);
+                    setStartDate(null)
+                    setEndDate(null)
+                    setFilter({ winningDate_to: null, winningDate_from: null });
                   }}
                   variant="outline" size="normal" full type='button' >გაუქმება</Button>
                 <Button
@@ -258,48 +267,11 @@ const LastWinnerFilter = (props) => {
           </DropDown>
         </div>
       </div>
-      <div>
-        <div>
-          <div
-            ref={parentRef}
-            className="List"
-            style={{
-              height: `600px`,
-              width: `400px`,
-              overflow: "auto"
-            }}
-          >
-            <div
-              style={{
-                height: `${rowVirtualizer.getTotalSize()}px`,
-                width: "100%",
-                position: "relative"
-              }}
-            >
-              {rowVirtualizer.getVirtualItems().map((virtualRow) => (
-                <div
-                  key={virtualRow.index}
-                  className={virtualRow.index % 2 ? "ListItemOdd" : "ListItemEven"}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: `${virtualRow.size}px`,
-                    transform: `translateY(${virtualRow.start}px)`
-                  }}
-                >
-                  {filteredList[virtualRow.index] && <div>
-                    <span>{filteredList[virtualRow.index].key}-</span>
-                    <span>{filteredList[virtualRow.index].id}-</span>
-                    <span>{filteredList[virtualRow.index].title || filteredList[virtualRow.index].name}</span>
-                    <span>- {filteredList[virtualRow.index].slug}</span></div>}
-                  {/* { && filteredList[virtualRow.index].name} */}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className={styles.filterList}>
+        {filteredList.map((item, key) => {
+          return <FilterItem key={key} {...item} />
+        })}
+        {filteredList.length <= 0 ? 'No Data to show' : ''}
       </div>
     </div>
     <br />

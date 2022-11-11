@@ -9,7 +9,7 @@ export default function BuyTicketModal(props) {
   const focusEl = useRef();
   const [state, setState] = useState({
     count: 100,
-    price: 100,
+    price: 10,
     points: 100
   })
 
