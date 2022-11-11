@@ -63,6 +63,7 @@
       @include flex;
       justify-content: flex-end;
       flex-direction: column;
+      flex: 1;
     }
   }
 
@@ -87,7 +88,7 @@
   }
 
   .textHeadOne {
-    width: 431px;
+    // min-width: 431px;
     height: 114px;
 
     font-family: 'Avenir Next Georgian';
