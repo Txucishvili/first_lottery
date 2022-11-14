@@ -1,12 +1,17 @@
 .searchArea {
   width: 100%;
-  height: px($SEARCH_INPUT_HEIGHT);
+  height: px($SEARCH_INPUT_HEIGHT_MOBILE);
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    height: px($SEARCH_INPUT_HEIGHT)
+  }
 
   .wrap {
     @include flex;
     height: inherit;
     border-radius: 8px;
     // overflow: hidden;
+    position: relative;
   }
 
   .inputWrap {
@@ -16,7 +21,7 @@
       padding: 14px 24px;
       outline: none;
       border: none;
-      background: rgba($color_gray, .04);
+      background: transparent;
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
       height: 100%;
@@ -36,13 +41,24 @@
       @include btn-style($main_gold);
       height: 100%;
       color: #FFF;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-      @include flex;
+      @include flex-all;
 
       @include Font_Avenir(14px);
       font-weight: 400;
       line-height: 20px;
+
+      padding: 12px 21px;
+      margin: 0;
+      border-radius: 12px;
+
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        padding: 12px 23px;
+      }
 
       &:focus {
         outline: rgba($dark_gold, .2) solid 1px;
@@ -52,11 +68,35 @@
       &:hover {
         background-color: $main_gold;
       }
+
+      >div {
+
+        &:not(.icon-area) {
+          display: none;
+
+          @include max-min(min px($BP_TABLET_SM)) {
+            @include flex;
+            margin-left: 12px;
+          }
+        }
+      }
     }
+
     .icon-area {
       @include size(24px);
-      margin-right: 12px;
       margin-top: -2px;
     }
+
+  }
+
+  .bg {
+    background-color: rgba($color_gray, .04);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: 12px;
   }
 }

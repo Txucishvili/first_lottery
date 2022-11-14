@@ -7,6 +7,7 @@ export default function Search() {
   return (
     <div className={styles.searchArea}>
       <div className={styles.wrap}>
+        <div className={styles.bg}></div>
         <div className={styles.inputWrap}>
           <input placeholder='ძებნა ბილეთის ან ტირაჟის ნომრით...' />
         </div>

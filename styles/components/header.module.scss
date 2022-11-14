@@ -9,15 +9,18 @@
     @include layoutWrap();
     @include flex;
     flex-direction: column;
+    padding: 0 20px 20px 20px;
+
 
     @include max-min(min px($BP_TABLET_SM)) {
       flex-direction: row;
       height: px($HEADER_HEIGHT);
-    }
-
-    @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
       padding: 0 20px;
     }
+
+    // @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
+    //   padding: 0 20px;
+    // }
 
   }
 
