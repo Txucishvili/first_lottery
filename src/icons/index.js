@@ -93,13 +93,20 @@ export const Youtube = () => (
 
 )
 
+export const BurgerMenu = () => (
+  <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 18H10.75M2 2H22H2ZM2 10H22H2Z" stroke="#3F3F46" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const ICON_SET = {
   UserIcon,
   ArrowSvg,
   SearchIcon,
   Play,
   Close,
-  PlayCircle
+  PlayCircle,
+  BurgerMenu
 }
 
 export default ICON_SET;

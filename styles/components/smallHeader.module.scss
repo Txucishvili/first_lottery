@@ -2,6 +2,12 @@
   background-color: $color_gray;
   height: px($HEADER_SMALL_HEIGHT);
 
+  display: none;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    display: block;
+  }
+
   .wrap {
     @include layoutWrap();
 

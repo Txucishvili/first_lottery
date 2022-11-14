@@ -66,9 +66,9 @@ export default function SmallHeader(props) {
               <LanguageSwitcher languages={languages} active={activeLanguage} />
             </li>
           </ul>
-          <div className={styles.userInfoToggle}>
+          {/* <div className={styles.userInfoToggle}>
             -
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

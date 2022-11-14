@@ -164,7 +164,7 @@
 }
 
 .timeBlockWrap {
-  gap: 13px;
+  // gap: 13px;
   padding: 0 16px 20px 16px;
 
   @include max-min(min px($BP_TABLET_SM)) {
@@ -173,6 +173,9 @@
   }
 
   >* {
+    flex-basis: 25%;
+    flex-shrink: 0;
+    padding-left: 13px;
 
     &:last-child {
 
@@ -260,39 +263,6 @@
   &::after {
     margin-top: 12px;
   }
-
-
-  // @include max-min(min px($BP_MOBILE)) {
-  //   // width: 100%;
-  //   // font-size: 24px;
-  //   // height: 64px;
-  // }
-
-
-  // @include max-min(min px($BP_LAPTOP_SM)) {
-  //   width: 100%;
-  //   height: 100px;
-  //   font-size: 35px;
-  // }
-
-
-  // @include max-min(min px($BP_LAPTOP_MEDIUM)) {
-  //   width: 100%;
-  //   height: 100px;
-  //   font-size: 50px;
-  // }
-
-
-  // @include max-min(min px($LAYOUT_WRAP_SIZE)) {
-  //   width: 100%;
-  //   height: 149px;
-
-  //   font-size: 80px;
-  //   // font-size: 60px;
-  // }
-
-
-
 
   svg {
 
