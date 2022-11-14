@@ -4,8 +4,13 @@
   gap: 12px;
 
   @include max-min(min px($BP_TABLET_SM)) {
-    gap: 16px;
+    gap: 24px;
   }
+
+  @include max-min(min px($BP_LAPTOP_SM)) {
+    gap: 38px;
+  }
+
 
   .promoContainer {}
 }
@@ -15,9 +20,14 @@
   flex-direction: column;
   gap: 16px;
 
+
   @include max-min(min px($BP_TABLET_SM)) {
-    gap: 38px;
     flex-direction: row;
+    gap: 24px;
+  }
+
+  @include max-min(min px($BP_LAPTOP_SM)) {
+    gap: 38px;
   }
 }
 
@@ -157,15 +167,29 @@
   gap: 13px;
   padding: 0 16px 20px 16px;
 
-  @include max-min(min px($BP_LAPTOP_SM)) {
+  @include max-min(min px($BP_TABLET_SM)) {
     padding: 0 22px 38px 22px;
+    // gap: 38px;
   }
 
   >* {
-    gap: 3px;
 
-    @include max-min(min px($BP_LAPTOP_SM)) {
-      gap: 12px;
+    &:last-child {
+
+      >* {
+
+        &::after,
+        &::before {
+          display: none;
+        }
+      }
+
+    }
+
+    // gap: 3px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      // gap: 12px;
     }
   }
 }
@@ -195,6 +219,7 @@
   /* identical to box height */
   letter-spacing: 0.05em;
   height: 72px;
+  position: relative;
 
 
   @include max-min(min px($BP_MOBILE)) {
@@ -213,6 +238,27 @@
     font-size: 76px;
     line-height: 90px;
     height: 149px;
+  }
+
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 6px;
+    height: 6px;
+    background-color: #FFF;
+    border-radius: 100%;
+    overflow: hidden;
+    z-index: 5;
+    box-shadow: 0px 0px 0px 2px inset #9A9A9D;
+    transform: translateY(-50%);
+    margin-left: 3px;
+  }
+
+  &::after {
+    margin-top: 12px;
   }
 
 
