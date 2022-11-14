@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.scss'
 
 const { SVGTextEl } = require("src/utils");
 
-var countDownDate = new Date("Nov 5, 2022 15:37:25").getTime();
+var countDownDate = new Date("Dec 31, 2022 15:37:25").getTime();
 
 const getDistance = () => countDownDate - new Date().getTime();
 
@@ -33,7 +33,7 @@ const CountdownComponent = () => {
 
   return <>
     <div className={classNames(styles.timeBlockWrap, 'flx')}>
-      <div className={'flx flxCol flxAll gap-12'}>
+      <div className={'flx flxCol flxAll'}>
         <div className={styles.timeBlock}>
           <SVGTextEl height={'100%'}>
             {days}
@@ -41,7 +41,7 @@ const CountdownComponent = () => {
         </div>
         <div className={styles.timeBlockLabel}>დღე</div>
       </div>
-      <div className={'flx flxCol flxAll gap-12'}>
+      <div className={'flx flxCol flxAll'}>
         <div className={styles.timeBlock}>
           <SVGTextEl height={'100%'}>
             {hours}
@@ -50,7 +50,7 @@ const CountdownComponent = () => {
         <div className={styles.timeBlockLabel}>საათი</div>
 
       </div>
-      <div className={'flx flxCol flxAll gap-12'}>
+      <div className={'flx flxCol flxAll'}>
         <div className={styles.timeBlock}>
           <SVGTextEl height={'100%'}>
             {minutes}
@@ -59,7 +59,7 @@ const CountdownComponent = () => {
         <div className={styles.timeBlockLabel}>წუთი</div>
 
       </div>
-      <div className={'flx flxCol flxAll gap-12'}>
+      <div className={'flx flxCol flxAll'}>
         <div className={styles.timeBlock}>
           <SVGTextEl height={'100%'}>{seconds}</SVGTextEl>
         </div>

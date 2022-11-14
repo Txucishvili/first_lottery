@@ -25,7 +25,7 @@ const VideoContainer = forwardRef((props, ref) => {
             />
           </div>
           <div onClick={() => props.onAction()} className={classNames(styles.playBtn, 'flxAll')}>
-            <IconWrap size="54" name="Play" />
+            <IconWrap name="Play" />
           </div>
         </div>
       </div>

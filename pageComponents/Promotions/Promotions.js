@@ -9,11 +9,16 @@ import Button from 'src/Shared/Button'
 import IconWrap from '@/components/IconWrap'
 
 
+const JackpotBlock = () => {
+  return
+}
+
+
 const PromotionSection = (props) => {
   const [isOpen, setOpen] = useState(false);
 
   return <>
-    <div className='flx flxCol gap-28'>
+    <div className={styles.promotions}>
       <VideoContainer onAction={() => setOpen(true)} />
       <ModalWrapper
         onClose={() => setOpen(false)}
@@ -31,19 +36,21 @@ const PromotionSection = (props) => {
 
       </ModalWrapper>
 
-      <div className={classNames(styles.blockWrap, 'gap-38')}>
+      <div className={classNames(styles.blockWrap)}>
+        
         <div className={(classNames(styles.block, styles.smallBlockWide))} style={{ backgroundColor: '#EDC522' }}>
-          <div className={classNames(styles.blockHead, 'flxAll divide-32')}>
+          <div className={classNames(styles.blockHead, 'flxAll')}>
             <img src='/assets/images/jackpot-head.png' />
           </div>
-          <div className='divide-16'>
-            <SVGTextEl height={92}>
-              - 000₾
+          <div className={styles.textArea}>
+            <SVGTextEl>
+              10 000 000₾
             </SVGTextEl>
           </div>
         </div>
+
         <div className={(classNames(styles.block, styles.smallBlock))}>
-          <div className={styles.title}>
+          <div className={styles.timeBlockTitle}>
             გათამაშებამდე დარჩენილია
           </div>
           <CountdownComponent />

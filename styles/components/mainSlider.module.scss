@@ -1,5 +1,29 @@
 $btn-width: 66;
 
+.swiperWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.overflowWrap {
+  overflow: visible;
+  @include max-min(max px($BP_TABLET_SM)) {
+    overflow: hidden;
+  }
+}
+
+.arrowWrap {
+  // background-color: red;
+  display: none;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    // background-color: 
+    display: block;
+  }
+
+  ;
+}
+
 .arrowBtn {
   width: px($btn-width);
   height: 61px;
@@ -36,11 +60,11 @@ $btn-width: 66;
   &.simple {
     background: #FDFAF6;
 
-    
+
     &:hover {
       background-color: #FFF;
     }
-    
+
     svg {
 
       path {

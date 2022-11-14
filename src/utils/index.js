@@ -30,3 +30,9 @@ export const copyArray = (length, array) => {
 export const getOnlyNum = (str) => {
   return str.match(/([0-9])+/ig)
 }
+
+export function numberWithSpaces(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
+}

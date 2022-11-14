@@ -83,7 +83,6 @@ export default function BuyTicketModal(props) {
                 <Input
                   value={state.count}
                   onBlur={(e) => {
-                    console.log('e', e.target.value, state['count'])
                     if (!e.target.value.length) return;
                     setState({ ...state, ...{ count: getOnlyNum(e.target.value) ? getOnlyNum(e.target.value).join('') : '0' } })
                   }}

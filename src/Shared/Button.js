@@ -23,8 +23,6 @@ export function ButtonBase(props) {
     _styles['height'] = height
   }
 
-  console.log('--', _styles)
-
   return (
     <div className={classNames(styles.button)}>
       <div className={classNames('content', props.className)}>

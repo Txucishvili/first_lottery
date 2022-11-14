@@ -45,30 +45,8 @@ const SimpleLine = (props) => {
   </div>
 }
 
-
-
-
-
-
-const howToPlayList = [
-  {
-    title: 'წესები და პირობები',
-    desc: 'გაეცანით თამაშის წესებს და გაიგეთ მეტი ჩვენი მომსახურების შესახებ',
-    img: '/assets/images/telecom.png'
-  },
-  {
-    title: 'უკუკავშირი',
-    desc: 'გაქვთ შეკითხვა? დაგვიკავშირდით ცხელ ხაზზე, ან მოგვწერეთ უკუკავშირის ფორმა Facebook ჩატის გამოყენებით',
-    img: '/assets/images/cell-phone.png'
-  },
-  {
-    title: 'ვიდეო ინსტრუქცია',
-    desc: 'ვვიდეო საშუალებით გაიგებთ, როგორ ითამაშოთ და მოიგოთ',
-    img: '/assets/images/multimedia.png'
-  }
-]
-
 const SectionContainer = (props) => {
+  console.log('props', props)
   return <div className={styles.sectionContainer}>
     <div className={styles.containerTitle}>
       <span>როგორ</span>
@@ -83,7 +61,7 @@ const SectionContainer = (props) => {
         </div>
       </div>
       <div className={classNames(styles.containerList, 'flx flxCol')}>
-        {howToPlayList.map((item, key) => {
+        {props.howToPlayList.map((item, key) => {
           return <div className={classNames(styles.containerItem, {
             [styles.containerSpace]: key == 1
           })} key={key}>
@@ -106,6 +84,24 @@ const SectionContainer = (props) => {
   </div>
 }
 
+const BuyTicketContainer = () => {
+  return {/* <div style={{ marginTop: 20, position: 'relative', zIndex: 5 }} className='flxAll'>
+  <Button className={"fontMT"} width={350} height={77}
+    onClick={openAppModal}
+    variant="primary"
+    size="large">
+    <span>ბილეთის შეძენა</span>
+  </Button>
+  <ModalWrapper disableClose
+    onClose={() => openModal(false)}
+    open={isModalOpened}>
+    <ModalBase width="auto" height="auto">
+      <BuyTicketModal onAction={onModalAction} />
+    </ModalBase>
+  </ModalWrapper>
+</div> */}
+}
+
 export default function Home(props) {
   const [isModalOpened, openModal] = useState(!true);
 
@@ -125,37 +121,42 @@ export default function Home(props) {
           return <Jackpot key={k} />
         })}
       </SwipeSlider>
-      <div style={{ marginTop: 20, position: 'relative', zIndex: 5 }} className='flxAll'>
-        <Button className={"fontMT"} width={350} height={77}
-          onClick={openAppModal}
-          variant="primary"
-          size="large">
-          <span>ბილეთის შეძენა</span>
-        </Button>
-        <ModalWrapper disableClose
-          onClose={() => openModal(false)}
-          open={isModalOpened}>
-          <ModalBase width="auto" height="auto">
-            <BuyTicketModal onAction={onModalAction} />
-          </ModalBase>
-        </ModalWrapper>
-      </div>
+      
       <PromotionSection  {...props} />
       <WinnersSlider {...props} />
       <FAQNavigation navigation={props.FAQNavigation} />
     </div>
     <SimpleLine />
     <div className='layout--wrap'>
-      <SectionContainer />
+      <SectionContainer {...props} />
     </div>
   </>)
 }
 
 export function getServerSideProps(ctx) {
+  const howToPlayList = [
+    {
+      title: 'წესები და პირობები',
+      desc: 'გაეცანით თამაშის წესებს და გაიგეთ მეტი ჩვენი მომსახურების შესახებ',
+      img: '/assets/images/telecom.png'
+    },
+    {
+      title: 'უკუკავშირი',
+      desc: 'გაქვთ შეკითხვა? დაგვიკავშირდით ცხელ ხაზზე, ან მოგვწერეთ უკუკავშირის ფორმა Facebook ჩატის გამოყენებით',
+      img: '/assets/images/cell-phone.png'
+    },
+    {
+      title: 'ვიდეო ინსტრუქცია',
+      desc: 'ვვიდეო საშუალებით გაიგებთ, როგორ ითამაშოთ და მოიგოთ',
+      img: '/assets/images/multimedia.png'
+    }
+  ]
+  
   return {
     props: {
       slides: Array(5).fill('null'),
       winnings: Array(15).fill(null),
+      howToPlayList,
       FAQNavigation: [
         { name: 'რეგისტრაცია', slug: '', image: '/assets/images/info.png', desc: '1 ბილეთი' },
         { name: '1 ლარის შენაძენზე', slug: '', image: '/assets/images/shop.png', desc: '100 მონეტა' },

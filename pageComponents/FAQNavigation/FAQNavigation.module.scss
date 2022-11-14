@@ -19,8 +19,8 @@
 
 
     .listWrap {
-      --bs-gutter-x: 39px;
-      ---g--bs-gutter-x: 39px;
+      // --bs-gutter-x: 39px;
+      // --g--bs-gutter-x: 39px;
     }
   }
 
@@ -108,7 +108,7 @@
       .listItem {
         @include flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
 
         width: 100%;
         min-height: 370px;

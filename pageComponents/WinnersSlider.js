@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from '../styles/Home.module.scss'
 import SwipeSlider from 'src/Shared/SwipeSlider'
 import IconWrap from '@/components/IconWrap'
 import ModalWrapper, { CloseAction, ModalBase, SimpleModal } from 'src/Shared/Modal/ModalWrapper'
 import styled from 'styled-components'
+import { useSwiper } from 'swiper/react'
+import { ArrowSvg } from 'src/icons'
+import useWindowSize from 'src/hooks/useWindowSize'
 
 const PlayButton = () => {
   return <IconWrap size="14" name="Play" />
@@ -41,24 +44,27 @@ const WinnerBlock = (props) => {
 
 export default function WinnersSlider(props) {
   const [isOpen, setOpen] = useState(false)
+  const {width} = useWindowSize();
 
+  console.log('width', width);
+  
   return (
     <div className={styles.swipeList}>
+
       <SwipeSlider
         spaceBetween={26.5}
-        initialSlide={0}
+        initialSlide={2}
         slidesPerView={'auto'}
         centeredSlides={false}
         resistanceRatio={0}
         freeMode={true}
         variant={'simple'}
         breakpoints={{
-          // [(((285 + 24) * 1) - 24 + 40)]: {
-          //   slidesPerView: 1,
-          //   spaceBetween: 24,
-          //   centeredSlides: true
+          [385]: {
+            slidesPerView: 'auto',
+            centeredSlides: true
 
-          // },
+          },
           // [(((285 + 24) * 2) - 24 + 40)]: {
           //   slidesPerView: 2,
           //   spaceBetween: 24,
@@ -86,6 +92,8 @@ export default function WinnersSlider(props) {
           })
         }
       </SwipeSlider>
+
+
       <ModalWrapper
         onClose={() => setOpen(false)}
         open={isOpen}>

@@ -1,15 +1,23 @@
 .promotions {
-  .promoContainer {
-    background-color: gray;
+  @include flex;
+  flex-direction: column;
+  gap: 12px;
 
+  @include max-min(min px($BP_TABLET_SM)) {
+    gap: 16px;
   }
+
+  .promoContainer {}
 }
 
 .blockWrap {
   @include flex;
+  flex-direction: column;
+  gap: 16px;
 
-  @include max-min(max px($BP_TABLET)) {
-    flex-direction: column;
+  @include max-min(min px($BP_TABLET_SM)) {
+    gap: 38px;
+    flex-direction: row;
   }
 }
 
@@ -23,31 +31,49 @@
   font-family: 'Avenir Next Georgian';
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
-  line-height: 34px;
+  font-size: 16px;
+  line-height: 23px;
+
   margin: 18px auto 26px auto;
   text-align: center;
   padding: 0 20px;
 
   color: $color_gray;
 
-
 }
 
 .smallBlockWide {
-  width: #{(879 / $LAYOUT_WRAP_SIZE) * 100  + '%'};
 
   font-family: 'Avenir Next Georgian';
   font-style: normal;
   font-weight: 900;
-  font-size: 65px;
+  font-size: 40px;
   line-height: 92px;
   letter-spacing: 0.05em;
   flex-shrink: 0;
+  height: 170px;
+  padding-top: 17px;
 
-  @include max-min(max px($BP_TABLET)) {
-    width: 100%;
-    height: 270px;
+  @include max-min(min px($BP_MOBILE)) {
+    height: auto;
+    font-size: 64px;
+    padding-top: 32px;
+  }
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    width: #{(879 / $LAYOUT_WRAP_SIZE) * 100  + '%'};
+    height: auto;
+    // height: 270px;
+    // max-height: 270px;
+  }
+
+  .textArea {
+    margin-top: -16px;
+
+
+    @include max-min(min px($BP_MOBILE)) {
+      margin-top: 16px;
+    }
   }
 
   svg {
@@ -57,6 +83,15 @@
     stroke-width: 8px;
     stroke-linecap: butt;
     stroke-linejoin: miter;
+    height: 52px;
+
+    @include max-min(min px($BP_MOBILE)) {
+      height: 92px;
+    }
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 
@@ -87,15 +122,52 @@
   font-family: 'Avenir Next Georgian';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
-
+  font-size: 13px;
+  line-height: 18px;
   color: #3F3F46;
+
+  @include max-min(min px($BP_MOBILE + 1)) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.timeBlockTitle {
+
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+  color: #3F3F46;
+  text-align: center;
+
+
+  margin: 18px auto 26px auto;
+  padding: 0 20px;
+
+
+  @include max-min(min px($BP_MOBILE)) {
+    font-size: 24px;
+    line-height: 34px;
+  }
 }
 
 .timeBlockWrap {
   gap: 13px;
-  padding: 0 20px 38px 20px;
+  padding: 0 16px 20px 16px;
+
+  @include max-min(min px($BP_LAPTOP_SM)) {
+    padding: 0 22px 38px 22px;
+  }
+
+  >* {
+    gap: 3px;
+
+    @include max-min(min px($BP_LAPTOP_SM)) {
+      gap: 12px;
+    }
+  }
 }
 
 .timeBlock {
@@ -113,37 +185,65 @@
   // line-height: 114px;
   // height: 64px;
   font-size: 24px;
-  height: 64px;
+  // height: 64px;
+
+  font-style: normal;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 57px;
+
+  /* identical to box height */
+  letter-spacing: 0.05em;
+  height: 72px;
 
 
   @include max-min(min px($BP_MOBILE)) {
-    // width: 100%;
-    // font-size: 24px;
-    // height: 64px;
+    height: 92px;
   }
 
-
-  @include max-min(min px($BP_LAPTOP_SM)) {
-    width: 100%;
-    height: 100px;
-    font-size: 35px;
+  @include max-min(min px(1080)) {
+    height: 98px;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 114px;
   }
 
-
-  @include max-min(min px($BP_LAPTOP_MEDIUM)) {
-    width: 100%;
-    height: 100px;
-    font-size: 50px;
-  }
-
-
-  @include max-min(min px($LAYOUT_WRAP_SIZE)) {
-    width: 100%;
+  @include max-min(min px(1380)) {
+    font-weight: 900;
+    font-size: 76px;
+    line-height: 90px;
     height: 149px;
-
-    font-size: 80px;
-    // font-size: 60px;
   }
+
+
+  // @include max-min(min px($BP_MOBILE)) {
+  //   // width: 100%;
+  //   // font-size: 24px;
+  //   // height: 64px;
+  // }
+
+
+  // @include max-min(min px($BP_LAPTOP_SM)) {
+  //   width: 100%;
+  //   height: 100px;
+  //   font-size: 35px;
+  // }
+
+
+  // @include max-min(min px($BP_LAPTOP_MEDIUM)) {
+  //   width: 100%;
+  //   height: 100px;
+  //   font-size: 50px;
+  // }
+
+
+  // @include max-min(min px($LAYOUT_WRAP_SIZE)) {
+  //   width: 100%;
+  //   height: 149px;
+
+  //   font-size: 80px;
+  //   // font-size: 60px;
+  // }
 
 
 
@@ -156,6 +256,9 @@
     stroke-width: 4px;
     stroke-linecap: butt;
     stroke-linejoin: miter;
+
+
+    margin-top: 4px;
   }
 }
 
@@ -166,8 +269,12 @@
 
   :global {
 
-    .swiper {
-      overflow: hidden !important;
+    .swiper.mySwiper {
+      overflow: visible !important;
+
+      @include max-min(min px($BP_LAPTOP_MEDIUM)) {
+        overflow: hidden !important;
+      }
     }
 
     .swiper-slide {
@@ -302,6 +409,7 @@
     flex-shrink: 0;
     padding: 1px 0 0 2px;
     cursor: pointer;
+
 
     &:hover {
       background-color: rgba($main_gold, .09);

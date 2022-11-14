@@ -10,7 +10,7 @@ import { WinnerListAPI } from 'src/API';
 import { format, getMonth, setMonth } from 'date-fns';
 import IconWrap from '@/components/IconWrap';
 import WinnerBlock, { TicketBlock, UserAvatar } from '@/components/WinnerBlock';
-import { SVGTextEl } from 'src/utils';
+import { numberWithSpaces, SVGTextEl } from 'src/utils';
 import classNames from 'classnames';
 import styles from './LastWinnersFilter.module.scss';
 
@@ -42,7 +42,7 @@ const FilterItem = (props) => {
             </UserAvatar>
           </div>
           <div className={'winNumber'}>
-            <SVGTextEl>{props.winNumber}</SVGTextEl>
+            <SVGTextEl>{numberWithSpaces(props.winNumber)} ₾</SVGTextEl>
 
           </div>
           {/* {new Date(props.winningDate).getDay() + ' - ' + new Date(props.winningDate).toString()} */}

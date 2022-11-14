@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable react/display-name */
+import React, { forwardRef, useState } from 'react'
 import { Swiper, SwiperSlide as SwipeItem } from 'swiper/react';
 
 // Import Swiper styles
@@ -7,75 +8,113 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import classNames from 'classnames';
-import styles from '@/styles/components/mainSlider.module.scss'
 import IconWrap from '@/components/IconWrap';
 import { ArrowSvg } from 'src/icons';
 import { Navigation } from 'swiper';
+import customSwiperStyle from '@/styles/components/mainSlider.module.scss'
 
-const SwipeSlider = (props) => {
-  const { variant = 'shadow', children } = props;
-  const prevRef = React.useRef();
-  const nextRef = React.useRef();
-  const swiperRef = React.useRef();
-  const [swiper, setSwiper] = useState();
-  const [state, setstate] = useState(0);
-  const _childrens = [].concat(children);
-  // console.log('object', children)
 
-  React.useEffect(() => {
-    if (swiper) {
+// export function SliderControlsWrap({ next, prev, onAction, variant }) {
 
-      // console.log("Swiper instance:", swiper);
-      // swiper.params.navigation.prevEl = prevRef.current;
-      // swiper.params.navigation.nextEl = nextRef.current;
-      // swiper.navigation.init();
-      // swiper.navigation.update();
-      // setstate(swiper.realIndex)
+//   return (
+//     <div>
+//       <div onClick={() => onAction && onAction(-1)} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.prev, {
+//         [customSwiperStyle.disabled]: !next,
+//         [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
+//       })}>
+//         <div className={customSwiperStyle.iconWrap}>
+//           <ArrowSvg />
+//         </div>
+//       </div>
 
-    }
-  }, [swiper]);
+//       <div onClick={() => onAction && onAction(+1)} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.next, {
+//         [customSwiperStyle.disabled]: !prev,
+//         [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
+//       })}>
+//         <div className={customSwiperStyle.iconWrap}>
+//           <ArrowSvg />
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 
-  // console.log('swiper.realIndex', props, state)
-  return <Swiper
-    modules={props.modules ?? [Navigation]}
-    style={props.style ?? { overflow: 'visible' }}
-    navigation={false}
-    updateOnWindowResize
-    observer
-    observeParents
-    initialSlide={Math.floor(_childrens.length / 2)}
-    onSwiper={(e) => {
-      setSwiper(e)
-      // console.log('setSwiper', setSwiper);
-    }}
-    onSlideChange={(w) => {
-      setstate(w.realIndex)
-      return w;
-    }}
-    {...props}
-  // pagination={{ clickable: true }}
-  // scrollbar={{ draggable: true }}
-  >
-    <div onClick={() => swiper && swiper.slidePrev()} className={classNames(styles.arrowBtn, 'flxAll', styles.prev, {
-      [styles.disabled]: state == 0,
-      [styles[variant]]: styles[variant] && variant
-    })} ref={prevRef}>
-      <div className={styles.iconWrap}>
-        <ArrowSvg />
+
+
+const SwipeSlider = forwardRef(
+  (props, ref) => {
+    const { variant = 'shadow', children } = props;
+    const prevRef = React.useRef();
+    const nextRef = React.useRef();
+    const swiperRef = React.useRef();
+    const [swiper, setSwiper] = useState();
+    const [state, setstate] = useState(0);
+    const _childrens = [].concat(children);
+
+    React.useEffect(() => {
+      if (swiper) {
+
+        // console.log("Swiper instance:", swiper);
+        // swiper.params.navigation.prevEl = prevRef.current;
+        // swiper.params.navigation.nextEl = nextRef.current;
+        // swiper.navigation.init();
+        // swiper.navigation.update();
+        // setstate(swiper.realIndex)
+
+      }
+    }, [swiper]);
+
+    return <div className={customSwiperStyle.swiperWrapper}>
+      <div className={customSwiperStyle.arrowWrap}>
+        <div onClick={() => swiper && swiper.slidePrev()} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.prev, {
+          [customSwiperStyle.disabled]: state == 0,
+          [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
+        })} ref={prevRef}>
+          <div className={customSwiperStyle.iconWrap}>
+            <ArrowSvg />
+          </div>
+        </div>
+
+        <div onClick={() => swiper && swiper.slideNext()} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.next, {
+          [customSwiperStyle.disabled]: [].length - 1 == state,
+          [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
+        })} ref={nextRef}>
+          <div className={customSwiperStyle.iconWrap}>
+            <ArrowSvg />
+          </div>
+        </div>
       </div>
+
+      <Swiper
+        modules={props.modules ?? [Navigation]}
+        style={props.style ?? { overflow: 'visible' }}
+        navigation={false}
+        updateOnWindowResize
+        observer
+        observeParents
+        // ref={swiperRef}
+        initialSlide={Math.floor(_childrens.length / 2)}
+        onSwiper={(e) => {
+          setSwiper(e)
+          props.onSwiper && props.onSwiper(e);
+          // console.log('setSwiper', setSwiper);
+        }}
+        onSlideChange={(w) => {
+          setstate(w.realIndex)
+          return w;
+        }}
+        {...props}
+      // pagination={{ clickable: true }}
+      // scrollbar={{ draggable: true }}
+      >
+
+        {[].concat(children).map((c, k) => {
+          return <SwipeItem key={k}>{c}</SwipeItem>
+        })}
+
+      </Swiper>
     </div>
-    {[].concat(children).map((c, k) => {
-      return <SwipeItem key={k}>{c}</SwipeItem>
-    })}
-    <div onClick={() => swiper && swiper.slideNext()} className={classNames(styles.arrowBtn, 'flxAll', styles.next, {
-      [styles.disabled]: [].length - 1 == state,
-      [styles[variant]]: styles[variant] && variant
-    })} ref={nextRef}>
-      <div className={styles.iconWrap}>
-        <ArrowSvg />
-      </div>
-    </div>
-  </Swiper>
-}
+  }
+)
 
 export default SwipeSlider

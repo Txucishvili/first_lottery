@@ -117,8 +117,6 @@ const filters = {
     condition: '{{name}}.includes({{value}})',
     filter: (target, field) => {
 
-      console.log('value', field.value)
-
       if (field.value) {
         return new Date(target.winningDate).getTime() <= new Date(field.value).getTime()
       }

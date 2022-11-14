@@ -11,10 +11,6 @@ export default function DateRangePicker(props) {
     return <span title={tooltipText}>{day}</span>;
   };
 
-  const onSelect = (e) => {
-    console.log('onSelect', e)
-  }
-
   return (
     <div>
       <ReactDatePicker
