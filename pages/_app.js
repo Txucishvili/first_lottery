@@ -10,6 +10,7 @@ import { ThemeProvider } from 'styled-components';
 import Footer from '@/components/Footer/Footer';
 import { footerNavList, HeaderNavigation, LanguageList, NavigationList } from 'src/API';
 import { AppContextProvider } from 'src/store';
+import { MobileMenu } from '@/components/Header/MobileNavigations';
 
 
 function MyApp(props) {
@@ -27,14 +28,11 @@ function MyApp(props) {
           <Header />
           <Navigation navigation={[]} />
         </div>
+
         <div className='pageWrap'>
           <Component {...pageProps} />
         </div>
         <Footer navigation={[]} />
-        {/* <ModalWrapper ref={(ref) => (modalRef = ref)} /> */}
-        {/* <div suppressHydrationWarning id="modals">
-            {isServer ? null : <div suppressHydrationWarning id="modalsWrap"></div>}
-          </div> */}
       </div>
     </div>
   </AppContextProvider>

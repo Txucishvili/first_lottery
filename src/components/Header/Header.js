@@ -12,21 +12,42 @@ import useWindowSize from 'src/hooks/useWindowSize';
 import { isServer } from 'src/utils';
 import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
+import {AnimatePresence, motion} from 'framer-motion';
 
-
-const MobileMenuTroggler = () => {
-  const [domReady, setDomReady] = useState(false)
-  const [open, setOpen] = useState(true)
+const MobileMenuTroggler = ({ onClick }) => {
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    setDomReady(true)
   }, [])
 
   const onOpen = (e) => {
-    setOpen(e)
+    setOpen(true);
+    onClick && onClick();
   }
 
-  return <div className='appBurger flxAll'>
+  const onMenuAction = (e) => {
+    console.log('object')
+    switch (e) {
+      case 'close':
+        setOpen(false);
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  return <div style={{zIndex: 2}} className='appBurger flxAll'>
+    <AnimatePresence>{open ? 
+      <motion.div
+        style={{position: 'fixed', top: 0, width: '100%', height: '100%' }}
+        animate={{ left: ['-100vh', '0vh'] }}
+        exit={{ left: ['0vh', '-100vh'] }}
+      >
+        <MobileMenu onAction={onMenuAction} />
+      </motion.div>
+    : null}
+ </AnimatePresence>
     <Button onClick={onOpen} variant="text" reset width={35} height={35}>
       <IconWrap size={20} name="BurgerMenu" />
     </Button>
@@ -36,7 +57,6 @@ const MobileMenuTroggler = () => {
 const HeaderLogoArea = () => {
   const { width } = useWindowSize();
   return <>
-    <MobileMenu />
     {width < 790 ? <MobileMenuTroggler /> : ''}
     <div className={styles.logoArea}>
       <Link href={'/'} legacyBehavior>

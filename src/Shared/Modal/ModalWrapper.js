@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { cloneElement, Component, createElement, memo, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom';
 import styles from '../../../styles/components/modal.module.scss'

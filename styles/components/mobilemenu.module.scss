@@ -1,16 +1,17 @@
 .container {
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
-  z-index: 55;
-  background: white;
+  z-index: 99999999999;
+  background: $color_white;
   width: 100%;
   height: 100%;
-
+  box-shadow: 0px 0px 36px rgba(0, 0, 0, 0.08);
   .wrap {
     @include flex;
     flex-direction: column;
     height: inherit;
+    overflow: auto;
   }
 
   .header {
@@ -19,8 +20,10 @@
     width: 100%;
     position: relative;
     // background-color: lightgray;
-    height: 76px;
+    // height: 76px;
+    height: 92px;
     padding: 0 52px;
+    flex-shrink: 0;
 
     .closeBtn {
       position: absolute;

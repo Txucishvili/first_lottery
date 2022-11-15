@@ -10,14 +10,15 @@ import Link from 'next/link';
 import { UserAvatar } from '../UserAvatar';
 
 
-export const MobileMenu = () => {
-  const [_navigation, set] = useAppContext()
+export const MobileMenu = (props) => {
+  const { onAction } = props;
+  const [_navigation, set] = useAppContext();
 
   return <div className={mobileStyle.container}>
     <div className={mobileStyle.wrap}>
       <div className={mobileStyle.header}>
         <div className={mobileStyle.closeBtn}>
-          <Button variant="text" reset width={30} height={30}>
+          <Button onClick={() => onAction('close')} variant="text" reset width={30} height={30}>
             <IconWrap size={16} name="CloseBold" />
           </Button>
         </div>
@@ -63,12 +64,12 @@ export const MobileMenu = () => {
             </UserAvatar>
           </div>
           <div className={mobileStyle.text}>
-          გასვლა
+            გასვლა
           </div>
           <div className={mobileStyle.icon}>
-           <IconWrap size={18} name="LogOut" />
+            <IconWrap size={18} name="LogOut" />
           </div>
-          
+
         </div>
       </div>
 
