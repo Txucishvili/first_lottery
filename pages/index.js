@@ -46,7 +46,6 @@ const SimpleLine = (props) => {
 }
 
 const SectionContainer = (props) => {
-  console.log('props', props)
   return <div className={styles.sectionContainer}>
     <div className={styles.containerTitle}>
       <span>როგორ</span>

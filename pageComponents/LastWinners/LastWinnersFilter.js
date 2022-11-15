@@ -9,10 +9,11 @@ import Button from 'src/Shared/Button'
 import { WinnerListAPI } from 'src/API';
 import { format, getMonth, setMonth } from 'date-fns';
 import IconWrap from '@/components/IconWrap';
-import WinnerBlock, { TicketBlock, UserAvatar } from '@/components/WinnerBlock';
+import WinnerBlock, { TicketBlock} from '@/components/WinnerBlock';
 import { numberWithSpaces, SVGTextEl } from 'src/utils';
 import classNames from 'classnames';
 import styles from './LastWinnersFilter.module.scss';
+import { UserAvatar } from '@/components/UserAvatar';
 
 
 const RangeToggler = ({ activeRange, isOpen, label, children }) => {

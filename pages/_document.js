@@ -56,16 +56,16 @@ export default class MyDocument extends Document {
 
               @font-face{
                 font-family:'Avenir Next Georgian';
-                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
-                font-weight:400;
+                src:url("/fonts/AvenirNextGeorgian-UltLt.otf");
+                font-weight:100;
                 font-style:normal;
                 font-display: fallback;
               }
 
               @font-face{
                 font-family:'Avenir Next Georgian';
-                src:url("/fonts/AvenirNextGeorgian-Black.otf");
-                font-weight:900;
+                src:url("/fonts/AvenirNextGeorgian-Thin.otf");
+                font-weight:200;
                 font-style:normal;
                 font-display: fallback;
               }
@@ -77,6 +77,40 @@ export default class MyDocument extends Document {
                 font-style:normal;
                 font-display: fallback;
               }
+
+              @font-face{
+                font-family:'Avenir Next Georgian';
+                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
+                font-weight:400;
+                font-style:normal;
+                font-display: fallback;
+              }
+
+              @font-face{
+                font-family:'Avenir Next Georgian';
+                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
+                font-weight:500;
+                font-style:normal;
+                font-display: fallback;
+              }
+                  
+              @font-face{
+                font-family:'Avenir Next Georgian';
+                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
+                font-weight:600;
+                font-style:normal;
+                font-display: fallback;
+              }
+                  
+              @font-face{
+                font-family:'Avenir Next Georgian';
+                src:url("/fonts/AvenirNextGeorgian-Black.otf");
+                font-weight:900;
+                font-style:normal;
+                font-display: fallback;
+              }
+
+
 
               @font-face{
                 font-family:'LBet STD MT';

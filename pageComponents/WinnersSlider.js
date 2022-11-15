@@ -46,7 +46,7 @@ export default function WinnersSlider(props) {
   const [isOpen, setOpen] = useState(false)
   const {width} = useWindowSize();
 
-  console.log('width', width);
+  // console.log('width', width);
   
   return (
     <div className={styles.swipeList}>

@@ -18,7 +18,7 @@
     width: 100%;
 
     input {
-      padding: 14px 24px;
+      padding: 8px 10px;
       outline: none;
       border: none;
       background: transparent;
@@ -33,6 +33,12 @@
       &::placeholder {
         color: rgba($color_gray, .5)
       }
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        padding: 14px 24px;
+
+      }
+
     }
   }
 

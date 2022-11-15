@@ -28,7 +28,7 @@ export default function useFilter({
   const [filterOptions, setFilterOptions] = useState(_initialOptions);
   const activeOptions = useRef(_initialOptions);
 
-  console.log('--- list', _originalList)
+  // console.log('--- list', _originalList)
 
   const data = useMemo(() => {
     // if (!list.length) { return [] }

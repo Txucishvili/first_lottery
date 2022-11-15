@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { WinnerListAPI } from '../src/API/index'
 import LastWinnerFilter from 'pageComponents/LastWinners/LastWinnersFilter'
 import { m } from 'framer-motion'
+import { UserAvatar } from '@/components/UserAvatar'
 
 
 
@@ -24,6 +25,9 @@ const LastWinnerSlide = ({ list }) => {
     e.update();
   }
   return <div className='containers'>
+    <div style={{width: 61}}>
+    <UserAvatar />
+    </div>
     <div className='wrap'>
       <div className='titleArea pageTitle'>
         <h3>ბოლო გამარჯვებული</h3>

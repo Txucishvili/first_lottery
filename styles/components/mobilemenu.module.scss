@@ -1,0 +1,161 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 55;
+  background: white;
+  width: 100%;
+  height: 100%;
+
+  .wrap {
+    @include flex;
+    flex-direction: column;
+    height: inherit;
+  }
+
+  .header {
+    @include flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    // background-color: lightgray;
+    height: 76px;
+    padding: 0 52px;
+
+    .closeBtn {
+      position: absolute;
+      left: 25px;
+    }
+
+    .title {
+      text-align: center;
+      font-family: 'Avenir Next Georgian';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 26px;
+      color: #3F3F46;
+      margin: auto;
+      // position: absolute;
+      // left: 50%;
+      // top: 50%;
+      // transform: translate(-50%, -50%);
+    }
+
+    .languageSelect {
+      // margin-left: auto;
+      position: absolute;
+      right: 24px;
+
+      :global {
+        .icon-wrapper {
+          svg path {
+            stroke: #3F3F46;
+          }
+        }
+      }
+    }
+  }
+
+  .divide {
+    margin-block: 40px;
+    width: 100%;
+    padding: 0 22px;
+
+    &:after {
+      content: '';
+      width: 100%;
+      background-color: rgba(63, 63, 70, 0.06);
+      ;
+      height: 1px;
+      display: block;
+    }
+  }
+
+  .navList {
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #3F3F46;
+    display: flex;
+    // gap: 24px;
+    flex-direction: column;
+    padding: 0 32px;
+
+    li {
+      height: 44px;
+      @include flex;
+      align-items: center;
+
+      a {
+        @include flex;
+        height: 100%;
+      }
+
+      span {
+        margin: auto;
+      }
+    }
+
+  }
+
+  .footer {
+    margin-top: auto;
+    padding: 0 16px;
+  }
+
+  .logoutBtn {
+    @include flex;
+
+    height: 80px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 36px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    margin-bottom: 50px;
+    padding: 11px 16px;
+    align-items: center;
+
+    .icon {
+      margin-left: auto;
+    }
+
+    .text {
+
+      font-family: 'Avenir Next Georgian';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+
+      /* identical to box height */
+
+      color: #3F3F46;
+      margin-left: 22px;
+    }
+
+    .userAvatar {
+      @include size(55px);
+
+      img {
+        height: 35px;
+      }
+
+      :global {
+        .name {
+          font-family: 'Avenir Next Georgian';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 14px;
+
+          color: #FFFFFF;
+          width: 21px;
+          height: 11px;
+        }
+      }
+    }
+  }
+}

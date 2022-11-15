@@ -36,7 +36,7 @@ export const SimpleModal = (props) => {
       // document.getElementById('__next').style.height = '100vh';
     } else {
       // document.body.style.overflowY = 'visible';
-      console.log('object')
+      // console.log('object')
     }
   }, [openState]);
 
@@ -112,7 +112,7 @@ export const ModalBase = (props) => {
       // document.getElementById('__next').style.height = '100vh';
     } else {
       // document.body.style.overflowY = 'visible';
-      console.log('object')
+      // console.log('object')
     }
   }, [openState]);
 

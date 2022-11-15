@@ -1,6 +1,5 @@
 
 const withTransitionLayout = ({ rect, position, children }) => {
-  console.log('rect', rect)
   return <div style={{
     position: 'absolute',
     top: position.offsetTop,
@@ -38,7 +37,6 @@ export function PortalWrapper(props) {
 }
 
 const WithTransition = (props) => {
-  console.log('[WithTransition]', props);
   const targeetClone = useRef(null);
   const targetRef = useRef(null);
   const [mounted, setMounted] = useState(false);
@@ -50,7 +48,6 @@ const WithTransition = (props) => {
     ref: targetRef,
     onClone: function (e) {
 
-      console.log('_cloneTarget', _cloneTarget)
       setMounted(true);
 
       const target = targetRef.current;
@@ -61,7 +58,6 @@ const WithTransition = (props) => {
     }
   });
 
-  console.log('targeetClone.current', targeetClone.current)
 
   return <div>
     <Comp {...props} someProps={'some'} />
@@ -71,7 +67,6 @@ const WithTransition = (props) => {
 
 
 const CloneTarget = (props) => {
-  console.log('CloneTarget', props)
   const { rect, position } = props;
   return <div
     style={{

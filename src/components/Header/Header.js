@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { createElement, useEffect, useState } from 'react'
 import { classNames } from '../../utils/classnames'
 import styles from '../../../styles/components/header.module.scss';
+import mobileMenuStyle from '../../../styles/components/header.module.scss';
 import Logo from '../../Logo';
 import Search from '../Search';
 import Button from '../../Shared/Button';
@@ -8,25 +9,48 @@ import Link from 'next/link';
 import IconWrap from '../IconWrap';
 import { BurgerMenu, UserIcon } from '../../icons';
 import useWindowSize from 'src/hooks/useWindowSize';
+import { isServer } from 'src/utils';
+import ReactDOM from 'react-dom';
+import { MobileMenu, MobileUserMenu } from './MobileNavigations';
 
-const MobileNavigation = () => {
+
+const MobileMenuTroggler = () => {
+  const [domReady, setDomReady] = useState(false)
+  const [open, setOpen] = useState(true)
+
+  useEffect(() => {
+    setDomReady(true)
+  }, [])
+
+  const onOpen = (e) => {
+    setOpen(e)
+  }
+
   return <div className='appBurger flxAll'>
-    <Button variant="text" reset width={35} height={35}>
+    <Button onClick={onOpen} variant="text" reset width={35} height={35}>
       <IconWrap size={20} name="BurgerMenu" />
     </Button>
   </div>
 }
 
-const MobileUserInfo = () => {
-  return <div className={classNames(styles.mobileUserInfo, 'flxAll')}>
-    <Button variant="text" reset width={35} height={35}>
-      <IconWrap size={22} name="UserIcon" />
-    </Button>
-  </div>
+const HeaderLogoArea = () => {
+  const { width } = useWindowSize();
+  return <>
+    <MobileMenu />
+    {width < 790 ? <MobileMenuTroggler /> : ''}
+    <div className={styles.logoArea}>
+      <Link href={'/'} legacyBehavior>
+        <a>
+          <Logo />
+        </a>
+      </Link>
+    </div>
+    {width < 790 ? <MobileUserMenu /> : ''}
+  </>
 }
 
 export default function Header() {
-  const { width } = useWindowSize();
+  // const { width } = useWindowSize();
 
   return (
     <div className={classNames(styles.content, 'flx')}>
@@ -34,15 +58,7 @@ export default function Header() {
 
 
         <div className={styles.leftArea}>
-          {width < 790 ? <MobileNavigation /> : ''}
-          <div className={styles.logoArea}>
-            <Link href={'/'} legacyBehavior>
-              <a>
-                <Logo />
-              </a>
-            </Link>
-          </div>
-          {width < 790 ? <MobileUserInfo /> : ''}
+          <HeaderLogoArea />
         </div>
         <div className={styles.searchArea}>
           <Search />

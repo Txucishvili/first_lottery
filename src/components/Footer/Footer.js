@@ -3,8 +3,10 @@ import styles from '@/styles/components/footer.module.scss';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Facebook, Instagram, Youtube } from 'src/icons';
+import { useAppContext } from 'src/store';
 
 export default function Footer(props) {
+  const [_navigation, set] = useAppContext()
 
   return (
     <div className={styles.container}>
@@ -13,7 +15,7 @@ export default function Footer(props) {
           <div className={styles.navListBox}>
             <div className={styles.navListTitle}>კომპანიის შესახებ</div>
             <ul className={styles.navList}>
-              {props.navigation.about.map((n, k) => {
+              {_navigation.footerNavigation.about && _navigation.footerNavigation.about.map((n, k) => {
                 return <li className={styles.navListItem} key={k}>
                   <Link href={n.slug}>
                     {n.text}
@@ -44,7 +46,7 @@ export default function Footer(props) {
           <div className={styles.navListBox}>
             <div className={styles.navListTitle}>მომხმარებლებისთვის</div>
             <ul className={styles.navList}>
-              {props.navigation.users.map((n, k) => {
+              {_navigation.footerNavigation.users && _navigation.footerNavigation.users.map((n, k) => {
                 return <li className={styles.navListItem} key={k}>
                   <Link href={n.slug}>
                     {n.text}
