@@ -89,11 +89,26 @@
     }
   }
 
+  .appBurger,
   .mobileUserInfo {
     @include flex;
-    margin-left: auto;
 
-    @include max-min(min px($BP_LAPTOP_SM)) {
+    @include max-min(min px($BP_TABLET_SM)) {
       display: none;
     }
+  }
+
+
+  .appBurger {
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .mobileUserInfo {
+    margin-left: auto;
+    z-index: 2;
+  }
+  .active {
+    z-index: 3;
   }

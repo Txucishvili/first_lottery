@@ -14,13 +14,9 @@ import { MobileMenu } from '@/components/Header/MobileNavigations';
 
 
 function MyApp(props) {
-  const { Component, pageProps, headerNavigation, appNavigation, footerNavigation } = props;
+  const { Component, pageProps, navigations } = props;
 
-  return <AppContextProvider initialValue={{
-    headerNavigation,
-    appNavigation,
-    footerNavigation
-  }}>
+  return <AppContextProvider initialValue={{...navigations}}>
     <div className={styles.appLayout}>
       <div className={styles.wrap}>
         <div className='sticky-header'>
@@ -46,10 +42,12 @@ MyApp.getInitialProps = async () => {
   const languages = LanguageList;
 
   return {
-    headerNavigation,
-    appNavigation,
-    footerNavigation,
-    languages
+    navigations: {
+      headerNavigation,
+      appNavigation,
+      footerNavigation,
+      languages
+    }
   }
 }
 

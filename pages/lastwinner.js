@@ -25,9 +25,6 @@ const LastWinnerSlide = ({ list }) => {
     e.update();
   }
   return <div className='containers'>
-    <div style={{width: 61}}>
-    <UserAvatar />
-    </div>
     <div className='wrap'>
       <div className='titleArea pageTitle'>
         <h3>ბოლო გამარჯვებული</h3>

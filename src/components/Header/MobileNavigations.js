@@ -78,10 +78,76 @@ export const MobileMenu = (props) => {
 }
 
 
-export const MobileUserMenu = () => {
-  return <div className={classNames(styles.mobileUserInfo, 'flxAll')}>
-    <Button variant="text" reset width={35} height={35}>
-      <IconWrap size={22} name="UserIcon" />
-    </Button>
+
+export const MobileUserMenu = ({onAction}) => {
+  return <div className={mobileStyle.userMenu}>
+    <div className='svg-clip'>
+      <svg width="0" height="0" hidden>
+        <defs>
+          <clipPath id="clipCorner">
+            <polyline points="228.66 0.04 114.23 30.68 114.23 0.04 227.3 0.04 1.36 0 114.43 0 114.43 30.64 0 0" />
+
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+    <div className={'menu-header'}>
+      <div className={'closeBtn'}>
+        <Button onClick={() => onAction('close')} variant="text" reset width={30} height={30}>
+          <IconWrap size={16} name="CloseBold" />
+        </Button>
+      </div>
+      <div className='avatar-area'>
+        <UserAvatar>
+          <img src='/assets/images/avatar.png' />
+        </UserAvatar>
+      </div>
+    </div>
+
+    <div className='box-list'>
+      <div className='box-item virtual'>
+        <div className='box-icon'>
+          <IconWrap size={32} name="around_360" />
+        </div>
+        <div className='box-text'><span>ვირტუალური ტური</span></div>
+      </div>
+      <div className='box-item shop'>
+        <div className='box-icon'>
+          <IconWrap size={18} name="shop" />
+        </div>
+        <div className='box-text'><span>ონლაინ მაღაზია</span></div>
+      </div>
+      <div className='box-item voucher'>
+        <div className='box-icon'>
+          <IconWrap size={21} name="voucher" />
+        </div>
+        <div className='box-text'><span>ვაუჩერები</span></div>
+      </div>
+      <div className='box-item medical'>
+        <div className='box-icon'>
+          <IconWrap size={18} name="pill" />
+        </div>
+        <div className='box-text'><span>მედიქალი</span></div>
+      </div>
+    </div>
+
+    <ul className='nav-list'>
+      <li className='nav-item'>
+        <Link href={'/'}>
+          <span>ბილეთები</span>
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link href={'/'}><span>გათამასების ისტორია</span></Link>
+      </li>
+      <li className='nav-item'>
+        <Link href={'/'}>
+          <span>გასვლა</span>
+          <div className='icon-wrap'>
+            <IconWrap size={20} name='LogOut' />
+          </div>
+        </Link>
+      </li>
+    </ul>
   </div>
 }
