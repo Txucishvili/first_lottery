@@ -97,7 +97,10 @@ export const ModalBase = (props) => {
   const _childrens = typeof props.children.type !== 'undefined' ? [props.children] : [].concat(props.children);
 
   useEffect(() => {
+    document.documentElement.classList.add('no-scroll');
+
     return () => {
+      document.documentElement.classList.remove('no-scroll');
     }
   }, [])
 

@@ -72,6 +72,10 @@ h6 {
 //   font-style: normal
 // }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .layout {
   &--wrap {
     @include layoutWrap(true);

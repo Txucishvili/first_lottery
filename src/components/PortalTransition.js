@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const withTransitionLayout = ({ rect, position, children }) => {
   return <div style={{
@@ -13,7 +15,7 @@ const withTransitionLayout = ({ rect, position, children }) => {
 
 
 export function PortalWrapper(props) {
-  const { open, children } = props;
+  const { open = true, children } = props;
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
 
@@ -30,9 +32,9 @@ export function PortalWrapper(props) {
   }, [open])
 
   return mounted ?
-    // <WithModals {...props} />
-    // cloneElement(props.children, props)
-    createPortal(withTransitionLayout(props), ref.current)
+    open ?
+      createPortal(props.children, ref.current)
+      : null
     : null
 }
 

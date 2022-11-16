@@ -1,7 +1,7 @@
 import React, { createElement, useEffect, useRef, useState } from 'react'
 import { classNames } from '../../utils/classnames'
 import styles from '../../../styles/components/header.module.scss';
-import mobileMenuStyle from '../../../styles/components/header.module.scss';
+import mobileMenuStyle from '../../../styles/components/mobilemenu.module.scss';
 import Logo from '../../Logo';
 import Search from '../Search';
 import Button from '../../Shared/Button';
@@ -13,6 +13,7 @@ import { isServer } from 'src/utils';
 import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
 import { AnimatePresence, motion } from 'framer-motion';
+import { PortalWrapper } from '../PortalTransition';
 
 const MobileMenuTroggler = ({ onClick }) => {
   const [open, setOpen] = useState(false)
@@ -41,17 +42,19 @@ const MobileMenuTroggler = ({ onClick }) => {
   }
 
   return <div className={classNames(styles.appBurger, { [styles.active]: isActive.current })}>
-    <AnimatePresence>
-      {open ?
-        <motion.div
-          style={{ position: 'fixed', top: 0, width: '100%', height: '100%' }}
-          animate={{ left: ['-100vh', '0vh'] }}
-          exit={{ left: ['0vh', '-100vh'] }}
-        >
-          <MobileMenu onAction={onMenuAction} />
-        </motion.div>
-        : null}
-    </AnimatePresence>
+    <PortalWrapper>
+      <AnimatePresence>
+        {open ?
+          <motion.div
+            className={mobileMenuStyle.overlayWrap}
+            animate={{ left: ['-100vh', '0vh'] }}
+            exit={{ left: ['0vh', '-100vh'] }}
+          >
+            <MobileMenu onAction={onMenuAction} />
+          </motion.div>
+          : null}
+      </AnimatePresence>
+    </PortalWrapper>
     <Button onClick={onOpen} variant="text" reset width={35} height={35}>
       <IconWrap size={20} name="BurgerMenu" />
     </Button>
@@ -61,18 +64,34 @@ const MobileMenuTroggler = ({ onClick }) => {
 const MobileUserToggler = () => {
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    if (typeof document == 'undefined') {
+      return;
+    }
+    if (open) {
+      document.documentElement.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+    }
+  }, [open])
+
   return <div className={classNames(styles.mobileUserInfo, 'flxAll', { [styles.active]: open })}>
-    <AnimatePresence>
-      {open ? <motion.div
-        style={{ position: 'fixed', top: 0, width: '100%', height: '100%' }}
-        animate={{ right: ['-100vh', '0vh'] }}
-        exit={{ right: ['0vh', '-100vh'] }}
-      >
-        <MobileUserMenu onAction={(e) => {
-          if (e == 'close') setOpen(false)
-        }} />
-      </motion.div> : null}
-    </AnimatePresence>
+    <PortalWrapper>
+      <AnimatePresence>
+        {open ? <motion.div
+          className={mobileMenuStyle.overlayWrap}
+          animate={{ right: ['-100vh', '0vh'] }}
+          exit={{ right: ['0vh', '-100vh'] }}
+        >
+          <MobileUserMenu
+            onAction={(e) => {
+              if (e == 'close') setOpen(false)
+            }}
+          />
+        </motion.div> : null}
+      </AnimatePresence>
+    </PortalWrapper>
+
     <Button onClick={() => setOpen(true)} variant="text" reset width={35} height={35}>
       <IconWrap size={22} name="UserIcon" />
     </Button>

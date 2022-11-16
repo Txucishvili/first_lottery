@@ -141,12 +141,12 @@ export const MobileUserMenu = ({onAction}) => {
         <Link href={'/'}><span>გათამასების ისტორია</span></Link>
       </li>
       <li className='nav-item'>
-        <Link href={'/'}>
+        <div className='btn' href={'/'}>
           <span>გასვლა</span>
           <div className='icon-wrap'>
             <IconWrap size={20} name='LogOut' />
           </div>
-        </Link>
+        </div>
       </li>
     </ul>
   </div>

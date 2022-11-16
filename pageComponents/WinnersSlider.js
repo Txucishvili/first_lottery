@@ -102,7 +102,7 @@ export default function WinnersSlider(props) {
           variant="center"
         >
 
-          <div className='flxAll' style={{ width: 825, height: 550 }}>
+          <div className='flxAll'>
             video Container
             {/* <iframe width="100%" height="100%" src="https://www.youtube.com/embed/BcJCNLgEsHs" title="YouTube video player" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
           </div>
