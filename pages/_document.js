@@ -43,11 +43,7 @@ export default class MyDocument extends Document {
                     height: 100%;
                     overflow-x: hidden;
                   }
-                  body {
-                    // max-height: 100vh;
-                    // overflow: auto;
-                    // overflow-x: hidden;
-                  }
+                  
                   body {
                     overflow-x: hidden;
                     padding-bottom: 80px;

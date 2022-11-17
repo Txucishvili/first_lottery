@@ -11,10 +11,13 @@
 
   .navigationArea {
     @include flex;
-    gap: 120px;
-    @include max-min(max px($BP_TABLET)) {
-      gap: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      gap: 120px;
     }
+
   }
 
   .navList {
@@ -118,21 +121,29 @@
   width: 100%;
   user-select: none;
 
+  height: 198px;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    height: initial;
+  }
+
   img {
     display: block;
     position: absolute;
     right: -200px;
     bottom: 0px;
     z-index: 5;
+    height: initial;
+    width: 380px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: initial;
+    }
   }
 }
 
 .circle {
   position: absolute;
-  top: -400px;
-  right: -635px;
-  width: 1300px;
-  height: 1300px;
   background: #EDC522;
   border-radius: 100%;
   // opacity: .2;
@@ -144,4 +155,196 @@
   // top: 4420px;
 
   // background: #539AFF;
+
+  right: -12px;
+  width: 646px;
+  height: 646px;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    height: initial;
+    top: -400px;
+    right: -635px;
+    width: 1300px;
+    height: 1300px;
+    left: initial;
+  }
+
+
+}
+
+.footerArea {
+  overflow: hidden;
+
+  :global {
+    .footer {
+      &--wrap {
+        padding-inline: 16px;
+        // @include layoutWrap(false);
+        margin-top: 100px;
+        max-width: 1530px;
+        margin-inline: auto;
+        // padding-top: 140px;
+        position: relative;
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          // padding-inline: 20px;
+        }
+      }
+
+      .nav-grid {
+        @include flex;
+        gap: 24px;
+        flex-direction: column;
+
+        @include max-min(min px($BP_MOBILE)) {
+          gap: 24px;
+          flex-direction: column;
+        }
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          gap: 120px;
+          flex-direction: row;
+        }
+
+        .col {
+          @include flex;
+          flex-direction: column;
+        }
+
+        .btm {
+          margin-top: auto;
+        }
+
+        .col-el {}
+      }
+
+      .navigation {
+
+        // margin-top: 24px;
+
+        &--title {
+          font-family: 'Avenir Next Georgian';
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 23px;
+          color: #3F3F46;
+          margin-bottom: 16px;
+
+          @include max-min(min px($BP_TABLET_SM)) {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 32px;
+          }
+        }
+
+        &--list {
+          @include flex;
+          flex-direction: column;
+          gap: 16px;
+
+          &--item {
+            font-family: 'Avenir Next Georgian';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #3F3F46;
+
+            @include max-min(min px($BP_TABLET_SM)) {
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 23px;
+              color: #3F3F46;
+            }
+
+          }
+        }
+
+
+      }
+
+      .navigation-icon {
+        &--list {
+          @include flex;
+          gap: 18px;
+          padding-top: 30px;
+        }
+
+        &--item {}
+      }
+
+      .bgArea {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 198px;
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          height: 0px;
+        }
+
+
+        .circle {
+          width: 646px;
+          height: 646px;
+          background: #EDC522;
+          border-radius: 100%;
+          position: absolute;
+          // right: 0;
+          // top: 0;
+          top: 10px;
+          right: -275px;
+          z-index: -1;
+
+          @include max-min(min px($BP_TABLET_SM)) {
+            top: -250px;
+            right: -625px;
+            width: 1300px;
+            height: 1300px;
+          }
+
+          .image {
+            position: absolute;
+            top: -40px;
+            left: 100px;
+            width: 290px;
+
+            @include max-min(min px($BP_TABLET_SM)) {
+              width: initial;
+              top: -152px;
+            }
+
+            img {
+              width: 100%;
+            }
+          }
+        }
+
+      }
+
+      .-copy_Right {
+        font-family: 'Avenir Next Georgian';
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 23px;
+        color: #FFF;
+        color: gray;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 100%;
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          font-family: 'Sofia Pro';
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 14px;
+          color: #383838;
+          padding-bottom: 15px;
+        }
+      }
+    }
+  }
 }

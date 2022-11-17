@@ -125,7 +125,7 @@ export default function Home(props) {
       <WinnersSlider {...props} />
       <FAQNavigation navigation={props.FAQNavigation} />
     </div>
-    <SimpleLine />
+    {/* <SimpleLine /> */}
     <div className='layout--wrap'>
       <SectionContainer {...props} />
     </div>

@@ -561,19 +561,19 @@
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
-    line-height: 40px;
-
-    /* identical to box height */
-
-    /* Main Gold */
+    font-size: 16px;
+    line-height: 23px;
     color: #3F3F46;
-
-
     text-align: center;
+    margin-top: 58px;
+    margin-bottom: 58px;
 
-    margin-top: 100px;
-    margin-bottom: 100px;
+    @include max-min(min px($BP_TABLET_SM)) {
+      font-size: 28px;
+      line-height: 40px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
 
     span {
       margin-left: 8px;

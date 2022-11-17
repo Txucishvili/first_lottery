@@ -75,6 +75,8 @@ export const footerNavList = {
   about: [
     { text: 'ვინ ვართ ჩვენ', slug: '', info: '' },
     { text: 'F.A.Q', slug: '', info: '' },
+    { text: 'მისმართი', slug: '', info: '' },
+    { text: 'გუნდი', slug: '', info: '' },
     { text: 'კონტაქტი', slug: '', info: '' },
   ],
   users: [

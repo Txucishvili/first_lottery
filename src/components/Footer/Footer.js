@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { Facebook, Instagram, Youtube } from 'src/icons';
 import { useAppContext } from 'src/store';
 
-export default function Footer(props) {
+
+export function _Footer(props) {
   const [_navigation, set] = useAppContext()
 
   return (
@@ -60,12 +61,96 @@ export default function Footer(props) {
             </div>
           </div>
         </div>
-        
+
       </div>
       <div className={styles.imageBg}>
-          <div className={styles.circle}></div>
-          <img src={'/assets/images/footer.svg'} />
-        </div>
+        <div className={styles.circle}></div>
+        <img src={'/assets/images/footer.svg'} />
+      </div>
     </div>
   )
+}
+
+export default function Footer() {
+  const [_navigation, set] = useAppContext();
+
+
+  const IconNavigaation = () => {
+    return <div className='navigation-icon'>
+      <ul className='navigation-icon--list'>
+        <li className='navigation-icon--item'>
+          <Link href={'some'}>
+            <Facebook />
+          </Link>
+        </li>
+        <li className='navigation-icon--item'>
+          <Link href={'some'}>
+            <Instagram />
+          </Link>
+        </li>
+        <li className='navigation-icon--item'>
+          <Link href={'some'}>
+            <Youtube />
+          </Link>
+        </li>
+      </ul>
+    </div>
+  }
+
+  return <div className={styles.footerArea}>
+    <div className='footer footer--wrap'>
+
+      <div className='nav-grid'>
+
+        <div className='col'>
+          <div className='navigation'>
+            <div className='navigation--title'>კომპანიის შესახებ</div>
+            <ul className='navigation--list'>
+              {_navigation.footerNavigation.about.map((nav, k) => {
+                return <li className='navigation--list--item' key={k}>
+                  <Link href={nav.slug}>
+                    {nav.text}
+                  </Link>
+                </li>
+              })}
+            </ul>
+          </div>
+
+          <div className='col-el btm'>
+          <IconNavigaation />
+        </div>
+          
+        </div>
+
+        <div className='col'>
+          <div className='navigation'>
+            <div className='navigation--title'>მომხმარებლებისთვის</div>
+            <ul className='navigation--list'>
+              {_navigation.footerNavigation.users.map((nav, k) => {
+                return <li className='navigation--list--item' key={k}>
+                  <Link href={nav.slug}>
+                    {nav.text}
+                  </Link>
+                </li>
+              })}
+            </ul>
+          </div>
+          <div className='col-el -copy_Right btm flxAll'>
+            <p>Copyright © 2022 our website. All rights reserved.</p>
+          </div>
+        </div>
+
+      </div>
+
+      
+      <div className='bgArea'>
+        <div className='circle'>
+          <div className='image'>
+            <img src={'/assets/images/footer.svg'} />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 }
