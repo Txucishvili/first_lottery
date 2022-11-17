@@ -1,5 +1,9 @@
 .container {
-  margin-top: 100px;
+  margin-top: 50px;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    margin-top: 100px;
+  }
 
   :global {
     .row {

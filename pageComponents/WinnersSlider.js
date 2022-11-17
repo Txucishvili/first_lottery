@@ -24,7 +24,7 @@ const WinnerBlock = (props) => {
     </svg>
     <div className={styles['winnerBlock--wrap']}>
       <div className={styles['ticketNumber']}>გათამაშება  #1.13</div>
-      <div className={styles['title']}>გათამაშებული</div>
+      <div className={styles['winTitle']}>გათამაშებული</div>
       <div className={styles['winNumber']}>0</div>
       <div className={styles['status']}>მოგება</div>
       <div className={styles['amount']}>
@@ -44,12 +44,15 @@ const WinnerBlock = (props) => {
 
 export default function WinnersSlider(props) {
   const [isOpen, setOpen] = useState(false)
-  const {width} = useWindowSize();
+  const { width } = useWindowSize();
 
   // console.log('width', width);
-  
+
   return (
     <div className={styles.swipeList}>
+      <div className='sectionTitle'>
+        <span>გათამაშებები</span>
+      </div>
 
       <SwipeSlider
         spaceBetween={26.5}

@@ -294,7 +294,11 @@
     }
 
     .swiper-slide {
-      width: 285px !important;
+      width: 208px !important;
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        width: 285px !important;
+      }
     }
   }
 }
@@ -307,71 +311,103 @@
     flex-direction: column;
     align-items: center;
     // gap: 20px;
-    padding: 41px 30px;
+    padding: 36px 30px;
     clip-path: url(#myClip);
-    background-color: rgba(212, 139, 34, 0.04);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0px 0px 36px rgba(0, 0, 0, 0.08);
+    width: 208px;
+    height: 294px;
 
-    width: 285px;
-    height: 394px;
-    left: 203px;
-    top: 2369px;
-
-    background: rgba(212, 139, 34, 0.04);
+    // background: rgba(212, 139, 34, 0.04);
     border-radius: 12px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: 285px;
+      height: 394px;
+      padding: 41px 30px;
+    }
 
   }
 
   &:after {
     content: '';
     position: absolute;
-    width: 285px;
-    height: 11px;
+    width: 100%;
+    height: 7px;
     left: 0;
     bottom: 0;
 
     background: #D48B22;
     border-radius: 12px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      height: 7px;
+    }
+
   }
 
   .ticketNumber {
-
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 600;
-    font-size: 17px;
-    line-height: 24px;
+
+
+    font-size: 13px;
+    line-height: 18px;
 
     /* Main Gold */
     color: #D6B100;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      font-size: 17px;
+      line-height: 24px;
+
+    }
   }
 
-  .title {
+  .winTitle {
     font-family: 'Avenir Next Georgian';
     font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 31px;
+    font-weight: 400;
 
     color: #3F3F46;
     margin-top: 33px;
+    font-size: 12px;
+    line-height: 17px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      font-size: 22px;
+      line-height: 31px;
+
+    }
+
   }
 
   .winNumber {
-    width: 66px;
-    height: 61px;
+    margin-top: 28px;
     background: rgba(63, 63, 70, 0.03);
-    border-radius: 16px;
+    border-radius: 4px;
     @include flex-all;
     flex-shrink: 0;
 
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 34px;
+    font-size: 15px;
+    line-height: 21px;
 
     color: #3F3F46;
 
+    width: 35px;
+    height: 32px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: 66px;
+      height: 61px;
+      font-size: 24px;
+      line-height: 34px;
+      border-radius: 16px;
+    }
 
   }
 
@@ -379,11 +415,20 @@
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 28px;
     margin-top: 22px;
 
     color: #3F3F46;
+
+
+    font-size: 12px;
+    line-height: 17px;
+
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      font-size: 20px;
+      line-height: 28px;
+
+    }
   }
 
   .amount {
@@ -402,7 +447,13 @@
 
     /* identical to box height */
 
-    color: #019E08
+    color: #019E08;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      font-size: 24px;
+      line-height: 34px;
+    }
+
   }
 
   .line {
@@ -416,8 +467,8 @@
 
   .playButton {
     margin-top: 15px;
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
     background: #FDFAF6;
     border: 2px solid #D6B100;
     @include flex-all;
@@ -425,6 +476,11 @@
     flex-shrink: 0;
     padding: 1px 0 0 2px;
     cursor: pointer;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      width: 42px;
+      height: 42px;
+    }
 
 
     &:hover {
@@ -560,7 +616,7 @@
   .containerTitle {
     font-family: 'Avenir Next Georgian';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 23px;
     color: #3F3F46;
