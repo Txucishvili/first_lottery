@@ -301,21 +301,24 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 
 
 
-$bp: (sm: 576,
+$bp: (
+  sm: 375,
   md: 768,
   lg: 992,
   xl: 1200,
   xxl: 1400);
 
 .row {
+  --gap-size: 20px;
   @include flex;
   flex-wrap: wrap;
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: calc(var(--gap-size) * -1);
+  margin-right: calc(var(--gap-size) * -1);
+
 
   >* {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--gap-size);
+    padding-right: var(--gap-size);
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;

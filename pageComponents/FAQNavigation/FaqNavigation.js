@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './FAQNavigation.module.scss'
 
 export const NavItem = (props) => {
-  return <div className='col-sm-12 col-md-6 col-xl-3'>
+  return <div className='col-sm-6 col-md-6 col-xl-3'>
     <div className={classNames(styles.listItemWrap)}>
       <div className={styles.dropEl}></div>
       <div className={styles.listItem}>
