@@ -21,9 +21,15 @@ const MobileMenuTroggler = ({ onClick }) => {
   const animation = useRef();
 
   useEffect(() => {
-    return () => {
+    if (typeof document == 'undefined') {
+      return;
     }
-  }, [])
+    if (open) {
+      document.documentElement.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+    }
+  }, [open])
 
   const onOpen = (e) => {
     setOpen(true);
