@@ -76,7 +76,7 @@ export default class MyDocument extends Document {
 
               @font-face{
                 font-family:'Avenir Next Georgian';
-                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
+                src:url("/fonts/AvenirNextGeorgian-Light.otf");
                 font-weight:400;
                 font-style:normal;
                 font-display: fallback;
@@ -92,7 +92,7 @@ export default class MyDocument extends Document {
                   
               @font-face{
                 font-family:'Avenir Next Georgian';
-                src:url("/fonts/AvenirNextGeorgian-Regular.otf");
+                src:url("/fonts/AvenirNextGeorgian-Medium.otf");
                 font-weight:600;
                 font-style:normal;
                 font-display: fallback;
