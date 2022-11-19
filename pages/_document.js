@@ -29,6 +29,24 @@ export default class MyDocument extends Document {
           />
           <script
             dangerouslySetInnerHTML={{
+              __html: `
+              if (window.localStorage.getItem('scrollOptions')) {
+                // console.log('object', JSON.parse(window.localStorage.getItem('scrollOptions')))
+                const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
+                console.log('get', opt.scroll, opt.reload, window.document.scrollingElement)
+                if (opt && opt.reload) {
+                  window.document.scrollingElement.scrollTop = Math.abs(opt.scroll) - 50;
+                }
+              }
+              window.addEventListener('onload', function() {
+                console.log('-load')
+                
+              })
+              `,
+            }}
+          />
+          <script
+            dangerouslySetInnerHTML={{
               __html: `history.scrollRestoration = "manual"`,
             }}
           />
@@ -39,14 +57,14 @@ export default class MyDocument extends Document {
 
               
                   html {
-                    min-height: 100%;
-                    height: 100%;
-                    overflow-x: hidden;
+                    // min-height: 100%;
+                    // height: 100%;
+                    // overflow-x: hidden;
                   }
                   
                   body {
                     overflow-x: hidden;
-                    padding-bottom: 80px;
+                    // padding-bottom: 80px;
                     max-width: 100%;
                   }
 
