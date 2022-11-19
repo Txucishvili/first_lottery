@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useClient, useScroll } from 'src/hooks';
+import useWindowSize from 'src/hooks/useWindowSize';
+import { isServer } from 'src/utils';
 import styles from '../../styles/components/search.module.scss';
 import ICON_SET from '../icons';
 import { classNames } from '../utils/classnames';
 
 export default function Search() {
+ 
+  console.log('-------------')
+
+
   return (
     <div className={styles.searchArea}>
       <div className={styles.wrap}>

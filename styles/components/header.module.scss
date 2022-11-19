@@ -9,18 +9,24 @@
     @include layoutWrap();
     @include flex;
     flex-direction: column;
-    padding: 0 20px 20px 20px;
+    // padding: 0 20px;
 
+
+
+    @include max-min(min px($BP_MOBILE)) {
+      padding: 0;
+    }
 
     @include max-min(min px($BP_TABLET_SM)) {
       flex-direction: row;
       height: px($HEADER_HEIGHT);
-      padding: 0 20px;
+      // padding: 0 20px;
     }
 
-    // @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
-    //   padding: 0 20px;
-    // }
+
+    @include max-min(max px($LAYOUT_WRAP_SIZE), min px($BP_TABLET_SM)) {
+      padding: 0 20px;
+    }
 
   }
 
@@ -30,10 +36,14 @@
     width: 100%;
     height: px($HEADER_HEIGHT_MOBILE);
     position: relative;
+    // padding: 0 20px; 
+    padding-inline: px($BP_WRAP_PADDING);
 
     @include max-min(min px($BP_TABLET_SM)) {
       width: auto;
       height: auto;
+      padding-inline: 0;
+
     }
   }
 
@@ -65,13 +75,9 @@
       margin-inline: auto;
     }
 
-    @include max-min(max 790px) {
+    @include max-min(max px($BP_TABLET_SM)) {
       // display: none;
-    }
-
-    @include max-min(min px($BP_TABLET_SM)) {
-      // display: none;
-      padding: 0 20px;
+      padding-inline: 0;
     }
 
   }
@@ -109,6 +115,7 @@
     margin-left: auto;
     z-index: 2;
   }
+
   .active {
     z-index: 3;
   }

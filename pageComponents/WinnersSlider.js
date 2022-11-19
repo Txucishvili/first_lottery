@@ -15,13 +15,27 @@ const PlayButton = () => {
 const WinnerBlock = (props) => {
 
   return <div className={styles.winnerBlock}>
-    <svg width="0" height="0">
-      <defs>
-        <clipPath id="myClip">
-          <path d="M0,12.28A12,12,0,0,1,14.32.41c114.3,22.3,140.87,21,256.5-.21A12,12,0,0,1,285,12.08V394H0Z" fill="#D48B22" fillOpacity="0.04" />
-        </clipPath>
-      </defs>
-    </svg>
+
+    <div className={styles.wiinerBlockBg}>
+      <svg width="358" height="464" viewBox="0 0 358 464" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_d_640_1082)">
+          <path d="M36.5 48.6064C36.5 41.0441 43.4584 35.3793 50.8824 36.8192C165.11 58.9734 191.706 57.715 307.277 36.612C314.654 35.2649 321.5 40.9167 321.5 48.4161V416C321.5 422.627 316.127 428 309.5 428H48.5C41.8726 428 36.5 422.627 36.5 416V48.6064Z" fill="white" fillOpacity="0.04" shapeRendering="crispEdges" />
+        </g>
+        <defs>
+          <filter id="filter0_d_640_1082" x="0.5" y="0.412598" width="357" height="463.587" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+            <feOffset />
+            <feGaussianBlur stdDeviation="18" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_640_1082" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_640_1082" result="shape" />
+          </filter>
+        </defs>
+      </svg>
+
+    </div>
     <div className={styles['winnerBlock--wrap']}>
       <div className={styles['ticketNumber']}>გათამაშება  #1.13</div>
       <div className={styles['winTitle']}>გათამაშებული</div>

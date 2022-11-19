@@ -198,12 +198,12 @@
 
         @include max-min(min px($BP_MOBILE)) {
           gap: 24px;
-          flex-direction: column;
+          flex-direction: row;
         }
 
         @include max-min(min px($BP_TABLET_SM)) {
           gap: 120px;
-          flex-direction: row;
+          // flex-direction: row;
         }
 
         .col {
@@ -323,6 +323,13 @@
 
       }
 
+      .md-social {
+        display: none;
+        @include max-min(min px($BP_MOBILE)) {
+          display: block;
+        }
+       }
+      
       .-copy_Right {
         font-family: 'Avenir Next Georgian';
         font-weight: 500;
@@ -343,6 +350,9 @@
           line-height: 14px;
           color: #383838;
           padding-bottom: 15px;
+          width: initial;
+          position: unset;
+          transform: none;
         }
       }
     }

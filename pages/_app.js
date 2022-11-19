@@ -16,6 +16,30 @@ import { MobileMenu } from '@/components/Header/MobileNavigations';
 function MyApp(props) {
   const { Component, pageProps, navigations } = props;
 
+  useEffect(() => {
+    if (window.localStorage.getItem('scrollOptions')) {
+      // console.log('object', JSON.parse(window.localStorage.getItem('scrollOptions')))
+      const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
+      console.log('get', opt.scroll)
+      if (opt && opt.reload) {
+        window.document.scrollingElement.scrollTop = Math.abs(opt.scroll);
+      }
+    }
+    window.addEventListener("beforeunload", alertUser);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    };
+  }, []);
+
+  const alertUser = (e) => {
+    e.returnValue = "";
+    console.log('set', (document.body.getBoundingClientRect()).top);
+    window.localStorage.setItem('scrollOptions', JSON.stringify({
+      reload: true,
+      scroll: (document.body.getBoundingClientRect()).top
+    }))
+  };
+
   return <AppContextProvider initialValue={{...navigations}}>
     <div className={styles.appLayout}>
       <div className={styles.wrap}>
@@ -40,6 +64,7 @@ MyApp.getInitialProps = async () => {
   const appNavigation = NavigationList;
   const footerNavigation = footerNavList;
   const languages = LanguageList;
+  
 
   return {
     navigations: {

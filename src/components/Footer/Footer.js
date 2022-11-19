@@ -4,6 +4,7 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import { Facebook, Instagram, Youtube } from 'src/icons';
 import { useAppContext } from 'src/store';
+import useWindowSize from 'src/hooks/useWindowSize';
 
 
 export function _Footer(props) {
@@ -73,6 +74,7 @@ export function _Footer(props) {
 
 export default function Footer() {
   const [_navigation, set] = useAppContext();
+  const { width } = useWindowSize();
 
 
   const IconNavigaation = () => {
@@ -116,10 +118,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className='col-el btm'>
-          <IconNavigaation />
-        </div>
-          
+          <div className='col-el md-social btm'>
+            <IconNavigaation />
+          </div>
+
         </div>
 
         <div className='col'>
@@ -135,14 +137,18 @@ export default function Footer() {
               })}
             </ul>
           </div>
+          {width <= 375 ?
+            <IconNavigaation />
+            : null}
           <div className='col-el -copy_Right btm flxAll'>
+
             <p>Copyright © 2022 our website. All rights reserved.</p>
           </div>
         </div>
 
       </div>
 
-      
+
       <div className='bgArea'>
         <div className='circle'>
           <div className='image'>

@@ -1,17 +1,27 @@
 .searchArea {
   width: 100%;
   height: px($SEARCH_INPUT_HEIGHT_MOBILE);
+  padding-inline: px($BP_WRAP_PADDING);
+  margin-bottom: px($BP_WRAP_PADDING);
+
 
   @include max-min(min px($BP_TABLET_SM)) {
-    height: px($SEARCH_INPUT_HEIGHT)
+    height: px($SEARCH_INPUT_HEIGHT);
+    margin-bottom: 0;
   }
 
+  @include max-min(min px($LAYOUT_WRAP_SIZE)) {
+    padding-inline: 0;
+  }
+  
   .wrap {
     @include flex;
     height: inherit;
     border-radius: 8px;
     // overflow: hidden;
     position: relative;
+
+
   }
 
   .inputWrap {

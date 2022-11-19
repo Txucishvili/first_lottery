@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useRef, useState } from 'react'
+import React, { cloneElement, createElement, useEffect, useRef, useState } from 'react'
 import { classNames } from '../../utils/classnames'
 import styles from '../../../styles/components/header.module.scss';
 import mobileMenuStyle from '../../../styles/components/mobilemenu.module.scss';
@@ -12,8 +12,9 @@ import useWindowSize from 'src/hooks/useWindowSize';
 import { isServer } from 'src/utils';
 import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { PortalWrapper } from '../PortalTransition';
+import { useClient } from 'src/hooks';
 
 const MobileMenuTroggler = ({ onClick }) => {
   const [open, setOpen] = useState(false)
@@ -118,7 +119,71 @@ const HeaderLogoArea = () => {
   </>
 }
 
+
+const SearchWrap = (props) => {
+  const { children } = props;
+
+  const { isClient: rendered } = useClient();
+  const { width } = useWindowSize();
+  const [hasLisener, setLisner] = useState(false);
+  const [scrollSize, setScroll] = useState(null);
+  const [scrollDirection, setDirection] = useState(null);
+  const scrollPrev = useRef(0);
+  const handleScroll = (e) => {
+    console.log('---', e)
+  }
+
+  useEffect(() => {
+    if (rendered) {
+      if (width <= 900) {
+        if (!hasLisener) {
+          setLisner(true)
+        }
+      } else {
+        if (hasLisener) {
+          setLisner(false)
+        }
+      }
+
+    }
+  }, [hasLisener, rendered, width]);
+
+  useEffect(() => {
+    if (!hasLisener) {
+      return;
+    }
+
+    function handleScroll(event) {
+      const value = (document.body.getBoundingClientRect()).top > scrollPrev.current;
+      console.log('object', (document.body.getBoundingClientRect()).top , scrollSize)
+      setScroll((document.body.getBoundingClientRect()).top)
+      setDirection(value ? 1 : -1);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasLisener]);
+
+
+  return <AnimatePresence>
+    {scrollSize < 200 ?
+      <motion.div
+        aimate={{ opacity: scrollSize && scrollSize > 200 ? 1 : 0 }}
+      >
+        {scrollDirection}
+        {(scrollSize > 200).toString()}
+        {children}
+      </motion.div>
+      :
+      null}
+  </AnimatePresence>
+}
+
 export default function Header() {
+
+
+
+
   return (
     <div className={classNames(styles.content, 'flx')}>
       <div className={styles.wrap}>
@@ -128,7 +193,9 @@ export default function Header() {
           <HeaderLogoArea />
         </div>
         <div className={styles.searchArea}>
-          <Search />
+          <SearchWrap>
+            <Search />
+          </SearchWrap>
         </div>
         <div className={styles.authArea}>
           <Button variant="text">
