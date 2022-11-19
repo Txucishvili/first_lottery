@@ -69,15 +69,22 @@
     align-items: center;
     flex: 1;
     // max-width: 940px;
+    overflow: hidden;
 
     >* {
       max-width: 807px;
       margin-inline: auto;
+      width: 100%;
+
     }
 
     @include max-min(max px($BP_TABLET_SM)) {
       // display: none;
       padding-inline: 0;
+    }
+
+    &.animating {
+      overflow: hidden;
     }
 
   }

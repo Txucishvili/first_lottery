@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { PortalWrapper } from '../PortalTransition';
-import { useClient } from 'src/hooks';
+import { useClient, useScrollDirection } from 'src/hooks';
 
 const MobileMenuTroggler = ({ onClick }) => {
   const [open, setOpen] = useState(false)
@@ -127,8 +127,9 @@ const SearchWrap = (props) => {
   const { width } = useWindowSize();
   const [hasLisener, setLisner] = useState(false);
   const [scrollSize, setScroll] = useState(null);
-  const [scrollDirection, setDirection] = useState(null);
+  const [scrollDirection, setDirection] = useState(-1);
   const scrollPrev = useRef(0);
+
   const handleScroll = (e) => {
     console.log('---', e)
   }
@@ -154,28 +155,42 @@ const SearchWrap = (props) => {
     }
 
     function handleScroll(event) {
-      const value = (document.body.getBoundingClientRect()).top > scrollPrev.current;
-      console.log('object', (document.body.getBoundingClientRect()).top , scrollSize)
+      const value = (document.body.getBoundingClientRect()).top < scrollSize;
+      console.log('object', (document.body.getBoundingClientRect()).top, scrollSize)
       setScroll((document.body.getBoundingClientRect()).top)
       setDirection(value ? 1 : -1);
     }
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasLisener]);
+  }, [hasLisener, scrollSize]);
 
+
+  const variants = {
+    active: {
+      height: 59,
+      opacity: 1,
+    },
+    inactive: {
+      height: 0,
+      opacity: 0,
+    }
+  }
 
   return <AnimatePresence>
-    {scrollSize < 200 ?
+    {(scrollSize < 200) && scrollDirection == -1 && (
       <motion.div
-        aimate={{ opacity: scrollSize && scrollSize > 200 ? 1 : 0 }}
+        initial={'inactive'}
+        variants={variants}
+        animate={width <= 900 ? "active" : "inactive"}
+        exit={{...variants.inactive}}
+        onAnimationComplete={() => {
+          
+        }}
       >
-        {scrollDirection}
-        {(scrollSize > 200).toString()}
         {children}
       </motion.div>
-      :
-      null}
+    )}
   </AnimatePresence>
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 export const useClient = () => {
   const [rendered, setRendered] = useState(false)
@@ -11,9 +11,9 @@ export const useClient = () => {
     }
   }, []);
 
-  
+
   return {
-    isClient: rendered 
+    isClient: rendered
   }
 }
 
@@ -21,11 +21,11 @@ export const useClient = () => {
 export const useScroll = () => {
   const [scrollSize, setScrollSize] = useState(null);
 
-
   useEffect(() => {
     function handleScroll(e) {
-      console.log('---', e.scrollElement)
       setScrollSize(e);
+      const value = (document.body.getBoundingClientRect()).top < scrollSize;
+      console.log('value', value)
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -36,7 +36,8 @@ export const useScroll = () => {
   }, []);
 
   return {
-    scroll: scrollSize 
+    scroll: scrollSize
   }
 }
+
 
