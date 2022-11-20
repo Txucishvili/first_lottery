@@ -178,6 +178,7 @@
 .timeBlockWrap {
   // gap: 13px;
   padding: 0 16px 18px 16px;
+  margin-left: -12px;
 
   @include max-min(min px($BP_TABLET_SM)) {
     padding: 0 22px 38px 22px;
@@ -312,6 +313,8 @@
 
       @include max-min(min px($BP_LAPTOP_MEDIUM)) {
         overflow: hidden !important;
+        padding: 70px 0;
+        margin-block: -70px;
       }
     }
 

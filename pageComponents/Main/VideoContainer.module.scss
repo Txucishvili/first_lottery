@@ -17,14 +17,15 @@
       margin-left: initial;
       margin-right: initial;
       border-radius: 16px;
-      height: 404px;
+      height: toVW(694, 1530);
+      max-height: 694px;
     }
 
     @include max-min(min px(930)) {
       margin-left: initial;
       margin-right: initial;
       border-radius: 16px;
-      height: 694px;
+      // height: 694px;
     }
 
     &:hover {
@@ -40,7 +41,7 @@
 
 
   .bgArea {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
     top: 0;
@@ -49,14 +50,14 @@
     img {
       width: auto !important;
       height: 100% !important;
-      position: absolute;
+      // position: unset !important;
       top: 50% !important;
       left: 50% !important;
       transform: translate(-50%, -50%);
 
       @include max-min(min px($BP_TABLET_SM)) {
-        width: auto !important;
-        height: 100% !important;
+        // width: auto !important;
+        // height: 100% !important;
       }
 
 
@@ -92,7 +93,7 @@
     z-index: 5;
 
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px(624)) {
       width: 134px;
       height: 134px;
 

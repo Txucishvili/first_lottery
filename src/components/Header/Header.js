@@ -130,6 +130,7 @@ const SearchWrap = (props) => {
   const [scrollSize, setScroll] = useState(null);
   const [scrollDirection, setDirection] = useState(-1);
   const header = useAnimationControls({ height: 0 });
+  const appHeader = useAnimationControls({ height: 0 });
   const [overflow, setOverflow] = useState('visible')
 
 
@@ -145,6 +146,13 @@ const SearchWrap = (props) => {
           setLisner(false)
         }
       }
+
+    }
+    if (width > 768) {
+      // appHeader.start({
+      //   height: 'initial'
+      // })
+    } else {
 
     }
   }, [hasLisener, header, rendered, width]);
@@ -177,7 +185,7 @@ const SearchWrap = (props) => {
         setOverflow('visible')
       })
     }
-  }, [header, scrollDirection])
+  }, [header, scrollDirection, width])
 
   const variants = {
     active: {
@@ -214,9 +222,9 @@ const SearchWrap = (props) => {
   }
 
   return <motion.div
-    animate={width && width >= 768 ? { height: 'initial' } : scrollDirection == 1 ? { height: 200 } : { height: 60 }}
-    initial={{ height: '0' }}
-    style={{ height: '0' }}
+  initial={{ height: 0 }}
+  animate={appHeader}
+    style={{ height: 0 }}
   >
     <Search
       onFocuse={() => {

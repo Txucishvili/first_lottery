@@ -131,3 +131,7 @@ $winner_space: 14;
 @function decimal-floor ($number, $digits: 0) {
   @return decimal-round($number, $digits, floor);
 }
+
+@function toVW($absoluteSize, $breakpoint) {
+  @return #{($absoluteSize / $breakpoint) * 100}vw;
+}
