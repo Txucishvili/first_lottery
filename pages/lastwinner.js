@@ -36,7 +36,7 @@ const LastWinnerSlide = ({ list }) => {
           className={'listContent'}
           style={{ overflow: 'hidden', padding: ' 0' }}
           slidesPerView={'auto'}
-          spaceBetween={0}
+          spaceBetween={24}
           centeredSlides={true}
           initialSlide={2}
           freeMode={true}

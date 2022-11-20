@@ -26,8 +26,9 @@ export const WinnerListAPI =
 
 
 export const NavigationList = [
-  { slug: 'ticket', name: 'ბილეთები' },
-  { slug: 'lastwinner', name: 'გათამაშების ისტორია' }
+  { slug: '#', name: 'ბილეთები' },
+  { slug: '#', name: 'გათამაშების ისტორია' },
+  { slug: 'lastwinner', name: 'გამარჯვებულები' }
 ]
 
 export const HeaderNavigation = [
@@ -46,12 +47,7 @@ export const HeaderNavigation = [
   {
     slug: 'online_market',
     name: 'ონლაინ მაღაზია'
-  },
-  {
-    slug: 'virtual_tour',
-    name: 'ვირტუალური ტური'
   }
-
 ];
 
 

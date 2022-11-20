@@ -69,7 +69,7 @@ export default function WinnersSlider(props) {
       </div>
 
       <SwipeSlider
-        spaceBetween={26.5}
+        spaceBetween={24}
         initialSlide={2}
         slidesPerView={'auto'}
         centeredSlides={false}

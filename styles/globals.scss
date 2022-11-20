@@ -149,16 +149,28 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 .appSwiper {
 
   &.swiper-slide {
-    width: 250px;
-    height: 603px;
+    width: 208px;
+    height: 298px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      width: 250px;
+      height: 384px;
+      // height: 483px;
+    }
+
 
     transition: all .125s ease-in-out;
-    margin: 0 15px;
+    // margin: 0 15px;
 
     &-active {
+
       // transform: scale(1.14);
-      width: 330px;
+      // width: 330px;
       // margin: 0 40px !important;
+      @include max-min(min px($BP_TABLET_SM + 1)) {
+        width: 330px;
+        height: 483px;
+      }
 
     }
 
@@ -189,7 +201,12 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
   .swiper-wrapper {
     padding-top: 62px;
     padding-bottom: 119px;
+    align-items: center;
+
     // @include flex;
+    @include max-min(min px($BP_TABLET_SM)) {
+      height: 468px;
+    }
   }
 
 }
@@ -204,8 +221,13 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
   /* Text */
   color: #3F3F46;
 
-  margin-top: 80px;
+  margin-top: 24px;
   text-align: center;
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    margin-top: 80px;
+  }
+
 }
 
 .list-menu {
