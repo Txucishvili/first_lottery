@@ -5,7 +5,7 @@
   margin-bottom: px($BP_WRAP_PADDING);
 
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     height: px($SEARCH_INPUT_HEIGHT);
     margin-bottom: 0;
   }
@@ -44,7 +44,7 @@
         color: rgba($color_gray, .5)
       }
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         padding: 14px 24px;
 
       }
@@ -68,7 +68,7 @@
       border-radius: 12px;
 
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
         border-top-left-radius: 0px;
@@ -90,7 +90,7 @@
         &:not(.icon-area) {
           display: none;
 
-          @include max-min(min px($BP_TABLET_SM)) {
+          @include max-min(min px($BP_TABLET_SM + 1)) {
             @include flex;
             margin-left: 12px;
           }

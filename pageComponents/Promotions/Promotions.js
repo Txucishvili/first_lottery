@@ -16,6 +16,7 @@ const JackpotBlock = () => {
 
 const PromotionSection = (props) => {
   const [isOpen, setOpen] = useState(false);
+  const jackpotNumber = '2 500 000';
 
   return <>
     <div className={styles.promotions}>
@@ -37,14 +38,20 @@ const PromotionSection = (props) => {
       </ModalWrapper>
 
       <div className={classNames(styles.blockWrap)}>
-        
+
         <div className={(classNames(styles.block, styles.smallBlockWide))} style={{ backgroundColor: '#EDC522' }}>
           <div className={classNames(styles.blockHead, 'flxAll')}>
             <img src='/assets/images/jackpot-head.png' />
           </div>
-          <div className={styles.textArea}>
+          <div
+            className={styles.textArea}
+          // style={jackpotNumber.length > 7 ? {fontSize: 32} : {}} className={styles.textArea}
+          >
+            {/* <div className='example' style={{ position: 'absolute' }}>
+              {jackpotNumber}₾
+            </div> */}
             <SVGTextEl>
-              10 000 000₾
+              {jackpotNumber}₾
             </SVGTextEl>
           </div>
         </div>

@@ -12,7 +12,7 @@ import useWindowSize from 'src/hooks/useWindowSize';
 import { isServer } from 'src/utils';
 import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
-import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls, useScroll } from 'framer-motion';
 import { PortalWrapper } from '../PortalTransition';
 import { useClient, useScrollDirection } from 'src/hooks';
 
@@ -120,6 +120,7 @@ const HeaderLogoArea = () => {
 }
 
 
+
 const SearchWrap = (props) => {
   const { children } = props;
 
@@ -128,26 +129,25 @@ const SearchWrap = (props) => {
   const [hasLisener, setLisner] = useState(false);
   const [scrollSize, setScroll] = useState(null);
   const [scrollDirection, setDirection] = useState(-1);
-  const scrollPrev = useRef(0);
+  const header = useAnimationControls({ height: 0 });
+  const [overflow, setOverflow] = useState('visible')
 
-  const handleScroll = (e) => {
-    console.log('---', e)
-  }
 
   useEffect(() => {
-    if (rendered) {
-      if (width <= 900) {
+    if (rendered && header) {
+      if (width <= 768) {
         if (!hasLisener) {
           setLisner(true)
         }
       } else {
+        header.start({ height: 'initial' })
         if (hasLisener) {
           setLisner(false)
         }
       }
 
     }
-  }, [hasLisener, rendered, width]);
+  }, [hasLisener, header, rendered, width]);
 
   useEffect(() => {
     if (!hasLisener) {
@@ -156,7 +156,7 @@ const SearchWrap = (props) => {
 
     function handleScroll(event) {
       const value = (document.body.getBoundingClientRect()).top < scrollSize;
-      console.log('object', (document.body.getBoundingClientRect()).top, scrollSize)
+      // console.log('object', (document.body.getBoundingClientRect()).top, scrollSize)
       setScroll((document.body.getBoundingClientRect()).top)
       setDirection(value ? 1 : -1);
     }
@@ -165,6 +165,19 @@ const SearchWrap = (props) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasLisener, scrollSize]);
 
+  useEffect(() => {
+    if (scrollDirection == 1) {
+      header.start({ height: 0 }).then(() => {
+        setOverflow('hidden')
+
+      })
+    }
+    if (scrollDirection == -1) {
+      header.start({ height: 60 }).then(() => {
+        setOverflow('visible')
+      })
+    }
+  }, [header, scrollDirection])
 
   const variants = {
     active: {
@@ -177,27 +190,49 @@ const SearchWrap = (props) => {
     }
   }
 
-  return <AnimatePresence>
-    {(scrollSize < 200) && scrollDirection == -1 && (
-      <motion.div
-        initial={'inactive'}
-        variants={variants}
-        animate={width <= 900 ? "active" : "inactive"}
-        exit={{...variants.inactive}}
-        onAnimationComplete={() => {
-          
+  if (width <= 768) {
+    return <motion.div
+      style={{ overflow: overflow }}
+      initial={{ height: 0 }}
+      animate={header}
+      onAnimationComplete={() => {
+
+      }}
+    >
+      <Search
+        onFocuse={() => {
+          console.log('on Focus preseve close')
         }}
-      >
-        {children}
-      </motion.div>
-    )}
-  </AnimatePresence>
+        onActive={() => {
+          console.log('on onActive preseve close')
+        }}
+        onChange={(e) => {
+          console.log('on change', e)
+        }}
+      />
+    </motion.div>
+  }
+
+  return <motion.div
+    animate={width && width >= 768 ? { height: 'initial' } : scrollDirection == 1 ? { height: 200 } : { height: 60 }}
+    initial={{ height: '0' }}
+    style={{ height: '0' }}
+  >
+    <Search
+      onFocuse={() => {
+        console.log('on Focus preseve close')
+      }}
+      onActive={() => {
+        console.log('on onActive preseve close')
+      }}
+      onChange={(e) => {
+        console.log('on change', e)
+      }}
+    />
+  </motion.div>
 }
 
 export default function Header() {
-
-
-
 
   return (
     <div className={classNames(styles.content, 'flx')}>
@@ -209,7 +244,7 @@ export default function Header() {
         </div>
         <div className={styles.searchArea}>
           <SearchWrap>
-            <Search />
+
           </SearchWrap>
         </div>
         <div className={styles.authArea}>

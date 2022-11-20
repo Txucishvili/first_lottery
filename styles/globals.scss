@@ -102,7 +102,7 @@ h6 {
   background-color: $color_white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.03);
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     box-shadow: none;
   }
 
@@ -371,4 +371,18 @@ $bp: (sm: 375,
     padding-bottom: 64px;
   }
 
+}
+
+.example {
+  position: absolute;
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 65px;
+  line-height: 92px;
+  letter-spacing: 0.05em;
+  color: #000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

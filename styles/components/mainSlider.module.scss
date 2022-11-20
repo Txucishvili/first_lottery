@@ -16,7 +16,7 @@ $btn-width: 66;
   // background-color: red;
   display: none;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     // background-color: 
     display: block;
   }

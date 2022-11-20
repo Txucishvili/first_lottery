@@ -4,7 +4,7 @@
 
   display: none;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     display: block;
   }
 
