@@ -103,7 +103,39 @@ const LastWinnerFilter = (props) => {
 
 
   return <div>
+    {/* <DropDown
+      portal={!true}
+      onChange={(e) => {
+      }}
+    >
+
+      <Toggler>
+        <div>open</div>
+      </Toggler>
+      <DropContent>
+        <div>SomeContent</div>
+      </DropContent>
+    </DropDown>
+
+    <DropDown
+      variant='out'
+      portal={!true}
+      onChange={(e) => {
+      }}
+    >
+
+      <Toggler>
+        <div>open</div>
+      </Toggler>
+      <DropContent>
+        <div>SomeContent</div>
+      </DropContent>
+    </DropDown> */}
     <div className='grid-container'>
+
+
+
+
       <div className={classNames(styles.filterRow, 'grid-row')}>
         <div style={{ fontSize: 16 }} className={classNames('col-md-3', styles.filterInput)}>
           <Input
@@ -121,6 +153,7 @@ const LastWinnerFilter = (props) => {
         </div>
         <div className='col-md-3'>
           <DropDown
+            className="borderDrop"
             portal={true}
             ref={dropRef}
             isOpen={isOpen}
@@ -136,7 +169,7 @@ const LastWinnerFilter = (props) => {
               setisOpen(e)
             }}
           >
-            
+
             <Toggler>
               <RangeToggler label="მოგება:">
                 {isOpen ?
@@ -169,23 +202,28 @@ const LastWinnerFilter = (props) => {
               </RangeToggler>
             </Toggler>
             <DropContent>
-              <div className='list-menu'>
-                <div className="list-menu--wrap">
-                  <ul className='list-menu--list'>
-                    {winnerFilters.map((range, k) => {
-                      return <li onClick={() => onItemClick(range)} className='list-menu--item gap-12' key={range.id}>
-                        <span>{range.from} - დან</span>
-                        <span>{range.to} - მდე</span>
-                      </li>
-                    })}
-                  </ul>
+              <div className='borderDrop--portal'>
+                <div className='list-menu'>
+                  <div className="list-menu--wrap">
+                    <ul className='list-menu--list'>
+                      {winnerFilters.map((range, k) => {
+                        return <li onClick={() => onItemClick(range)} className='list-menu--item gap-12' key={range.id}>
+                          <span>{range.from} - დან</span>
+                          <span>{range.to} - მდე</span>
+                        </li>
+                      })}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </DropContent>
           </DropDown>
         </div>
         <div className='col-md-3'>
-          <DropDown ref={calendarDrop} variant="out">
+          <DropDown
+            ref={calendarDrop}
+            className="borderDrop borderDrop--outer"
+          >
             <Toggler>
               <RangeToggler label="პერიოდი:">
                 <div className='flx gap-12'>

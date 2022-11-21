@@ -64,6 +64,17 @@
   padding-top: 17px;
   @include flex;
   flex-direction: column;
+  background-color: $dark_gold;
+
+  height: 305px;
+
+  .blockHead {
+    font-size: 96px;
+
+    svg {
+      height: 114px;
+    }
+  }
 
   @include max-min(min px($BP_MOBILE)) {
     height: auto;
@@ -100,7 +111,7 @@
 
   svg {
     paint-order: stroke;
-    stroke: $dark_gold;
+    stroke: $main_gold;
     fill: $color_white;
     stroke-width: 8px;
     stroke-linecap: butt;
@@ -290,7 +301,7 @@
   svg {
 
     paint-order: stroke;
-    stroke: #D6B100;
+    stroke: $main_gold;
     fill: $color_white;
     stroke-width: 4px;
     stroke-linecap: butt;
@@ -312,9 +323,10 @@
       overflow: visible !important;
 
       @include max-min(min px($BP_LAPTOP_MEDIUM)) {
-        overflow: hidden !important;
+        // overflow: hidden !important;
         padding: 70px 0;
         margin-block: -70px;
+        padding-inline: 210px;
       }
     }
 
@@ -376,7 +388,7 @@
     left: 0;
     bottom: 0;
 
-    background: #D48B22;
+    background: $main_gold;
     border-radius: 12px;
 
     @include max-min(min px($BP_TABLET_SM)) {
@@ -395,7 +407,7 @@
     line-height: 18px;
 
     /* Main Gold */
-    color: #D6B100;
+    color: $main_gold;
 
     @include max-min(min px($BP_TABLET_SM)) {
       font-size: 17px;
@@ -521,7 +533,7 @@
     width: 30px;
     height: 30px;
     background: #FDFAF6;
-    border: 2px solid #D6B100;
+    border: 2px solid $main_gold;
     @include flex-all;
     border-radius: 100px;
     flex-shrink: 0;
@@ -543,7 +555,7 @@
 
     svg {
       path {
-        fill: #D6B100;
+        fill: $main_gold;
       }
     }
   }

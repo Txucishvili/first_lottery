@@ -24,7 +24,6 @@
     @include max-min(min px(930)) {
       margin-left: initial;
       margin-right: initial;
-      border-radius: 16px;
       // height: 694px;
     }
 
@@ -46,31 +45,42 @@
     height: 100%;
     top: 0;
     left: 0;
+    background-image: url("/assets/images/video_wallpaper.png");
+    background-position: center bottom;
+    background-size: cover;
 
-    img {
-      width: auto !important;
-      height: 100% !important;
-      // position: unset !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%);
+    // img {
+    //   display: none;
 
-      @include max-min(min px($BP_TABLET_SM)) {
-        // width: auto !important;
-        // height: 100% !important;
-      }
+    //   // position: unset !important;
+    //   top: 50% !important;
+    //   left: 50% !important;
+    //   transform: translate(-50%, -50%);
+
+    //   width: auto !important;
+    //   height: 100% !important;
+
+    //   @include max-min(min px(588)) {
+    //     width: 100% !important;
+    //     height: auto !important;
+    //   }
+
+    //   @include max-min(min px($BP_TABLET_SM)) {
+    //     // width: auto !important;
+    //     // height: 100% !important;
+    //   }
 
 
-      @include max-min(max px($BP_TABLET)) {
-        // width: 100% !important;
-        // height: auto !important;
-      }
+    //   @include max-min(max px($BP_TABLET)) {
+    //     // width: 100% !important;
+    //     // height: auto !important;
+    //   }
 
-      @include max-min(min px($BP_TABLET)) {
-        // width: auto !important;
-        // height: 100%;
-      }
-    }
+    //   @include max-min(min px($BP_TABLET)) {
+    //     // width: auto !important;
+    //     // height: 100%;
+    //   }
+    // }
 
     &::before {
       content: '';

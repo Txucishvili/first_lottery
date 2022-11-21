@@ -37,10 +37,11 @@ export function numberWithSpaces(x) {
   return parts.join(".");
 }
 
-export function getElementRect(el) {
+export function getElementRect(element) {
   var bodyRect = document.body.getBoundingClientRect(),
     elemRect = element.getBoundingClientRect(),
     offset = elemRect.top - bodyRect.top;
 
-    return 
+
+  return { body: bodyRect, target: elemRect };
 }

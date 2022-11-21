@@ -2,7 +2,9 @@ import React, { cloneElement, createElement, createRef, forwardRef, useEffect, u
 import { useOutsideClick } from 'src/hooks/useOutsideClick';
 import styles from '@/styles/components/dropdown.module.scss';
 import classNames from 'classnames';
-import { PortalWrapper } from './PortalTransition';
+import { PortalWrapper, withPortal } from './PortalTransition';
+import { getElementRect } from 'src/utils';
+import useWindowSize from 'src/hooks/useWindowSize';
 
 export const Toggler = (props) => {
   const { children, ...nextProps } = props;
@@ -16,17 +18,22 @@ export const DropContent = (props) => {
 }
 
 const DropDown = forwardRef((props, ref) => {
-  const { ref: refEl, portal = false, isOpen, setIsOpen } = useOutsideClick(props.isOpen);
-  const { variant = 'default', disableToggle } = props;
+  const { ref: refEl, isOpen, setIsOpen } = useOutsideClick(props.isOpen);
+  const { className, variant = 'default', portal = false, disableToggle, dir = 'left' } = props;
   const isSingleChild = (props.children instanceof Array);
 
+  const {width} = useWindowSize();
+  
   const togglerRef = useRef();
 
   const [rect, setRect] = useState({})
 
 
   const TogglerChild = isSingleChild ? props.children.find((c) => c.type == Toggler) : null;
-  const DropContentChild = isSingleChild ? props.children.filter((c) => c.type == DropContent) : null;
+  const DropContentChild = isSingleChild
+    ? props.children.filter((c) => c.type == DropContent)
+    : null;
+
 
   const TogglerC = !!TogglerChild ? cloneElement(TogglerChild, {
     extraProp: true,
@@ -49,15 +56,23 @@ const DropDown = forwardRef((props, ref) => {
 
 
   useEffect(() => {
-    console.log('isOpen', togglerRef, isOpen, portal)
     if (togglerRef.current && portal) {
       if (isOpen) {
-        console.log('----- open')
+        const rect = getElementRect(togglerRef.current);
+        setRect({
+          top: Math.abs(rect.body.top - rect.target.top) + rect.target.height,
+          left: Math.abs(rect.body.left - rect.target.left),
+          width: Math.abs(rect.target.width),
+        })
       } else {
-        console.log('close')
+        setRect({})
       }
     }
-  }, [togglerRef, isOpen, portal])
+  }, [togglerRef, isOpen, portal, width]);
+
+  useEffect(() => {
+    console.log('rect', rect)
+  }, [rect])
 
 
   const onToggleClick = () => {
@@ -72,16 +87,14 @@ const DropDown = forwardRef((props, ref) => {
 
 
   return (
-    <div ref={ref} className={styles.container}>
+    <div ref={ref} className={classNames(styles.container, className)}>
       <div ref={refEl}>
-        <div className={classNames(styles.wrap, {
-          [styles.open]: isOpen,
-          [styles.outer]: variant == 'out',
-          [styles.default]: variant == 'default',
+        <div className={classNames('drop-wrap', {
+          ['open']: isOpen,
         })}>
           <div
             ref={togglerRef}
-            className={styles.toggler}
+            className={'toggler'}
             onClick={onToggleClick}>
             <div>
               {/* {TogglerChild && !!TogglerChild ? TogglerC : 'open'} */}
@@ -90,13 +103,29 @@ const DropDown = forwardRef((props, ref) => {
               </div>}
             </div>
           </div>
-          {isOpen && variant !== 'out' && DropContentChild &&
-            <div className={styles.drop}>{DropContentChild}</div>}
+          {isOpen && DropContentChild && !portal &&
+            <div
+              style={{
+                position: portal ? 'absolute' : 'auto',
+                top: rect?.top,
+                left: rect?.left,
+              }}
+              className={'drop'}>{DropContentChild}</div>
+          }
+          {isOpen && DropContentChild && portal &&
+            <PortalWrapper>
+              <div
+                style={{
+                  position: portal ? 'absolute' : 'auto',
+                  top: rect?.top,
+                  left: rect?.left,
+                  width: rect?.width,
+                  zIndex: 5
+                }}
+                className={'drop'}>{DropContentChild}</div>
+            </PortalWrapper>
+          }
         </div>
-        {isOpen && DropContentChild && variant == 'out' ?
-          <div className={styles.dropOuter}>
-            {DropContentChild}
-          </div> : null}
       </div>
     </div>
   )

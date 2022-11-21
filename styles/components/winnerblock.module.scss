@@ -85,7 +85,7 @@
 
         svg {
           paint-order: stroke;
-          stroke: #EDC522;
+          stroke: $color_gray;
           fill: #FFF;
           stroke-width: 4px;
         }
@@ -165,7 +165,7 @@
 
         .content {
           @include max-min(min px($BP_TABLET_SM + 1)) {
-            transform: scale(1.15);
+            transform: scale(1.13);
           }
         }
       }
@@ -341,7 +341,7 @@
     .name {
       width: 64px;
       height: 34px;
-      background: #AE7A16;
+      background: $color_gray;
       border-radius: 8px;
       color: #FFFFFF;
 

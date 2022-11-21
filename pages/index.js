@@ -115,12 +115,14 @@ export default function Home(props) {
 
   return (<>
     <div className={classNames(styles.appPageWrapper, 'layout--wrap')}>
-      <SwipeSlider spaceBetween={250} slidesPerView={1}>
-        {props.slides.map((c, k) => {
-          return <Jackpot key={k} />
-        })}
-      </SwipeSlider>
-      
+      <div style={{paddingTop: 26}}>
+        <SwipeSlider className="mainSlider" spaceBetween={250} slidesPerView={1}>
+          {props.slides.map((c, k) => {
+            return <Jackpot key={k} />
+          })}
+        </SwipeSlider>
+      </div>
+
       <PromotionSection  {...props} />
       <WinnersSlider {...props} />
       <FAQNavigation navigation={props.FAQNavigation} />
@@ -150,7 +152,7 @@ export function getServerSideProps(ctx) {
       img: '/assets/images/multimedia.png'
     }
   ]
-  
+
   return {
     props: {
       slides: Array(5).fill('null'),

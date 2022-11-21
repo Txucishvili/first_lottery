@@ -3,10 +3,21 @@ $btn-width: 66;
 .swiperWrapper {
   position: relative;
   z-index: 1;
+
+  :global {
+    .swiper-wrapper {
+      .swiper-slide {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 .overflowWrap {
   overflow: visible;
+
   @include max-min(max px($BP_TABLET_SM)) {
     overflow: hidden;
   }

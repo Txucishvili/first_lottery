@@ -4,6 +4,11 @@ import React from 'react'
 import styles from './jackpot.module.scss'
 
 export default function Jackpot() {
+
+  return <div>
+    <img src='/assets/slides/slider-1-2.png' />
+  </div>
+  
   return (true &&
     <div className={styles.container}>
       <div className={styles.textWrap}>

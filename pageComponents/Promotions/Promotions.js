@@ -16,7 +16,7 @@ const JackpotBlock = () => {
 
 const PromotionSection = (props) => {
   const [isOpen, setOpen] = useState(false);
-  const jackpotNumber = '2 500 000';
+  const jackpotNumber = '8 000 000 ';
 
   return <>
     <div className={styles.promotions}>
@@ -39,9 +39,11 @@ const PromotionSection = (props) => {
 
       <div className={classNames(styles.blockWrap)}>
 
-        <div className={(classNames(styles.block, styles.smallBlockWide))} style={{ backgroundColor: '#EDC522' }}>
+        <div className={(classNames(styles.block, styles.smallBlockWide))}>
           <div className={classNames(styles.blockHead, 'flxAll')}>
-            <img src='/assets/images/jackpot-head.png' />
+            <SVGTextEl>
+              ჯეკპოტი
+            </SVGTextEl>
           </div>
           <div
             className={styles.textArea}

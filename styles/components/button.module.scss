@@ -113,11 +113,11 @@
           }
 
           &--secondary {
-            background-color: $secondary_yellow;
+            background-color: $dark_gold;
             color: $color_white;
 
             &:hover {
-              background-color: darken($secondary_yellow, 9%);
+              background-color: darken($dark_gold, 9%);
             }
           }
 

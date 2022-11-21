@@ -9,10 +9,10 @@ var countDownDate = new Date("Dec 31, 2022 15:37:25").getTime();
 const getDistance = () => countDownDate - new Date().getTime();
 
 const CountdownComponent = () => {
-  const [days, setDays] = useState(Math.floor(getDistance() / (1000 * 60 * 60 * 24)));
-  const [hours, setHours] = useState(Math.floor((getDistance() % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-  const [minutes, setMinutes] = useState(Math.floor((getDistance() % (1000 * 60 * 60)) / (1000 * 60)));
-  const [seconds, setSeconds] = useState(0);
+  const [days, setDays] = useState('- -');
+  const [hours, setHours] = useState('- -');
+  const [minutes, setMinutes] = useState('- -');
+  const [seconds, setSeconds] = useState('- -');
 
   useEffect(() => {
     const interval = setInterval(() => {

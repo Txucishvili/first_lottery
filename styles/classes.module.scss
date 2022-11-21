@@ -774,8 +774,9 @@
 
       // background-color: $dark_gold;
       &:not(.react-datepicker__day--outside-month) {
+        color: #FFF;
 
-        background: #DBB246 !important;
+        background: $main_gold !important;
       }
     }
 
@@ -783,7 +784,7 @@
 
       // background-color: $dark_gold;
       &:not(.react-datepicker__day--outside-month) {
-        background: rgba(219, 178, 70, 0.16);
+        background: rgba($main_gold, .25);
       }
     }
 
@@ -791,16 +792,16 @@
     &--in-selecting-range {
 
       // background-color: $color_gray;
-      // background-color: rgba(219, 178, 70, 0.16);
+      // background-color: rgba($main_gold, .25);
 
       &:not(.react-datepicker__day--outside-month) {
-        background-color: rgba(219, 178, 70, 0.16);
+        background-color: rgba($main_gold, .25);
       }
     }
 
     &:hover {
       &:not(.react-datepicker__day--outside-month) {
-        background-color: rgba(219, 178, 70, 0.16);
+        background-color: rgba($main_gold, .25);
       }
       // color: rgba(219, 178, 70, 0.16);
     }

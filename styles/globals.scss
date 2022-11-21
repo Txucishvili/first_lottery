@@ -487,3 +487,97 @@ $bp: (sm: 375,
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+.borderDrop {
+  position: relative;
+  min-height: 66px;
+
+  .drop-wrap {
+    width: 100%;
+    background-color: #FFF;
+    border: 1px solid rgba(63, 63, 70, 0.08);
+    border-radius: 16px;
+
+    &.open {
+      background: #FFFFFF;
+
+      /* Main Gold */
+      border-color: $main_gold;
+      box-shadow: 0px 2px 6px rgba(219, 178, 70, 0.12);
+
+      position: absolute;
+
+      .drop {}
+    }
+
+
+  }
+
+  .outer {
+    position: relative;
+  }
+
+  .default {
+    position: absolute;
+  }
+
+  .toggler {
+    // @include flex;
+    display: block;
+    height: 64px;
+
+    >* {
+      height: inherit;
+    }
+  }
+
+  .drop {
+    // position: absolute;
+    // left: 0;
+    // width: 100%;
+    // min-height: 100%;
+    // z-index: 555;
+    // position: relative;
+  }
+
+  &--outer {
+    .drop {
+      width: fit-content;
+      position: absolute;
+      right: 0;
+
+      background: gray;
+      margin-top: 12px;
+      background: #FFF;
+      border: 1px solid $main_gold;
+      box-shadow: 0px 2px 6px rgba(219, 178, 70, 0.12);
+      border-radius: 16px;
+      // min-width: 100%;
+      right: 0;
+      padding: 28px 40px 28px 40px;
+    }
+  }
+
+  &--portal {
+    padding-top: 20px;
+    margin-top: 12px;
+    background: #FFF;
+    border: 1px solid $main_gold;
+    box-shadow: 0px 2px 6px rgba(219, 178, 70, 0.12);
+    border-radius: 16px;
+  }
+
+  .dropOuter {
+    position: absolute;
+    background: gray;
+    margin-top: 12px;
+    background: #FFF;
+    border: 1px solid $main_gold;
+    box-shadow: 0px 2px 6px rgba(219, 178, 70, 0.12);
+    border-radius: 16px;
+    // min-width: 100%;
+    right: 0;
+    padding: 28px 40px 28px 40px;
+  }
+}

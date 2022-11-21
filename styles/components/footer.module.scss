@@ -144,7 +144,7 @@
 
 .circle {
   position: absolute;
-  background: #EDC522;
+  background: $main_gold;
   border-radius: 100%;
   // opacity: .2;
   z-index: 5;
@@ -288,7 +288,7 @@
         .circle {
           width: 646px;
           height: 646px;
-          background: #EDC522;
+          background: $main_gold;
           border-radius: 100%;
           position: absolute;
           // right: 0;

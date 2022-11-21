@@ -37,7 +37,7 @@ const LastWinnerSlide = ({ list }) => {
           spaceBetween={0}
           initialSlide={2}
           slidesPerView={'auto'}
-          centeredSlides={true}
+          centeredSlides={'auto'}
           resistanceRatio={0}
           freeMode={true}
           variant={'simple'}

@@ -38,6 +38,10 @@ export function PortalWrapper(props) {
     : null
 }
 
+export const withPortal = (props) => {
+  return <PortalWrapper>{props}</PortalWrapper>
+}
+
 const WithTransition = (props) => {
   const targeetClone = useRef(null);
   const targetRef = useRef(null);
