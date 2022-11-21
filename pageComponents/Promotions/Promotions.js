@@ -1,18 +1,22 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/Home.module.scss'
+import videoModalStyles from '@/styles/components/videoModal.module.scss'
 import { SVGTextEl } from 'src/utils'
 import CountdownComponent from '../CountDown'
 import VideoContainer from 'pageComponents/Main/VideoContainer'
-import ModalWrapper, { CloseAction, ModalBase, SimpleModal } from 'src/Shared/Modal/ModalWrapper'
-import Button from 'src/Shared/Button'
-import IconWrap from '@/components/IconWrap'
+import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper'
 
+const VideoModal = (props) => {
 
-const JackpotBlock = () => {
-  return
+  return <div className={videoModalStyles.videoModal}>
+    <div className={videoModalStyles.wrap}>
+      <div className={videoModalStyles.wrap}>
+
+      </div>
+    </div>
+  </div>
 }
-
 
 const PromotionSection = (props) => {
   const [isOpen, setOpen] = useState(false);
@@ -24,15 +28,8 @@ const PromotionSection = (props) => {
       <ModalWrapper
         onClose={() => setOpen(false)}
         open={isOpen}>
-
-        <ModalBase
-          variant="center"
-        >
-
-          <div className='flxAll' style={{ width: 825, height: 550 }}>
-            Video Container
-            {/* <iframe width="100%" height="100%" src="https://www.youtube.com/embed/BcJCNLgEsHs" title="YouTube video player" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
-          </div>
+        <ModalBase variant="center" >
+          <VideoModal />
         </ModalBase>
 
       </ModalWrapper>

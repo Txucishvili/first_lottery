@@ -17,7 +17,7 @@ import PromotionSection from 'pageComponents/Promotions/Promotions'
 import FAQNavigation from 'pageComponents/FAQNavigation/FaqNavigation'
 import Link from 'next/link'
 import IconWrap from '@/components/IconWrap'
-
+import MainSlider from 'pageComponents/Main/MainSlider'
 
 const SimpleLine = (props) => {
   return <div className={styles.infoLineContainer}>
@@ -115,14 +115,7 @@ export default function Home(props) {
 
   return (<>
     <div className={classNames(styles.appPageWrapper, 'layout--wrap')}>
-      <div style={{paddingTop: 26}}>
-        <SwipeSlider className="mainSlider" spaceBetween={250} slidesPerView={1}>
-          {props.slides.map((c, k) => {
-            return <Jackpot key={k} />
-          })}
-        </SwipeSlider>
-      </div>
-
+      <MainSlider slides={props.slides} />
       <PromotionSection  {...props} />
       <WinnersSlider {...props} />
       <FAQNavigation navigation={props.FAQNavigation} />
@@ -153,9 +146,14 @@ export function getServerSideProps(ctx) {
     }
   ]
 
+  const slides = [
+    {src: '/assets/slides/slider-1-2.png'},
+    {src: '/assets/slides/slider-2.png'},
+  ];
+
   return {
     props: {
-      slides: Array(5).fill('null'),
+      slides: slides,
       winnings: Array(15).fill(null),
       howToPlayList,
       FAQNavigation: [

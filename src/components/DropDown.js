@@ -18,15 +18,30 @@ export const DropContent = (props) => {
 }
 
 const DropDown = forwardRef((props, ref) => {
-  const { ref: refEl, isOpen, setIsOpen } = useOutsideClick(props.isOpen);
   const { className, variant = 'default', portal = false, disableToggle, dir = 'left' } = props;
   const isSingleChild = (props.children instanceof Array);
 
-  const {width} = useWindowSize();
-  
-  const togglerRef = useRef();
+  const { width } = useWindowSize();
 
-  const [rect, setRect] = useState({})
+  const togglerRef = useRef();
+  const dropRef = useRef();
+
+  const [rect, setRect] = useState({});
+
+
+  const customEvent = (e) => {
+    if (portal) {
+      if (dropRef && dropRef.current && !dropRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+      return;
+    }
+
+    if (refEl && refEl.current && !refEl.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  }
+  const { ref: refEl, isOpen, setIsOpen } = useOutsideClick(props.isOpen, customEvent);
 
 
   const TogglerChild = isSingleChild ? props.children.find((c) => c.type == Toggler) : null;
@@ -109,15 +124,17 @@ const DropDown = forwardRef((props, ref) => {
           }
           {isOpen && DropContentChild && portal &&
             <PortalWrapper>
-              <div
-                style={{
-                  position: portal ? 'absolute' : 'auto',
-                  top: rect?.top,
-                  left: rect?.left,
-                  width: rect?.width,
-                  zIndex: 5
-                }}
-                className={'drop'}>{DropContentChild}</div>
+              <div ref={dropRef}>
+                <div
+                  style={{
+                    position: portal ? 'absolute' : 'auto',
+                    top: rect?.top,
+                    left: rect?.left,
+                    width: rect?.width,
+                    zIndex: 5
+                  }}
+                  className={'drop'}>{DropContentChild}</div>
+              </div>
             </PortalWrapper>
           }
         </div>

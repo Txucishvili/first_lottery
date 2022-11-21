@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import IconWrap from '@/components/IconWrap';
 import { ArrowSvg } from 'src/icons';
 import { Navigation } from 'swiper';
-import customSwiperStyle from '@/styles/components/mainSlider.module.scss'
+import customSwiperStyle from '@/styles/components/swiperSlider.module.scss'
 
 
 // export function SliderControlsWrap({ next, prev, onAction, variant }) {
@@ -67,7 +67,7 @@ const SwipeSlider = forwardRef(
     return <div className={customSwiperStyle.swiperWrapper}>
       <div className={customSwiperStyle.arrowWrap}>
         <div onClick={() => swiper && swiper.slidePrev()} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.prev, {
-          [customSwiperStyle.disabled]: state == 0,
+          [customSwiperStyle.disabled]: swiper && swiper.realIndex == 0,
           [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
         })} ref={prevRef}>
           <div className={customSwiperStyle.iconWrap}>
@@ -76,7 +76,7 @@ const SwipeSlider = forwardRef(
         </div>
 
         <div onClick={() => swiper && swiper.slideNext()} className={classNames(customSwiperStyle.arrowBtn, 'flxAll', customSwiperStyle.next, {
-          [customSwiperStyle.disabled]: [].length - 1 == state,
+          [customSwiperStyle.disabled]: swiper && swiper.isEnd,
           [customSwiperStyle[variant]]: customSwiperStyle[variant] && variant
         })} ref={nextRef}>
           <div className={customSwiperStyle.iconWrap}>
@@ -92,12 +92,10 @@ const SwipeSlider = forwardRef(
         updateOnWindowResize
         observer
         observeParents
-        // ref={swiperRef}
         initialSlide={Math.floor(_childrens.length / 2)}
         onSwiper={(e) => {
-          setSwiper(e)
+          setSwiper(e);
           props.onSwiper && props.onSwiper(e);
-          // console.log('setSwiper', setSwiper);
         }}
         onSlideChange={(w) => {
           setstate(w.realIndex)

@@ -45,79 +45,79 @@
     height: 100%;
     top: 0;
     left: 0;
-    background-image: url("/assets/images/video_wallpaper.png");
-    background-position: center bottom;
-    background-size: cover;
+    // background-image: url("/assets/images/video_wallpaper.png");
+    // background-position: center bottom;
+    // background-size: cover;
 
-    // img {
-    //   display: none;
+  img {
+    // display: none;
 
-    //   // position: unset !important;
-    //   top: 50% !important;
-    //   left: 50% !important;
-    //   transform: translate(-50%, -50%);
+    // position: unset !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
 
-    //   width: auto !important;
-    //   height: 100% !important;
+    width: auto !important;
+    height: 100% !important;
 
-    //   @include max-min(min px(588)) {
-    //     width: 100% !important;
-    //     height: auto !important;
-    //   }
+    @include max-min(min px(588)) {
+      width: 100% !important;
+      height: auto !important;
+    }
 
-    //   @include max-min(min px($BP_TABLET_SM)) {
-    //     // width: auto !important;
-    //     // height: 100% !important;
-    //   }
+    @include max-min(min px($BP_TABLET_SM)) {
+      // width: auto !important;
+      // height: 100% !important;
+    }
 
 
-    //   @include max-min(max px($BP_TABLET)) {
-    //     // width: 100% !important;
-    //     // height: auto !important;
-    //   }
+    @include max-min(max px($BP_TABLET)) {
+      // width: 100% !important;
+      // height: auto !important;
+    }
 
-    //   @include max-min(min px($BP_TABLET)) {
-    //     // width: auto !important;
-    //     // height: 100%;
-    //   }
-    // }
-
-    &::before {
-      content: '';
-      position: absolute;
-      @include size(inherit);
-      background: rgba(0, 0, 0, 0.44);
-      z-index: 2;
+    @include max-min(min px($BP_TABLET)) {
+      // width: auto !important;
+      // height: 100%;
     }
   }
 
-  .playBtn {
-    width: 38px;
-    height: 38px;
-    background-color: rgba(#000, .4);
-    border-radius: 100px;
+  &::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
+    @include size(inherit);
+    background: rgba(0, 0, 0, 0.44);
+    z-index: 2;
+  }
+}
+
+.playBtn {
+  width: 38px;
+  height: 38px;
+  background-color: rgba(#000, .4);
+  border-radius: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
 
 
-    @include max-min(min px(624)) {
-      width: 134px;
-      height: 134px;
+  @include max-min(min px(624)) {
+    width: 134px;
+    height: 134px;
 
-      :global {
-        .icon-wrapper {
-          width: 44px !important;
-          height: 44px !important;
-        }
+    :global {
+      .icon-wrapper {
+        width: 44px !important;
+        height: 44px !important;
       }
     }
-
-
-    // @include max-min(max px())
   }
+
+
+  // @include max-min(max px())
+}
 
 
 }
