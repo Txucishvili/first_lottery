@@ -31,9 +31,7 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
               if (window.localStorage.getItem('scrollOptions')) {
-                // console.log('object', JSON.parse(window.localStorage.getItem('scrollOptions')))
                 const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
-                console.log('get', opt.scroll, opt.reload, window.document.scrollingElement)
                 if (opt && opt.reload) {
                   window.document.scrollingElement.scrollTop = Math.abs(opt.scroll) - 50;
                 }

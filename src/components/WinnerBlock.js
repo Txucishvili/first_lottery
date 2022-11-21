@@ -30,20 +30,30 @@ export default function WinnerBlock({ isActive }) {
       <div className={'sliderWrapper'}>
         <div className={classNames('container', { 'activeBlock': isActive })}>
           <div className={'wrap'}>
-            <div className={'image'}>
-              <UserAvatar>
-                <img src='/assets/images/avatar.png' />
-              </UserAvatar>
-            </div>
-            <div className={'winNumber'}>
-              <SVGTextEl>50 000 000</SVGTextEl>
-            </div>
-            <div className={'ticketNumber'}>
-              <TicketBlock number='358-129-7' />
+            <div className='content'>
+              <div className={'image'}>
+                <UserAvatar>
+                  <img src='/assets/images/avatar.png' />
+                </UserAvatar>
+              </div>
+              <div className={'winNumber'}>
+                <SVGTextEl>50 000 000</SVGTextEl>
+              </div>
+              <div className={'ticketNumber'}>
+                <TicketBlock number='358-129-7' />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+
+
+export const SimpleBlock = ({ isActive }) => {
+  return <div className={styles.winnerBlockItem}>
+    {isActive.toString()}
+  </div>
 }

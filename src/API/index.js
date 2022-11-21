@@ -26,8 +26,8 @@ export const WinnerListAPI =
 
 
 export const NavigationList = [
-  { slug: '#', name: 'ბილეთები' },
-  { slug: '#', name: 'გათამაშების ისტორია' },
+  { slug: '#1', name: 'ბილეთები' },
+  { slug: '#2', name: 'გათამაშების ისტორია' },
   { slug: 'lastwinner', name: 'გამარჯვებულები' }
 ]
 

@@ -6,7 +6,6 @@ export const useClient = () => {
   useEffect(() => {
     setRendered(true);
     return () => {
-      console.log('[Render ]')
       setRendered(false);
     }
   }, []);
@@ -17,7 +16,6 @@ export const useClient = () => {
   }
 }
 
-
 export const useScroll = () => {
   const [scrollSize, setScrollSize] = useState(null);
 
@@ -25,7 +23,6 @@ export const useScroll = () => {
     function handleScroll(e) {
       setScrollSize(e);
       const value = (document.body.getBoundingClientRect()).top < scrollSize;
-      console.log('value', value)
     }
 
     window.addEventListener("scroll", handleScroll);

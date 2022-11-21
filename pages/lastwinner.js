@@ -5,7 +5,6 @@ import { copyArray, isInt } from 'src/utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { WinnerListAPI } from '../src/API/index'
 import LastWinnerFilter from 'pageComponents/LastWinners/LastWinnersFilter'
-import { m } from 'framer-motion'
 import { UserAvatar } from '@/components/UserAvatar'
 
 
@@ -24,27 +23,36 @@ const LastWinnerSlide = ({ list }) => {
   const onResize = (e) => {
     e.update();
   }
-  return <div className='containers'>
+  return <div className='md-container-fluid'>
     <div className='wrap'>
       <div className='titleArea pageTitle'>
         <h3>ბოლო გამარჯვებული</h3>
       </div>
-      <div className="listContentWrap">
+      <div className="lastWinnerSwiperWrap">
         <Swiper
           ref={ref}
           modules={[]}
-          className={'listContent'}
-          style={{ overflow: 'hidden', padding: ' 0' }}
-          slidesPerView={'auto'}
-          spaceBetween={24}
-          centeredSlides={true}
+          navigation={false}
+          // className={'listContentSwiper'}
+          spaceBetween={0}
           initialSlide={2}
+          slidesPerView={'auto'}
+          centeredSlides={true}
+          resistanceRatio={0}
           freeMode={true}
+          variant={'simple'}
+          centerInsufficientSlides={true}
+          breakpoints={{
+            [385]: {
+              slidesPerView: 'auto',
+              centeredSlides: true
+            },
+          }}
           onSlideChange={onSlideChange}
           onResize={onResize}
         >
           {list.map((c, k) => {
-            return <SwiperSlide className='appSwiper' key={k}>
+            return <SwiperSlide key={k}>
               {({ isActive }) => {
                 return <WinnerBlock isActive={isActive} />
               }}

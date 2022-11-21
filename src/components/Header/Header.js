@@ -200,12 +200,12 @@ const SearchWrap = (props) => {
 
   if (width <= 768) {
     return <motion.div
-      style={{ overflow: overflow }}
-      initial={{ height: 0 }}
-      animate={header}
-      onAnimationComplete={() => {
+      // style={{ overflow: overflow }}
+      // initial={{ height: 0 }}
+      // animate={header}
+      // onAnimationComplete={() => {
 
-      }}
+      // }}
     >
       <Search
         onFocuse={() => {
@@ -222,9 +222,9 @@ const SearchWrap = (props) => {
   }
 
   return <motion.div
-  initial={{ height: 0 }}
-  animate={appHeader}
-    style={{ height: 0 }}
+  // initial={{ height: 0 }}
+  // animate={appHeader}
+  //   style={{ height: 0 }}
   >
     <Search
       onFocuse={() => {

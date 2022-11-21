@@ -72,7 +72,7 @@ export default function WinnersSlider(props) {
         spaceBetween={24}
         initialSlide={2}
         slidesPerView={'auto'}
-        centeredSlides={false}
+        centeredSlides={true}
         resistanceRatio={0}
         freeMode={true}
         variant={'simple'}

@@ -18,9 +18,7 @@ function MyApp(props) {
 
   useEffect(() => {
     if (window.localStorage.getItem('scrollOptions')) {
-      // console.log('object', JSON.parse(window.localStorage.getItem('scrollOptions')))
       const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
-      console.log('get', opt.scroll)
       if (opt && opt.reload) {
         window.document.scrollingElement.scrollTop = Math.abs(opt.scroll);
       }
@@ -33,7 +31,6 @@ function MyApp(props) {
 
   const alertUser = (e) => {
     e.returnValue = "";
-    console.log('set', (document.body.getBoundingClientRect()).top);
     window.localStorage.setItem('scrollOptions', JSON.stringify({
       reload: true,
       scroll: (document.body.getBoundingClientRect()).top

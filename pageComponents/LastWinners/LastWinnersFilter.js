@@ -9,7 +9,7 @@ import Button from 'src/Shared/Button'
 import { WinnerListAPI } from 'src/API';
 import { format, getMonth, setMonth } from 'date-fns';
 import IconWrap from '@/components/IconWrap';
-import WinnerBlock, { TicketBlock} from '@/components/WinnerBlock';
+import WinnerBlock, { TicketBlock } from '@/components/WinnerBlock';
 import { numberWithSpaces, SVGTextEl } from 'src/utils';
 import classNames from 'classnames';
 import styles from './LastWinnersFilter.module.scss';
@@ -61,15 +61,9 @@ const LastWinnerFilter = (props) => {
   const inputRefMain = useRef();
   const dropRef = useRef();
   const calendarDrop = useRef();
-  const parentRef = useRef()
+
   const [filterList, setFilterList] = useState(list.data);
   const { filteredList, setFilter, commit, reset, options } = useFilter({ list: filterList, filterOptions: filters });
-  const rowVirtualizer = useVirtualizer({
-    count: filterList.length || 20,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 385,
-    overscan: 5,
-  });
 
   const [isOpen, setisOpen] = useState(false)
 
@@ -82,10 +76,6 @@ const LastWinnerFilter = (props) => {
     setFilterList(WinnerListAPI.data);
     // console.log('object', WinnerListAPI.data)
   }, [])
-
-  useEffect(() => {
-    // console.log('----- filteredList', filteredList);
-  }, [filteredList])
 
   const searchFilter = (e) => {
     setFilter({ name: e.target.value });
@@ -131,6 +121,7 @@ const LastWinnerFilter = (props) => {
         </div>
         <div className='col-md-3'>
           <DropDown
+            portal={true}
             ref={dropRef}
             isOpen={isOpen}
             disableToggle
@@ -145,6 +136,7 @@ const LastWinnerFilter = (props) => {
               setisOpen(e)
             }}
           >
+            
             <Toggler>
               <RangeToggler label="მოგება:">
                 {isOpen ?
@@ -198,7 +190,7 @@ const LastWinnerFilter = (props) => {
               <RangeToggler label="პერიოდი:">
                 <div className='flx gap-12'>
                   {startDate ? <span>{format(startDate.getTime(), "dd-LL-yy", 'en')}  - დან</span> : null}
-                  <span>{startDate ? '-'  : 'აირჩიეთ თარიღი'}</span>
+                  <span>{startDate ? '-' : 'აირჩიეთ თარიღი'}</span>
                   {endDate ? <span>{endDate ? format(endDate.getTime(), "dd-LL-yy", 'en') : null}  - მდე</span> : null}
 
                 </div>
