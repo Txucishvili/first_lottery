@@ -105,11 +105,6 @@ const DropDown = forwardRef((props, ref) => {
           </div>
           {isOpen && DropContentChild && !portal &&
             <div
-              style={{
-                position: portal ? 'absolute' : 'auto',
-                top: rect?.top,
-                left: rect?.left,
-              }}
               className={'drop'}>{DropContentChild}</div>
           }
           {isOpen && DropContentChild && portal &&

@@ -87,6 +87,7 @@ const LastWinnerFilter = (props) => {
   }
 
   const onItemClick = (e) => {
+    console.log('------------------')
     setFilter({ from_range: e.from, to_range: e.to })
     dropRef.current.open(false);
     setRangeFilter(e)
