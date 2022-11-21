@@ -3,7 +3,9 @@
 @import './classes.module.scss';
 @import './react-calendar.scss';
 
-
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -17,47 +19,26 @@ html {
   min-height: 100%;
   height: 100%;
   overflow-x: hidden;
-
-}
-
-body {
-  // max-height: 100vh;
-  // overflow: auto;
-  // overflow-x: hidden;
-  // background-color: #D8D8D8;
 }
 
 body {
   overflow-x: hidden;
-  padding-bottom: 80px;
   max-width: 100%;
-}
-
-p {
-  margin: 0;
-  padding: 0;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
+
+  &:link,
+  a:active {
+    text-decoration: none;
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
-  line-height: normal;
-}
-
+// ----------------
+// ----------
+// ------
 
 .no-scroll {
   overflow: hidden;
@@ -67,13 +48,13 @@ h6 {
   &--wrap {
     @include layoutWrap(true);
 
-    @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
+    @include max-min(max px($LAYOUT_WRAP_SIZE + $PAGE_PADDING_INLINE)) {
       // overflow-x: hidden;
     }
   }
 }
 
-.pageWrap {
+.appContent {
   padding-top: px($HEADER_HEIGHT_MOBILE + 60);
 
   @include max-min(min px($BP_TABLET_SM)) {
@@ -82,7 +63,7 @@ h6 {
 }
 
 .md-container-fluid {
-  margin-inline: -20px;
+  margin-inline: - px(#{$PAGE_PADDING_INLINE});
 
   @include max-min(min px($BP_TABLET_SM)) {
     margin-inline: initial;
@@ -103,7 +84,6 @@ h6 {
   @include max-min(min px($BP_TABLET_SM + 1)) {
     box-shadow: none;
   }
-
 }
 
 
@@ -116,74 +96,6 @@ h6 {
     width: 100%;
     height: 100%;
   }
-}
-
-.text-red {
-  color: $main_red;
-}
-
-.theme-border {
-  border-radius: 8px;
-}
-
-
-.lastWinnerSwiperWrap {
-  max-width: 1530px;
-  margin: 0 auto;
-  overflow: hidden;
-  width: 100%;
-
-  .swiper-initialized {
-    padding-top: 32px;
-    padding-bottom: 48px;
-
-    // @include flex;
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      padding-top: 62px;
-      padding-bottom: 119px;
-    }
-  }
-
-  .swiper-wrapper {
-    align-items: center;
-    height: 298px;
-
-    // background-color: gainsboro;
-    @include max-min(min px($BP_TABLET_SM)) {
-      height: 483px;
-    }
-
-  }
-
-  .swiper-slide {
-    width: 208px;
-    height: 298px;
-
-    transition: all .125s ease-in-out;
-    margin: 0 15px;
-
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      width: 250px;
-      height: 384px;
-    }
-
-
-
-    &-active {
-      @include max-min(min px($BP_TABLET_SM + 1)) {
-        width: 330px;
-        height: 483px;
-      }
-
-    }
-
-    &-next {}
-
-    &-prev {}
-
-    &:first-child {}
-  }
-
 }
 
 .pageTitle {
@@ -205,6 +117,30 @@ h6 {
 
 }
 
+.sectionTitle {
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #3F3F46;
+  padding-bottom: 24px;
+
+  text-align: center;
+
+  @include max-min(min px($BP_TABLET_SM)) {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+    padding-bottom: 64px;
+  }
+
+}
+
+
+// !!! move to module
+
+// list menu component
 .list-menu {
   &--wrap {
     display: flex;
@@ -249,6 +185,7 @@ h6 {
 
 }
 
+// range toggler component
 .rangeToggler {
   height: 100%;
   padding-inline: 20px;
@@ -298,61 +235,7 @@ h6 {
   }
 }
 
-
-
-.row {
-  --gap-size: 20px;
-  @include flex;
-  flex-wrap: wrap;
-  margin-left: calc(var(--gap-size) * -1);
-  margin-right: calc(var(--gap-size) * -1);
-
-
-  >* {
-    padding-left: var(--gap-size);
-    padding-right: var(--gap-size);
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  @each $key,
-  $value in $bp {
-    @media only screen and (min-width: $value + px) {
-
-      @for $i from 1 through 12 {
-        .col-#{$key}-#{$i} {
-          flex: 0 0 auto;
-          width: #{($i / 12) * 100 + '%'};
-        }
-      }
-    }
-  }
-
-
-}
-
-
-.sectionTitle {
-  font-family: 'Avenir Next Georgian';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 23px;
-  color: #3F3F46;
-  padding-bottom: 24px;
-
-  text-align: center;
-
-  @include max-min(min px($BP_TABLET_SM)) {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 34px;
-    padding-bottom: 64px;
-  }
-
-}
-
+// bordered dropdown style
 .borderDrop {
   position: relative;
   min-height: 66px;
@@ -444,4 +327,65 @@ h6 {
     right: 0;
     padding: 28px 40px 28px 40px;
   }
+}
+
+
+// last winner page swiper
+.lastWinnerSwiperWrap {
+  max-width: 1530px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+
+  .swiper-initialized {
+    padding-top: 32px;
+    padding-bottom: 48px;
+
+    // @include flex;
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      padding-top: 62px;
+      padding-bottom: 119px;
+    }
+  }
+
+  .swiper-wrapper {
+    align-items: center;
+    height: 298px;
+
+    // background-color: gainsboro;
+    @include max-min(min px($BP_TABLET_SM)) {
+      height: 483px;
+    }
+
+  }
+
+  .swiper-slide {
+    width: 208px;
+    height: 298px;
+
+    transition: all .125s ease-in-out;
+    margin: 0 15px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      width: 250px;
+      height: 384px;
+    }
+
+
+
+    &-active {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
+        width: 330px;
+        height: 483px;
+      }
+
+    }
+
+    &-next {}
+
+    &-prev {}
+
+    &:first-child {}
+  }
+
 }

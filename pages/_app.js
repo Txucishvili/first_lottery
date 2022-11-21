@@ -3,20 +3,17 @@ import styles from '../styles/components/layout.module.scss';
 import SmallHeader from '../src/components/Header/SmallHeader';
 import Header from '../src/components/Header/Header';
 import Navigation from '../src/components/Header/Navigation';
-import { Modal, ModalWrapper } from '../src/Shared/Modal';
-import { createContext, useContext, useEffect, useReducer } from 'react';
-import { isServer } from '../src/utils';
-import { ThemeProvider } from 'styled-components';
+import { useEffect } from 'react';
 import Footer from '@/components/Footer/Footer';
 import { footerNavList, HeaderNavigation, LanguageList, NavigationList } from 'src/API';
 import { AppContextProvider } from 'src/store';
-import { MobileMenu } from '@/components/Header/MobileNavigations';
 
 
 function MyApp(props) {
   const { Component, pageProps, navigations } = props;
 
   useEffect(() => {
+    // !!!
     if (window.localStorage.getItem('scrollOptions')) {
       const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
       if (opt && opt.reload) {
@@ -30,7 +27,6 @@ function MyApp(props) {
   }, []);
 
   const alertUser = (e) => {
-    e.returnValue = "";
     window.localStorage.setItem('scrollOptions', JSON.stringify({
       reload: true,
       scroll: (document.body.getBoundingClientRect()).top
@@ -46,7 +42,7 @@ function MyApp(props) {
           <Navigation navigation={[]} />
         </div>
 
-        <div className='pageWrap'>
+        <div className='appContent'>
           <Component {...pageProps} />
         </div>
         <Footer navigation={[]} />

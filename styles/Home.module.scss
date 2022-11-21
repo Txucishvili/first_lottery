@@ -37,21 +37,6 @@
   border-radius: 16px;
 }
 
-.title {
-  font-family: 'Avenir Next Georgian';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 23px;
-
-  margin: 18px auto 26px auto;
-  text-align: center;
-  padding: 0 20px;
-
-  color: $color_gray;
-
-}
-
 .smallBlockWide {
   font-family: 'Avenir Next Georgian';
   font-style: normal;
@@ -136,21 +121,6 @@
 }
 
 
-.title {
-  font-family: 'Avenir Next Georgian';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 34px;
-  margin: 18px auto 26px auto;
-  text-align: center;
-  padding: 0 20px;
-
-  color: $color_gray;
-
-
-}
-
 .timeBlockLabel {
   font-family: 'Avenir Next Georgian';
   font-style: normal;
@@ -166,7 +136,6 @@
 }
 
 .timeBlockTitle {
-
   font-family: 'Avenir Next Georgian';
   font-style: normal;
   font-weight: 500;
@@ -180,7 +149,7 @@
   padding: 0 20px;
 
 
-  @include max-min(min px($BP_MOBILE)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     font-size: 24px;
     line-height: 34px;
   }
@@ -311,8 +280,6 @@
     margin-top: 4px;
   }
 }
-
-
 
 .swipeList {
   margin-top: 50px;

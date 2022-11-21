@@ -60,11 +60,10 @@ export default class MyDocument extends Document {
                     // overflow-x: hidden;
                   }
                   
-                  body {
-                    overflow-x: hidden;
-                    // padding-bottom: 80px;
-                    max-width: 100%;
-                  }
+                  // body {
+                  //   overflow-x: hidden;
+                  //   max-width: 100%;
+                  // }
 
               @font-face{
                 font-family:'Avenir Next Georgian';

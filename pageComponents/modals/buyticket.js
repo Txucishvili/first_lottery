@@ -68,7 +68,7 @@ export default function BuyTicketModal(props) {
         </div>
         <div className={classNames(styles.textArea, 'divide-36')}>
           <span>
-            <div>გთხოვთ გაითვალისწინოთ, რომ ეს არის წვის ქულები, რაც გულისხმობს,<span className='text-red'>*</span></div>
+            <div>გთხოვთ გაითვალისწინოთ, რომ ეს არის წვის ქულები, რაც გულისხმობს,<span className='text--red'>*</span></div>
             <div>რომ მისი შეძენის შემდეგ ქულები თქვენს ანგარიშზე არ დაემატება</div>
           </span>
         </div>

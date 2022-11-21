@@ -1,8 +1,13 @@
-import Jackpot from 'pageComponents/JackpotSlider/Jackpot'
 import React from 'react'
 import SwipeSlider from 'src/Shared/SwipeSlider'
-import Swiper from 'swiper'
 import styles from '@/styles/components/mainSlider.module.scss';
+import Image from 'next/image';
+
+const SliderItem = ({slide}) => {
+  return <div style={{ position: 'relative' }}>
+    <Image alt={'some jackpot magnit text'} fill={true} src={slide.src} />
+  </div>
+}
 
 export default function MainSlider(props) {
   return (
@@ -12,8 +17,8 @@ export default function MainSlider(props) {
         spaceBetween={250}
         initialSlide={0}
         slidesPerView={1}>
-        {props.slides.map((c, k) => {
-          return <Jackpot key={k} src={c.src} />
+        {props.slides.map((slide, k) => {
+          return <SliderItem key={k} slide={slide} />
         })}
       </SwipeSlider>
     </div>

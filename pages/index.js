@@ -1,23 +1,13 @@
 import classNames from 'classnames'
-import Head from 'next/head'
-import Image from 'next/image'
-import React, { cloneElement, createElement, useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
-import Jackpot from '../pageComponents/JackpotSlider/Jackpot'
-import VideoContainer from '../pageComponents/Main/VideoContainer'
-import ModalWrapper, { CloseAction, ModalBase, SimpleModal } from '../src/Shared/Modal/ModalWrapper'
-import Button from '../src/Shared/Button'
+import React, { useState } from 'react'
 import styles from '../styles/Home.module.scss'
-import BuyTicketModal from '../pageComponents/modals/buyticket'
-import SwipeSlider from 'src/Shared/SwipeSlider'
-import { Pagination } from 'swiper'
-import { isServer, SVGTextEl } from 'src/utils'
 import WinnersSlider from 'pageComponents/WinnersSlider'
 import PromotionSection from 'pageComponents/Promotions/Promotions'
 import FAQNavigation from 'pageComponents/FAQNavigation/FaqNavigation'
-import Link from 'next/link'
-import IconWrap from '@/components/IconWrap'
 import MainSlider from 'pageComponents/Main/MainSlider'
+import Button from 'src/Shared/Button'
+import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper'
+import BuyTicketModal from 'pageComponents/modals/buyticket'
 
 const SimpleLine = (props) => {
   return <div className={styles.infoLineContainer}>
@@ -45,7 +35,7 @@ const SimpleLine = (props) => {
   </div>
 }
 
-const SectionContainer = (props) => {
+const FAQSection = (props) => {
   return <div className={styles.sectionContainer}>
     <div className={styles.containerTitle}>
       <span>როგორ</span>
@@ -84,45 +74,40 @@ const SectionContainer = (props) => {
 }
 
 const BuyTicketContainer = () => {
-  return {/* <div style={{ marginTop: 20, position: 'relative', zIndex: 5 }} className='flxAll'>
-  <Button className={"fontMT"} width={350} height={77}
-    onClick={openAppModal}
-    variant="primary"
-    size="large">
-    <span>ბილეთის შეძენა</span>
-  </Button>
-  <ModalWrapper disableClose
-    onClose={() => openModal(false)}
-    open={isModalOpened}>
-    <ModalBase width="auto" height="auto">
-      <BuyTicketModal onAction={onModalAction} />
-    </ModalBase>
-  </ModalWrapper>
-</div> */}
+  const [isOpen, setOpen] = useState(false);
+
+  return <div style={{ marginTop: 20, position: 'relative', zIndex: 5 }
+  } className='flxAll' >
+    <Button className={"fontMT"} width={350} height={77}
+      onClick={() => setOpen(true)}
+      variant="primary"
+      size="large">
+      <span>ბილეთის შეძენა</span>
+    </Button>
+    <ModalWrapper disableClose
+      onClose={() => setOpen(false)}
+      open={isOpen}>
+      <ModalBase width="auto" height="auto">
+        <BuyTicketModal  />
+      </ModalBase>
+    </ModalWrapper>
+  </div>
+
 }
 
 export default function Home(props) {
-  const [isModalOpened, openModal] = useState(!true);
-
-  const openAppModal = () => {
-    openModal(!isModalOpened);
-
-  }
-
-  const onModalAction = (action, payload) => {
-    console.log('onModalAction', payload);
-  }
 
   return (<>
     <div className={classNames(styles.appPageWrapper, 'layout--wrap')}>
       <MainSlider slides={props.slides} />
-      <PromotionSection  {...props} />
+      {/* <BuyTicketContainer /> */}
+      <PromotionSection jackpotDetails={props.jackpotDetails} videoDetails={props.videoDetails} />
       <WinnersSlider {...props} />
       <FAQNavigation navigation={props.FAQNavigation} />
     </div>
     {/* <SimpleLine /> */}
     <div className='layout--wrap'>
-      <SectionContainer {...props} />
+      <FAQSection {...props} />
     </div>
   </>)
 }
@@ -147,9 +132,18 @@ export function getServerSideProps(ctx) {
   ]
 
   const slides = [
-    {src: '/assets/slides/slider-1-2.png'},
-    {src: '/assets/slides/slider-2.png'},
+    { src: '/assets/slides/slider-1-2.png' },
+    { src: '/assets/slides/slider-2.png' },
   ];
+
+  const jackpotDetails = {
+    amount: 800000
+  }
+
+  const videoDetails = {
+    videoUrl: '',
+    videoTitle: ''
+  }
 
   return {
     props: {
@@ -161,7 +155,9 @@ export function getServerSideProps(ctx) {
         { name: '1 ლარის შენაძენზე', slug: '', image: '/assets/images/shop.png', desc: '100 მონეტა' },
         { name: 'ზარი გაააქტიურე *001 ზარით', slug: '', image: '/assets/images/phone.png', desc: 'დამატებითი 100 ქულა' },
         { name: 'თამაში გაძლევს საშუალებას დააგროვო მონეტები  ', slug: '', image: '/assets/images/controller.png', desc: '' },
-      ]
+      ],
+      jackpotDetails,
+      videoDetails
     }
   }
 }

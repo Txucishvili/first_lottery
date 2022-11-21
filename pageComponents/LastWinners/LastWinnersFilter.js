@@ -132,13 +132,11 @@ const LastWinnerFilter = (props) => {
         <div>SomeContent</div>
       </DropContent>
     </DropDown> */}
-    <div className='grid-container'>
+    <div className='grid'>
 
-
-
-
-      <div className={classNames(styles.filterRow, 'grid-row')}>
-        <div style={{ fontSize: 16 }} className={classNames('col-md-3', styles.filterInput)}>
+      <div className={classNames(styles.filterRow, 'row')}>
+        <div style={{ fontSize: 16 }} 
+        className={classNames('col-sm-12 col-md-4', styles.filterInput)}>
           <Input
             value={inputValue}
             ref={inputRefMain}
@@ -152,7 +150,7 @@ const LastWinnerFilter = (props) => {
             withClearIcon={true}
           />
         </div>
-        <div className='col-md-3'>
+        <div className='col-sm-12 col-md-4'>
           <DropDown
             className="borderDrop"
             portal={true}
@@ -220,7 +218,7 @@ const LastWinnerFilter = (props) => {
             </DropContent>
           </DropDown>
         </div>
-        <div className='col-md-3'>
+        <div className='col-sm-12 col-md-4'>
           <DropDown
             ref={calendarDrop}
             className="borderDrop borderDrop--outer"

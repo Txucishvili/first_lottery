@@ -56,6 +56,40 @@ $winner_space: 14;
   height: px($height + ($winner_space * 2));
 }
 
+
+@mixin modalCloseButton() {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  @content;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// !!!!!!!!!!!!
+
 @function decimal-round ($number, $digits: 0, $mode: round) {
   $n: 1;
 

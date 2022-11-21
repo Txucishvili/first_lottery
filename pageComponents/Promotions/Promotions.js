@@ -6,21 +6,44 @@ import { SVGTextEl } from 'src/utils'
 import CountdownComponent from '../CountDown'
 import VideoContainer from 'pageComponents/Main/VideoContainer'
 import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper'
+import IconWrap from '@/components/IconWrap'
+import Image from 'next/image'
 
 const VideoModal = (props) => {
 
   return <div className={videoModalStyles.videoModal}>
+    <div onClick={() => props.onAction('close')} className={videoModalStyles.closeBtn}>
+      <IconWrap size="24" name='Close' />
+    </div>
     <div className={videoModalStyles.wrap}>
-      <div className={videoModalStyles.wrap}>
+      <div className={videoModalStyles.content}>
+        {/* <div >
+          <Image
+            alt='Mountains'
+            src={'/assets/images/video_wallpaper.png'}
+            layout='fill'
+            fill='layout'
+          />
+        </div> */}
 
+        <div className={videoModalStyles.videoContainer}>
+          <video controls src='https://thumbs.dreamstime.com/videothumb_large21171/211712346.mp4'></video>
+        </div>
+
+        <div className={classNames(videoModalStyles.bottomBar, 'flx', 'flxJC flxAI')}>
+          <span className={videoModalStyles.bottomTitle}>გათამაშება  #1.12</span>
+          <span className={classNames(videoModalStyles.read, 'toRight')}>
+            სრულიად ნახვა
+          </span>
+        </div>
       </div>
     </div>
   </div>
 }
 
 const PromotionSection = (props) => {
-  const [isOpen, setOpen] = useState(false);
-  const jackpotNumber = '8 000 000 ';
+  const [isOpen, setOpen] = useState(true);
+  const { jackpotDetails } = props;
 
   return <>
     <div className={styles.promotions}>
@@ -28,7 +51,9 @@ const PromotionSection = (props) => {
       <ModalWrapper
         onClose={() => setOpen(false)}
         open={isOpen}>
-        <ModalBase variant="center" >
+        <ModalBase
+          variant="center"
+        >
           <VideoModal />
         </ModalBase>
 
@@ -43,14 +68,12 @@ const PromotionSection = (props) => {
             </SVGTextEl>
           </div>
           <div
-            className={styles.textArea}
-          // style={jackpotNumber.length > 7 ? {fontSize: 32} : {}} className={styles.textArea}
-          >
+            className={styles.textArea}>
             {/* <div className='example' style={{ position: 'absolute' }}>
               {jackpotNumber}₾
             </div> */}
             <SVGTextEl>
-              {jackpotNumber}₾
+              {jackpotDetails.amount ?? 0}₾
             </SVGTextEl>
           </div>
         </div>

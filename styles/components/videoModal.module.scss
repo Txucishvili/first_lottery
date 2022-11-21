@@ -1,13 +1,77 @@
 .videoModal {
+  position: relative;
+  max-width: 1530px;
+  width: 100%;
+  // max-height: 801px;
+  background: #FFF;
+  border-radius: 16px;
+  overflow: hidden;
+
   .wrap {
-    position: relative;
-    width: 1529px;
-    height: 801px;
-    
+
     // background: rgba(0, 0, 0, 0.49);
-    background: #FFF;
-    border-radius: 16px;
   }
+
+  .closeBtn {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    top: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 36px;
+    @include flex-all;
+    z-index: 55;
+    cursor: pointer;
+  }
+
   .content {}
+
   .bgArea {}
+
+
+  .videoContainer {
+    width: 100%;
+    // height: calc(100% - 85px);
+    // position: absolute;
+    background: #FFF;
+    display: flex;
+    margin-bottom: 85px;
+    height: calc(100% - 85px);
+
+    video {
+      width: 100%;
+      margin: auto;
+      height: 100%;
+    }
+  }
+
+  .bottomBar {
+    width: 100%;
+    height: 85px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.63);
+    border-radius: 0px 0px 16px 16px;
+    padding: 8px 32px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+
+    /* identical to box height */
+
+    color: #FFFFFF;
+    font-family: 'Avenir Next Georgian';
+
+    .bottomTitle {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 34px;
+
+      /* RasBerry */
+      color: #DB0060;
+    }
+  }
 }
