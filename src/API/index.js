@@ -33,18 +33,22 @@ export const NavigationList = [
 
 export const HeaderNavigation = [
   {
+    href: '/',
     slug: 'lottery_raffle',
     name: 'ლოტოს გათამაშება'
   },
   {
+    href: 'https://vouchers.pirveli.ge',
     slug: 'vouchers',
     name: 'ვაუჩერები'
   },
   {
+    href: 'https://medical.pirveli.ge',
     slug: 'medical',
     name: 'მედიქალი'
   },
   {
+    href: 'https://optimoml.geopay.ge/index.php',
     slug: 'online_market',
     name: 'ონლაინ მაღაზია'
   }

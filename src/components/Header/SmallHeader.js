@@ -9,8 +9,8 @@ import LanguageSwitcher from '../LanguageSwitcher';
 import { useAppContext } from 'src/store';
 
 
-const NavLinkItem = ({ name, slug, active }) => {
-  return <Link href={slug} className={classNames(styles.listItem, 'flx flxAI', {
+const NavLinkItem = ({ name, slug, active, href }) => {
+  return <Link href={href} className={classNames(styles.listItem, 'flx flxAI', {
     [styles.active]: active
   })}>
     {name}
