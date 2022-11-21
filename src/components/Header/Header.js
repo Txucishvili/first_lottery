@@ -256,10 +256,12 @@ export default function Header() {
           </SearchWrap>
         </div>
         <div className={styles.authArea}>
+          <Link href='https://auth.pirveli.ge/realms/xracoon-demo/protocol/openid-connect/auth?response_type=code&client_id=demo-client&scope=email%20profile%20roles%20openid&state=ozej6dlmtIpneeVt7QoGPy2zXJ9e6BNPdGltyKyn3X4%3D&redirect_uri=https://lot51.pirveli.ge&nonce=KAmXCp0jHrPiUph9D2p5yVwdpT5g3qWO0iCxqJFbiv0'>
           <Button variant="text">
             <IconWrap name="UserIcon" size={22} />
             <span>შესვლა</span>
           </Button>
+          </Link>
         </div>
 
       </div>
