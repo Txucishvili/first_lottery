@@ -65,18 +65,27 @@ $winner_space: 14;
 }
 
 
+@function rgbaToHex($color, $alpha) {
+  $color-accent: $color;
+  $color-accent-bg: rgba($color-accent, $alpha);
+  $ie-hex: ie_hex_str($color-accent-bg); //#33039B15
+  $back-to-color-accent: unquote('#'+ str_slice($ie-hex, 4)); //#039B15
 
+  @return $ie-hex;
+}
 
+// gist: https://gist.github.com/deeperton/addd1498854fdd1f37ebbebb9f7d4b4c
+@function rgba-to-rgb($rgba, $opacity: 0, $background: #fff) {
+  @if $opacity>0 {
+    @if $opacity < 1 {
+      $opacity: $opacity * 100
+    }
 
+    @return mix(mix(rgb(red($rgba), green($rgba), blue($rgba)), $background, alpha($rgba) * 100%), rgb(255, 255, 255), $opacity)
+  }
 
-
-
-
-
-
-
-
-
+  @return mix(rgb(red($rgba), green($rgba), blue($rgba)), $background, alpha($rgba) * 100%)
+}
 
 
 

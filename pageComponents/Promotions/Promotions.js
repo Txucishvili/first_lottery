@@ -41,8 +41,11 @@ const VideoModal = (props) => {
   </div>
 }
 
+// language and font depend (only GE)
+const str = 'ჯეკპოტი';
+
 const PromotionSection = (props) => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const { jackpotDetails } = props;
 
   return <>
@@ -51,9 +54,7 @@ const PromotionSection = (props) => {
       <ModalWrapper
         onClose={() => setOpen(false)}
         open={isOpen}>
-        <ModalBase
-          variant="center"
-        >
+        <ModalBase variant="center" >
           <VideoModal />
         </ModalBase>
 
@@ -63,9 +64,11 @@ const PromotionSection = (props) => {
 
         <div className={(classNames(styles.block, styles.smallBlockWide))}>
           <div className={classNames(styles.blockHead, 'flxAll')}>
-            <SVGTextEl>
-              ჯეკპოტი
-            </SVGTextEl>
+          <svg viewBox={`0 0 ${str.length * 74} 136`}>
+              <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle">
+                {str}
+              </text>
+            </svg>
           </div>
           <div
             className={styles.textArea}>

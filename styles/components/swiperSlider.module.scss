@@ -66,11 +66,18 @@ $btn-width: 66;
   }
 
   &.simple {
-    background: #FDFAF6;
+    background: rgba-to-rgb(rgba($main_gold, 0.10));
 
 
     &:hover {
-      background-color: #FFF;
+      background: rgba-to-rgb(rgba($main_gold, 1));
+      svg {
+
+        path {
+          stroke: $color_white;
+        }
+  
+      }
     }
 
     svg {
@@ -101,6 +108,7 @@ $btn-width: 66;
     left: 24px;
 
   }
+
   @include max-min(min px($LAYOUT_WRAP_SIZE + (($btn-width + 53)* 2) + 20)) {
     left: - px($btn-width + 53);
   }
