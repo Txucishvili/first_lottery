@@ -293,12 +293,13 @@
           position: absolute;
           // right: 0;
           // top: 0;
-          top: 10px;
+          // top: 10px;
           right: -275px;
           z-index: -1;
 
           @include max-min(min px($BP_TABLET_SM)) {
-            top: -250px;
+            // top: -250px;
+            top: -300px;
             right: -625px;
             width: 1300px;
             height: 1300px;
@@ -310,9 +311,12 @@
             left: 100px;
             width: 290px;
 
+
             @include max-min(min px($BP_TABLET_SM)) {
               width: initial;
-              top: -152px;
+              // top: -152px;
+              top: -85px;
+              left: 270px;
             }
 
             img {
@@ -325,11 +329,12 @@
 
       .md-social {
         display: none;
+
         @include max-min(min px($BP_MOBILE)) {
           display: block;
         }
-       }
-      
+      }
+
       .-copy_Right {
         font-family: 'Avenir Next Georgian';
         font-weight: 500;

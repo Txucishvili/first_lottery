@@ -156,7 +156,7 @@ const LastWinnerFilter = (props) => {
             portal={true}
             ref={dropRef}
             isOpen={isOpen}
-            disableToggle
+            disableToggle={true}
             onTogglerClick={(e) => {
               if (!isOpen) {
                 setisOpen(true)

@@ -31,7 +31,8 @@ const DropDown = forwardRef((props, ref) => {
 
   const customEvent = (e) => {
     if (portal) {
-      if (dropRef && dropRef.current && !dropRef.current.contains(e.target)) {
+      console.log('object', e.parentNode, e.target, togglerRef.current)
+      if (dropRef && dropRef.current && !dropRef.current.contains(e.target) && !togglerRef.current.contains(e.target)) {
         setIsOpen(false);
       }
       return;

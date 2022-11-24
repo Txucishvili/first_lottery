@@ -152,7 +152,7 @@ export default function Footer() {
       <div className='bgArea'>
         <div className='circle'>
           <div className='image'>
-            <img src={'/assets/images/footer.svg'} />
+            <img src={'/assets/images/footer.png'} />
           </div>
         </div>
 
