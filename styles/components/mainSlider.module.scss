@@ -6,6 +6,7 @@
       height: toVW(838, 1530);
       max-height: 838px;
       // min-height: 238px;
+      // @include layoutWrap(true);
 
       >div {
         @include flex-all;
@@ -14,7 +15,24 @@
 
       img {
         // width: auto !important;
-        position: unset !important;
+        // position: unset !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        box-sizing: border-box;
+        padding: 0;
+        border: none;
+        margin: auto;
+        display: block;
+        width: 0;
+        height: 0;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        object-fit: contain;
         // height: auto !important;
         height: 100% !important;
       }
