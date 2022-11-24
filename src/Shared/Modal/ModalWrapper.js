@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import IconWrap from '@/components/IconWrap';
 import classNames from 'classnames';
 import Button from '../Button';
+import { el } from 'date-fns/locale';
 
 export const CloseAction = (props) => {
   return <div>{props.children}</div>
@@ -190,7 +191,7 @@ export function ModalWrapper(props) {
 
   useEffect(() => {
     ref.current = document.getElementById('modals');
-    setMounted(true);
+    // setMounted(true);
     return () => {
     }
   }, [])
@@ -202,6 +203,27 @@ export function ModalWrapper(props) {
       key: k
     })
   })
+
+  useEffect(() => {
+    if (!document.getElementById('modals') && !open) {
+      return;
+    }
+    
+    if (!open) {
+      if (ref.current && ref.current.childElementCount == 0) {
+        ref.current.remove()
+        setMounted(false);
+      }
+    } else {
+      if (!document.getElementById('modals')) {
+        const _el = document.createElement('div');
+        _el.id = 'modals';
+        document.body.appendChild(_el);
+        ref.current = document.getElementById('modals');
+        setMounted(true);
+      }
+    }
+  }, [mounted, open])
 
 
   return mounted ?

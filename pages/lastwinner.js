@@ -7,8 +7,6 @@ import { WinnerListAPI } from '../src/API/index'
 import LastWinnerFilter from 'pageComponents/LastWinners/LastWinnersFilter'
 import { UserAvatar } from '@/components/UserAvatar'
 
-
-
 const LastWinnerSlide = ({ list }) => {
   const ref = useRef();
 
@@ -137,9 +135,11 @@ const filters = {
 
 export default function LastWinnerPage(pageProps) {
   return (
-    <div className='layout--wrap'>
+    <div className='layout'>
       <LastWinnerSlide list={pageProps.sliderItems} />
-      <LastWinnerFilter winnerFilters={winningRangeValues} filters={filters} list={pageProps.listData} />
+      <div className={'filterWrapBg'}>
+        <LastWinnerFilter winnerFilters={winningRangeValues} filters={filters} list={pageProps.listData} />
+      </div>
     </div>
   )
 }

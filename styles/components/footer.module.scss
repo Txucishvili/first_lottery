@@ -174,7 +174,13 @@
 
 .footerArea {
   overflow: hidden;
+  margin-top: auto;
+  padding-top: 150px;
+  padding-bottom: 0;
+  @include max-min(min px($BP_TABLET_SM)) {
+    padding-bottom: 170px;
 
+  }
   :global {
     .footer {
       &--wrap {
@@ -196,12 +202,12 @@
         gap: 24px;
         flex-direction: column;
 
-        @include max-min(min px($BP_MOBILE)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           gap: 24px;
           flex-direction: row;
         }
 
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           gap: 120px;
           // flex-direction: row;
         }
@@ -278,7 +284,7 @@
         position: relative;
         left: 0;
         width: 100%;
-        height: 198px;
+        height: 220px;
 
         @include max-min(min px($BP_TABLET_SM)) {
           height: 0px;
@@ -299,7 +305,8 @@
 
           @include max-min(min px($BP_TABLET_SM)) {
             // top: -250px;
-            top: -300px;
+            // top: -300px;
+            top: -232px;
             right: -625px;
             width: 1300px;
             height: 1300px;
@@ -310,6 +317,12 @@
             top: -40px;
             left: 100px;
             width: 290px;
+
+            &-wrap {
+              width: 535px;
+              height: 411px;
+              position: relative;
+            }
 
 
             @include max-min(min px($BP_TABLET_SM)) {
@@ -349,7 +362,6 @@
         width: 100%;
 
         @include max-min(min px($BP_TABLET_SM)) {
-          font-family: 'Sofia Pro';
           font-weight: 400;
           font-size: 14px;
           line-height: 14px;

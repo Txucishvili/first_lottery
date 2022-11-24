@@ -83,7 +83,7 @@ $btn-width: 66;
     svg {
 
       path {
-        stroke: $color_gray;
+        stroke: $main_gold;
       }
 
     }
@@ -99,6 +99,7 @@ $btn-width: 66;
 
 .disabled {
   opacity: .5;
+  pointer-events: none;
 }
 
 .prev {

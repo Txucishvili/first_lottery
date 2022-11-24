@@ -45,3 +45,7 @@ export function getElementRect(element) {
 
   return { body: bodyRect, target: elemRect };
 }
+
+export function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}

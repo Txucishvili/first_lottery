@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import React from 'react'
+import React, { forwardRef } from 'react'
 import ICON_SET from '../icons/index';
 
-export default function IconWrap({ children, name, size = 14 }) {
+function IconWrapBase({ children, name, size = 14 }) {
 
   const IconComp = ICON_SET[name];
 
@@ -22,3 +22,6 @@ export default function IconWrap({ children, name, size = 14 }) {
     </div>
   )
 }
+
+// eslint-disable-next-line react/display-name
+export default forwardRef((props, ref) => <IconWrapBase ref={ref} {...props} />)

@@ -29,7 +29,7 @@
 
     @include max-min(min px($BP_TABLET_SM)) {
       // padding: 34px 30px 90px;
-      padding: 44px 71px 130px;
+      padding: 44px 71px 64px 71px;
 
       box-shadow: 0px 0px 42px rgba(63, 63, 70, 0.2);
       // min-height: 752px;
@@ -85,7 +85,7 @@
     width: 100%;
 
     @include max-min(min px($BP_TABLET_SM)) {
-      margin-top: 80px;
+      margin-top: 64px;
     }
 
     .listWrap {}
@@ -284,6 +284,22 @@
         display: block;
       }
     }
+  }
+
+  .loadMore {
+    margin-top: 64px;
+
+    font-family: 'Avenir Next Georgian';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    text-decoration-line: underline;
+
+    /* Text */
+    color: #3F3F46;
+
+    text-align: center;
   }
 
 }

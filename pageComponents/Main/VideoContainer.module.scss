@@ -17,8 +17,8 @@
       margin-left: initial;
       margin-right: initial;
       border-radius: 16px;
-      height: toVW(694, $LAYOUT_WRAP_SIZE);
-      max-height: 694px;
+      height: toVW(764, $LAYOUT_WRAP_SIZE);
+      max-height: 764px;
     }
 
     @include max-min(min px(930)) {
@@ -53,9 +53,9 @@
     // display: none;
 
     // position: unset !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%);
+    // top: 50% !important;
+    // left: 50% !important;
+    // transform: translate(-50%, -50%);
 
     width: auto !important;
     height: 100% !important;

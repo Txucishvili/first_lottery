@@ -3,9 +3,14 @@ import SwipeSlider from 'src/Shared/SwipeSlider'
 import styles from '@/styles/components/mainSlider.module.scss';
 import Image from 'next/image';
 
-const SliderItem = ({slide}) => {
-  return <div style={{ position: 'relative' }}>
-    <Image alt={'some jackpot magnit text'} fill={true} src={slide.src} />
+const SliderItem = ({ slide }) => {
+  return <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+    <Image
+      alt=' '
+      src={slide.src}
+      layout='fill'
+      objectFit='contain'
+    />
   </div>
 }
 

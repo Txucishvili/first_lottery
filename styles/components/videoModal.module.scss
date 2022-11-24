@@ -1,16 +1,50 @@
-.videoModal {
+.videoModalWrap {
+  padding-inline: 20px;
   position: relative;
   max-width: 1530px;
   width: 100%;
-  max-height: 801px;
-  height: 100vh;
-  background: #FFF;
+
+  @include max-min(min px($LAYOUT_WRAP_SIZE + 20)) {
+    padding-inline: 0;
+
+  }
+}
+
+.canvasWrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    filter: blur(32px);
+  }
+}
+
+.videoModal {
+
+  // max-height: 801px;
+  // height: 100vh;
+  background: transparent;
   border-radius: 16px;
   overflow: hidden;
+  height: 400px;
+  height: toVW(801, 1530);
+
+  @include max-min(min px($BP_TABLET_SM)) {}
+
+  @include max-min(min px($LAYOUT_WRAP_SIZE)) {
+    // display: none;
+    // height: auto;
+    // height: toVW(801, 1530);
+    max-height: 801px;
+  }
 
   .wrap {
-    @include size(100%)
-    // background: rgba(0, 0, 0, 0.49);
+    @include size(100%) // background: rgba(0, 0, 0, 0.49);
   }
 
   .closeBtn {
@@ -29,6 +63,14 @@
       width: 46px;
       height: 46px;
     }
+
+    &:hover {
+      background-color: rgba($main_gold, .9);
+    }
+
+    svg {
+      fill: #FFF;
+    }
   }
 
   .content {
@@ -40,17 +82,18 @@
 
   .bgArea {}
 
+  .videoContainerWrap {
+    position: relative;
+    flex: 1;
+    background: rgba(0, 0, 0, 0.73);
+  }
 
   .videoContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    // height: calc(100% - 85px);
-    // position: absolute;
-    background: #FFF;
-    display: flex;
-    // margin-bottom: 45px;
-    // height: calc(100% - 45px);
     height: 100%;
-    flex: 1;
 
     @include max-min(min px($BP_TABLET_SM + 1)) {
       // margin-bottom: 85px;
@@ -60,6 +103,7 @@
     video {
       // width: 100%;
       margin: auto;
+      width: 100%;
       height: 100%;
     }
   }
@@ -73,6 +117,7 @@
     background: rgba(0, 0, 0, 0.63);
     border-radius: 0px 0px 16px 16px;
     padding: 8px 32px;
+    position: relative;
 
     font-weight: 500;
     font-size: 14px;
@@ -90,10 +135,23 @@
       line-height: 23px;
     }
 
+    .icon {
+      :global {
+        svg path {
+          stroke: #FFF;
+        }
+      }
+    }
+
     .bottomTitle {
       font-weight: 600;
       font-size: 16px;
       line-height: 24px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0 20px;
 
       @include max-min(min px($BP_TABLET_SM + 1)) {
         font-size: 24px;

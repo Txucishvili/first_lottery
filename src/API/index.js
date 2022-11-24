@@ -1,6 +1,5 @@
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+import { getRndInteger } from "src/utils";
+
 
 const getRandomName = () => {
   const firstLetter = String.fromCharCode(getRndInteger(4304, 4336));

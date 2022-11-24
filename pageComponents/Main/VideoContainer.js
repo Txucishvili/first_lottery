@@ -16,13 +16,21 @@ const VideoContainer = forwardRef((props, ref) => {
             {
               // backgroundImage: 'url(/assets/images/video_wallpaper.png)'
             }
-            } className={classNames(styles.bgArea)}>
-            <Image
+          } className={classNames(styles.bgArea)}>
+            {/* <Image
               alt='Mountains'
               src={'/assets/images/video_wallpaper.png'}
               layout='fill'
               fill='layout'
-            />
+            /> */}
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+              <Image
+                alt='Last Winner'
+                src={'/assets/images/video_wallpaper.png'}  
+                layout='fill'
+                objectFit='cover'
+              />
+            </div>
           </div>
           <div onClick={() => props.onAction()} className={classNames(styles.playBtn, 'flxAll')}>
             <IconWrap name="Play" />

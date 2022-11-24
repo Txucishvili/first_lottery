@@ -22,7 +22,7 @@ export const SearchIcon = <svg width="24" height="24" viewBox="0 0 24 24" fill="
 </svg>
   ;
 
-export const Play = () => (<svg width="41" height="45" viewBox="0 0 41 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Play = () => (<svg style={{transform: 'translateX(7%)'}} width="41" height="45" viewBox="0 0 41 45" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M41 22.5L0.5 44.5836L0.5 0.416351L41 22.5Z" fill="#D9D9D9" />
 </svg>);
 
@@ -162,6 +162,9 @@ const pill = () => (
 );
 
 const ICON_SET = {
+  Facebook,
+  Instagram,
+  Youtube,
   UserIcon,
   ArrowSvg,
   SearchIcon,

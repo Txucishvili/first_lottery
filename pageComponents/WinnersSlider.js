@@ -7,14 +7,19 @@ import styled from 'styled-components'
 import { useSwiper } from 'swiper/react'
 import { ArrowSvg } from 'src/icons'
 import useWindowSize from 'src/hooks/useWindowSize'
+import classNames from 'classnames'
+import VideoModal from './Promotions/VideoModal'
 
 const PlayButton = () => {
   return <IconWrap size="14" name="Play" />
 }
 
 const WinnerBlock = (props) => {
+  const { item: { id, number, status, winAmount, totalTickets }, onOpen } = props;
 
-  return <div className={styles.winnerBlock}>
+  return <div className={classNames(styles.winnerBlock, {
+    [styles.winnerBlockLight]: status
+  })}>
 
     <div className={styles.wiinerBlockBg}>
       <svg width="358" height="464" viewBox="0 0 358 464" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,16 +42,15 @@ const WinnerBlock = (props) => {
 
     </div>
     <div className={styles['winnerBlock--wrap']}>
-      <div className={styles['ticketNumber']}>გათამაშება  #1.13</div>
-      <div className={styles['winTitle']}>გათამაშებული</div>
-      <div className={styles['winNumber']}>0</div>
+      <div className={styles['ticketNumber']}>გათამაშება  #{number}</div>
+      <div className={styles['winTitle']}>{status ? 'გათამაშებული' : 'მიმდინარე'}</div>
+      <div className={styles['winNumber']}>{totalTickets}</div>
       <div className={styles['status']}>მოგება</div>
       <div className={styles['amount']}>
-        {!props.hideValue ? <p className={styles['amountNumber']}>{'1500$'}</p> : <div className={styles['line']}></div>}
+        {status ? <p className={styles['amountNumber']}>{winAmount} ₾</p> : <div className={styles['line']}></div>}
       </div>
       <div onClick={() => {
-        console.log('open Modal')
-        props.setOpen(true)
+        onOpen(id)
       }} className={styles['playButton']}>
         <PlayButton />
         {/* <IconWrap size="42" name="PlayCircle" /> */}
@@ -56,11 +60,18 @@ const WinnerBlock = (props) => {
   </div>
 }
 
-export default function WinnersSlider(props) {
+export default function RaffleSlider(props) {
   const [isOpen, setOpen] = useState(false)
   const { width } = useWindowSize();
+  const [activeVideo, setActiveVideo] = useState(null);
 
   // console.log('width', width);
+
+  const onVideoOpen = (id) => {
+    const item = props.items.find((i) => i.id == id);
+    setActiveVideo(item);
+    setOpen(true);
+  }
 
   return (
     <div className={styles.swipeList}>
@@ -102,10 +113,13 @@ export default function WinnersSlider(props) {
         className="mySwiper"
       >
         {
-          props.winnings.map((c, k) => {
-            return <WinnerBlock setOpen={() => {
-              setOpen(true);
-            }} hideValue={(k >= 2)} className={styles['swiper-slide']} key={k}>item</WinnerBlock>
+          props.items.map((c, k) => {
+            return <WinnerBlock
+              item={c}
+              onOpen={onVideoOpen}
+              hideValue={(k >= 2)}
+              className={styles['swiper-slide']} key={k}>
+            </WinnerBlock>
           })
         }
       </SwipeSlider>
@@ -115,15 +129,10 @@ export default function WinnersSlider(props) {
         onClose={() => setOpen(false)}
         open={isOpen}>
 
-        <ModalBase
-          variant="center"
-        >
-
-          <div className='flxAll'>
-            video Container
-            {/* <iframe width="100%" height="100%" src="https://www.youtube.com/embed/BcJCNLgEsHs" title="YouTube video player" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
-          </div>
+        <ModalBase variant="center" >
+          <VideoModal {...activeVideo} />
         </ModalBase>
+
 
       </ModalWrapper>
     </div>

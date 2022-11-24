@@ -1,3 +1,12 @@
+.filterBg {
+  background: rgb(255, 255, 255);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 1) 0%,
+      rgba-to-rgb(rgba($main_gold, .02)) 15%,
+      rgba-to-rgb(rgba($main_gold, .02)) 85%,
+      rgba(255, 255, 255, 1) 100%);
+}
+
 .filterInput {
   :global {
     .wrap {

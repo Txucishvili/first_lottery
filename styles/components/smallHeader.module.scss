@@ -42,6 +42,7 @@
       margin: 0;
       padding: 0;
       @include flex;
+      align-items: center;
       position: relative;
     }
   }

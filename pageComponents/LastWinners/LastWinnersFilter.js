@@ -103,7 +103,7 @@ const LastWinnerFilter = (props) => {
   }
 
 
-  return <div>
+  return <div className={'layout--wrap'}>
     {/* <DropDown
       portal={!true}
       onChange={(e) => {

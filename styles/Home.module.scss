@@ -355,7 +355,7 @@
     left: 0;
     bottom: 0;
 
-    background: $main_gold;
+    background: $dark_gold;
     border-radius: 12px;
 
     @include max-min(min px($BP_TABLET_SM)) {
@@ -525,6 +525,11 @@
         fill: $main_gold;
       }
     }
+  }
+}
+.winnerBlockLight {
+  &::after {
+    background-color: $main_gold;
   }
 }
 

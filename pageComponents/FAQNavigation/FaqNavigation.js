@@ -49,6 +49,9 @@ export default function FAQNavigation(props) {
               return <NavItem {...c} key={k} />
             })}
           </div>
+          <div className={styles.loadMore}>
+            <span>მეტის ნახვა</span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import React, { useState } from 'react'
 import styles from '../styles/Home.module.scss'
-import WinnersSlider from 'pageComponents/WinnersSlider'
+import RaffleSlider from 'pageComponents/WinnersSlider'
 import PromotionSection from 'pageComponents/Promotions/Promotions'
 import FAQNavigation from 'pageComponents/FAQNavigation/FaqNavigation'
 import MainSlider from 'pageComponents/Main/MainSlider'
 import Button from 'src/Shared/Button'
 import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper'
 import BuyTicketModal from 'pageComponents/modals/buyticket'
+import { getRndInteger } from 'src/utils'
 
 const SimpleLine = (props) => {
   return <div className={styles.infoLineContainer}>
@@ -102,7 +103,7 @@ export default function Home(props) {
       <MainSlider slides={props.slides} />
       {/* <BuyTicketContainer /> */}
       <PromotionSection jackpotDetails={props.jackpotDetails} videoDetails={props.videoDetails} />
-      <WinnersSlider {...props} />
+      <RaffleSlider items={props.raffles} />
       <FAQNavigation navigation={props.FAQNavigation} />
     </div>
     {/* <SimpleLine /> */}
@@ -145,10 +146,26 @@ export function getServerSideProps(ctx) {
     videoTitle: ''
   }
 
+  const videos = [
+    'https://cdn.coverr.co/videos/coverr-a-man-plays-with-his-dog-87/1080p.mp4',
+    'https://cdn.coverr.co/videos/coverr-a-woman-leaning-against-a-car-at-sunset-6648/1080p.mp4',
+    'https://cdn.coverr.co/videos/coverr-a-young-man-walking-in-the-park-423/1080p.mp4'
+  ]
+
   return {
     props: {
       slides: slides,
-      winnings: Array(15).fill(null),
+      raffles: Array(15).fill(null).map((item, key) => {
+        const status = key % 2 ? 1 : 0;
+        return {
+          id: key,
+          number: key,
+          status,
+          totalTickets: getRndInteger(0, 100),
+          winAmount: status ? 5 * key : null,
+          videoUrl: videos[getRndInteger(0, videos.length)]
+        }
+      }),
       howToPlayList,
       FAQNavigation: [
         { name: 'რეგისტრაცია', slug: '', image: '/assets/images/info.png', desc: '1 ბილეთი' },

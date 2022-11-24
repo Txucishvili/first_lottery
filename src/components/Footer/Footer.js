@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Facebook, Instagram, Youtube } from 'src/icons';
 import { useAppContext } from 'src/store';
 import useWindowSize from 'src/hooks/useWindowSize';
+import Image from 'next/image';
 
 
 export function _Footer(props) {
@@ -82,17 +83,23 @@ export default function Footer() {
       <ul className='navigation-icon--list'>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <Facebook />
+            <a>
+              <Facebook />
+            </a>
           </Link>
         </li>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <Instagram />
+            <a>
+              <Instagram />
+            </a>
           </Link>
         </li>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <Youtube />
+            <a>
+              <Youtube />
+            </a>
           </Link>
         </li>
       </ul>
@@ -152,7 +159,13 @@ export default function Footer() {
       <div className='bgArea'>
         <div className='circle'>
           <div className='image'>
-            <img src={'/assets/images/footer.png'} />
+            <div className='image-wrap'>
+              <Image
+                alt=''
+                layout='fill'
+                objectFit='cover'
+                src={'/assets/images/footer.png'} />
+            </div>
           </div>
         </div>
 
