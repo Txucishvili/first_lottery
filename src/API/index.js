@@ -12,7 +12,7 @@ const withUniqueNumber = () => {
 
 export const WinnerListAPI =
 {
-  "data": Array(128).fill(null).map((i, k) => {
+  "data": Array(8).fill(null).map((i, k) => {
     return {
       name: getRandomName(),
       id: k,

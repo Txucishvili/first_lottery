@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 12px;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     gap: 24px;
   }
 
@@ -160,7 +160,7 @@
   padding: 0 16px 18px 16px;
   margin-left: -12px;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     padding: 0 22px 38px 22px;
     // gap: 38px;
   }
@@ -184,7 +184,7 @@
 
     // gap: 3px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       // gap: 12px;
     }
   }
@@ -228,7 +228,7 @@
     height: 92px;
   }
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     height: 72px;
   }
 
@@ -300,7 +300,7 @@
     .swiper-slide {
       width: 208px !important;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         width: 285px !important;
       }
     }
@@ -327,7 +327,7 @@
     border-radius: 12px;
     position: relative;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       width: 285px;
       height: 394px;
       padding: 41px 30px 27px 30px;
@@ -358,7 +358,7 @@
     background: $dark_gold;
     border-radius: 12px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       height: 7px;
     }
 
@@ -376,7 +376,7 @@
     /* Main Gold */
     color: $main_gold;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 17px;
       line-height: 24px;
 
@@ -393,7 +393,7 @@
     font-size: 12px;
     line-height: 17px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 22px;
       line-height: 31px;
 
@@ -419,7 +419,7 @@
     width: 35px;
     height: 32px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       width: 66px;
       height: 61px;
       font-size: 24px;
@@ -442,7 +442,7 @@
     line-height: 17px;
 
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 20px;
       line-height: 28px;
 
@@ -467,7 +467,7 @@
 
     color: #019E08;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 24px;
       line-height: 34px;
     }
@@ -508,7 +508,7 @@
     cursor: pointer;
     margin-top: auto;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       width: 42px;
       height: 42px;
     }
@@ -662,7 +662,7 @@
     margin-top: 58px;
     margin-bottom: 58px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 28px;
       line-height: 40px;
       margin-top: 100px;
@@ -742,7 +742,7 @@
   .containerItemText {
     padding-top: 30px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       padding-top: 69px;
     }
   }
@@ -756,7 +756,7 @@
     font-size: 12px;
     line-height: 17px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-weight: 600;
       font-size: 16px;
       line-height: 24px;
@@ -827,7 +827,7 @@
     font-size: 12px;
     line-height: 17px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 16px;
       line-height: 20px;
     }

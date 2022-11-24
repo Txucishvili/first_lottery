@@ -1,9 +1,13 @@
 .container {
-  padding-top: 340px;
+  padding-top: 140px;
   position: relative;
   // height: 500px;
   overflow: hidden;
   margin-top: auto;
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    padding-top: 340px;
+  }
 
   .wrap {
     @include layoutWrap(true);
@@ -14,7 +18,7 @@
     flex-wrap: wrap;
     gap: 20px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       gap: 120px;
     }
 
@@ -123,7 +127,7 @@
 
   height: 198px;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     height: initial;
   }
 
@@ -136,7 +140,7 @@
     height: initial;
     width: 380px;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       width: initial;
     }
   }
@@ -160,7 +164,7 @@
   width: 646px;
   height: 646px;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     height: initial;
     top: -400px;
     right: -635px;
@@ -175,24 +179,26 @@
 .footerArea {
   overflow: hidden;
   margin-top: auto;
-  padding-top: 150px;
+  padding-top: 70px;
   padding-bottom: 0;
-  @include max-min(min px($BP_TABLET_SM)) {
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     padding-bottom: 170px;
 
   }
+
   :global {
     .footer {
       &--wrap {
         padding-inline: 16px;
         // @include layoutWrap(false);
-        margin-top: 100px;
+        // margin-top: 100px;
         max-width: 1530px;
         margin-inline: auto;
         // padding-top: 140px;
         position: relative;
 
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           // padding-inline: 20px;
         }
       }
@@ -236,7 +242,7 @@
           color: #3F3F46;
           margin-bottom: 16px;
 
-          @include max-min(min px($BP_TABLET_SM)) {
+          @include max-min(min px($BP_TABLET_SM + 1)) {
             font-weight: 400;
             font-size: 18px;
             line-height: 26px;
@@ -257,7 +263,7 @@
             line-height: 20px;
             color: #3F3F46;
 
-            @include max-min(min px($BP_TABLET_SM)) {
+            @include max-min(min px($BP_TABLET_SM + 1)) {
               font-weight: 400;
               font-size: 16px;
               line-height: 23px;
@@ -286,7 +292,7 @@
         width: 100%;
         height: 220px;
 
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           height: 0px;
         }
 
@@ -303,7 +309,7 @@
           right: -275px;
           z-index: -1;
 
-          @include max-min(min px($BP_TABLET_SM)) {
+          @include max-min(min px($BP_TABLET_SM + 1)) {
             // top: -250px;
             // top: -300px;
             top: -232px;
@@ -319,13 +325,20 @@
             width: 290px;
 
             &-wrap {
-              width: 535px;
-              height: 411px;
+
               position: relative;
+              width: 300px;
+              height: 185px;
+
+              @include max-min(min px($BP_TABLET_SM + 1)) {
+
+                width: 535px;
+                height: 411px;
+              }
             }
 
 
-            @include max-min(min px($BP_TABLET_SM)) {
+            @include max-min(min px($BP_TABLET_SM + 1)) {
               width: initial;
               // top: -152px;
               top: -85px;
@@ -361,7 +374,7 @@
         transform: translate(-50%, 0);
         width: 100%;
 
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           font-weight: 400;
           font-size: 14px;
           line-height: 14px;

@@ -1,7 +1,7 @@
 .container {
   margin-top: 50px;
 
-  @include max-min(min px($BP_TABLET_SM)) {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     margin-top: 100px;
   }
 
@@ -9,13 +9,13 @@
     .row {
       --gap-size: 8px;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         --gap-size: 20px;
       }
     }
   }
 
-  @include max-min(min px($BP_TABLET_SM)) {}
+  @include max-min(min px($BP_TABLET_SM + 1)) {}
 
   .wrap {
     // padding: 44px 71px 130px;
@@ -27,7 +27,7 @@
     flex-direction: column;
 
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       // padding: 34px 30px 90px;
       padding: 44px 71px 64px 71px;
 
@@ -54,7 +54,7 @@
 
       color: #3F3F46;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         font-size: 24px;
         line-height: 34px;
 
@@ -72,7 +72,7 @@
 
       color: #3F3F46;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         font-size: 20px;
         line-height: 28px;
 
@@ -84,7 +84,7 @@
     margin-top: 30px;
     width: 100%;
 
-    @include max-min(min px($BP_TABLET_SM)) {
+    @include max-min(min px($BP_TABLET_SM + 1)) {
       margin-top: 64px;
     }
 
@@ -112,7 +112,7 @@
       margin-top: 16px;
 
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         // width: 100%;
         width: 290px;
         height: initial;
@@ -129,7 +129,7 @@
 
 
       &:hover {
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           .dropEl {
             width: 290px;
             height: 402px;
@@ -165,7 +165,7 @@
         padding-bottom: 20px;
         position: relative;
 
-        @include max-min(min px($BP_TABLET_SM)) {
+        @include max-min(min px($BP_TABLET_SM + 1)) {
           min-height: 370px;
         }
 
@@ -194,7 +194,7 @@
         height 0.35s cubic-bezier(1, 0, 0, 1);
       opacity: 1;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         opacity: 0;
       }
 
@@ -214,7 +214,7 @@
       font-size: 12px;
       line-height: 17px;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         font-size: 20px;
         line-height: 32px;
       }
@@ -233,7 +233,7 @@
       line-height: 18px;
       margin-top: auto;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         font-size: 22px;
         line-height: 28px;
         margin-top: initial;
@@ -248,7 +248,7 @@
       @include flex;
       flex-direction: column;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         margin-top: 0;
         flex: initial;
       }
@@ -262,7 +262,7 @@
       margin-top: 20px;
       margin-inline: auto;
 
-      @include max-min(min px($BP_TABLET_SM)) {
+      @include max-min(min px($BP_TABLET_SM + 1)) {
         width: 200px;
         height: 200px;
         margin: 20px auto auto;
@@ -287,19 +287,24 @@
   }
 
   .loadMore {
-    margin-top: 64px;
+    margin-top: 44px;
 
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 20px;
     text-decoration-line: underline;
 
     /* Text */
     color: #3F3F46;
 
     text-align: center;
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+    margin-top: 64px;
+    font-size: 20px;
+      line-height: 28px;
+    }
   }
 
 }
