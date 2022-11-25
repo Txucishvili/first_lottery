@@ -8,30 +8,39 @@ import useWindowSize from 'src/hooks/useWindowSize';
 
 export const Toggler = (props) => {
   const { children, ...nextProps } = props;
-  return cloneElement(props.children, {
-    ...nextProps
+  return createElement('div', {
+    ...nextProps,
+    key: 'Toggler',
   })
 }
 
-export const DropContent = (props) => {
-  return props.children
+export const withToggler = (props) => {
+  const { children, ...nextProps } = props;
+
+  return cloneElement(Toggler, {
+    ...nextProps,
+    key: 'Toggler'
+  }, children)
 }
 
+// eslint-disable-next-line react/display-name
+export const DropContent = forwardRef((props, ref) => {
+  const { children, ...nextProps } = props;
+  return createElement('div', {
+    ...nextProps,
+    ref,
+    key: 'DropContent',
+  }, children)
+
+})
+
 const DropDown = forwardRef((props, ref) => {
-  const { className, variant = 'default', portal = false, disableToggle, dir = 'left' } = props;
-  const isSingleChild = (props.children instanceof Array);
-
-  const { width } = useWindowSize();
-
+  const { fromEdge = false, className, name, variant = 'default', portal = false, disableToggle, dir = 'left', ...nextProps } = props;
   const togglerRef = useRef();
   const dropRef = useRef();
-
-  const [rect, setRect] = useState({});
-
-
   const customEvent = (e) => {
+    console.log('ref', dropRef)
     if (portal) {
-      console.log('object', e.parentNode, e.target, togglerRef.current)
       if (dropRef && dropRef.current && !dropRef.current.contains(e.target) && !togglerRef.current.contains(e.target)) {
         setIsOpen(false);
       }
@@ -42,19 +51,13 @@ const DropDown = forwardRef((props, ref) => {
       setIsOpen(false);
     }
   }
+
+
   const { ref: refEl, isOpen, setIsOpen } = useOutsideClick(props.isOpen, customEvent);
+  const { width } = useWindowSize();
 
+  const [rect, setRect] = useState({});
 
-  const TogglerChild = isSingleChild ? props.children.find((c) => c.type == Toggler) : null;
-  const DropContentChild = isSingleChild
-    ? props.children.filter((c) => c.type == DropContent)
-    : null;
-
-
-  const TogglerC = !!TogglerChild ? cloneElement(TogglerChild, {
-    extraProp: true,
-    isOpen
-  }) : null;
 
   useImperativeHandle(ref, () => ({
     open: (e) => {
@@ -76,9 +79,10 @@ const DropDown = forwardRef((props, ref) => {
       if (isOpen) {
         const rect = getElementRect(togglerRef.current);
         setRect({
-          top: Math.abs(rect.body.top - rect.target.top) + rect.target.height,
-          left: Math.abs(rect.body.left - rect.target.left),
+          top: Math.abs(rect.body.top - rect.target.top) + rect.target.height - 1  ,
+          left: Math.abs(rect.body.left - rect.target.left) - 1,
           width: Math.abs(rect.target.width),
+          height: Math.abs(rect.target.height),
         })
       } else {
         setRect({})
@@ -87,9 +91,51 @@ const DropDown = forwardRef((props, ref) => {
   }, [togglerRef, isOpen, portal, width]);
 
   useEffect(() => {
-    console.log('rect', rect)
+    // console.log('rect', rect)
   }, [rect])
 
+
+  const isSingleChild = (props.children instanceof Array);
+
+  const TogglerChild = isSingleChild ? props.children.find((c) => {
+    return c.type == Toggler
+  }) : null;
+
+
+  const DropContentChild = isSingleChild
+    ? props.children.find((c) => c.type == DropContent)
+    : null;
+
+
+  let TogglerEl = null;
+  let DropContentEl = null;
+
+  if (DropContentChild && isOpen) {
+    if (portal) {
+      DropContentEl = withPortal({
+        className: classNames('portal', className),
+        style: {
+          position: portal ? 'absolute' : 'auto',
+          top: fromEdge ? rect?.top - rect?.height : rect?.top,
+          left: rect?.left,
+          width: rect?.width + 2,
+          zIndex: 4,
+          ...DropContentChild.props.style
+        }, children: createElement('div', {
+          ref: dropRef,
+          className: 'drop'
+        }, DropContentChild)
+      })
+    } else {
+      DropContentEl = cloneElement(DropContentChild, {
+        className: classNames('drop', DropContentChild.props.className),
+        ref: dropRef,
+        style: {
+          ...DropContentChild.props.style
+        }
+      }, DropContentChild.props.children)
+    }
+  }
 
   const onToggleClick = () => {
     if (disableToggle) {
@@ -102,43 +148,68 @@ const DropDown = forwardRef((props, ref) => {
   }
 
 
+  if (TogglerChild) {
+    TogglerEl = cloneElement(Toggler({ children: TogglerChild.props.children }), {
+      className: classNames('toggler', TogglerChild.props.className),
+      ref: togglerRef,
+      onClick: onToggleClick,
+      style: {
+        ...TogglerChild.props.style
+      }
+    },
+      TogglerChild.props.children);
+    // TogglerEl = cloneElement(TogglerChild, {
+    //   className: className,
+    //   style: {
+    //     ...TogglerChild.props.style
+    //   }
+    // },
+    //   createElement('div', {
+    //     ref: dropRef,
+    //     className: 'drop'
+    //   }, TogglerChild.props.children));
+    // if (fromEdge && isOpen) {
+    //   TogglerEl = cloneElement(TogglerChild, {
+    //     ...TogglerChild.props,
+    //     style: {
+    //       visibility: 'hidden'
+    //     }
+    //   }, TogglerChild)
+    // } else {
+    //   TogglerEl = cloneElement(TogglerChild, {
+    //     ...TogglerChild.props
+    //   }, TogglerChild)
+    // }
+  }
+
+
+
   return (
     <div ref={ref} className={classNames(styles.container, className)}>
-      <div ref={refEl}>
-        <div className={classNames('drop-wrap', {
-          ['open']: isOpen,
-        })}>
-          <div
-            ref={togglerRef}
-            className={'toggler'}
-            onClick={onToggleClick}>
-            <div>
-              {/* {TogglerChild && !!TogglerChild ? TogglerC : 'open'} */}
-              {TogglerC ? TogglerC : <div>
-                open
-              </div>}
-            </div>
-          </div>
-          {isOpen && DropContentChild && !portal &&
-            <div
-              className={'drop'}>{DropContentChild}</div>
-          }
-          {isOpen && DropContentChild && portal &&
+      <div ref={refEl} className={classNames('drop-wrap', {
+        ['open']: isOpen,
+      })}>
+        {/* <div
+          ref={togglerRef}
+          className={'toggler'}
+          onClick={onToggleClick}> */}
+        {/* {TogglerChild && !!TogglerChild ? TogglerC : 'open'} */}
+        {TogglerEl}
+        {isOpen && DropContentEl}
+        {/* {isOpen && DropContentChild && portal &&
             <PortalWrapper>
-              <div ref={dropRef}>
-                <div
-                  style={{
-                    position: portal ? 'absolute' : 'auto',
-                    top: rect?.top,
-                    left: rect?.left,
-                    width: rect?.width,
-                    zIndex: 5
-                  }}
-                  className={'drop'}>{DropContentChild}</div>
-              </div>
+              <div ref={dropRef}
+                className={'drop'}
+                style={{
+                  position: portal ? 'absolute' : 'auto',
+                  top: rect?.top,
+                  left: rect?.left,
+                  width: rect?.width,
+                  zIndex: 5
+                }}
+              >{DropContentChild}</div>
             </PortalWrapper>
-          }
-        </div>
+          } */}
       </div>
     </div>
   )

@@ -14,12 +14,14 @@ import { numberWithSpaces, SVGTextEl } from 'src/utils';
 import classNames from 'classnames';
 import styles from './LastWinnersFilter.module.scss';
 import { UserAvatar } from '@/components/UserAvatar';
+import useWindowSize from 'src/hooks/useWindowSize';
+import { AnimatePresence, motion, useAnimationControls, useScroll } from 'framer-motion';
 
 
-const RangeToggler = ({ activeRange, isOpen, label, children }) => {
+const FilterToggler = ({ activeRange, isOpen, className, label, children, style }) => {
   // !!
   // console.log('RangeToggler isOpen', isOpen)
-  return <div className='rangeToggler'>
+  return <div style={style} className={classNames(className, 'rangeToggler')}>
     <div className='flx flxJSB flxAI'>
       <div className='labels'><div className='label'>{label}</div></div>
       <div className='content'>
@@ -66,11 +68,13 @@ const LastWinnerFilter = (props) => {
   const { filteredList, setFilter, commit, reset, options } = useFilter({ list: filterList, filterOptions: filters });
 
   const [isOpen, setisOpen] = useState(false)
+  const [isCalendarOpen, setCalendarOpen] = useState(true)
 
   const [inputValue, setInput] = useState('')
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [rangeFilter, setRangeFilter] = useState(winnerFilters[0]);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     setFilterList(WinnerListAPI.data);
@@ -87,7 +91,6 @@ const LastWinnerFilter = (props) => {
   }
 
   const onItemClick = (e) => {
-    console.log('------------------')
     setFilter({ from_range: e.from, to_range: e.to })
     dropRef.current.open(false);
     setRangeFilter(e)
@@ -110,10 +113,10 @@ const LastWinnerFilter = (props) => {
       }}
     >
 
-      <Toggler>
+      <Toggler className={'_toggler'}>
         <div>open</div>
       </Toggler>
-      <DropContent>
+      <DropContent className={'_content'}>
         <div>SomeContent</div>
       </DropContent>
     </DropDown>
@@ -132,11 +135,14 @@ const LastWinnerFilter = (props) => {
         <div>SomeContent</div>
       </DropContent>
     </DropDown> */}
-    <div className='grid'>
+    <div className='filterGrid'>
 
       <div className={classNames(styles.filterRow, 'row')}>
-        <div style={{ fontSize: 16 }} 
-        className={classNames('col-sm-12 col-md-4', styles.filterInput)}>
+        <div style={{ fontSize: 16 }}
+          className={classNames('col-sm-4 col-md-4 filterGrid--item', styles.filterInput, {
+
+            'wide': !isOpen && !isCalendarOpen
+          })}>
           <Input
             value={inputValue}
             ref={inputRefMain}
@@ -150,10 +156,24 @@ const LastWinnerFilter = (props) => {
             withClearIcon={true}
           />
         </div>
-        <div className='col-sm-12 col-md-4'>
+        <div
+        onAnimationEndCapture={(e) => {
+          console.log('------------------------', e)
+        }}
+          className={
+            classNames('col-sm-4 col-md-4 filterGrid--item', {
+              'wide': isOpen
+            })
+          }>
           <DropDown
-            className="borderDrop"
-            portal={true}
+            fromEdge={width > 768}
+            className={
+              classNames('borderDrop', {
+                'variant--outer': width < 768,
+                'variant--simple': width > 768,
+              })
+            }
+            portal={width > 768}
             ref={dropRef}
             isOpen={isOpen}
             disableToggle={true}
@@ -168,10 +188,49 @@ const LastWinnerFilter = (props) => {
               setisOpen(e)
             }}
           >
+            <Toggler className='wraps'>
+              {width < 768
+                ? <><AnimatePresence>
+                  {!isOpen ? <motion.div
+                    key="iconArea"
+                    className='filterGrid--md flxAll'>
+                    <IconWrap name="Close" />
+                  </motion.div> : null}
+                </AnimatePresence><AnimatePresence>
+                    {isOpen ? <motion.div className={'filterGrid--xs'}
+                      key="iconArea2"
+                      initial={{
+                        opacity: isOpen ? 1 : 0,
+                        x: isOpen ? 0 : 100,
+                      }}
+                      animate={{
+                        opacity: isOpen ? 1 : 0,
+                        x: isOpen ? 0 : 100,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        x: 100,
+                      }}
+                    >
+                      <FilterToggler className={'filterGrid--xs'} label="მოგება:">
+                        <div className='flx gap-12'>
+                          <span>{rangeFilter.from ?? 0} - დან</span>
+                          <span>{rangeFilter.to ?? 0} - მდე</span>
+                        </div>
+                      </FilterToggler>
+                    </motion.div> : null}
+                  </AnimatePresence></>
+                : <FilterToggler className={'filterGrid--xs'} label="მოგება:">
+                  <div className='flx gap-12'>
+                    <span>{rangeFilter.from ?? 0} - დან</span>
+                    <span>{rangeFilter.to ?? 0} - მდე</span>
+                  </div>
+                </FilterToggler>}
 
-            <Toggler>
-              <RangeToggler label="მოგება:">
-                {isOpen ?
+            </Toggler>
+            <DropContent>
+              <div className='borderDrop--portal'>
+                <FilterToggler label="მოგება:" style={{ height: 64 }}>
                   <div className='flx gap-24'>
                     <div className='flx flxAI gap-4'>
                       <div style={{ width: 88, height: 44, flexShrink: 0 }}>
@@ -194,14 +253,8 @@ const LastWinnerFilter = (props) => {
                       <div style={{ flexShrink: 0 }}> - მდე</div>
                     </div>
                   </div>
-                  : <div className='flx gap-12'>
-                    <span>{rangeFilter.from ?? 0} - დან</span>
-                    <span>{rangeFilter.to ?? 0} - მდე</span>
-                  </div>}
-              </RangeToggler>
-            </Toggler>
-            <DropContent>
-              <div className='borderDrop--portal'>
+                </FilterToggler>
+
                 <div className='list-menu'>
                   <div className="list-menu--wrap">
                     <ul className='list-menu--list'>
@@ -218,20 +271,63 @@ const LastWinnerFilter = (props) => {
             </DropContent>
           </DropDown>
         </div>
-        <div className='col-sm-12 col-md-4'>
+        <div
+          className={classNames('col-sm-4 col-md-4 filterGrid--item', {
+            'wide': isCalendarOpen
+          })}>
           <DropDown
+            portal={false}
             ref={calendarDrop}
-            className="borderDrop borderDrop--outer"
+            onChange={(e) => {
+              console.log('object', e)
+              setCalendarOpen(e)
+            }}
+            className="borderDrop variant--outer"
           >
-            <Toggler>
-              <RangeToggler label="პერიოდი:">
-                <div className='flx gap-12'>
-                  {startDate ? <span>{format(startDate.getTime(), "dd-LL-yy", 'en')}  - დან</span> : null}
-                  <span>{startDate ? '-' : 'აირჩიეთ თარიღი'}</span>
-                  {endDate ? <span>{endDate ? format(endDate.getTime(), "dd-LL-yy", 'en') : null}  - მდე</span> : null}
+            <Toggler className='wraps'>
 
-                </div>
-              </RangeToggler>
+              {width < 768
+                ? <><AnimatePresence>
+                  {!isCalendarOpen ? <motion.div
+                    key="iconArea"
+                    initial={{ opacity: !isCalendarOpen ? 1 : 0 }}
+                    animate={{ opacity: !isCalendarOpen ? 1 : 0 }}
+                    className='filterGrid--md flxAll'>
+                    <IconWrap name="Close" />
+                  </motion.div> : null}
+                </AnimatePresence><AnimatePresence>
+                    {isCalendarOpen ? <motion.div className={'filterGrid--xs'}
+                      key="iconArea2"
+                      initial={{
+                        opacity: !isCalendarOpen ? 1 : 0,
+                        x: !isCalendarOpen ? 0 : 100,
+                      }}
+                      animate={{
+                        opacity: isCalendarOpen ? 1 : 0,
+                        x: isCalendarOpen ? 0 : 100,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        x: 100,
+                      }}
+                    >
+                      <FilterToggler label="პერიოდი:">
+                        <div className='flx gap-12'>
+                          {startDate ? <span>{format(startDate.getTime(), "dd-LL-yy", 'en')}  - დან</span> : null}
+                          <span>{startDate ? '-' : 'აირჩიეთ თარიღი'}</span>
+                          {endDate ? <span>{endDate ? format(endDate.getTime(), "dd-LL-yy", 'en') : null}  - მდე</span> : null}
+                        </div>
+                      </FilterToggler>
+                    </motion.div> : null}
+                  </AnimatePresence></>
+                : <FilterToggler className={'filterGrid--xs'} label="პერიოდი:">
+                  <div className='flx gap-12'>
+                    {startDate ? <span>{format(startDate.getTime(), "dd-LL-yy", 'en')}  - დან</span> : null}
+                    <span>{startDate ? '-' : 'აირჩიეთ თარიღი'}</span>
+                    {endDate ? <span>{endDate ? format(endDate.getTime(), "dd-LL-yy", 'en') : null}  - მდე</span> : null}
+                  </div>
+                </FilterToggler>}
+
             </Toggler>
 
             <DropContent>
@@ -240,7 +336,6 @@ const LastWinnerFilter = (props) => {
               </div>
               <div style={{ width: 616, height: 282 }}>
                 <DateRangePicker
-
                   startDate={startDate}
                   renderCustomHeader={({
                     monthDate,

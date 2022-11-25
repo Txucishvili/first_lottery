@@ -32,14 +32,9 @@ export const NavigationList = [
 
 export const HeaderNavigation = [
   {
-    href: '/',
-    slug: 'lottery_raffle',
-    name: 'ლოტოს გათამაშება'
-  },
-  {
-    href: 'https://vouchers.pirveli.ge',
-    slug: 'vouchers',
-    name: 'ვაუჩერები'
+    href: 'https://optimoml.geopay.ge/index.php',
+    slug: 'online_market',
+    name: 'მაღაზია'
   },
   {
     href: 'https://medical.pirveli.ge',
@@ -47,9 +42,19 @@ export const HeaderNavigation = [
     name: 'მედიქალი'
   },
   {
-    href: 'https://optimoml.geopay.ge/index.php',
-    slug: 'online_market',
-    name: 'ონლაინ მაღაზია'
+    href: 'https://vouchers.pirveli.ge',
+    slug: 'vouchers',
+    name: 'ვაუჩერები'
+  },
+  {
+    href: '/',
+    slug: 'lottery',
+    name: 'გათამაშება'
+  },
+  {
+    href: 'https://games.geopay.ge/index.php',
+    slug: 'games',
+    name: 'თამაშები'
   }
 ];
 

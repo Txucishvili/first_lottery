@@ -11,16 +11,25 @@ const LastWinnerSlide = ({ list }) => {
   const ref = useRef();
 
   const onSlideChange = (e) => {
-    if (e.progress == -0) {
+    console.log('object', e.swipeDirection == 'next')
+    if (!e.swipeDirection) {
       return;
     } else {
-      e.setTranslate(-(e.slidesGrid.find((s, k) => k === e.activeIndex) + 40))
+
+      if (e.swipeDirection == 'next') {
+        // e.setTranslate(-(e.slidesGrid.find((s, k) => k === e.activeIndex) + 40))
+        return;
+      } else {
+        // e.setTranslate(-(e.slidesGrid.find((s, k) => k === e.activeIndex) + 40))
+      }
+      
     }
   }
 
   const onResize = (e) => {
     e.update();
   }
+  
   return <div className='md-container-fluid'>
     <div className='wrap'>
       <div className='titleArea pageTitle'>

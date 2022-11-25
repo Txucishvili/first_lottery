@@ -2,10 +2,10 @@
 
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
+  cssModules: true,
   experimental: {
     scrollRestoration: true,
   },
@@ -81,3 +81,4 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+// module.exports = withCSS(nextConfig)

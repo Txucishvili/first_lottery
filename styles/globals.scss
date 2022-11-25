@@ -191,6 +191,7 @@ a {
   height: 100%;
   padding-inline: 20px;
   position: relative;
+  width: 100%;
 
   >* {
     height: inherit;
@@ -238,9 +239,16 @@ a {
 
 // bordered dropdown style
 .borderDrop {
-  position: relative;
-  min-height: 66px;
+  // position: relative;  
+  // height: 100%;
 
+  // min-height: 66px;
+  // padding-top: 20px;
+  // margin-top: 12px;
+  // background: #FFF;
+  // border: 1px solid $main_gold;
+  // box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+  // border-radius: 16px;
   .drop-wrap {
     width: 100%;
     background-color: #FFF;
@@ -250,11 +258,11 @@ a {
     &.open {
       background: #FFFFFF;
 
-      /* Main Gold */
+      // /* Main Gold */
       border-color: $main_gold;
       box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
 
-      position: absolute;
+      // position: absolute;
 
       .drop {}
     }
@@ -273,7 +281,7 @@ a {
   .toggler {
     // @include flex;
     display: block;
-    height: 64px;
+    height: 100%;
 
     >* {
       height: inherit;
@@ -307,13 +315,13 @@ a {
     }
   }
 
-  &--portal {
-    padding-top: 20px;
-    margin-top: 12px;
-    background: #FFF;
-    border: 1px solid $main_gold;
-    box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
-    border-radius: 16px;
+  &.portal {
+    // padding-top: 20px;
+    // margin-top: 12px;
+    // background: #FFF;
+    // border: 1px solid $main_gold;
+    // box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+    // border-radius: 16px;
   }
 
   .dropOuter {
@@ -328,8 +336,109 @@ a {
     right: 0;
     padding: 28px 40px 28px 40px;
   }
+
+  &.variant {
+    &--simple {
+      &.portal {
+        // padding-top: 20px;
+        // margin-top: 12px;
+        background: #FFF;
+        border: 1px solid $main_gold;
+        box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+        border-radius: 16px;
+      }
+    }
+
+    &--outer {
+      .drop {
+        position: absolute;
+        margin-top: 12px;
+        background: #FFF;
+        border: 1px solid $main_gold;
+        box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+        border-radius: 16px;
+        // min-width: 100%;
+        right: 0;
+        padding: 28px 40px 28px 40px;
+      }
+    }
+  }
 }
 
+// responsive filter grid
+
+.filterGrid {
+  .row {
+    justify-content: flex-end;
+    --gap-size: 2.5px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      --gap-size: 10px;
+    }
+  }
+
+  .wraps {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  &--md {
+    width: 64px;
+  }
+
+  &--xs {
+    position: absolute;
+    width: 100%;
+  }
+
+  &--item {
+    @include max-min(max px($BP_TABLET_SM)) {
+      width: auto !important;
+    }
+
+    >div {
+        width: 100% !important;
+        // transition: all 2s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+      @include max-min(min px($BP_TABLET_SM + 1)) {
+      }
+    }
+
+    .drop-wrap {
+      position: unset;
+
+      @include max-min(min px($BP_TABLET_SM)) {
+        position: relative;
+      }
+
+
+      .drop {
+        // width: fit-content;
+        min-width: 100%;
+      }
+
+      .toggler {
+        position: relative;
+        height: 64px;
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+
+    flex: 74px 0 !important;
+    transition: all .35s ease-in-out;
+    flex-shrink: 0;
+
+    &.wide {
+      flex: 1 0 !important;
+
+      >div {
+        // width: 100%;
+      }
+    }
+  }
+}
 
 // last winner page swiper
 .lastWinnerSwiperWrap {
@@ -421,7 +530,7 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     top: 100%;
     background:
       linear-gradient(180deg, $filterBG 0%,
-      rgba(#FFF, 1) 100%);
+        rgba(#FFF, 1) 100%);
 
   }
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 const withTransitionLayout = ({ rect, position, children }) => {
@@ -15,7 +15,7 @@ const withTransitionLayout = ({ rect, position, children }) => {
 
 
 export function PortalWrapper(props) {
-  const { open = true, children } = props;
+  const { open = true, children, ...nextProps } = props;
   const ref = useRef();
   const [mounted, setMounted] = useState(false);
 
@@ -31,15 +31,23 @@ export function PortalWrapper(props) {
     }
   }, [open])
 
+  const Element = createElement('div', 
+  {
+    ...nextProps
+  }, children);
+
+
   return mounted ?
     open ?
-      createPortal(props.children, ref.current)
+      createPortal(Element, ref.current)
       : null
     : null
 }
 
 export const withPortal = (props) => {
-  return <PortalWrapper>{props}</PortalWrapper>
+  const {children, ...nextProps} = props;
+  console.log('object', nextProps)
+  return <PortalWrapper {...nextProps}>{props.children}</PortalWrapper>
 }
 
 const WithTransition = (props) => {
@@ -70,7 +78,6 @@ const WithTransition = (props) => {
     {mounted && targeetClone.current}
   </div>;
 }
-
 
 const CloneTarget = (props) => {
   const { rect, position } = props;

@@ -22,7 +22,9 @@ const NavigationList = (props) => {
 
   return <ul className={classNames(styles.list, 'flx')}>
     {menu.map((e, k) => {
-      return <li key={e.slug}><NavLinkItem active={k === 0} {...e} /></li>
+      return <li key={e.slug} className={classNames({
+        [styles.active]: e.slug == 'lottery'
+      })}><NavLinkItem active={k === 0} {...e} /></li>
     })}
   </ul>
 }
