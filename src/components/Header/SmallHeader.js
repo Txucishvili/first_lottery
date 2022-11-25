@@ -11,7 +11,6 @@ import { useAppContext } from 'src/store';
 
 const NavLinkItem = ({ name, slug, active, href }) => {
   return <Link href={href} className={classNames(styles.listItem, 'flx flxAI', {
-    [styles.active]: active
   })}>
     {name}
   </Link>
@@ -24,7 +23,7 @@ const NavigationList = (props) => {
     {menu.map((e, k) => {
       return <li key={e.slug} className={classNames({
         [styles.active]: e.slug == 'lottery'
-      })}><NavLinkItem active={k === 0} {...e} /></li>
+      })}><NavLinkItem  {...e} /></li>
     })}
   </ul>
 }

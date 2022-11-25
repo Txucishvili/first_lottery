@@ -108,7 +108,7 @@ const LastWinnerFilter = (props) => {
 
   return <div className={'layout--wrap'}>
     {/* <DropDown
-      portal={!true}
+      portal={true}
       onChange={(e) => {
       }}
     >
@@ -150,6 +150,7 @@ const LastWinnerFilter = (props) => {
             iconPosition="bottom"
             variant={'outline'}
             size={'large'}
+            full
             name="ticketId"
             placeholder='მოძებნე ტირაჟით ან ბილეთის ნომრით...'
             withIcon={ICON_SET.SearchIcon}
@@ -157,15 +158,17 @@ const LastWinnerFilter = (props) => {
           />
         </div>
         <div
-        onAnimationEndCapture={(e) => {
-          console.log('------------------------', e)
-        }}
+          onAnimationEndCapture={(e) => {
+            console.log('------------------------', e)
+          }}
           className={
             classNames('col-sm-4 col-md-4 filterGrid--item', {
               'wide': isOpen
             })
           }>
           <DropDown
+          name="overflow"
+            variant="overflow"
             fromEdge={width > 768}
             className={
               classNames('borderDrop', {
@@ -194,9 +197,10 @@ const LastWinnerFilter = (props) => {
                   {!isOpen ? <motion.div
                     key="iconArea"
                     className='filterGrid--md flxAll'>
-                    <IconWrap name="Close" />
+                    <IconWrap name="gel" />
                   </motion.div> : null}
-                </AnimatePresence><AnimatePresence>
+                </AnimatePresence>
+                  <AnimatePresence>
                     {isOpen ? <motion.div className={'filterGrid--xs'}
                       key="iconArea2"
                       initial={{
@@ -276,10 +280,13 @@ const LastWinnerFilter = (props) => {
             'wide': isCalendarOpen
           })}>
           <DropDown
+            position="center"
+            resize
+            variant="overflow"
             portal={false}
             ref={calendarDrop}
             onChange={(e) => {
-              console.log('object', e)
+              // console.log('object', e)
               setCalendarOpen(e)
             }}
             className="borderDrop variant--outer"
@@ -293,7 +300,7 @@ const LastWinnerFilter = (props) => {
                     initial={{ opacity: !isCalendarOpen ? 1 : 0 }}
                     animate={{ opacity: !isCalendarOpen ? 1 : 0 }}
                     className='filterGrid--md flxAll'>
-                    <IconWrap name="Close" />
+                    <IconWrap name="calendar" />
                   </motion.div> : null}
                 </AnimatePresence><AnimatePresence>
                     {isCalendarOpen ? <motion.div className={'filterGrid--xs'}

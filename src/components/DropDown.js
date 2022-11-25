@@ -35,11 +35,11 @@ export const DropContent = forwardRef((props, ref) => {
 })
 
 const DropDown = forwardRef((props, ref) => {
-  const { fromEdge = false, className, name, variant = 'default', portal = false, disableToggle, dir = 'left', ...nextProps } = props;
+  const { position = 'auto', fromEdge = false, className, name, variant = 'default', portal = false, disableToggle, dir = 'left', ...nextProps } = props;
   const togglerRef = useRef();
   const dropRef = useRef();
   const customEvent = (e) => {
-    console.log('ref', dropRef)
+    // console.log('ref', dropRef)
     if (portal) {
       if (dropRef && dropRef.current && !dropRef.current.contains(e.target) && !togglerRef.current.contains(e.target)) {
         setIsOpen(false);
@@ -78,9 +78,10 @@ const DropDown = forwardRef((props, ref) => {
     if (togglerRef.current && portal) {
       if (isOpen) {
         const rect = getElementRect(togglerRef.current);
+        // console.log('rect.body.left', rect.body.left, rect.target.left)
         setRect({
-          top: Math.abs(rect.body.top - rect.target.top) + rect.target.height - 1  ,
-          left: Math.abs(rect.body.left - rect.target.left) - 1,
+          top: Math.abs(rect.body.top - rect.target.top) + rect.target.height,
+          left: rect.target.left,
           width: Math.abs(rect.target.width),
           height: Math.abs(rect.target.height),
         })
@@ -88,7 +89,7 @@ const DropDown = forwardRef((props, ref) => {
         setRect({})
       }
     }
-  }, [togglerRef, isOpen, portal, width]);
+  }, [togglerRef, isOpen, portal, width, name]);
 
   useEffect(() => {
     // console.log('rect', rect)
@@ -111,14 +112,16 @@ const DropDown = forwardRef((props, ref) => {
   let DropContentEl = null;
 
   if (DropContentChild && isOpen) {
-    if (portal) {
+    if (portal && dropRef.current) {
+      console.log('----------------------------------', dropRef.current)
       DropContentEl = withPortal({
         className: classNames('portal', className),
         style: {
           position: portal ? 'absolute' : 'auto',
-          top: fromEdge ? rect?.top - rect?.height : rect?.top,
-          left: rect?.left,
-          width: rect?.width + 2,
+          // top: fromEdge ? rect?.top - rect?.height : rect?.top,
+          // left: rect?.left,
+          transform: `translate(${Math.round((rect?.left - (1 / 2)) * 10) / 10}px, ${rect?.top}px)`,
+          // width: rect?.width + 2,
           zIndex: 4,
           ...DropContentChild.props.style
         }, children: createElement('div', {
@@ -182,11 +185,13 @@ const DropDown = forwardRef((props, ref) => {
     // }
   }
 
-
+  if (position) {
+    // console.log('position', position)
+  }
 
   return (
     <div ref={ref} className={classNames(styles.container, className)}>
-      <div ref={refEl} className={classNames('drop-wrap', {
+      <div ref={refEl} className={classNames('drop-wrap', {[variant]: variant} , {
         ['open']: isOpen,
       })}>
         {/* <div

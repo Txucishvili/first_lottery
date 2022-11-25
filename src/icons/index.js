@@ -22,7 +22,7 @@ export const SearchIcon = <svg width="24" height="24" viewBox="0 0 24 24" fill="
 </svg>
   ;
 
-export const Play = () => (<svg style={{transform: 'translateX(7%)'}} width="41" height="45" viewBox="0 0 41 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const Play = () => (<svg style={{ transform: 'translateX(7%)' }} width="41" height="45" viewBox="0 0 41 45" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M41 22.5L0.5 44.5836L0.5 0.416351L41 22.5Z" fill="#D9D9D9" />
 </svg>);
 
@@ -161,6 +161,32 @@ const pill = () => (
 
 );
 
+const gel = () => (
+  <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14.456 7.098C14.4407 7.972 14.3487 8.89967 14.18 9.881C14.0267 10.847 13.7583 11.7287 13.375 12.526H11.328C11.4813 12.1887 11.6193 11.79 11.742 11.33C11.88 10.87 11.9873 10.3947 12.064 9.904C12.1407 9.398 12.202 8.90733 12.248 8.432C12.294 7.94133 12.317 7.49667 12.317 7.098C12.317 5.856 12.1637 4.97433 11.857 4.453C11.5657 3.93167 11.0673 3.65567 10.362 3.625V9.95H8.43V3.602H6.889V9.95H4.957V3.602H4.451C4.20567 3.602 3.968 3.68633 3.738 3.855C3.508 4.02367 3.301 4.30733 3.117 4.706C2.933 5.10467 2.78733 5.649 2.68 6.339C2.57267 7.029 2.519 7.88767 2.519 8.915C2.53433 10.4177 2.66467 11.652 2.91 12.618C3.17067 13.584 3.577 14.3507 4.129 14.918C4.681 15.47 5.40167 15.8533 6.291 16.068C7.19567 16.2673 8.315 16.367 9.649 16.367H11.305V18H9.764C7.924 18 6.406 17.8237 5.21 17.471C4.014 17.1183 3.05567 16.574 2.335 15.838C1.62967 15.0867 1.13133 14.1437 0.84 13.009C0.548667 11.859 0.395333 10.4943 0.38 8.915C0.38 7.73433 0.433667 6.707 0.541 5.833C0.663667 4.94367 0.870667 4.20767 1.162 3.625C1.46867 3.027 1.875 2.58233 2.381 2.291C2.887 1.99967 3.531 1.854 4.313 1.854H4.957V0.359H6.889V1.854H8.43V0.359H10.362V1.854C11.052 1.854 11.65 1.95367 12.156 2.153C12.6773 2.35233 13.1067 2.659 13.444 3.073C13.7813 3.487 14.0343 4.03133 14.203 4.706C14.3717 5.36533 14.456 6.16267 14.456 7.098Z" fill="#3F3F46" fill-opacity="0.7" />
+  </svg>
+
+)
+
+const calendar = () => (
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1897_254)">
+<path d="M16.5 4.58337H5.50002C4.4875 4.58337 3.66669 5.40419 3.66669 6.41671V17.4167C3.66669 18.4292 4.4875 19.25 5.50002 19.25H16.5C17.5125 19.25 18.3334 18.4292 18.3334 17.4167V6.41671C18.3334 5.40419 17.5125 4.58337 16.5 4.58337Z" stroke="#3F3F46" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.6667 2.75V6.41667" stroke="#3F3F46" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7.33331 2.75V6.41667" stroke="#3F3F46" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M3.66669 10.0834H18.3334" stroke="#3F3F46" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M9.16665 13.75H7.33331V15.5833H9.16665V13.75Z" stroke="#3F3F46" strokeOpacity="0.7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1897_254">
+<rect width="22" height="22" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+
+)
+
 const ICON_SET = {
   Facebook,
   Instagram,
@@ -177,7 +203,9 @@ const ICON_SET = {
   around_360,
   shop,
   voucher,
-  pill
+  pill,
+  calendar,
+  gel
 }
 
 export default ICON_SET;

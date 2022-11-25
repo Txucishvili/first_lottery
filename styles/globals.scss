@@ -237,12 +237,14 @@ a {
   }
 }
 
+.portal {
+  inset: 0px auto auto 0px;
+}
 // bordered dropdown style
 .borderDrop {
   // position: relative;  
   // height: 100%;
 
-  // min-height: 66px;
   // padding-top: 20px;
   // margin-top: 12px;
   // background: #FFF;
@@ -342,10 +344,12 @@ a {
       &.portal {
         // padding-top: 20px;
         // margin-top: 12px;
+        // width: 200px !important;
         background: #FFF;
         border: 1px solid $main_gold;
         box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
         border-radius: 16px;
+        inset: 0px auto auto 0px !important;
       }
     }
 
@@ -384,7 +388,7 @@ a {
   }
 
   &--md {
-    width: 64px;
+    width: 50px;
   }
 
   &--xs {
@@ -392,18 +396,40 @@ a {
     width: 100%;
   }
 
+
+  // .inputWrap {
+  //   height: 50px !important;
+
+  //   @include max-min(min px($BP_TABLET_SM)) {
+  //     height: 64px !important;
+  //   }
+  // }
+
   &--item {
+    height: 50px;
+
+    @include max-min(min px($BP_TABLET_SM)) {
+      // height: 64px !important;
+      height: 64px;
+    }
+
+    .borderDrop {
+      // height: 50;
+      width: 100%;
+      height: 100%;
+
+
+    }
+
     @include max-min(max px($BP_TABLET_SM)) {
-      width: auto !important;
+      // width: auto !important;
     }
 
-    >div {
-        width: 100% !important;
-        // transition: all 2s cubic-bezier(0.215, 0.610, 0.355, 1);
+    // >div {
+    //   width: 100% !important;
+    //   @include max-min(min px($BP_TABLET_SM + 1)) {}
+    // }
 
-      @include max-min(min px($BP_TABLET_SM + 1)) {
-      }
-    }
 
     .drop-wrap {
       position: unset;
@@ -420,15 +446,24 @@ a {
 
       .toggler {
         position: relative;
-        height: 64px;
+        // height: 50px;
         width: 100%;
         overflow: hidden;
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          // height: 64px;
+        }
       }
     }
 
-    flex: 74px 0 !important;
+    flex: 50px 0 !important;
     transition: all .35s ease-in-out;
     flex-shrink: 0;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      transition: none;
+      flex: initial !important;
+    }
 
     &.wide {
       flex: 1 0 !important;

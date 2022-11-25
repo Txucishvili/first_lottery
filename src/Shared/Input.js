@@ -16,6 +16,7 @@ export const Input = forwardRef((props, ref) => {
     textAlign = 'left',
     value,
     onChange,
+    full = false,
     ...otherProps
   } = props;
   let initialValue = useRef(value);
@@ -58,6 +59,7 @@ export const Input = forwardRef((props, ref) => {
     <div className={classNames('container', {
       [`variant--${variant}`]: variant,
       [`size--${size}`]: size,
+      [`full`]: full,
     })}>
     <div className={'wrap'}>
       {withIcon && iconPosition == 'start' ? <button className={classNames('withIconWrap', {
