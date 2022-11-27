@@ -4,18 +4,39 @@ import { ServerStyleSheet } from 'styled-components';
 import { isServer } from '../src/utils';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const sheet = new ServerStyleSheet();
+  // static async getInitialProps(ctx) {
+  //   const sheet = new ServerStyleSheet();
 
-    const page = ctx.renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />)
-    );
-    const initialProps = await Document.getInitialProps(ctx)
-    const styleTags = sheet.getStyleElement();
+  //   const page = ctx.renderPage((App) => (props) =>
+  //     sheet.collectStyles(<App {...props} />)
+  //   );
+  //   const initialProps = await Document.getInitialProps(ctx)
+  //   const styleTags = sheet.getStyleElement();
 
-    return { ...page, ...initialProps, styleTags };
-  }
+  //   return { ...page, ...initialProps, styleTags };
+  // }
+  // static async getInitialProps (ctx) {
+  //   const styledComponentsSheet = new ServerStyleSheet()
+  //   const originalRenderPage = ctx.renderPage;
 
+  //   try {
+  //       ctx.renderPage = () => originalRenderPage({
+  //           enhanceApp: App => props => styledComponentsSheet.collectStyles(<App {...props} />)
+  //         })
+  //       const initialProps = await Document.getInitialProps(ctx)
+  //       return {
+  //         ...initialProps,
+  //         styles: (
+  //           <React.Fragment>
+  //             {initialProps.styles}
+  //             {styledComponentsSheet.getStyleElement()}
+  //           </React.Fragment>
+  //         )
+  //       }
+  //     } finally {
+  //       styledComponentsSheet.seal()
+  //     }
+  // }
   render() {
     return (
       <Html>
@@ -52,19 +73,6 @@ export default class MyDocument extends Document {
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `
-
-              
-                  html {
-                    // min-height: 100%;
-                    // height: 100%;
-                    // overflow-x: hidden;
-                  }
-                  
-                  // body {
-                  //   overflow-x: hidden;
-                  //   max-width: 100%;
-                  // }
-
               @font-face{
                 font-family:'Avenir Next Georgian';
                 src:url("/fonts/AvenirNextGeorgian-UltLt.otf");
@@ -138,10 +146,10 @@ export default class MyDocument extends Document {
             `,
             }}
           />
-          {/* {this.props.sheet} */}
+          {this.props.sheet}
         </Head>
         <body>
-        <script>0</script>
+          <script>0</script>
           <Main />
           <div id="modals"></div>
           <div id="portals"></div>
