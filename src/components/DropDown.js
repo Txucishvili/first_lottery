@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { PortalWrapper, withPortal } from './PortalTransition';
 import { getElementRect } from 'src/utils';
 import useWindowSize from 'src/hooks/useWindowSize';
+import { createPopper } from '@popperjs/core';
 
 export const Toggler = (props) => {
   const { children, ...nextProps } = props;
@@ -113,21 +114,29 @@ const DropDown = forwardRef((props, ref) => {
 
   if (DropContentChild && isOpen) {
     if (portal && dropRef.current) {
-      console.log('----------------------------------', dropRef.current)
+
+
+      const {state, forceUpdate} = createPopper(togglerRef.current, dropRef.current);
+      console.log('----------------------------------', state.styles.popper)
+
       DropContentEl = withPortal({
         className: classNames('portal', className),
         style: {
-          position: portal ? 'absolute' : 'auto',
-          // top: fromEdge ? rect?.top - rect?.height : rect?.top,
-          // left: rect?.left,
-          transform: `translate(${Math.round((rect?.left - (1 / 2)) * 10) / 10}px, ${rect?.top}px)`,
-          // width: rect?.width + 2,
-          zIndex: 4,
+          // position: portal ? 'absolute' : 'auto',
+          // // top: fromEdge ? rect?.top - rect?.height : rect?.top,
+          // // left: rect?.left,
+          // transform: `translate(${Math.round((rect?.left - (1 / 2)) * 10) / 10}px, ${rect?.top}px)`,
+          // // width: rect?.width + 2,
+          // zIndex: 4,
+          // ...popperStyle.popper,
           ...DropContentChild.props.style
-        }, children: createElement('div', {
+        }, 
+        children: createElement('div', {
           ref: dropRef,
           className: 'drop'
-        }, DropContentChild)
+        },
+        DropContentChild),
+        // ...state.attributes.popper
       })
     } else {
       DropContentEl = cloneElement(DropContentChild, {

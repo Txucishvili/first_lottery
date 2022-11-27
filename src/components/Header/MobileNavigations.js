@@ -79,7 +79,7 @@ export const MobileMenu = (props) => {
 
 
 
-export const MobileUserMenu = ({onAction}) => {
+export const MobileUserMenu = ({ onAction }) => {
   return <div className={mobileStyle.userMenu}>
     <div className='svg-clip'>
       <svg width="0" height="0" hidden>

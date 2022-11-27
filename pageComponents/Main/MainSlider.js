@@ -7,9 +7,10 @@ const SliderItem = ({ slide }) => {
   return <div style={{ width: '100%', height: '100%', position: 'relative' }}>
     <Image
       alt=' '
+      width={1530}
+      height={803}
       src={slide.src}
       layout='fill'
-      objectFit='contain'
     />
   </div>
 }

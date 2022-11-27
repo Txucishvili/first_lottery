@@ -109,10 +109,8 @@ const HeaderLogoArea = () => {
   return <>
     <MobileMenuTroggler />
     <div className={styles.logoArea}>
-      <Link href={'/'} legacyBehavior>
-        <a>
+      <Link href={'/'} prefetch={false}>
           <Logo />
-        </a>
       </Link>
     </div>
     <MobileUserToggler />
@@ -257,12 +255,10 @@ export default function Header() {
         </div>
         <div className={styles.authArea}>
           <Link href='https://auth.pirveli.ge/realms/xracoon-demo/protocol/openid-connect/auth?response_type=code&client_id=demo-client&scope=email%20profile%20roles%20openid&state=ozej6dlmtIpneeVt7QoGPy2zXJ9e6BNPdGltyKyn3X4%3D&redirect_uri=https://lot51.pirveli.ge&nonce=KAmXCp0jHrPiUph9D2p5yVwdpT5g3qWO0iCxqJFbiv0'>
-            <a>
               <Button variant="text">
                 <IconWrap name="UserIcon" size={22} />
                 <span>შესვლა</span>
               </Button>
-            </a>
           </Link>
         </div>
 

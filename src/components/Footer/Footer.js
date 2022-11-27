@@ -83,23 +83,17 @@ export default function Footer() {
       <ul className='navigation-icon--list'>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <a>
               <Facebook />
-            </a>
           </Link>
         </li>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <a>
               <Instagram />
-            </a>
           </Link>
         </li>
         <li className='navigation-icon--item'>
           <Link href={'some'}>
-            <a>
               <Youtube />
-            </a>
           </Link>
         </li>
       </ul>
@@ -163,7 +157,8 @@ export default function Footer() {
               <Image
                 alt=''
                 layout='fill'
-                objectFit='cover'
+                width={256}
+                height={197}
                 src={'/assets/images/footer.png'} />
             </div>
           </div>

@@ -141,6 +141,7 @@ export default class MyDocument extends Document {
           {/* {this.props.sheet} */}
         </Head>
         <body>
+        <script>0</script>
           <Main />
           <div id="modals"></div>
           <div id="portals"></div>

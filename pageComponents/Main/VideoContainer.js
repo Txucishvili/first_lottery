@@ -28,7 +28,9 @@ const VideoContainer = forwardRef((props, ref) => {
                 alt='Last Winner'
                 src={'/assets/images/video_wallpaper.png'}
                 layout='fill'
-                objectFit='cover'
+                width={1530}
+                height={764}
+                // objectFit='cover'
               />
             </div>
           </div>

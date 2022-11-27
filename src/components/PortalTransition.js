@@ -46,6 +46,7 @@ export function PortalWrapper(props) {
 
 export const withPortal = (props) => {
   const {children, ...nextProps} = props;
+  
   // console.log('object', nextProps)
   return <PortalWrapper {...nextProps}>{props.children}</PortalWrapper>
 }

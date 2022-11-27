@@ -14,9 +14,7 @@ export default function Navigation({ navigation }) {
           {_navigation.appNavigation.map((nav) => {
             return <div key={nav.slug} className={styles.listItem}>
               <Link href={nav.slug} legacyBehavior>
-                <a>
                   {nav.name}
-                </a>
               </Link>
             </div>
           })}
