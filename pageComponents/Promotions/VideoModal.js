@@ -74,7 +74,7 @@ export default function VideoModal(props) {
             </span>
             <span className={videoModalStyles.bottomTitle}>გათამაშება  #{number}</span>
             <span className={classNames(videoModalStyles.read, 'toRight')}>
-              <Link href="/video-history" prefetch={true}>
+              <Link href="/video-history" prefetch={false}>
                 ყველას ნახვა
               </Link>
             </span>
