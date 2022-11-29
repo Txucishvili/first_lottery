@@ -2,6 +2,10 @@
 @import 'sassync/sass/_default/_theme/_reset';
 @import './classes.module.scss';
 @import './react-calendar.scss';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+@import 'swiper/css/scrollbar';
 
 * {
   box-sizing: border-box;
@@ -16,14 +20,22 @@ body {
 }
 
 html {
-  min-height: 100%;
-  height: 100%;
-  overflow-x: hidden;
+  // min-height: 100%;
+  // height: 100%;
+  // overflow-x: hidden;
 }
+
 
 body {
   overflow-x: hidden;
-  max-width: 100%;
+  width: 100%;
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+
+  >div {
+    overflow: hidden;
+  }
 }
 
 a {
@@ -147,7 +159,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 0 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
   }
 
   &--list {
@@ -186,15 +198,27 @@ a {
 
 }
 
+@keyframes fromHeight {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 // range toggler component
 .rangeToggler {
-  height: 100%;
+  // height: 100%;
   padding-inline: 20px;
   position: relative;
   width: 100%;
 
   >* {
-    height: inherit;
+    // height: inherit;
   }
 
   .label {
@@ -240,35 +264,50 @@ a {
 .portal {
   // inset: 0px auto auto 0px;
 }
-// bordered dropdown style
-.borderDrop {
-  // position: relative;  
-  // height: 100%;
 
-  // padding-top: 20px;
-  // margin-top: 12px;
-  // background: #FFF;
-  // border: 1px solid $main_gold;
-  // box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
-  // border-radius: 16px;
+// bordered dropdown style
+.borderDropx {
   .drop-wrap {
-    width: 100%;
-    background-color: #FFF;
-    border: 1px solid rgba(63, 63, 70, 0.08);
-    border-radius: 16px;
+    background-color: transparent;
 
     &.open {
-      background: #FFFFFF;
 
-      // /* Main Gold */
-      border-color: $main_gold;
-      box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+      .drop {
 
-      // position: absolute;
+        @include max-min(min px($BP_TABLET_SM)) {}
+      }
 
-      .drop {}
+      &::before {
+        background: #FFFFFF;
+
+        // /* Main Gold */
+        border-color: $main_gold;
+        box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+        height: 100%;
+      }
+
+      @include max-min(min px($BP_TABLET_SM)) {}
+
     }
 
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: transparent;
+        border: 1px solid rgba(63, 63, 70, 0.08);
+        border-radius: 16px;
+        height: 64px;
+        height: var(--toggler-height, 64px);
+        transition: all 2.5s ease-in-out;
+      }
+    }
 
   }
 
@@ -284,6 +323,15 @@ a {
     // @include flex;
     display: block;
     height: 100%;
+    --toggler-height: 64px;
+
+    @include max-min(max px($BP_TABLET_SM)) {
+
+      background: #FFFFFF;
+      box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+
+    }
 
     >* {
       height: inherit;
@@ -313,7 +361,10 @@ a {
       border-radius: 16px;
       // min-width: 100%;
       right: 0;
-      padding: 28px 40px 28px 40px;
+
+      @include max-min(min px($BP_TABLET_SM + 1)) {
+        padding: 28px 40px 28px 40px;
+      }
     }
   }
 
@@ -324,6 +375,10 @@ a {
     // border: 1px solid $main_gold;
     // box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
     // border-radius: 16px;
+    background-color: gray;
+    inset: 0px auto auto;
+
+    .drop {}
   }
 
   .dropOuter {
@@ -351,19 +406,96 @@ a {
         border-radius: 16px;
         // inset: 0px auto auto 0px !important;
       }
+
+      .drop {
+        // position: absolute;
+        // margin-top: 12px;
+        // background: #FFF;
+        // border: 1px solid $main_gold;
+        // box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
+        // border-radius: 16px;
+        // min-width: 100%;
+        // right: 0;
+        // padding: 28px 40px 28px 40px;
+      }
     }
 
     &--outer {
       .drop {
-        position: absolute;
+        // position: absolute;
         margin-top: 12px;
         background: #FFF;
         border: 1px solid $main_gold;
         box-shadow: 0px 2px 6px rgba($dark_gold, 0.12);
         border-radius: 16px;
         // min-width: 100%;
-        right: 0;
+        // right: 0;
         padding: 28px 40px 28px 40px;
+      }
+    }
+  }
+}
+
+@mixin borderStyle {
+  border: 1px solid rgba(63, 63, 70, 0.08);
+  border-radius: 16px;
+}
+
+.borderDropDown {
+
+  .drop-wrap {
+    .toggler {
+      height: 64px;
+    }
+  }
+
+  &.variant {
+    &--simple {
+      // height: 100%;
+
+      .drop-wrap {
+        position: absolute;
+
+        &:before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #FFF;
+          @include borderStyle();
+          transition: all .2s ease-in-out;
+        }
+
+        &.open {
+          &::before {
+            border-color: $main_gold;
+          }
+        }
+      }
+    }
+
+    &--outer {
+      .drop-wrap {
+        .toggler {
+          @include borderStyle();
+        }
+
+        .drop {
+          margin-top: 12px;
+          background-color: #FFF;
+          @include borderStyle();
+        }
+
+        &.open {
+
+          .toggler,
+          .drop {
+            border-color: $main_gold;
+          }
+        }
       }
     }
   }
@@ -387,92 +519,6 @@ a {
     white-space: nowrap;
   }
 
-  &--md {
-    width: 50px;
-  }
-
-  &--xs {
-    position: absolute;
-    width: 100%;
-  }
-
-
-  // .inputWrap {
-  //   height: 50px !important;
-
-  //   @include max-min(min px($BP_TABLET_SM)) {
-  //     height: 64px !important;
-  //   }
-  // }
-
-  &--item {
-    height: 50px;
-
-    @include max-min(min px($BP_TABLET_SM)) {
-      // height: 64px !important;
-      height: 64px;
-    }
-
-    .borderDrop {
-      // height: 50;
-      width: 100%;
-      height: 100%;
-
-
-    }
-
-    @include max-min(max px($BP_TABLET_SM)) {
-      // width: auto !important;
-    }
-
-    // >div {
-    //   width: 100% !important;
-    //   @include max-min(min px($BP_TABLET_SM + 1)) {}
-    // }
-
-
-    .drop-wrap {
-      position: unset;
-
-      @include max-min(min px($BP_TABLET_SM)) {
-        position: relative;
-      }
-
-
-      .drop {
-        // width: fit-content;
-        min-width: 100%;
-      }
-
-      .toggler {
-        position: relative;
-        // height: 50px;
-        width: 100%;
-        overflow: hidden;
-
-        @include max-min(min px($BP_TABLET_SM)) {
-          // height: 64px;
-        }
-      }
-    }
-
-    flex: 50px 0 !important;
-    transition: all .35s ease-in-out;
-    flex-shrink: 0;
-
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      transition: none;
-      flex: initial !important;
-    }
-
-    &.wide {
-      flex: 1 0 !important;
-
-      >div {
-        // width: 100%;
-      }
-    }
-  }
 }
 
 // last winner page swiper
@@ -481,7 +527,7 @@ a {
   margin: 0 auto;
   overflow: hidden;
   width: 100%;
-  height: 670px;
+  // height: 670px;
 
   .swiper-initialized {
     padding-top: 32px;
@@ -496,7 +542,7 @@ a {
 
   .swiper-wrapper {
     align-items: center;
-    height: 298px;
+    // height: 298px;
 
     // background-color: gainsboro;
     @include max-min(min px($BP_TABLET_SM)) {
@@ -517,9 +563,25 @@ a {
       height: 384px;
     }
 
+    :first-child {
+      transition: all .2s ease-in-out;
 
+      :first-child {
+        // display: none;
+      }
+    }
 
     &-active {
+
+      :first-child {
+
+        :first-child {
+          .wrap {
+            // background-color: $main_gold;
+          }
+        }
+      }
+
       @include max-min(min px($BP_TABLET_SM + 1)) {
         width: 330px;
         height: 483px;

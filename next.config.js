@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
-
+const { version } = require('./package.json');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
+const gitRevisionPlugin = new GitRevisionPlugin({ lightweightTags: true });
+
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   cssModules: true,
+  publicRuntimeConfig: {
+    version,
+  },
   experimental: {
     scrollRestoration: true,
   },
@@ -38,7 +44,19 @@ const nextConfig = {
       },
     ]
   },
-
+  webpack: (
+    config,
+    // options
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+) => {
+    // plugins don't work in the main object above
+    config.plugins.push(new webpack.DefinePlugin({
+        VERSION: JSON.stringify(gitRevisionPlugin.version() || "unknown"),
+        LASTCOMMITDATETIME: JSON.stringify(gitRevisionPlugin.lastcommitdatetime())
+    }))
+    // Important: return the modified config
+    return config
+},
   // webpack(config) {
   //   config.module.rules.push({
   //     test: /\.(le|c)ss$/,

@@ -17,10 +17,9 @@ import { UserAvatar } from '@/components/UserAvatar';
 import useWindowSize from 'src/hooks/useWindowSize';
 import { AnimatePresence, motion, useAnimationControls, useScroll } from 'framer-motion';
 
-
 const FilterToggler = ({ activeRange, isOpen, className, label, children, style }) => {
   // !!
-  // console.log('RangeToggler isOpen', isOpen)
+  console.log('-  RangeToggler isOpen', isOpen)
   return <div style={style} className={classNames(className, 'rangeToggler')}>
     <div className='flx flxJSB flxAI'>
       <div className='labels'><div className='label'>{label}</div></div>
@@ -68,7 +67,7 @@ const LastWinnerFilter = (props) => {
   const { filteredList, setFilter, commit, reset, options } = useFilter({ list: filterList, filterOptions: filters });
 
   const [isOpen, setisOpen] = useState(false)
-  const [isCalendarOpen, setCalendarOpen] = useState(true)
+  const [isCalendarOpen, setCalendarOpen] = useState(false)
 
   const [inputValue, setInput] = useState('')
   const [startDate, setStartDate] = useState()
@@ -158,25 +157,21 @@ const LastWinnerFilter = (props) => {
           />
         </div>
         <div
-          onAnimationEndCapture={(e) => {
-            console.log('------------------------', e)
-          }}
           className={
             classNames('col-sm-4 col-md-4 filterGrid--item', {
               'wide': isOpen
             })
           }>
           <DropDown
-          name="overflow"
-            variant="overflow"
-            fromEdge={width > 768}
+            // fromEdge={width > 768}
             className={
-              classNames('borderDrop', {
+              classNames('borderDropDown', {
                 'variant--outer': width < 768,
                 'variant--simple': width > 768,
               })
             }
-            portal={width > 768}
+            // portal={width > 768}
+            name="____portal"
             ref={dropRef}
             isOpen={isOpen}
             disableToggle={true}
@@ -225,16 +220,37 @@ const LastWinnerFilter = (props) => {
                     </motion.div> : null}
                   </AnimatePresence></>
                 : <FilterToggler className={'filterGrid--xs'} label="მოგება:">
-                  <div className='flx gap-12'>
+                  {isOpen ? <div className='flx gap-24'>
+                    <div className='flx flxAI gap-4'>
+                      <div style={{ width: 88, height: 44, flexShrink: 0 }}>
+                        <Input
+                          value={rangeFilter.from}
+                          onChange={onRangeInput}
+                          name="from"
+                          textAlign="center"
+                          size="full"
+                        />
+                      </div>
+                      <div style={{ flexShrink: 0 }}> - დან</div>
+                    </div>
+                    <div className='flx flxAI gap-4'>
+                      <div style={{ width: 88, height: 44, flexShrink: 0 }}>
+                        <Input
+                          value={rangeFilter.to}
+                          onChange={onRangeInput} name="to" textAlign="center" size="full" />
+                      </div>
+                      <div style={{ flexShrink: 0 }}> - მდე</div>
+                    </div>
+                  </div> : <div className='flx gap-12'>
                     <span>{rangeFilter.from ?? 0} - დან</span>
                     <span>{rangeFilter.to ?? 0} - მდე</span>
-                  </div>
+                  </div>}
                 </FilterToggler>}
 
             </Toggler>
             <DropContent>
               <div className='borderDrop--portal'>
-                <FilterToggler label="მოგება:" style={{ height: 64 }}>
+                {width < 768 ? <FilterToggler label="მოგება:" style={{ height: 64 }}>
                   <div className='flx gap-24'>
                     <div className='flx flxAI gap-4'>
                       <div style={{ width: 88, height: 44, flexShrink: 0 }}>
@@ -257,7 +273,7 @@ const LastWinnerFilter = (props) => {
                       <div style={{ flexShrink: 0 }}> - მდე</div>
                     </div>
                   </div>
-                </FilterToggler>
+                </FilterToggler> : null}
 
                 <div className='list-menu'>
                   <div className="list-menu--wrap">
@@ -275,12 +291,16 @@ const LastWinnerFilter = (props) => {
             </DropContent>
           </DropDown>
         </div>
+
+
         <div
           className={classNames('col-sm-4 col-md-4 filterGrid--item', {
             'wide': isCalendarOpen
           })}>
           <DropDown
-            position="center"
+            name="____DropDown"
+            position="bottom"
+            align="center"
             resize
             variant="overflow"
             portal={false}
@@ -289,7 +309,8 @@ const LastWinnerFilter = (props) => {
               // console.log('object', e)
               setCalendarOpen(e)
             }}
-            className="borderDrop variant--outer"
+            isOpen={false}
+            className="borderDropDown variant--outer"
           >
             <Toggler className='wraps'>
 
@@ -342,6 +363,7 @@ const LastWinnerFilter = (props) => {
                 <span>აირჩიეთ თარიღი</span>
               </div>
               <div style={{ width: 616, height: 282 }}>
+
                 <DateRangePicker
                   startDate={startDate}
                   renderCustomHeader={({

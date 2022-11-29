@@ -7,20 +7,26 @@ import { useEffect } from 'react';
 import Footer from '@/components/Footer/Footer';
 import { footerNavList, HeaderNavigation, LanguageList, NavigationList } from 'src/API';
 import { AppContextProvider } from 'src/store';
+import getConfig from 'next/config';
 
+const { publicRuntimeConfig } = getConfig();
 
 function MyApp(props) {
   const { Component, pageProps, navigations } = props;
 
   useEffect(() => {
+    console.log('publicRuntimeConfig', VERSION)
     // !!!
     if (window.localStorage.getItem('scrollOptions')) {
       const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
       if (opt && opt.reload) {
         window.document.scrollingElement.scrollTop = Math.abs(opt.scroll);
-      }
+        window.localStorage.setItem('scrollOptions', JSON.stringify({ ...opt, reload: false }));
+      } else {}
     }
+
     window.addEventListener("beforeunload", alertUser);
+
     return () => {
       window.removeEventListener("beforeunload", alertUser);
     };
@@ -33,7 +39,7 @@ function MyApp(props) {
     }))
   };
 
-  return <AppContextProvider initialValue={{...navigations}}>
+  return <AppContextProvider initialValue={{ ...navigations }}>
     <div className={styles.appLayout}>
       <div className={styles.wrap}>
         <div className='sticky-header'>
@@ -57,7 +63,7 @@ MyApp.getInitialProps = async () => {
   const appNavigation = NavigationList;
   const footerNavigation = footerNavList;
   const languages = LanguageList;
-  
+
 
   return {
     navigations: {

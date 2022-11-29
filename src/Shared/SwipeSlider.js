@@ -3,10 +3,6 @@ import React, { forwardRef, useState } from 'react'
 import { Swiper, SwiperSlide as SwipeItem } from 'swiper/react';
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import classNames from 'classnames';
 import IconWrap from '@/components/IconWrap';
 import { ArrowSvg } from 'src/icons';

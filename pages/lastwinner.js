@@ -1,5 +1,5 @@
 import WinnerBlock from '@/components/WinnerBlock'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SwipeSlider from 'src/Shared/SwipeSlider'
 import { copyArray, isInt } from 'src/utils'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -22,32 +22,47 @@ const LastWinnerSlide = ({ list }) => {
       } else {
         // e.setTranslate(-(e.slidesGrid.find((s, k) => k === e.activeIndex) + 40))
       }
-      
+
     }
   }
 
   const onResize = (e) => {
     e.update();
   }
-  
-  return <div className='md-container-fluid'>
+
+  const [translate, setTranslate] = useState(null);
+  const [swiper, setSwiper] = useState(null);
+
+  useEffect(() => {
+    // console.log('translate', ref.current)
+    if (swiper) {
+      // swiper.setTranslate(translate);
+    }
+    // ref.current.firstChild.style.transform = `translate3d(${translate}, 0px 0px)`
+    return () => {
+
+    }
+  }, [swiper, translate])
+
+  return <div className='md-container-fluid_x'>
     <div className='wrap'>
       <div className='titleArea pageTitle'>
         <h3>ბოლო გამარჯვებული</h3>
       </div>
       <div className="lastWinnerSwiperWrap">
         <Swiper
+          style={{
+          }}
           ref={ref}
           modules={[]}
           navigation={false}
           // className={'listContentSwiper'}
           spaceBetween={0}
-          initialSlide={2}
+          initialSlide={5}
           slidesPerView={'auto'}
-          centeredSlides={'auto'}
+          centeredSlides={true}
           resistanceRatio={0}
-          freeMode={true}
-          variant={'simple'}
+          // freeMode={true}
           centerInsufficientSlides={true}
           breakpoints={{
             [385]: {
@@ -55,8 +70,64 @@ const LastWinnerSlide = ({ list }) => {
               centeredSlides: true
             },
           }}
-          onSlideChange={onSlideChange}
+          freeMode={!true}
+          // onSlideChange={onSlideChange}
           onResize={onResize}
+          watchSlidesProgress={true}
+          virtualTranslate={true}
+          hashNavigation={true}
+          
+          onSlideChange={(_swiper) => {
+            // setTranslate(swiper.translate)
+            // ref.current.firstChild.style.background = `gray`
+            const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
+            const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
+            const divide = ((maxWidth - minWidth) / 2);
+            ref.current.firstChild.style.transform = `translate3d(${_swiper.translate - divide}px, 0px, 0px)`
+            // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
+            // console.log('-------', divide)
+            console.log('[onSlideChange]', _swiper)
+ 
+            if (!_swiper.touchEventsData.isMoved) {
+              // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
+              ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
+            }
+
+          }}
+          onProgress={(_swiper) => {
+            const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
+            const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
+            const divide = ((maxWidth - minWidth) / 2);
+
+            ref.current.firstChild.style.transform = `translate3d(${_swiper.translate  - divide}px, 0px, 0px)`
+            // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
+
+            if (!_swiper.touchEventsData.isMoved) {
+              // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
+              ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
+            }
+
+          }}
+          onSlideNextTransitionEnd={(swiper) => {
+            // console.log('----------------------', swiper)
+            // ref.current.firstChild.style.transform = `translate3d(${(swiper.slidesGrid[swiper.activeIndex] < 0 ? Math.abs(swiper.slidesGrid[swiper.activeIndex]) : -Math.abs(swiper.slidesGrid[swiper.activeIndex]))}px, 0px, 0px)`
+            // swiper.slideTo(swiper.activeIndex)
+          }}
+          onBeforeInit={(_swiper) => {
+            console.log('[onBeforeInit]', _swiper.activeIndex)
+            // _swiper.slideTo(5);
+
+          }}
+          onSwiper={(_swiper) => {
+            setSwiper(_swiper);
+            const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
+            const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
+            const divide = ((maxWidth - minWidth) / 2) || 40;
+            console.log('[onSwiper]', _swiper.activeIndex)
+            _swiper.el.firstChild.style.transform = `translate3d(${_swiper.translate - divide}px, 0px, 0px)`
+
+            // swiper.setTranslate(swiper.slidesGrid[swiper.activeIndex])
+          }}
         >
           {list.map((c, k) => {
             return <SwiperSlide key={k}>
@@ -153,7 +224,7 @@ export default function LastWinnerPage(pageProps) {
   )
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
   // const formatedList = copyArray(10, CasinosList.data).map((item) => {
   //   const { shared_content, ...obj } = item;
   //   return {

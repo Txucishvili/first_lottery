@@ -157,8 +157,8 @@ export default function Footer() {
               <Image
                 alt=''
                 layout='fill'
-                width={256}
-                height={197}
+                width={535}
+                height={411}
                 src={'/assets/images/footer.png'} />
             </div>
           </div>

@@ -3,6 +3,7 @@
   position: relative;
   max-width: 1530px;
   width: 100%;
+  overflow: hidden;
 
   @include max-min(min px($LAYOUT_WRAP_SIZE + 20)) {
     padding-inline: 0;
