@@ -44,6 +44,21 @@ const LastWinnerSlide = ({ list }) => {
     }
   }, [swiper, translate])
 
+  const onSlide = (_swiper) => {
+    const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
+    const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
+    const divide = ((maxWidth - minWidth) / 2);
+
+    ref.current.firstChild.style.transform = `translate3d(${_swiper.translate  - divide}px, 0px, 0px)`
+    // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
+
+    if (!_swiper.touchEventsData.isMoved) {
+      // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
+      ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
+    }
+
+  };
+
   return <div className='md-container-fluid_x'>
     <div className='wrap'>
       <div className='titleArea pageTitle'>
@@ -58,7 +73,7 @@ const LastWinnerSlide = ({ list }) => {
           navigation={false}
           // className={'listContentSwiper'}
           spaceBetween={0}
-          initialSlide={5}
+          initialSlide={0}
           slidesPerView={'auto'}
           centeredSlides={true}
           resistanceRatio={0}
@@ -76,47 +91,10 @@ const LastWinnerSlide = ({ list }) => {
           watchSlidesProgress={true}
           virtualTranslate={true}
           hashNavigation={true}
-          
-          onSlideChange={(_swiper) => {
-            // setTranslate(swiper.translate)
-            // ref.current.firstChild.style.background = `gray`
-            const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
-            const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
-            const divide = ((maxWidth - minWidth) / 2);
-            ref.current.firstChild.style.transform = `translate3d(${_swiper.translate - divide}px, 0px, 0px)`
-            // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
-            // console.log('-------', divide)
-            console.log('[onSlideChange]', _swiper)
- 
-            if (!_swiper.touchEventsData.isMoved) {
-              // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
-              ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
-            }
-
-          }}
-          onProgress={(_swiper) => {
-            const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
-            const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
-            const divide = ((maxWidth - minWidth) / 2);
-
-            ref.current.firstChild.style.transform = `translate3d(${_swiper.translate  - divide}px, 0px, 0px)`
-            // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
-
-            if (!_swiper.touchEventsData.isMoved) {
-              // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
-              ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
-            }
-
-          }}
-          onSlideNextTransitionEnd={(swiper) => {
-            // console.log('----------------------', swiper)
-            // ref.current.firstChild.style.transform = `translate3d(${(swiper.slidesGrid[swiper.activeIndex] < 0 ? Math.abs(swiper.slidesGrid[swiper.activeIndex]) : -Math.abs(swiper.slidesGrid[swiper.activeIndex]))}px, 0px, 0px)`
-            // swiper.slideTo(swiper.activeIndex)
-          }}
+          onSlideChange={onSlide}
+          onProgress={onSlide}
           onBeforeInit={(_swiper) => {
             console.log('[onBeforeInit]', _swiper.activeIndex)
-            // _swiper.slideTo(5);
-
           }}
           onSwiper={(_swiper) => {
             setSwiper(_swiper);
