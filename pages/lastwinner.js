@@ -73,7 +73,7 @@ const LastWinnerSlide = ({ list }) => {
           navigation={false}
           // className={'listContentSwiper'}
           spaceBetween={0}
-          initialSlide={0}
+          initialSlide={5}
           slidesPerView={'auto'}
           centeredSlides={true}
           resistanceRatio={0}
