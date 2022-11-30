@@ -287,19 +287,29 @@
   :global {
 
     .swiper.mySwiper {
-      overflow: visible !important;
+      // overflow: visible !important;
 
       @include max-min(min px($BP_LAPTOP_MEDIUM)) {
         // overflow: hidden !important;
         padding: 70px 0;
         margin-block: -70px;
-        padding-inline: 210px;
+        // padding-inline: 210px;
       }
     }
 
     .swiper-slide {
       width: 208px !important;
-
+      // opacity: 0;
+      transition: all .125s ease-in-out;
+      // margin: 0 12px;
+      background-color: gray;
+      
+      &.visible-el {
+        transition: all .125s ease-in-out;
+      background-color: #3F3F46;
+      opacity: 1;
+      }
+      
       @include max-min(min px($BP_TABLET_SM + 1)) {
         width: 285px !important;
       }
@@ -527,6 +537,7 @@
     }
   }
 }
+
 .winnerBlockLight {
   &::after {
     background-color: $main_gold;

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../styles/Home.module.scss'
 import SwipeSlider from 'src/Shared/SwipeSlider'
 import IconWrap from '@/components/IconWrap'
 import ModalWrapper, { CloseAction, ModalBase, SimpleModal } from 'src/Shared/Modal/ModalWrapper'
 import styled from 'styled-components'
-import { useSwiper } from 'swiper/react'
+import { Swiper, SwiperSlide, useSwiper, useSwiperSlide } from 'swiper/react'
 import { ArrowSvg } from 'src/icons'
 import useWindowSize from 'src/hooks/useWindowSize'
 import classNames from 'classnames'
@@ -17,8 +17,12 @@ const PlayButton = () => {
 const WinnerBlock = (props) => {
   const { item: { id, number, status, winAmount, totalTickets }, onOpen } = props;
 
+  // const { isVisible, isActive } = useSwiperSlide();
+
+  // console.log('WinnerBlock', isVisible, isActive)
+
   return <div className={classNames(styles.winnerBlock, {
-    [styles.winnerBlockLight]: status
+    [styles.winnerBlockLight]: status,
   })}>
 
     <div className={styles.wiinerBlockBg}>
@@ -73,6 +77,12 @@ export default function RaffleSlider(props) {
     setOpen(true);
   }
 
+  const [swiper, setSwiper] = useState(null);
+
+  useEffect(() => {
+    console.log('setSwiper', swiper)
+  }, [swiper])
+
   return (
     <div className={styles.swipeList}>
       <div className='sectionTitle'>
@@ -80,17 +90,23 @@ export default function RaffleSlider(props) {
       </div>
 
       <SwipeSlider
+        slideVisibleClass='visible-el'
         spaceBetween={24}
-        initialSlide={2}
+        modules={[]}
+        navigation={false}
+        // className={'listContentSwiper'}
+        initialSlide={0}
         slidesPerView={'auto'}
         centeredSlides={true}
-        resistanceRatio={0}
         freeMode={true}
+        watchSlidesProgress={true}
+        // onSlideChange={(e) => e.update()}
+        onInit={(e) => e.update()}
         variant={'simple'}
         breakpoints={{
           [385]: {
             slidesPerView: 'auto',
-            centeredSlides: true
+            // centeredSlides: 'auto'
 
           },
           // [(((285 + 24) * 2) - 24 + 40)]: {
@@ -115,11 +131,11 @@ export default function RaffleSlider(props) {
         {
           props.items.map((c, k) => {
             return <WinnerBlock
-              item={c}
-              onOpen={onVideoOpen}
-              hideValue={(k >= 2)}
-              className={styles['swiper-slide']} key={k}>
-            </WinnerBlock>
+            item={c}
+            onOpen={onVideoOpen}
+            hideValue={(k >= 2)}
+            className={styles['swiper-slide']} key={k}>
+          </WinnerBlock>
           })
         }
       </SwipeSlider>

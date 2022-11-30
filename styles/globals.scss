@@ -521,35 +521,50 @@ a {
 
 }
 
+
+
+.wrapx {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 2px;
+    background: gray;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+}
+
 // last winner page swiper
 .lastWinnerSwiperWrap {
   max-width: 1530px;
   margin: 0 auto;
-  overflow: hidden;
+  // overflow: hidden;
   width: 100%;
-  // height: 670px;
 
-  .swiper-initialized {
-    padding-top: 32px;
-    padding-bottom: 48px;
+  padding-top: 32px;
+  padding-bottom: 48px;
 
-    // @include flex;
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      padding-top: 62px;
-      padding-bottom: 119px;
-    }
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    padding-top: 62px;
+    padding-bottom: 119px;
+  }
+
+  .swiper {
+    margin-top: -50px;
+    margin-bottom: -50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: px(483 + 100);
   }
 
   .swiper-wrapper {
     align-items: center;
-    // height: 298px;
-
-    // background-color: gainsboro;
-    @include max-min(min px($BP_TABLET_SM)) {
-      height: 483px;
-    }
-
   }
+
 
   .swiper-slide {
     width: 208px;
@@ -563,24 +578,7 @@ a {
       height: 384px;
     }
 
-    :first-child {
-      transition: all .2s ease-in-out;
-
-      :first-child {
-        // display: none;
-      }
-    }
-
     &-active {
-
-      :first-child {
-
-        :first-child {
-          .wrap {
-            // background-color: $main_gold;
-          }
-        }
-      }
 
       @include max-min(min px($BP_TABLET_SM + 1)) {
         width: 330px;

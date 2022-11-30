@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { WinnerListAPI } from '../src/API/index'
 import LastWinnerFilter from 'pageComponents/LastWinners/LastWinnersFilter'
 import { UserAvatar } from '@/components/UserAvatar'
+import classNames from 'classnames'
 
 const LastWinnerSlide = ({ list }) => {
   const ref = useRef();
@@ -44,17 +45,33 @@ const LastWinnerSlide = ({ list }) => {
     }
   }, [swiper, translate])
 
-  const onSlide = (_swiper) => {
+  const divideRef = useRef(0);
+
+  const onSlide = (fn, _swiper) => {
     const maxWidth = Math.max(..._swiper.slides.map((slide) => slide.clientWidth));
     const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
-    const divide = ((maxWidth - minWidth) / 2);
+    const divide = (maxWidth - minWidth) / 2;
+    divideRef.current = divideRef.current ? divideRef.current : divide ? divide : 0
 
-    ref.current.firstChild.style.transform = `translate3d(${_swiper.translate  - divide}px, 0px, 0px)`
-    // console.log('-------', swiper.translate, swiper.slidesGrid[swiper.activeIndex])
+    const _divider = divideRef.current ? divideRef.current : 40
+    console.log('object', _swiper.visibl)
+
+    if (_swiper.touchEventsData.isMoved && _swiper.activeIndex == 0 && _swiper.translate >= Math.abs(_swiper.slidesGrid[_swiper.activeIndex])) {
+      ref.current.firstChild.style.transform = `translate3d(${_swiper.translate - _divider}px, 0px, 0px)`
+      return;
+    }
+
+    ref.current.firstChild.style.transform = `translate3d(${_swiper.translate - _divider}px, 0px, 0px)`
 
     if (!_swiper.touchEventsData.isMoved) {
-      // console.log('-end', _swiper.slidesGrid[_swiper.activeIndex])
-      ref.current.firstChild.style.transform = `translate3d(${(_swiper.slidesGrid[_swiper.activeIndex] < 0 ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex]) - divide )}px, 0px, 0px)`
+
+      _swiper.el.firstChild.style.transform =
+        `translate3d(
+        ${(_swiper.slidesGrid[_swiper.activeIndex] < 0
+          ? Math.abs(_swiper.slidesGrid[_swiper.activeIndex])
+          - _divider
+          : -Math.abs(_swiper.slidesGrid[_swiper.activeIndex])
+          - (_divider))}px, 0px, 0px)`
     }
 
   };
@@ -73,28 +90,31 @@ const LastWinnerSlide = ({ list }) => {
           navigation={false}
           // className={'listContentSwiper'}
           spaceBetween={0}
-          initialSlide={5}
+          initialSlide={0}
           slidesPerView={'auto'}
           centeredSlides={true}
           resistanceRatio={0}
-          // freeMode={true}
-          centerInsufficientSlides={true}
+          freeMode={true}
+          // centerInsufficientSlides={true}
           breakpoints={{
             [385]: {
-              slidesPerView: 'auto',
-              centeredSlides: true
+              // slidesPerView: 'auto',
+              // centeredSlides: true
             },
           }}
-          freeMode={!true}
-          // onSlideChange={onSlideChange}
+          // freeMode={!true}
           onResize={onResize}
           watchSlidesProgress={true}
           virtualTranslate={true}
-          hashNavigation={true}
-          onSlideChange={onSlide}
-          onProgress={onSlide}
+          // hashNavigation={true}
+          onSlideChange={(e) => { onSlide('a', e) }}
+          onProgress={(e) => { onSlide('b', e) }}
+
           onBeforeInit={(_swiper) => {
             console.log('[onBeforeInit]', _swiper.activeIndex)
+          }}
+          onInit={() => {
+            console.log('------------------------------------')
           }}
           onSwiper={(_swiper) => {
             setSwiper(_swiper);
@@ -102,13 +122,15 @@ const LastWinnerSlide = ({ list }) => {
             const minWidth = Math.min(..._swiper.slides.map((slide) => slide.clientWidth));
             const divide = ((maxWidth - minWidth) / 2) || 40;
             console.log('[onSwiper]', _swiper.activeIndex)
-            _swiper.el.firstChild.style.transform = `translate3d(${_swiper.translate - divide}px, 0px, 0px)`
+            // _swiper.el.firstChild.style.transform = `translate3d(${_swiper.translate - divide}px, 0px, 0px)`
 
             // swiper.setTranslate(swiper.slidesGrid[swiper.activeIndex])
           }}
         >
           {list.map((c, k) => {
-            return <SwiperSlide key={k}>
+            return <SwiperSlide className={classNames({
+              // 'swiper-slide-active': true
+            })} key={k}>
               {({ isActive }) => {
                 return <WinnerBlock isActive={isActive} />
               }}
@@ -213,7 +235,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      sliderItems: Array(20).fill(null),
+      sliderItems: Array(12).fill(null),
       listData: WinnerListAPI
     }
   }
