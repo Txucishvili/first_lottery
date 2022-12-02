@@ -1,129 +1,238 @@
-  .content {
-    // height: px($HEADER_HEIGHT);
+.content {
+  // height: px($HEADER_HEIGHT);
+}
+
+.wrap {
+  height: auto;
+  width: 100%;
+  height: 100%;
+  @include layoutWrap();
+  @include flex;
+  flex-direction: column;
+  // padding: 0 20px;
+
+
+
+  @include max-min(min px($BP_MOBILE)) {
+    padding: 0;
   }
 
-  .wrap {
-    height: auto;
-    width: 100%;
-    height: 100%;
-    @include layoutWrap();
-    @include flex;
-    flex-direction: column;
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    flex-direction: row;
+    height: px($HEADER_HEIGHT);
     // padding: 0 20px;
+  }
 
-
-
-    @include max-min(min px($BP_MOBILE)) {
-      padding: 0;
-    }
-
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      flex-direction: row;
-      height: px($HEADER_HEIGHT);
-      // padding: 0 20px;
-    }
-
-    @include max-min(max px($LAYOUT_WRAP_SIZE + 20), min px($BP_TABLET_SM + 1)) {
-      padding: 0 20px;
-
-    }
+  @include max-min(max px($LAYOUT_WRAP_SIZE + 20), min px($BP_TABLET_SM + 1)) {
+    padding: 0 20px;
 
   }
 
-  .leftArea {
-    @include flex;
-    // flex: 1;
-    width: 100%;
-    height: px($HEADER_HEIGHT_MOBILE);
-    position: relative;
-    // padding: 0 20px; 
-    padding-inline: px($BP_WRAP_PADDING);
+}
 
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      width: auto;
-      height: auto;
-      padding-inline: 0;
+.leftArea {
+  @include flex;
+  // flex: 1;
+  width: 100%;
+  height: px($HEADER_HEIGHT_MOBILE);
+  position: relative;
+  // padding: 0 20px; 
+  padding-inline: px($BP_WRAP_PADDING);
 
-    }
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    width: auto;
+    height: auto;
+    padding-inline: 0;
+
   }
+}
 
-  .logoArea {
-    @include flex;
-    align-items: center;
-    // width: 329px;
-    // !!!
-    padding-top: 3px;
+.logoArea {
+  @include flex;
+  align-items: center;
+  // width: 329px;
+  // !!!
+  padding-top: 3px;
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    @include max-min(min px($BP_TABLET_SM + 1)) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
     position: unset;
     transform: none;
 
-    }
+  }
+
+}
+
+.searchArea {
+  @include flex;
+  align-items: center;
+  flex: 1;
+  // max-width: 940px;
+  overflow: hidden;
+  padding-inline: 0;
+
+  >* {
+    max-width: 807px;
+    margin-inline: auto;
+    width: 100%;
 
   }
 
-  .searchArea {
-    @include flex;
-    align-items: center;
-    flex: 1;
-    // max-width: 940px;
+  @include max-min(max px($BP_TABLET_SM)) {}
+
+  &.animating {
     overflow: hidden;
-    padding-inline: 0;
-
-    >* {
-      max-width: 807px;
-      margin-inline: auto;
-      width: 100%;
-
-    }
-
-    @include max-min(max px($BP_TABLET_SM)) {
-    }
-
-    &.animating {
-      overflow: hidden;
-    }
-
   }
 
-  .authArea {
-    // width: 250px;
-    margin-left: auto;
-    display: none;
+}
 
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      // display: block;
-      @include flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-  }
+.authArea {
+  // width: 250px;
+  margin-left: auto;
+  display: none;
 
-  .appBurger,
-  .mobileUserInfo {
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    // display: block;
     @include flex;
-
-    @include max-min(min px($BP_TABLET_SM + 1)) {
-      display: none;
-    }
-  }
-
-
-  .appBurger {
     align-items: center;
-    justify-content: center;
-    z-index: 2;
+    justify-content: flex-end;
+  }
+}
+
+.appBurger,
+.mobileUserInfo {
+  @include flex;
+
+  @include max-min(min px($BP_TABLET_SM + 1)) {
+    display: none;
+  }
+}
+
+
+.appBurger {
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.mobileUserInfo {
+  margin-left: auto;
+  z-index: 2;
+}
+
+.active {
+  z-index: 3;
+}
+
+
+
+$USER_INFO_LIST_DIVIDE: 37;
+$USER_INFO_LIST_ITEM_DIVIDE: 32;
+
+
+.userInfo {
+  position: relative;
+
+  &-avatar {
+    :global {
+      .user-avatar {
+        width: 41px;
+
+        .name {
+          background-color: $main_gold;
+
+          width: 14px;
+          height: 6px;
+        }
+      }
+    }
+
   }
 
-  .mobileUserInfo {
-    margin-left: auto;
-    z-index: 2;
+  &-list {
+    @include flex;
+    flex-direction: column;
+
+
+    &-icon {
+      @include flex-all;
+      margin-top: 3px;
+      flex-shrink: 0;
+      position: relative;
+      width: 18px;
+      height: 18px;
+
+      :global {
+        .icon-wrapper {
+          position: absolute;
+
+          svg path {
+            stroke: $color_gray;
+          }
+        }
+      }
+    }
+
+    li {
+      padding-top: px($USER_INFO_LIST_ITEM_DIVIDE / 2);
+      padding-bottom: px($USER_INFO_LIST_ITEM_DIVIDE / 2);
+      padding-inline: 24px;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      >* {
+        @include flex;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+
+      a {
+        font-family: 'Avenir Next Georgian';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+
+        color: #3F3F46;
+
+        &:hover {
+          color: $main_gold;
+
+          :global {
+            .icon-wrapper {
+              svg path {
+                stroke: $main_gold;
+              }
+            }
+          }
+        }
+      }
+    }
+
   }
 
-  .active {
-    z-index: 3;
+  &-toggler {
+    @extend %borderStyle;
   }
+
+  &-drop {
+    padding-top: px($USER_INFO_LIST_DIVIDE);
+    padding-bottom: px($USER_INFO_LIST_DIVIDE);
+    @extend %borderStyle;
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    width: 265px;
+  }
+}

@@ -64,6 +64,16 @@ $winner_space: 14;
   @content;
 }
 
+%borderStyle {
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+}
+
+%list-menu {
+  
+}
+
 
 @function rgbaToHex($color, $alpha) {
   $color-accent: $color;
@@ -86,6 +96,7 @@ $winner_space: 14;
 
   @return mix(rgb(red($rgba), green($rgba), blue($rgba)), $background, alpha($rgba) * 100%)
 }
+
 
 
 

@@ -10,6 +10,10 @@
   }
 }
 
+.flx-wrap {
+  flex-wrap: wrap
+}
+
 .flxAll {
   @include flex;
   align-items: center;
@@ -41,6 +45,14 @@
   margin-left: auto;
 }
 
+
+.flx {
+  &-align {
+    &-end {
+      align-items: flex-end;
+    }
+  }
+}
 
 .text {
   &--primary {
@@ -74,7 +86,8 @@
   &-row {
     width: 100%;
     @include flex;
-    gap: 20px;
+    // gap: 20px;
+    // padding-inline: calc(var(--gap-size) / 2);
   }
 }
 
@@ -83,16 +96,27 @@
   --gap-size: 20px;
   @include flex;
   flex-wrap: wrap;
-  margin-left: calc(var(--gap-size) * -1);
-  margin-right: calc(var(--gap-size) * -1);
+  // margin-left: calc(var(--gap-size) * -1);
+  // margin-right: calc(var(--gap-size) * -1);
 
 
   >* {
-    padding-left: var(--gap-size);
-    padding-right: var(--gap-size);
+    padding-left: calc(var(--gap-size) * 2);
+    // padding-right: var(--gap-size);
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      flex: 0 0 auto;
+      width: #{($i / 12) * 100 + '%'};
+    }
   }
 
   @each $key,
@@ -118,7 +142,7 @@
 }
 
 
-$divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38);
+$divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46);
 
 @each $size in $divide-size {
   .divide-#{$size} {
@@ -128,8 +152,62 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
   .gap-#{$size} {
     gap: #{$size}px;
   }
+
+  .m {
+    &-left-#{$size} {
+      margin-left: #{$size}px;
+    }
+
+    &-right-#{$size} {
+      margin-right: #{$size}px;
+    }
+
+    &-top-#{$size} {
+      margin-top: #{$size}px;
+    }
+
+    &-bottom-#{$size} {
+      margin-bottom: #{$size}px;
+    }
+
+    &-b-#{$size} {
+      padding-top: #{$size}px;
+      padding-bottom: #{$size}px;
+    }
+  }
+
+  .p {
+    &-inline-#{$size} {
+      padding-left: #{$size}px;
+      padding-right: #{$size}px;
+    }
+
+    &-block-#{$size} {
+      padding-top: #{$size}px;
+      padding-bottom: #{$size}px;
+    }
+  }
 }
 
+.text {
+  &-center {
+    text-align: center;
+  }
+
+  &-underline {
+    text-decoration: underline;
+  }
+
+  &-color {
+    &-green {
+      color: green;
+    }
+
+    &-red {
+      color: $main_red;
+    }
+  }
+}
 
 
 .react-datepicker {
@@ -281,4 +359,18 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 
   color: #3F3F46;
   text-align: center;
+}
+
+
+
+.color {
+  &-icon {
+    &-gray {
+
+      // !! only stroke icons
+      svg {
+        stroke: gray;
+      }
+    }
+  }
 }

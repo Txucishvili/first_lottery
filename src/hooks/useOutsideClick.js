@@ -1,13 +1,19 @@
-import { createRef, useCallback, useEffect, useRef, useState } from "react";
+import {
+  createRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 
-export function useOutsideClick(initialIsVisible, customEvent) {
+
+export function useOutsideClick(initialIsVisible = false, customEvent) {
   const [isOpen, setIsOpen] = useState(
     initialIsVisible
   );
   const [event, setLastEvent] = useState(null);
 
   const ref = createRef();
-
 
   const handleHideDropdown = (event) => {
     if (event.key === "Escape") {
@@ -17,6 +23,9 @@ export function useOutsideClick(initialIsVisible, customEvent) {
   };
 
   const handleClickOutside = useCallback((event) => {
+    if (!isOpen) {
+      return;
+    }
     if (customEvent) {
       customEvent(event);
       return;
@@ -25,7 +34,18 @@ export function useOutsideClick(initialIsVisible, customEvent) {
       setIsOpen(false);
       setLastEvent(event);
     }
-  }, [customEvent, ref]);
+  }, [isOpen, customEvent, ref]);
+
+  // !!
+  useEffect(() => {
+    if (!isOpen) {
+      document.addEventListener("keydown", handleHideDropdown, true);
+      document.addEventListener("click", handleClickOutside, true);
+    } else {
+      document.removeEventListener("keydown", handleHideDropdown, true);
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [handleClickOutside, isOpen]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleHideDropdown, true);
@@ -36,5 +56,10 @@ export function useOutsideClick(initialIsVisible, customEvent) {
     };
   });
 
-  return { ref, isOpen, setIsOpen, event };
+  return {
+    ref,
+    isOpen,
+    setIsOpen,
+    event
+  };
 }

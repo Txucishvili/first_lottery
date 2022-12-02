@@ -1,0 +1,67 @@
+.filterWrap {
+  background: #FFFFFF;
+  border-radius: 16px;
+  height: 58px;
+  @include flex;
+  gap: 0;
+  filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.05));
+  align-items: center;
+  font-family: 'Avenir Next Georgian';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  position: relative;
+  z-index: 1;
+  /* identical to box height */
+
+
+  color: rgba(63, 63, 70, 0.7);
+
+
+
+  :global {
+    .icon-wrapper {
+      svg path {
+        stroke: rgba(63, 63, 70, 0.7) !important;
+      }
+    }
+
+    .symbol-el {
+      margin-right: 7px;
+    }
+
+    .filter-col {
+      height: 100%;
+      padding: 0 12px;
+      position: relative;
+      margin-left: -1px;
+      @include flex;
+      align-items: center;
+
+      &:after {
+        content: '';
+        display: inline-block;
+        
+        background-color: rgba(63, 63, 70, 0.7);
+        border-radius: 50px;
+
+        // position: absolute;
+        height: 22px;
+        width: 1px;
+        margin-left: 30px;
+        // top: 50%;
+        // transform: translateY(-50%);
+        // right: -1px;
+      }
+    }
+
+    .inputWrap {
+      input {
+        font-size: 16px !important;
+      }
+    }
+
+  }
+
+}

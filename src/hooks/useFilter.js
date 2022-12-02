@@ -37,7 +37,11 @@ export default function useFilter({
     for (const op in filterOptions) {
       if (Object.hasOwnProperty.call(filterOptions, op)) {
         const element = filterOptions[op];
-        if (element.value) {
+        const _value = typeof element.value == 'string' ? element.value : '';
+        const _array = typeof element.value == 'object' ? element.value : [];
+        
+        return filterList;
+        if (_value && _array.length) {
           filteredList = filteredList.filter((i, key) => {
 
             if (element.value) {
@@ -46,8 +50,6 @@ export default function useFilter({
               //   .replace(`{{${element.targetField}}}`, isInt(i[element.targetField]) ? i[element.targetField] : "'" + i[element.targetField] + "'")
               //   .replace('{{value}}', isInt(element.value) ? element.value : "'" + element.value + "'");
               // return !!eval(_eval)
-
-              // console.log('object', element);
 
               return element.filter({...i, key}, element);
               // return element.filter(i, element);

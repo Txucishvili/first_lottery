@@ -119,7 +119,7 @@ export const MobileUserMenu = ({ onAction }) => {
       </div>
       <div className='box-item voucher'>
         <div className='box-icon'>
-          <IconWrap size={21} name="voucher" />
+          <IconWrap size={21} name="Ticket" />
         </div>
         <div className='box-text'><span>ვაუჩერები</span></div>
       </div>

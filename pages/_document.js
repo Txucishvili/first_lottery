@@ -3,6 +3,7 @@ import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 import { isServer } from '../src/utils';
 
+
 export default class MyDocument extends Document {
   // static async getInitialProps(ctx) {
   //   const sheet = new ServerStyleSheet();
@@ -37,6 +38,8 @@ export default class MyDocument extends Document {
   //       styledComponentsSheet.seal()
   //     }
   // }
+
+
   render() {
     return (
       <Html>
@@ -48,6 +51,20 @@ export default class MyDocument extends Document {
             type="font/otf"
             crossOrigin="anonymous"
           />
+
+          {process.env.NODE_ENV == 'production' ? <script dangerouslySetInnerHTML={{
+            __html: `
+              (function (d, w, s) {
+                var widgetHash = 'fj6TEFjrUxFcny2mRDGd', bch = d.createElement(s); bch.type = 'text/javascript'; bch.async = true;
+                bch.src = '//widgets.binotel.com/chat/widgets/' + widgetHash + '.js';
+                var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(bch, sn);
+              })(document, window, 'script');
+              `
+          }} type='text/javascript'>
+          </script> : null}
+
+
+
           <script
             dangerouslySetInnerHTML={{
               __html: `

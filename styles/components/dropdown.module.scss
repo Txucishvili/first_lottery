@@ -172,3 +172,19 @@
     }
   }
 }
+
+.simpleDropDown {
+  display: contents;
+  :global {
+    .dropdown {
+      &.overflow {
+        position: relative;
+        
+        .dropdown-body {
+          position: absolute;
+        }
+      }
+
+    }
+  }
+}

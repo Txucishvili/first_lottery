@@ -196,8 +196,8 @@
         max-width: 1530px;
         margin-inline: auto;
         // padding-top: 140px;
-        position: relative;
-        z-index: 3;
+        // position: relative;
+        // z-index: 3;
 
         @include max-min(min px($BP_TABLET_SM + 1)) {
           // padding-inline: 20px;

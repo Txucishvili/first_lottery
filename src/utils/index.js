@@ -49,3 +49,11 @@ export function getElementRect(element) {
 export function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+export async function delay(speed) {
+  return new Promise((r) => {
+    setTimeout(() => {
+      r()
+    }, speed || 3000);
+  })
+}

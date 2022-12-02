@@ -1,6 +1,7 @@
 .root {
   display: initial;
-  height: inherit;
+  // !!!
+  // height: inherit;
 
   :global {
     .container {
@@ -8,6 +9,7 @@
 
       .wrap {
         position: relative;
+        z-index: 0;
         @include flex;
         height: inherit;
 
@@ -33,7 +35,10 @@
           font-weight: 400;
           font-size: inherit;
           line-height: 27px;
-          padding: 20px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 20px;
+          padding-right: 20px;
 
           color: #3F3F46;
           position: relative;
@@ -54,6 +59,12 @@
         border-radius: 12px;
       }
 
+      &.clear {
+        input {
+          padding-right: 50px !important;
+        }
+      }
+
       &.size {
         &--small {
           .wrap {
@@ -61,6 +72,10 @@
           }
 
           input {
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 4px;
+            padding-right: 4px;
             font-size: 14px;
           }
         }
@@ -68,6 +83,10 @@
         &--normal {
           .wrap {
             height: 44px;
+          }
+          input {
+            padding: 7px;
+            font-size: 16px;
           }
         }
 
@@ -120,6 +139,17 @@
 
               border-color: $main_gold;
             }
+          }
+        }
+      }
+
+      &.hideDefaultAperance {
+        input {
+
+          &[type=number] {
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            /* Firefox */
           }
         }
       }
@@ -194,4 +224,48 @@
       }
     }
   }
+
+  :global {
+    .checkbox {
+
+      width: 18px;
+      height: 18px;
+      position: relative;
+      @include flex-all;
+
+      input {
+        margin: 0;
+        padding: 0;
+        visibility: hidden;
+
+        &:checked {
+          +.bg {
+            transition: all .15s ease-in-out;
+            background-color: rgba(63, 63, 70, 0.05);
+
+            >div {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(63, 63, 70, 0.11);
+        ;
+        border-radius: 4px;
+        @include flex-all;
+
+        >div {
+          transition: all .25s ease-in-out;
+          opacity: 0;
+        }
+      }
+
+    }
+  }
+
 }
