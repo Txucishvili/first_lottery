@@ -8,7 +8,7 @@ const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz'
 const locale = {
   localize: {
     day: n => days[n],
-    month: n => months[n]
+    // month: n => months[n]
   },
   formatLong: {
     date: () => 'mm/dd/yyyy'
@@ -16,22 +16,20 @@ const locale = {
 }
 
 
-export default function DateRangePicker(props) {
+export default function DatePicker(props) {
   const { onChange, startDate, endDate, ...defaultProps } = props;
   // const [dateRange, setDateRange] = useState([startDate, endDate]);
   // const [_startDate, _endDate] = dateRange;
 
   const renderDayContents = (day, date) => {
     const tooltipText = `Tooltip for date: ${date}`;
-    return <span title={tooltipText}>{day}</span>;
+    return <span title={tooltipText}><p>{day}</p></span>;
   };
 
   return (
     <div>
       <ReactDatePicker
-      locale={locale}
         // onSelect={onSelect}
-        {...defaultProps}
         open={true}
         selectsRange={true}
         startDate={startDate}
@@ -46,6 +44,7 @@ export default function DateRangePicker(props) {
         monthsShown={2}
         // portalId="portals"
         selected={startDate}
+        {...defaultProps}
       />
     </div>
   )

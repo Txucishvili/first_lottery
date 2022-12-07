@@ -83,13 +83,14 @@ export default class MyDocument extends Document {
           />
           <script
             dangerouslySetInnerHTML={{
-              __html: `history.scrollRestoration = "manual"`,
+              __html: `history.scrollRestoration = "auto"`,
             }}
           />
           <style
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `
+
               @font-face{
                 font-family:'Avenir Next Georgian';
                 src:url("/fonts/AvenirNextGeorgian-UltLt.otf");

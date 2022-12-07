@@ -3,6 +3,7 @@
   height: px($HEADER_SMALL_HEIGHT);
 
   display: none;
+  transition: margin .5s ease-in-out;
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
     display: block;

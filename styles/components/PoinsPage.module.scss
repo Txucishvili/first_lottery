@@ -18,12 +18,13 @@
 
   color: rgba(63, 63, 70, 0.7);
 
+  white-space: nowrap;
 
 
   :global {
     .icon-wrapper {
       svg path {
-        stroke: rgba(63, 63, 70, 0.7) !important;
+        // stroke: rgba(63, 63, 70, 0.7) !important;
       }
     }
 
@@ -32,6 +33,15 @@
     }
 
     .filter-col {
+      height: 100%;
+      padding: 0 12px;
+      position: relative;
+      @include flex;
+      align-items: center;
+
+    }
+
+    .filter-col-line {
       height: 100%;
       padding: 0 12px;
       position: relative;

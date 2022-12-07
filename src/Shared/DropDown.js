@@ -2,7 +2,7 @@ import React, { cloneElement, createElement, createRef, forwardRef, useEffect, u
 import { useOutsideClick } from 'src/hooks/useOutsideClick';
 import styles from '@/styles/components/dropdown.module.scss';
 import classNames from 'classnames';
-import { PortalWrapper, withPortal } from '../components/PortalTransition';
+import { PortalWrapper, withPortal } from './PortalTransition';
 import { getElementRect } from 'src/utils';
 import useWindowSize from 'src/hooks/useWindowSize';
 import { createPopper } from '@popperjs/core';

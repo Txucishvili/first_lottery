@@ -1,3 +1,4 @@
+import { concat } from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 
@@ -37,43 +38,48 @@ export default function useFilter({
     for (const op in filterOptions) {
       if (Object.hasOwnProperty.call(filterOptions, op)) {
         const element = filterOptions[op];
-        const _value = typeof element.value == 'string' ? element.value : '';
-        const _array = typeof element.value == 'object' ? element.value : [];
-        
-        return filterList;
-        if (_value && _array.length) {
-          filteredList = filteredList.filter((i, key) => {
 
-            if (element.value) {
+        if (element.filter && element.value) {
+          filteredList = filteredList.filter((i) => {
+            if (i[element.targetField] && element.value) {
 
-                // const _eval = element.condition
+              // const _eval = element.condition
               //   .replace(`{{${element.targetField}}}`, isInt(i[element.targetField]) ? i[element.targetField] : "'" + i[element.targetField] + "'")
               //   .replace('{{value}}', isInt(element.value) ? element.value : "'" + element.value + "'");
               // return !!eval(_eval)
 
-              return element.filter({...i, key}, element);
-              // return element.filter(i, element);
+              // console.log('object', element);
+
+              return element.filter(i, element);
             }
-
-
           })
+
+          // console.log('filteredList', filteredList)
         }
+
+        if (element.sort && element.value.length) {
+          filteredList = filteredList.sort(element.sort(element));
+        }
+
 
       }
     }
 
+
     // console.log('----------filterList', filterList)
-    return filterList
-  }, [_originalList, filterList, filterOptions]);
+    return filteredList
+  }, [_originalList, filterOptions]);
 
   useEffect(() => {
+    return;
     if (!list.length) { return }
-    let filteredList = _originalList;
-    
+    let filteredList = list;
+
     for (const op in filterOptions) {
       if (Object.hasOwnProperty.call(filterOptions, op)) {
         const element = filterOptions[op];
-        if (element.value) {
+
+        if (element.filter && element.value) {
           filteredList = filteredList.filter((i) => {
             if (i[element.targetField] && element.value) {
 
@@ -89,6 +95,14 @@ export default function useFilter({
           })
         }
 
+        if (element.sort && element.value.length) {
+          console.log('sort', element.value[0])
+          filteredList = filteredList.sort((a, b) => {
+            return element.value[0] === 'points-from' ? a.points - b.points : b.points - a.points;
+          });
+        }
+
+
       }
     }
 
@@ -96,7 +110,7 @@ export default function useFilter({
 
     activeOptions.current = filterOptions;
     // updateField('somefiled');
-  }, [filterOptions, list.length]);
+  }, [filterOptions, list]);
 
   useEffect(() => {
     // _lastFilter.current = filterList;

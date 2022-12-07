@@ -8,7 +8,7 @@ const gitRevisionPlugin = new GitRevisionPlugin({ lightweightTags: true });
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
-  cssModules: true,
+  // cssModules: true,
   publicRuntimeConfig: {
     version,
   },

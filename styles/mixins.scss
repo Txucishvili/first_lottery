@@ -39,7 +39,19 @@ $BP_WRAP_PADDING: 20;
 }
 
 
-@mixin Font_LBet_MT($size: 14px) {
+@mixin _Font_Avenir {
+  font-family: 'Avenir Next Georgian';
+}
+
+@mixin _Font_LBet_MT {
+  font-family: 'LBet STD MT';
+}
+
+@mixin _Font_LBet_NUS {
+  font-family: 'LBet STD NUS';
+}
+
+@mixin Font_LBet_MT($size) {
   font-family: 'LBet STD MT';
   font-size: $size;
 }
@@ -70,9 +82,7 @@ $winner_space: 14;
   border-radius: 16px;
 }
 
-%list-menu {
-  
-}
+%list-menu {}
 
 
 @function rgbaToHex($color, $alpha) {

@@ -296,9 +296,22 @@ const CheckMarkFill = () => {
 const CheckMark = () => {
   return <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
     viewBox="0 0 11 9">
-    <polyline  fill="transparent" strokeWidth={2.8} stroke="gray" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} points="1.5,4.5 4.2,7.5 9.5,1.5 " />
+    <polyline fill="transparent" strokeWidth={2.8} stroke="gray" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} points="1.5,4.5 4.2,7.5 9.5,1.5 " />
   </svg>
 }
+
+const Plus = () => (
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 1V7M7 7V13M7 7H13M7 7H1" stroke="#019E08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const Minus = () => (
+  <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 1H1" stroke="#E00000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
+
+)
 
 const ICON_SET = {
   Facebook,
@@ -330,7 +343,9 @@ const ICON_SET = {
   Games,
   Bell,
   Invitation,
-  CheckMark
+  CheckMark,
+  Plus,
+  Minus,
 }
 
 export default ICON_SET;

@@ -55,6 +55,7 @@ export const Input = forwardRef(({
     // !!!
     // console.log('object', value)
     inputRef.current.value = value;
+    setInputValue(value)
   }, [value])
 
   const onChangeValue = (e) => {
@@ -67,7 +68,6 @@ export const Input = forwardRef(({
     inputRef.current.value = '';
     onChangeValue({ target: { value: '' } });
   }
-
 
   return <div className={styles.root}>
     <div className={classNames('container', {
@@ -101,7 +101,6 @@ export const Input = forwardRef(({
           </button> : null}
         </div>
         {withIcon && iconPosition == 'bottom' ? <button className={classNames('withIconWrap', {
-          ['bottom']: iconPosition == 'bottom'
         })}>
           {withIcon}
         </button> : null}

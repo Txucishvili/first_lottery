@@ -7,7 +7,7 @@ import { ArrowSvg } from '../../icons';
 import Link from 'next/link';
 import LanguageSwitcher from '../LanguageSwitcher';
 import { useAppContext } from 'src/store';
-import { difference } from 'lodash';
+import { difference, last } from 'lodash';
 import _ from 'lodash';
 
 
@@ -37,10 +37,11 @@ export default function SmallHeader(props) {
   const [_navigation, set] = useAppContext()
   const [scroll, setScrollSize] = useState(0);
   const ref = useRef();
+  const last = useRef();
 
   function difference(object, base) {
     function changes(object, base) {
-      return _.transform(object, function(result, value, key) {
+      return _.transform(object, function (result, value, key) {
         if (!_.isEqual(value, base[key])) {
           result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
         }
@@ -57,45 +58,55 @@ export default function SmallHeader(props) {
   const prev = useRef();
 
   useEffect(() => {
-//     document.addEventListener('wheel', (e) => {
+    // console.log('document.documentElement.scrollTop', document.scrollingElement.scrollTop)
+    // document.addEventListener('scroll', (e) => {
+    //   console.log('------------------ last.current', last.current, e.target.scrollingElement.scrollTop, document.documentElement.scrollTop)
 
-//       if (document.body.parentNode.scrollTop) {
-//         console.log('e', e)
-//       }
-      
-//       prev.current = e;
-      
-//       return
-// // 
-//       const logo = document.querySelector('.scroll-text');
-//       const logoHeight = 46;
-//       const viewHeight = window.innerHeight;
-//       const maxLogoOffset = viewHeight - logoHeight;
-//       const scrollFraction = getElementScrollFraction(e.target.scrollingElement);
+    //   if (typeof last.current == 'undefined') {
+    //     last.current = e.target.scrollingElement.scrollTop;
+    //   }
 
-//       var rect = e.target.scrollingElement.getBoundingClientRect()
-//       var scrollHeight = e.target.scrollingElement.scrollHeight + (parseInt(rect.height) - rect.height)
-//       var scrollWidth = e.target.scrollingElement.scrollWidth + (parseInt(rect.width) - rect.width)
+    //   // console.log('--', '-' + 46 / 100 * (getElementScrollFraction(e.target.scrollingElement) * 100), 46 / 100 * (getElementScrollFraction(e.target.scrollingElement) * 100))
+    //   if (prev.current) {
+    //     if (prev.current >= e.target.scrollingElement.scrollTop) {
+    //       console.log('up', e.target.scrollingElement.scrollTop, last.current)
+    //       ref.current.style.marginTop = '0px';
+    //       prev.current = e.target.scrollingElement.scrollTop;
+    //       if (last.current  >= e.target.scrollingElement.scrollTop) {
+    //         // console.log('------------------')
+    //         // last.current = e.target.scrollingElement.scrollTop
+    //       };
+    //       return;
+    //     } else {
+    //       if (!last.current) {
+    //         // last.current = e.target.scrollingElement.scrollTop;
+    //         // console.log('set last el', e.target.scrollingElement.scrollTop)
+    //       }
 
-//       console.log('maxLogoOffset*scrollFraction', rect, scrollHeight);
+    //       console.log('down', last.current, e.target.scrollingElement.scrollTop + 'px')
+    //       if (Math.abs(last.current - e.target.scrollingElement.scrollTop) >= 46) {
+    //         // return;
+    //       }
+    //       // last.current = e.target.scrollingElement.scrollTop;
+    //       // ref.current.style.marginTop = -e.target.scrollingElement.scrollTop+ 'px';
+    //       // ref.current.style.marginTop = (e.target.scrollingElement.scrollTop) >= 46 ? last.current - e.target.scrollingElement.scrollTop + 'px' : -Math.abs(e.target.scrollingElement.scrollTop) + 'px';
+    //     }
+    //   } else {
+    //   }
 
-//       if ((maxLogoOffset * scrollFraction) >= 46) {
-//         return
-//       } else {
-//         // console.log('-------------------', (maxLogoOffset * scrollFraction))
+    //   prev.current = e.target.scrollingElement.scrollTop;
 
-//       }
-//       // if (maxLogoOffset*scrollFraction <= 46) {
+    //   // console.log('-------------------', (e.target.scrollingElement.scrollTop) >= 46 ? -46 : -Math.abs(e.target.scrollingElement.scrollTop) + 'px')
 
 
-//       if (ref.current && ref.current) {
-//         // console.log('ref', ref.current)
-//         ref.current.style.marginTop = '' + maxLogoOffset * scrollFraction + 'px';
-//       }
-//       // setScrollSize(maxLogoOffset * scrollFraction)
+    //   if (ref.current && ref.current) {
+    //     // console.log('ref', ref.current)
+    //     // ref.current.style.marginTop = (e.target.scrollingElement.scrollTop) >= 46 ? '-46px' : -Math.abs(e.target.scrollingElement.scrollTop) + 'px';
+    //   }
+    //   // setScrollSize(maxLogoOffset * scrollFraction)
 
-//       // }
-//     })
+    //   // }
+    // })
   }, [])
 
   console.log('object', scroll)

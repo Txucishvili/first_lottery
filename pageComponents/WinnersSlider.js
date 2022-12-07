@@ -90,10 +90,11 @@ export default function RaffleSlider(props) {
       </div>
 
       <SwipeSlider
-        slideVisibleClass='visible-el'
+        slideVisibleClass='visible-el_'
         spaceBetween={24}
         modules={[]}
         navigation={false}
+        style={{overflow: 'hidden'}}
         // className={'listContentSwiper'}
         initialSlide={0}
         slidesPerView={'auto'}

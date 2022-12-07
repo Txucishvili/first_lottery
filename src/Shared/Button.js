@@ -33,16 +33,16 @@ export function ButtonBase(
 
   return (
     <div className={classNames(styles.button)}>
-      <div className={classNames('content', defaultProps.className)}>
+      <div className={classNames('content', )}>
         <button type={type} {...props}
           className={classNames('button--wrap', {
             [`variant--${variant}`]: variant,
             [`color--${color}`]: color,
-            [`size--${size}`]: size,
+            [`size--${size}`]: size && !reset,
             ['full']: full,
             ['wide']: wide,
             ['reset']: reset,
-          })}
+          }, defaultProps.className)}
           style={_styles}
         >
           <div className='flx flxAll'>

@@ -3,21 +3,22 @@
 
   :global {
     .content {
-      &.fontMT {
-        @include Font_LBet_MT(14px);
-      }
+      // &.fontMT {
+      //   @include Font_LBet_MT(14px);
+      // }
 
-      &:not(.fontMT) {
-        @include Font_Avenir(14px);
-      }
+      // &:not(.fontMT) {
+      //   @include Font_Avenir(14px);
+      // }
 
       // !!
       display: contents;
 
       .button--wrap {
-        text-decoration: inherit;
+        // text-decoration: inherit;
 
-        @include flex-all;
+        @include flex;
+        align-items: center;
         // width: 100%;
         // height: 48px;
         border-radius: 8px;
@@ -30,9 +31,20 @@
         border: none;
         outline: none;
         transition: all .25s ease-in-out;
+        font: inherit;
 
-        >div {
-          gap: 7px;
+        &:not(.reset) {
+          justify-content: center;
+
+          >div {
+            gap: 7px;
+          }
+        }
+
+        &[class*="variant"] {
+          &:not([class*="font"]) {
+            // font-family: 'Avenir Next Georgian';
+          }
         }
 
         &:not(.reset) {
@@ -40,7 +52,7 @@
         }
 
         &.reset {
-          padding: 0;
+          // padding: 0;
         }
 
         &:active {

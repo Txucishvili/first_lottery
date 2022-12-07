@@ -73,7 +73,6 @@
       &-md {
 
         @for $i from 1 through 12 {
-
           &-#{$i} {
             width: #{100 / $i + '%'};
           }
@@ -88,6 +87,21 @@
     @include flex;
     // gap: 20px;
     // padding-inline: calc(var(--gap-size) / 2);
+  }
+}
+
+
+.bp {
+
+  @each $key,
+  $value in $bps {
+    &-#{$key} {
+      display: none;
+
+      @media only screen and (min-width: px($value + 1)) {
+        display: block;
+      }
+    }
   }
 }
 
@@ -210,10 +224,55 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 }
 
 
+.color {
+  &-green {
+    color: green;
+
+    svg {
+      path {
+        stroke: green;
+      }
+    }
+  }
+
+  &-red {
+    color: $main_red;
+
+    svg {
+      path {
+        stroke: $main_red;
+      }
+    }
+  }
+}
+
+.font {
+  &-primary {
+    @include _Font_Avenir;
+  }
+
+  &-secondary-mt {
+    // background-color: gray !important;
+    @include _Font_LBet_MT;
+  }
+
+  &-secondary-nus {
+    @include _Font_LBet_NUS;
+  }
+}
+
+
+
+//
+
 .react-datepicker {
 
   @include flex;
-  gap: 50px;
+  gap: 54px;
+
+  &__input-container {
+    display: none;
+  }
 
   &-popper {
     // background: gray;
@@ -221,21 +280,35 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
     // width: 282px;
   }
 
+
   &__month-container {
     max-width: 282px;
-    // background-color: gray;
-
-    font-family: "LBet STD Nus";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
-
-    /* identical to box height */
-
     color: #3F3F46;
 
+    &:first-of-type,
+    &:first-child {}
+  }
 
+  [class="react-datepicker__month-container"] {
+
+
+
+
+    &:last-of-type {
+      // background-color: gray;
+    }
+
+    &:first-of-type {
+      // background-color: gray !important;
+    }
+  }
+
+  &__day--outside-month {
+    background-color: #FFF !important;
   }
 
   &__day-names {
@@ -243,6 +316,7 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
     align-items: center;
     justify-content: center;
     gap: 11px;
+    margin-bottom: 16px;
   }
 
   &__day-name {
@@ -259,8 +333,40 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
     width: 100%;
     display: flex;
     /*! flex-direction: column; */
-    gap: 11px;
+    // gap: 11px;
     justify-content: center;
+
+    &:last-child {
+
+      .react-datepicker__day--in-range,
+      .react-datepicker__day--in-selecting-range {
+
+        &:nth-last-child(+2) {
+          &:after {
+            background: linear-gradient(90deg, rgba(219, 0, 96, 0.16) 50%, rgba(217, 217, 217, 0) 100%);
+          }
+        }
+
+        &:nth-last-child(+1) {
+          &:after {
+            background-color: #FFF;
+          }
+        }
+      }
+
+    }
+  }
+
+  &__month {
+    gap: 12px;
+    @include flex;
+    flex-direction: column;
+
+    .react-datepicker__day {
+      >&:nth-child(2) {
+        // background-color: gray;
+      }
+    }
   }
 
   &__day {
@@ -271,44 +377,123 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    // border-radius: 4px;
+    font-family: 'LBet Banner Mt';
+    cursor: pointer;
+    flex: 1;
+    position: relative;
+
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      // background: rgba($main_gold, .16);
+      border-radius: 0px;
+
+    }
+
+    p {
+      position: relative;
+    }
+
+    >* {
+      width: 30px;
+      height: 100%;
+      @include flex-all;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        // background: rgba($main_gold, .16);
+        border-radius: 0px;
+
+      }
+    }
 
     &--range-start,
-    &--range-end {
-
-      // background-color: $dark_gold;
+    &--range-end,
+    &--selecting-range-start,
+    &--selecting-range-end {
       &:not(.react-datepicker__day--outside-month) {
-        color: #FFF;
 
-        background: $main_gold !important;
+        &::before {
+          width: 50%;
+        }
+
+        >* {
+          background: $main_gold;
+          color: #FFF;
+          z-index: 5;
+          border-radius: 4px;
+
+          &::before {}
+        }
       }
     }
 
-    &--in-range {
-
-      // background-color: $dark_gold;
+    &--range-start,
+    &--selecting-range-start {
       &:not(.react-datepicker__day--outside-month) {
-        background: rgba($main_gold, .25);
+        &::before {
+          right: 0;
+          left: initial;
+        }
+      }
+    }
+
+    &--range-end,
+    &--selecting-range-end {
+      &:not(.react-datepicker__day--outside-month) {
+        &::before {
+          left: 0;
+          right: initial;
+        }
       }
     }
 
 
+    &--outside-month {
+      &:not(.react-datepicker__day--in-range) {
+        &:before {
+          // background-color: grsay !important;
+        }
+      }
+    }
+
+    &--in-range,
     &--in-selecting-range {
+      &::before {
+        background-color: rgba-to-rgb(rgba(219, 0, 96, 1), .16);
 
-      // background-color: $color_gray;
-      // background-color: rgba($main_gold, .25);
-
-      &:not(.react-datepicker__day--outside-month) {
-        background-color: rgba($main_gold, .25);
+        &:not(.react-datepicker__day--range-start) {}
       }
     }
 
-    &:hover {
-      &:not(.react-datepicker__day--outside-month) {
-        background-color: rgba($main_gold, .25);
-      }
 
-      // color: rgba(219, 178, 70, 0.16);
+    &:not(.react-datepicker__day--in-selecting-range) {
+      &:not(.react-datepicker__day--outside-month) {
+        &:not(.react-datepicker__day--range-start) {
+          &:not(.react-datepicker__day--range-end) {
+            &:hover {
+              >* {
+                background-color: rgba($main_gold, .25);
+              }
+            }
+
+            // color: rgba(219, 178, 70, 0.16);
+          }
+        }
+      }
     }
   }
 

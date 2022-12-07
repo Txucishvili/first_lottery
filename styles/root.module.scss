@@ -1,3 +1,18 @@
-::export {
-  MAIN_RED: main_red
+:export {
+  MAIN_COLOR: $main_gold;
+
+  BP: {
+    MOBILE: $BP_MOBILE;
+    TABLET_SM: $BP_TABLET_SM;
+    TABLET: $BP_TABLET;
+    LAPTOP_SM: $BP_LAPTOP_SM;
+    LAPTOP_MEDIUM: $BP_LAPTOP_MEDIUM;
+    LAPTOP: $BP_LAPTOP;
+    LAPTOP_XL: $BP_LAPTOP_XL;
+    LAPTOP_XXL: $BP_LAPTOP_XXL;
+  }
+
+  EL: {
+    SOME: '500'
+  }
 }

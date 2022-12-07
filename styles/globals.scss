@@ -15,15 +15,16 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    scroll-behavior: smooth;
+  // font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  // Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  @include _Font_Avenir;
+  scroll-behavior: smooth;
 }
 
 html {
-  // min-height: 100%;
-  // height: 100%;
-  // overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 
@@ -620,6 +621,7 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     width: 100%;
     height: 200px;
     background-color: gray;
+    z-index: -2;
   }
 
   &::before {
@@ -658,8 +660,9 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
         color: $main_gold;
       }
 
-      .icon-wrapper {
+      .icon-area {
         margin-left: 24px;
+        transition: transform .125s ease-in-out;
       }
     }
 
@@ -668,27 +671,33 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
       display: block;
       margin-top: 13px;
       // padding: 20px;
+
+      &.align {
+        &-right {
+          right: 0;
+          left: initial;
+        }
+      }
     }
 
 
   }
 
-  .icon-wrapper {
-    transition: transform .125s ease-in-out;
-  }
+  .icon-area {}
 
   &.open {
     .dropdown-toggle {
       color: $main_gold;
 
-      svg {
-        path {
-          stroke: $main_gold;
-        }
-      }
 
-      .icon-wrapper {
+      .icon-area {
         transform: rotate(180deg);
+
+        svg {
+          path {
+            stroke: $main_gold;
+          }
+        }
       }
     }
   }
@@ -814,13 +823,16 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     line-height: 26px;
 
     color: #3F3F46;
+    max-height: 50px;
+    height: 100%;
   }
 
   .clear {
     .button--wrap {
+      margin: auto;
 
       background: rgba(63, 63, 70, 0.06) !important;
-      border-radius: 12px;
+      border-radius: 100px !important;
       cursor: pointer;
 
       &:hover {
@@ -855,33 +867,68 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     /* Text */
 
     color: #3F3F46;
+
+    &.table-row {
+      padding: 30px 55px;
+    }
   }
 
-  .table-row {
-    padding-right: 55px;
-    padding-left: 55px;
-  }
 
 
   .grid-row-body {
     @include flex;
     flex-direction: column;
     font-family: 'Avenir Next Georgian';
-    font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 18px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      font-size: 20px;
+      line-height: 28px;
+
+    }
 
     .table-row {
       flex: 1;
       @include flex;
-      border-radius: 16px;
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding: 14px 16px;
+      gap: 12px;
+      flex-direction: column;
+
+      @include max-min(min px($BP_TABLET_SM + 1)) {
+        border-radius: 16px;
+        padding: 30px 55px;
+        flex-direction: row;
+        gap: 0px;
+      }
 
       &:nth-child(odd) {
         background: rgba(63, 63, 70, 0.03);
       }
+
+
+      [class*="col-"] {
+
+        @include max-min(max px($BP_TABLET_SM)) {
+          flex: 1;
+          padding: 0;
+          width: 100%;
+          @include flex;
+
+          :nth-child(2) {
+            margin-left: auto;
+          }
+        }
+
+        @include max-min(min px($BP_TABLET_SM + 1)) {
+          // flex: 0 0 auto;
+          // padding: 30px 55px;
+        }
+
+      }
+
+
     }
 
     .table-col {
@@ -911,11 +958,25 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 // }
 
 @keyframes fade {
-  0% { opacity: 1; }
-  25% { opacity: 0.75; }
-  50% { opacity: .5; }
-  75% { opacity: .25; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  75% {
+    opacity: .25;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .loading {
@@ -923,9 +984,9 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     &--item {
       animation: fade 1.5s ease-in-out infinite;
     }
+
     &--wrap {
       display: block !important;
     }
   }
 }
-

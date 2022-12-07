@@ -57,3 +57,5 @@ export async function delay(speed) {
     }, speed || 3000);
   })
 }
+
+export { default as VARIABLES} from './variables';

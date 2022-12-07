@@ -19,6 +19,7 @@ export default function MainSlider(props) {
   return (
     <div className={styles.mainSlider}>
       <SwipeSlider
+      
         className="mainSlider"
         spaceBetween={250}
         initialSlide={0}

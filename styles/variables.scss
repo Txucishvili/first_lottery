@@ -16,8 +16,7 @@ $main_red: #E00000;
 
 $color_light_gray: #ECECEC;
 
-$BRAND_COLORS: (
-  medical: #FFBBB6,
+$BRAND_COLORS: (medical: #FFBBB6,
   vouchers: #9766F0,
   shop: #5DB039,
   games: #EDC520,
@@ -52,8 +51,22 @@ $BP_LAPTOP_XL: 1992;
 $BP_LAPTOP_XXL: 390;
 
 
-$bp: (sm: 375,
-  md: 768,
+
+$bps: (
+  sm: $BP_MOBILE,
+  md-s: $BP_TABLET_SM,
+  md: $BP_TABLET,
+  l-sm: $BP_LAPTOP_SM,
+  l-m: $BP_LAPTOP_MEDIUM,
+  l: $BP_LAPTOP,
+  l-xl: $BP_LAPTOP_XL,
+  l-xxl: $BP_LAPTOP_XXL
+  );
+
+$bp: (
+  sm: $BP_MOBILE,
+  md: $BP_TABLET_SM,
   lg: 992,
   xl: 1200,
-  xxl: 1400);
+  xxl: 1400
+  );

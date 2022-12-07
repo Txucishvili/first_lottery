@@ -20,7 +20,6 @@ function IconWrapBase({ children, name, size = 14, width, height, className, ...
       className={classNames({
         'flxAll': true,
         'icon-wrapper': size !== 'auto',
-        
       }, className)}>
       {IconComp ? <IconComp /> : '[]'}
     </div>

@@ -2,7 +2,7 @@ import React, { cloneElement, createElement, useEffect, useRef, useState } from 
 import { classNames } from '../../utils/classnames'
 import styles from '../../../styles/components/header.module.scss';
 import mobileMenuStyle from '../../../styles/components/mobilemenu.module.scss';
-import Logo from '../../Logo';
+import Logo from '../Logo';
 import Search from '../Search';
 import Button from '../../Shared/Button';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ import { isServer } from 'src/utils';
 import ReactDOM from 'react-dom';
 import { MobileMenu, MobileUserMenu } from './MobileNavigations';
 import { AnimatePresence, motion, useAnimationControls, useScroll } from 'framer-motion';
-import { PortalWrapper } from '../PortalTransition';
+import { PortalWrapper } from '../../Shared/PortalTransition';
 import { useClient, useScrollDirection } from 'src/hooks';
 import UserInfo from '@/components/UserInfo'
 

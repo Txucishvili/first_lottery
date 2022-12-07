@@ -17,13 +17,13 @@ function MyApp(props) {
   useEffect(() => {
     console.log('publicRuntimeConfig', VERSION)
     // !!!
-    if (window.localStorage.getItem('scrollOptions')) {
-      const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
-      if (opt && opt.reload) {
-        window.document.scrollingElement.scrollTop = Math.abs(opt.scroll);
-        window.localStorage.setItem('scrollOptions', JSON.stringify({ ...opt, reload: false }));
-      } else {}
-    }
+    // if (window.localStorage.getItem('scrollOptions')) {
+    //   const opt = JSON.parse(window.localStorage.getItem('scrollOptions'));
+    //   if (opt && opt.reload) {
+    //     window.document.scrollingElement.scrollTop = Math.abs(opt.scroll);
+    //     window.localStorage.setItem('scrollOptions', JSON.stringify({ ...opt, reload: false }));
+    //   } else {}
+    // }
 
     window.addEventListener("beforeunload", alertUser);
 
