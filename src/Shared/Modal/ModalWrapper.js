@@ -88,7 +88,7 @@ export const SimpleModal = (props) => {
 }
 
 export const ModalBase = (props) => {
-  const { open, onClose, width, height, variant = 'center' || 'top' || 'page' } = props;
+  const { open, align, onClose, width, height, variant = 'center' || 'top' || 'page' } = props;
   const overlay = useAnimationControls();
   const modal = useAnimationControls();
   const [isOpen, setOpen] = useState(open)
@@ -121,7 +121,7 @@ export const ModalBase = (props) => {
       // await delay();
       setOpenState(false);
       setOpen(false);
-      onClose();
+      onClose && onClose();
     })
   }
 
@@ -165,19 +165,19 @@ export const ModalBase = (props) => {
       <div
         ref={targetRef}
         className={classNames(styles.content, {
-          [styles[`variant-${variant}`]]: styles[`variant-${variant}`]
+          [styles[`variant-${variant}`]]: styles[`variant-${variant}`],
+          [styles[`align-${align}`]]: styles[`align-${align}`]
         })}
         onClickCapture={onBackDropClose}
       >
         <motion.div
           style={Object.assign({}, !!width ? { width } : {}, !!height ? { height } : {})}
           initial={{ opacity: isOpen ? 1 : 0, scale: isOpen ? 1 : 0, translateY: isOpen ? 50 : 0 }}
-          animate={modal} className={styles.modalContent}>
-          {/* <div className={styles.modalBody}> */}
+          animate={modal}
+          className={styles.modalContent}>
           {ReturnComponent.map((c, k) => {
             return cloneElement(c, c.type instanceof Function ? { isOpen: openState, key: k, onAction: onAction } : { key: k })
           })}
-          {/* </div> */}
         </motion.div>
       </div>
     </div>
@@ -189,6 +189,7 @@ export function ModalWrapper(props) {
   const ref = useRef()
   const [mounted, setMounted] = useState(false);
 
+
   useEffect(() => {
     ref.current = document.getElementById('modals');
     // setMounted(true);
@@ -199,7 +200,7 @@ export function ModalWrapper(props) {
   const Element = [].concat(props.children).map((c, k) => {
     return cloneElement(c, {
       onClose: props.onClose,
-      open: props.open,
+      open: open,
       key: k
     })
   })
@@ -208,7 +209,7 @@ export function ModalWrapper(props) {
     if (!document.getElementById('modals') && !open) {
       return;
     }
-    
+
     if (!open) {
       if (ref.current && ref.current.childElementCount == 0) {
         ref.current.remove()
@@ -219,11 +220,11 @@ export function ModalWrapper(props) {
         const _el = document.createElement('div');
         _el.id = 'modals';
         document.body.appendChild(_el);
-        ref.current = document.getElementById('modals');
-        setMounted(true);
       }
+      ref.current = document.getElementById('modals');
+      setMounted(true);
     }
-  }, [mounted, open])
+  }, [open])
 
 
   return mounted ?

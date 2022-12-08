@@ -809,22 +809,29 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 
 }
 
-
 .badge {
   &-wrap {
-    padding: 12px 24px;
+    padding: 9px 14px;
     background: #FFFFFF;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
     border-radius: 12px;
     font-family: 'Avenir Next Georgian';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 26px;
+
 
     color: #3F3F46;
     max-height: 50px;
     height: 100%;
+    font-size: 13px;
+    line-height: 18px;
+
+    @include max-min(min px($BP_TABLET_SM + 1)) {
+      padding: 12px 24px;
+      font-size: 18px;
+      align-items: center;
+      line-height: 26px;
+    }
   }
 
   .clear {
@@ -882,11 +889,18 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
+    margin-top: 20px;
+
+    @include max-min(max px($BP_MOBILE)) {
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+
 
     @include max-min(min px($BP_TABLET_SM + 1)) {
       font-size: 20px;
       line-height: 28px;
-
+      margin-top: 0;
     }
 
     .table-row {
@@ -910,11 +924,24 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 
       [class*="col-"] {
 
-        @include max-min(max px($BP_TABLET_SM)) {
+        @include max-min(max px($BP_MOBILE)) {
+          padding: 0;
+          width: 100%;
+          @include flex;
+          flex-direction: column;
+
+          .titler {
+            font-size: 18px;
+            margin-top: 12px;
+          }
+        }
+
+        @include max-min(min px($BP_MOBILE + 1), max px($BP_TABLET_SM)) {
           flex: 1;
           padding: 0;
           width: 100%;
           @include flex;
+          flex-direction: row;
 
           :nth-child(2) {
             margin-left: auto;
@@ -987,6 +1014,49 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 
     &--wrap {
       display: block !important;
+    }
+  }
+}
+
+.bottom-paper {
+  background: #FFFFFF;
+  width: 100%;
+
+}
+
+.mobile-calendar {
+  .days {
+    width: 100%;
+    overflow: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    span {
+      @include flex-all;
+      flex-direction: column;
+      padding: 14px 10px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 23px;
+      /* identical to box height */
+      width: 56px;
+      flex-shrink: 0;
+      cursor: pointer;
+
+
+      color: #000;
+
+      background: #FFF;
+
+      box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.08);
+      border-radius: 16px;
+
+      &.active {
+        color: #FFF;
+        background: $main_gold;
+      }
+
     }
   }
 }

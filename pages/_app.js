@@ -9,6 +9,12 @@ import { footerNavList, HeaderNavigation, LanguageList, NavigationList } from 's
 import { AppContextProvider } from 'src/store';
 import getConfig from 'next/config';
 
+
+import setDefaultOptions from 'date-fns/setDefaultOptions';
+import { ka } from 'date-fns/locale';
+
+setDefaultOptions({ locale: ka })
+
 const { publicRuntimeConfig } = getConfig();
 
 function MyApp(props) {

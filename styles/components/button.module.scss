@@ -125,6 +125,17 @@
             }
           }
 
+          &--light {
+            color: #3F3F46;
+            background: #FFFFFF;
+            box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            
+            &:hover {
+              background-color: darken(#FFF, 5%);
+            }
+          }
+
           &--secondary {
             background-color: $dark_gold;
             color: $color_white;

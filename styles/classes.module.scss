@@ -156,7 +156,7 @@
 }
 
 
-$divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46);
+$divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56);
 
 @each $size in $divide-size {
   .divide-#{$size} {
@@ -184,6 +184,14 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
       margin-bottom: #{$size}px;
     }
 
+    &-inline-#{$size} {
+      margin-inline: #{$size}px;
+    }
+
+    &-block-#{$size} {
+      margin-block: #{$size}px;
+    }
+
     &-b-#{$size} {
       padding-top: #{$size}px;
       padding-bottom: #{$size}px;
@@ -198,6 +206,14 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 
     &-block-#{$size} {
       padding-top: #{$size}px;
+      padding-bottom: #{$size}px;
+    }
+
+    &-top-#{$size} {
+      padding-top: #{$size}px;
+    }
+
+    &-bottom-#{$size} {
       padding-bottom: #{$size}px;
     }
   }
@@ -219,6 +235,10 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
 
     &-red {
       color: $main_red;
+    }
+
+    &-gray {
+      color: $color_gray;
     }
   }
 }
@@ -244,6 +264,26 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
       }
     }
   }
+
+  &-gray {
+    color: $color_gray;
+
+    svg {
+      path {
+        stroke: $color_gray;
+      }
+    }
+  }
+
+  &-white {
+    color: #fff;
+
+    svg {
+      path {
+        stroke: #fff;
+      }
+    }
+  }
 }
 
 .font {
@@ -261,7 +301,41 @@ $divide-size: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 3
   }
 }
 
+.p {
+  &-relative {
+    position: relative;
+  }
 
+  &-absolute {
+    position: absolute;
+  }
+
+  &-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+  }
+
+  &-left {
+    left: 0;
+    right: initial;
+  }
+
+  &-right {
+    right: 0;
+    left: initial;
+  }
+}
+
+$rotates: (0, 90, 180, 270, 360);
+
+.rotate {
+  @each $deg in $rotates {
+    &-#{$deg} {
+      transform: rotate($deg + deg)
+    }
+  }
+}
 
 //
 

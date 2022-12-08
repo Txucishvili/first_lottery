@@ -8,10 +8,12 @@ import { CheckBox, Input } from '../../src/Shared/Input';
 import useFilter from 'src/hooks/useFilter';
 import { getPointsList, PointAmountList } from 'src/API';
 import Button from 'src/Shared/Button';
-import { format } from 'date-fns';
+import { addMonths, compareAsc, format, getDaysInMonth, setDefaultOptions, subMonths } from 'date-fns';
 import { delay, isInt, numberWithSpaces, VARIABLES } from 'src/utils';
 import Badge from 'src/Shared/Badge';
 import useBreakPoint from 'src/hooks/useBreakPoint';
+import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper';
+import { ka } from 'date-fns/locale'
 
 
 const ListItems = ({
@@ -37,7 +39,113 @@ const ListItem = ({
   </div>
 }
 
-//
+
+
+const MobileFilter = () => {
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectDate] = useState(null);
+
+  const days = getDaysInMonth(date);
+
+  const daysArray = Array(days).fill(null).map((d, k) => {
+    return new Date(date.getFullYear(), date.getMonth(), k + 1)
+  });
+
+  return <div className='bottom-paper p-top-32 p-bottom-54 mobile-calendar'>
+    <div className='head flx flxAll p-bottom-32 m-inline-16 p-relative'>
+      <div className='p-absolute p-left'>
+        <IconWrap className="color-gray rotate-90" name="ArrowSvg" />
+      </div>
+      <p className='text-center text-color-gray'>ფილტრი</p>
+    </div>
+    <div className='month flx flxAI gap-12 p-inline-16'>
+      <div>
+        {selectedDate ? format(selectedDate, 'dd LLLL yyyy') : null}
+      </div>
+      <div className='flx flxAI gap-10 toRight'>
+        <Button reset className="p-inline-6 p-block-4" onClick={() => {
+          setDate(subMonths(date, 1))
+        }}
+          variant={'primary'} size="normal">
+          <IconWrap className="color-white rotate-90" name='ArrowSvg' />
+        </Button>
+        <div className='text-center' style={{ width: 100 }}>{format(date, 'LLLL')}</div>
+        <Button
+          reset
+          className="p-inline-6 p-block-4"
+          onClick={() => {
+            setDate(addMonths(date, 1));
+            setDefaultOptions({ locale: ka })
+          }} variant={'primary'} size="normal">
+          <IconWrap className="color-white rotate-270" name='ArrowSvg' />
+        </Button>
+      </div>
+    </div>
+    <div className='days flx gap-12 p-inline-12'>
+      {daysArray.map((d, k) => {
+        return <span
+          className={classNames({
+            active: compareAsc(d, selectedDate) == 0
+          })}
+          onClick={() => {
+            if (!selectedDate) {
+              setSelectDate(d)
+            } else {
+              if (compareAsc(selectedDate, d) == 0) {
+                setSelectDate(null);
+              } else {
+                setSelectDate(d)
+              }
+            }
+          }} key={k}>
+          <div>{format(d, 'dd')}</div>
+          <div>{format(d, 'EE')}</div>
+          {/* <div>{format(new Date(date.getFullYear(), date.getMonth(), d), 'EE')}</div> */}
+          {/* <div>{selectedDate ? format(selectedDate, 'dd') : null}</div> */}
+          {/* <div>{compareAsc(d, selectedDate) == 0 ? 'active' : null}</div> */}
+        </span>
+      })}
+    </div>
+    <div className='btns row p-top-12 p-inline-12'>
+      <div className='col-6'>
+        <Button
+          wide
+          variant={'light'}
+          onClick={() => {
+            setMobileModal(!mobileModal)
+          }}>
+          <div className='flxAll gap-12'>
+            <span>პლატფორმა</span>
+            <IconWrap className="color-gray" name="ArrowSvg" />
+          </div>
+        </Button>
+      </div>
+      <div className='col-6'>
+        <Button
+          wide
+          variant={'light'}
+          onClick={() => {
+            setMobileModal(!mobileModal)
+          }}>
+          <div className='flxAll gap-12'>
+            <span>ქულები</span>
+            <IconWrap className="color-gray" name="ArrowSvg" />
+          </div>
+        </Button>
+      </div>
+    </div>
+  </div>
+}
+
+
+
+
+
+
+
+
+
+// 
 const Platforms = [
   { name: 'მედიქალი', icon: 'Medical', color: 'pink', slug: 'medical' },
   { name: 'ვაუჩერები', icon: 'TicketOutline', color: 'violet', slug: 'vouchers' },
@@ -131,6 +239,7 @@ const FilterOptions = ({ options, onAction }) => {
   const rangeToRef = useRef();
   const datePickerDrop = useRef();
   const [dateRange, setDateRange] = useState([options.winningDate_from.value, options.winningDate_to.value]);
+  const [mobileModal, setMobileModal] = useState(true);
 
   useEffect(() => {
     if (options.winningDate_from.value == null || options.winningDate_to.value == null) {
@@ -204,10 +313,7 @@ const FilterOptions = ({ options, onAction }) => {
               }) => (
                 <div className="react-datepicker__current-month--center">
                   <span >
-                    {monthDate.toLocaleString("ka-GE", {
-                      month: "long",
-                      year: "numeric",
-                    })}
+                    {format(monthDate, 'MMMM yyyy')}
                   </span>
                 </div>
               )}
@@ -339,6 +445,24 @@ const FilterOptions = ({ options, onAction }) => {
         </SimpleDropDown>
       </div>
     </div>
+    <Button
+      variant={'light'}
+      onClick={() => {
+        setMobileModal(!mobileModal)
+      }}>
+      <span>ფილტრაცია</span>
+      <IconWrap name="Filter" />
+    </Button>
+    <ModalWrapper
+      onClose={() => {
+        setMobileModal(false)
+      }}
+      open={mobileModal}>
+      <ModalBase variant="bottom" align="bottom" >
+        <MobileFilter />
+      </ModalBase>
+    </ModalWrapper>
+
   </div>
 }
 
@@ -365,22 +489,22 @@ const FilterList = ({
             {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>ტრანზაქციის ID: </span> : null}
             <div>
               <span className='m-right-8'>#</span>
-              <span>{item.transactionId}</span>
+              <span className='titler'>{item.transactionId}</span>
             </div>
           </div>
           <div className='col-3'>
             {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>პლატფორმა: </span> : null}
-            <span>{item.platform.name}</span>
+            <span className='titler'>{item.platform.name}</span>
           </div>
           <div className='col-3'>
             {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>დაგროვილი ქულები: </span> : null}
             <span
-              className={classNames(`text-color-${item.points <= 0 ? 'red' : 'green'}`)}
+              className={classNames(`titler, text-color-${item.points <= 0 ? 'red' : 'green'}`)}
             >{numberWithSpaces(item.points)}</span>
           </div>
           <div className='col-1'>
             {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>თარიღი: </span> : null}
-            <span>{format(new Date(item.date), 'MM/dd/yyyy')}</span>
+            <span className='titler'>{format(new Date(item.date), 'MM/dd/yyyy')}</span>
           </div>
         </div>
       }) : null}
@@ -541,6 +665,7 @@ export default function UserPointsPage(props) {
         <div>
           <FilterList listItems={filteredList} />
 
+          {!filteredList.length ? <div className='flxAll p-block-20'>No data to show</div> : null}
 
           {loading
             ? <div className='loading-frame--wrap simple-table'>
