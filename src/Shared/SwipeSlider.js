@@ -1,13 +1,17 @@
 /* eslint-disable react/display-name */
 import React, { forwardRef, useState } from 'react'
 import { Swiper, SwiperSlide as SwipeItem } from 'swiper/react';
-
-// Import Swiper styles
 import classNames from 'classnames';
-import IconWrap from '@/components/IconWrap';
 import { ArrowSvg } from 'src/icons';
 import { Navigation } from 'swiper';
 import customSwiperStyle from '@/styles/components/swiperSlider.module.scss'
+
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 // export function SliderControlsWrap({ next, prev, onAction, variant }) {

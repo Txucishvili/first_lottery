@@ -308,8 +308,46 @@ const Plus = () => (
 
 const Minus = () => (
   <svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 1H1" stroke="#E00000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M13 1H1" stroke="#E00000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+const Filter = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_2197_1251)">
+      <path d="M8 8H4V12H8V8Z" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 4V8" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 12V20" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14 14H10V18H14V14Z" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4V14" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 18V20" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M20 5H16V9H20V5Z" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 4V5" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M18 9V20" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2197_1251">
+        <rect width="24" height="24" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+
+);
+const SortDesc = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2197_1262)">
+<path d="M4 6H13" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 12H11" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 18H11" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M15 15L18 18L21 15" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18 6V18" stroke="#3F3F46" strokeOpacity="0.7" stroke-width="2" strokeLinecap="round" strokeLinejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_2197_1262">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
 </svg>
+
 
 )
 
@@ -346,6 +384,8 @@ const ICON_SET = {
   CheckMark,
   Plus,
   Minus,
+  Filter,
+  SortDesc
 }
 
 export default ICON_SET;

@@ -217,7 +217,7 @@ export default function LastWinnerPage(pageProps) {
   return (
     <div className='layout'>
       <LastWinnerSlide list={pageProps.sliderItems} />
-      <div className={'filterWrapBg'}>
+      <div className={'filterWrapBg p-top-56'}>
         <LastWinnerFilter winnerFilters={winningRangeValues} filters={filters} list={pageProps.listData} />
       </div>
     </div>

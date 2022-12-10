@@ -1,5 +1,5 @@
 .button {
-  display: initial;
+  display: contents;
 
   :global {
     .content {
@@ -12,16 +12,25 @@
       // }
 
       // !!
-      display: contents;
+
+
+      &.full,
+      &.wide {
+        width: 100%;
+        height: 100%;
+      }
+
 
       .button--wrap {
         // text-decoration: inherit;
 
         @include flex;
         align-items: center;
+        // justify-content: center;
+
         // width: 100%;
         // height: 48px;
-        border-radius: 8px;
+
         overflow: hidden;
         cursor: pointer;
         font-family: inherit;
@@ -33,8 +42,12 @@
         transition: all .25s ease-in-out;
         font: inherit;
 
-        &:not(.reset) {
+        &:not(.align) {
           justify-content: center;
+        }
+
+        &:not(.reset) {
+          border-radius: 16px;
 
           >div {
             gap: 7px;
@@ -60,7 +73,7 @@
         }
 
         &.icon-wrapper {
-          margin-left: 5px;
+          // margin-left: 5px;
         }
 
         &.textArea {}
@@ -129,8 +142,7 @@
             color: #3F3F46;
             background: #FFFFFF;
             box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.08);
-            border-radius: 16px;
-            
+
             &:hover {
               background-color: darken(#FFF, 5%);
             }
@@ -163,6 +175,14 @@
               background-color: rgba($color_gray, .05);
             }
 
+          }
+        }
+
+        &.border-primary {
+          border-color: $main_gold;
+
+          &:hover {
+            background-color: rgba($main_gold, .05);
           }
         }
       }

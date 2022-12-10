@@ -182,30 +182,60 @@
 .footerArea {
   overflow: hidden;
   margin-top: auto;
-  padding-top: 70px;
   padding-bottom: 0;
-  min-height: 460px;
+  // min-height: 226px;
+  padding-top: 320px;
+  position: relative;
 
-  @include max-min(min px($BP_TABLET_SM + 1)) {
-    padding-bottom: 170px;
+  // @include layoutWrap(true);
 
+
+  min-height: 482px;
+
+  // background-color: gray;
+
+
+  @include max-min(min px($LAYOUT_WRAP_SIZE + 20)) {
+    min-height: 482px;
   }
+
+  @include max-min(min px($BP_MOBILE), max px($LAYOUT_WRAP_SIZE + 20)) {
+
+    // min-height: toVW(482, 1550);
+  }
+
+  // @include max-min(min px($LAYOUT_WRAP_SIZE + 20)) {
+  //   position: unset;
+  // }
+
+  // @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
+  //   position: unset;
+  //   min-height: toVW(482, 1550);
+  // }
+
+  // @include max-min(min px($BP_TABLET_SM + 1)) {
+  //   // padding-bottom: 170px;
+  //   // padding-top: 320px;
+  //   // min-height: toVW(482, 1550  );
+  // }
 
   :global {
     .footer {
       &--wrap {
-        padding-inline: 16px;
-        // @include layoutWrap(false);
-        // margin-top: 100px;
+        // padding-inline: 16px;
         max-width: 1530px;
         margin-inline: auto;
-        // padding-top: 140px;
-        // position: relative;
-        // z-index: 3;
         height: 100%;
         @include flex;
         flex-direction: column;
-        min-height: 220px;
+        min-height: inherit;
+        position: unset;
+        // padding-inline: 16px;
+
+        @include max-min(min px($LAYOUT_WRAP_SIZE + 20)) {
+          position: relative;
+          // padding-inline: 0px;
+        }
 
         @include max-min(min px($BP_TABLET_SM + 1)) {
           // padding-inline: 20px;
@@ -213,20 +243,24 @@
       }
 
       .nav-grid {
-        
+
+        padding-top: 77px;
         @include flex;
         gap: 24px;
         flex-direction: column;
+
+
         // position: relative;
         // z-index: 2;
-
-        @include max-min(min px($BP_TABLET_SM + 1)) {
+        @include max-min(min px($BP_MOBILE + 1)) {
           gap: 24px;
           flex-direction: row;
+          // flex-direction: row;
         }
 
         @include max-min(min px($BP_TABLET_SM + 1)) {
           gap: 120px;
+          flex-direction: row;
           // flex-direction: row;
         }
 
@@ -248,14 +282,14 @@
 
         &--title {
           font-family: 'Avenir Next Georgian';
-          font-weight: 500;
+          font-weight: 600;
           font-size: 16px;
           line-height: 23px;
           color: #3F3F46;
           margin-bottom: 16px;
 
           @include max-min(min px($BP_TABLET_SM + 1)) {
-            font-weight: 400;
+            // font-weight: 400;
             font-size: 18px;
             line-height: 26px;
             margin-bottom: 32px;
@@ -265,18 +299,23 @@
         &--list {
           @include flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 20px;
 
           &--item {
             font-family: 'Avenir Next Georgian';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 14px;
             line-height: 20px;
             color: #3F3F46;
 
+            a {
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+
             @include max-min(min px($BP_TABLET_SM + 1)) {
-              font-weight: 400;
               font-size: 16px;
               line-height: 23px;
               color: #3F3F46;
@@ -299,64 +338,146 @@
       }
 
       .bgArea {
-        position: relative;
+        // position: relative;
         left: 0;
         width: 100%;
         height: 220px;
         z-index: -1;
         margin-top: auto;
+        // order: 2;
+        position: relative;
+        bottom: 0;
+        right: 0;
 
-        @include max-min(min px($BP_TABLET_SM + 1)) {
-          height: 0px;
+        background-color: aliceblue;
+
+        @include max-min(min px($BP_TABLET_SM)) {
+          position: absolute;
+          min-height: inherit;
+          bottom: 0;
+          right: 0;
+          // order: 0;
         }
 
+        @include max-min(min px($BP_MOBILE), max px($LAYOUT_WRAP_SIZE + 20)) {
+
+          min-height: toVW(482, 1550);
+        }
 
         .circle {
-          width: 646px;
-          height: 646px;
-          background: $main_gold;
+          min-width: px(646);
+          min-height: px(646);
+          // background: $main_gold;
+
+          background: gray;
           border-radius: 100%;
           position: absolute;
-          // right: 0;
+          right: -259px;
           // top: 0;
-          // top: 10px;
-          right: -275px;
+          // transition: all 2s ease-in-out;
 
           @include max-min(min px($BP_TABLET_SM + 1)) {
             // top: -250px;
             // top: -300px;
-            top: -232px;
-            right: -625px;
-            width: 1300px;
-            height: 1300px;
+            // top: -232px;
+            // top: -482px;
+            // right: px((380 + 195) / -1);
+            // width: 1300px;
+            // height: 1300px;
+          }
+
+          @include max-min(min px($BP_TABLET_SM), max px($LAYOUT_WRAP_SIZE + 20)) {
+            background-color: red;
+            // top: -250px;
+            // top: -300px;
+            // top: -232px;
+            // top: -482px;
+            // right: toVW((380 + 195) / -1, 1550);
+            // width: toVW(1300, 1550);
+            // height: toVW(1300, 1550);
           }
 
           .image {
             position: absolute;
-            top: -40px;
-            left: 100px;
-            width: 290px;
+            // top: -25px;
+            // right: 100px;
+            // width: 210px;
+            // right: toVW(515, 1300);
+
+            // right: 55%;
+            width: px(210);
+            min-height: 200px;
+            max-height: 475px;
+            height: 100%;
+            // height: px(475);
+            // max-width: 610px;s
+
+            background-color: rgba(#383838, .5);
+            display: none;
+
+
+            @include max-min(min px($BP_TABLET_SM + 1)) {
+              // width: 610px;
+              // right: 515px;
+              // background-color: orange;
+              // right: toVW(515, 1300);
+              // width: px(610);
+              // height: px(475);
+              right: 575px;
+              background-color: $main_gold;
+            }
+
+            @include max-min(min px($BP_TABLET_SM), max px($LAYOUT_WRAP_SIZE + 20)) {
+              // width: toVW(290, 1300);
+              // top: toVW(5, 1300);
+              // left: toVW(144, 1300);
+              // width: toVW(610, 1300);
+              // background-color: aliceblue;
+              //   right: toVW(515, 1300);
+              // top: (toVW(-25, 1300));
+            right: toVW(575, 1300);
+
+            }
+
+
 
             &-wrap {
+
+              // display: none;
 
               position: relative;
               // width: 300px;
               // height: 185px;
 
-              @include max-min(min px($BP_TABLET_SM + 1)) {
+              // width: 210px;
 
-                width: 535px;
-                height: 411px;
+              @include max-min(min px($BP_MOBILE), max px($LAYOUT_WRAP_SIZE + 20)) {
+                // width: 100%;
               }
+
+              // @include max-min(min px($BP_TABLET_SM + 1)) {
+              //   width: 610px;
+              //   height: 472px;
+              // }
+
+              // @include max-min(min px($BP_TABLET_SM), max px($LAYOUT_WRAP_SIZE + 20)) {
+              //   // background-color: lightblue;
+              //   // top: -250px;
+              //   // top: -300px;
+              //   // top: -232px;
+              //   // top: -482px;
+              //   width: toVW(610, 1300);
+              //   height: toVW(472, 1300);
+              // }
             }
 
 
-            @include max-min(min px($BP_TABLET_SM + 1)) {
-              width: initial;
-              // top: -152px;
-              top: -85px;
-              left: 270px;
-            }
+            // @include max-min(min px($BP_TABLET_SM + 1)) {
+            //   width: initial;
+            //   // top: -152px;
+            //   top: -25px;
+            //   left: 175px;
+            // }
 
             img {
               width: 100%;

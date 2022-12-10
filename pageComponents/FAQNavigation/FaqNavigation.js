@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
+import Button from 'src/Shared/Button'
 import styles from './FAQNavigation.module.scss'
 
 export const NavItem = (props) => {
@@ -49,8 +50,8 @@ export default function FAQNavigation(props) {
               return <NavItem {...c} key={k} />
             })}
           </div>
-          <div className={styles.loadMore}>
-            <span>მეტის ნახვა</span>
+          <div className={'flxAll m-top-60'}>
+            <Button className='text-underline' size='medium' variant={'text'}>მეტის ნახვა</Button>
           </div>
         </div>
       </div>

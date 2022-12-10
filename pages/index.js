@@ -101,7 +101,7 @@ export default function Home(props) {
   return (<>
     <div className={classNames(styles.appPageWrapper, 'layout--wrap')}>
       <MainSlider slides={props.slides} />
-      <BuyTicketContainer />
+      {/* <BuyTicketContainer /> */}
       <PromotionSection jackpotDetails={props.jackpotDetails} videoDetails={props.videoDetails} />
       <RaffleSlider items={props.raffles} />
       <FAQNavigation navigation={props.FAQNavigation} />

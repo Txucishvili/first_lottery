@@ -45,7 +45,6 @@ export default function DatePicker(props) {
         // portalId="portals"
         selected={startDate}
         {...defaultProps}
-        locale={'en-GB'}
       />
     </div>
   )

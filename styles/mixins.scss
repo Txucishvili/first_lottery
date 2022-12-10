@@ -15,15 +15,73 @@ $BP_WRAP_PADDING: 20;
   width: 100%;
   @extend %layoutWrap;
 
-  @debug $withBP;
+  // padding-inline: 5px;
 
   @if ($withBP==true) {
-    @include max-min(max px($LAYOUT_WRAP_SIZE + 20)) {
-      padding-inline: px($BP_WRAP_PADDING);
+    @include max-min(min px($BP_TABLET_SM), max px($BP_TABLET)) {
+      padding-inline: 10px;
+    }
+
+    @include max-min(min px($BP_TABLET), max px($LAYOUT_WRAP_SIZE + 40)) {
+      padding-inline: 20px;
+    }
+
+    @include max-min(max px($LAYOUT_WRAP_SIZE + 40)) {
+      margin: initial;
+      max-width: 100%;
     }
   }
-
 }
+
+
+$bps-padding: ("sm": 5,
+  "md-s": 10,
+  "md": 20,
+  "l-sm": 4,
+  l-m: 5,
+  l: 6,
+  l-xl: 7,
+  l-xxl: 8);
+
+
+@mixin layoutOuter($args...) {
+
+
+  @each $bpsKey,
+  $bpsValue in $bps {
+
+    @each $argValue,
+    $argKey in $args {
+
+      @if ($bpsValue==$argValue) {
+        @include max-min(max px($argValue)) {
+          margin-left: -#{map-get($bps-padding, $bpsKey)}px;
+          margin-right: -#{map-get($bps-padding, $bpsKey)}px;
+        }
+      }
+
+
+    }
+
+  }
+}
+
+
+
+// @mixin layoutOuter($args...) {
+//   margin-right: -5px;
+//   margin-left: -5px;
+
+//   @include max-min(min px($BP_TABLET_SM), max px($BP_TABLET)) {
+//     margin-right: -10px;
+//     margin-left: -10px;
+//   }
+
+//   @include max-min(min px($BP_TABLET), max px($LAYOUT_WRAP_SIZE + 40)) {
+//     margin-right: -20px;
+//     margin-left: -20px;
+//   }
+// }
 
 @mixin btn-style($bgColor) {
   padding: 14px 23px;

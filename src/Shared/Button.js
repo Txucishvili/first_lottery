@@ -4,7 +4,7 @@ import IconWrap from '../components/IconWrap';
 import { classNames } from '../utils/classnames';
 
 export function ButtonBase(
-  { wide, reset = false, width, variant, full, size = 'normal', height, color, type = 'button', children, text, ...defaultProps }
+  { wide, align, reset = false, width, variant, full, size = 'normal', height, color, type = 'button', children, text, ...defaultProps }
 ) {
   // const { wide, reset = false, width, variant, full, size = 'normal', height, color, type = 'button', children, text, ...defaultProps } = props;
   let IconWrapEl, _childrens;
@@ -33,8 +33,9 @@ export function ButtonBase(
 
   return (
     <div className={classNames(styles.button)}>
-      <div className={classNames('content', )}>
-        <button type={type} {...props}
+      <div className={classNames('content', { full: full })}>
+        <button type={type}
+          {...props}
           className={classNames('button--wrap', {
             [`variant--${variant}`]: variant,
             [`color--${color}`]: color,
@@ -42,13 +43,15 @@ export function ButtonBase(
             ['full']: full,
             ['wide']: wide,
             ['reset']: reset,
+            ['align']: align,
           }, defaultProps.className)}
-          style={_styles}
+          style={{ ..._styles, ...props.style }}
         >
-          <div className='flx flxAll'>
-            {IconWrapEl}
-            {_childrens ?? children}
-          </div>
+          {/* <div className='flx flxAll'> */}
+          {/* {IconWrapEl} */}
+          {/* {_childrens ?? children} */}
+          {children}
+          {/* </div> */}
         </button>
       </div>
     </div>

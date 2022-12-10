@@ -2,10 +2,10 @@
 @import 'sassync/sass/_default/_theme/_reset';
 @import './classes.module.scss';
 @import './react-calendar.scss';
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
-@import 'swiper/css/scrollbar';
+// @import 'swiper/css';
+// @import 'swiper/css/navigation';
+// @import 'swiper/css/pagination';
+// @import 'swiper/css/scrollbar';
 
 * {
   box-sizing: border-box;
@@ -112,6 +112,7 @@ li[class] {
   // margin-right: 14px;
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
 
   svg {
     width: 100%;
@@ -122,18 +123,26 @@ li[class] {
 .pageTitle {
   font-family: 'Avenir Next Georgian';
   font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 35px;
-  /* Text */
   color: #3F3F46;
 
   margin-top: 24px;
-  margin-bottom: 57px;
+  margin-bottom: 24px;
   text-align: center;
 
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  /* identical to box height */
+
+
+  color: #3F3F46;
+
   @include max-min(min px($BP_TABLET_SM + 1)) {
-    margin-top: 80px;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
   }
 
 }
@@ -553,20 +562,20 @@ li[class] {
   // overflow: hidden;
   width: 100%;
 
-  padding-top: 32px;
-  padding-bottom: 48px;
+  // padding-top: 32px;
+  // padding-bottom: 48px;
 
   @include max-min(min px($BP_TABLET_SM + 1)) {
-    padding-top: 62px;
-    padding-bottom: 119px;
+    // padding-top: 62px;
+    // padding-bottom: 119px;
   }
 
   .swiper {
-    margin-top: -50px;
-    margin-bottom: -50px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    height: px(483 + 100);
+    // margin-top: -50px;
+    // margin-bottom: -50px;
+    // padding-top: 50px;
+    // padding-bottom: 50px;
+    height: px(483 + (40 * 2));
   }
 
   .swiper-wrapper {
@@ -875,7 +884,7 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 
     color: #3F3F46;
 
-    &.table-row {
+    .table-row {
       padding: 30px 55px;
     }
   }
@@ -891,26 +900,47 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
     line-height: 18px;
     margin-top: 20px;
 
-    @include max-min(max px($BP_MOBILE)) {
-      margin-left: -20px;
-      margin-right: -20px;
-    }
+    @include layoutOuter($BP_MOBILE, $BP_TABLET_SM);
 
 
-    @include max-min(min px($BP_TABLET_SM + 1)) {
+    @include max-min(min px($BP_TABLET_SM)) {
+      // margin-left: initial;
+      // margin-right: initial;
       font-size: 20px;
       line-height: 28px;
       margin-top: 0;
     }
 
-    .table-row {
-      flex: 1;
-      @include flex;
-      padding: 14px 16px;
-      gap: 12px;
-      flex-direction: column;
+    .bp-title {
+      font-weight: 600;
+    }
 
-      @include max-min(min px($BP_TABLET_SM + 1)) {
+
+    // @include max-min(min px($BP_TABLET_SM + 1)) {
+    //   font-size: 20px;
+    //   line-height: 28px;
+    //   margin-top: 0;
+    // }
+
+    .table-row {
+      // flex: 1;
+      // @include flex;
+      padding: 14px 16px;
+      // gap: 12px;
+      // flex-direction: column;
+
+      // @include max-min(min px($BP_TABLET_SM + 1)) {
+      //   border-radius: 16px;
+      //   padding: 30px 55px;
+      //   flex-direction: row;
+      //   gap: 0px;
+      //   flex-direction: initial;
+
+      // }
+
+      gap: 12px;
+
+      @include max-min(min px($BP_TABLET_SM)) {
         border-radius: 16px;
         padding: 30px 55px;
         flex-direction: row;
@@ -918,40 +948,68 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
       }
 
       &:nth-child(odd) {
-        background: rgba(63, 63, 70, 0.03);
+        background: rgba(63, 63, 70, .03);
       }
 
 
       [class*="col-"] {
+        // background-color: rgba(gray, .12);
+        // padding: 0;
+        // width: 100%;
+        @include flex;
+        flex-direction: column;
+        // padding: 30px 55px;
 
-        @include max-min(max px($BP_MOBILE)) {
-          padding: 0;
-          width: 100%;
-          @include flex;
-          flex-direction: column;
-
+        @include max-min(max px($BP_MOBILE - 1)) {
+          // background-color: rgba(red, .12);
+          
           .titler {
             font-size: 18px;
             margin-top: 12px;
           }
         }
 
-        @include max-min(min px($BP_MOBILE + 1), max px($BP_TABLET_SM)) {
-          flex: 1;
-          padding: 0;
-          width: 100%;
+        @include max-min(min px($BP_MOBILE)) {
+          // background-color: rgba(red, .12);
           @include flex;
           flex-direction: row;
-
-          :nth-child(2) {
-            margin-left: auto;
-          }
+          justify-content: space-between;
         }
 
-        @include max-min(min px($BP_TABLET_SM + 1)) {
-          // flex: 0 0 auto;
-          // padding: 30px 55px;
+        @include max-min(min px($BP_TABLET_SM)) {
+          // background-color: rgba(orange, .12);
+          flex-direction: row;
         }
+
+
+        // // @include max-min(min px($BP_MOBILE + 1)) {
+        //   padding: 0;
+        //   width: 100%;
+        //   @include flex;
+        //   flex-direction: column;
+
+        //   .titler {
+        //     font-size: 18px;
+        //     margin-top: 12px;
+        //   }
+        // // }
+
+        // @include max-min(min px($BP_MOBILE + 1), max px($BP_TABLET_SM)) {
+        //   flex: 1;
+        //   padding: 0;
+        //   width: 100%;
+        //   @include flex;
+        //   flex-direction: row;
+
+        //   :nth-child(2) {
+        //     margin-left: auto;
+        //   }
+        // }
+
+        // @include max-min(min px($BP_TABLET_SM + 1)) {
+        //   // flex: 0 0 auto;
+        //   // padding: 30px 55px;
+        // }
 
       }
 
@@ -1024,13 +1082,20 @@ $filterBG: rgba-to-rgb(rgba($main_gold, .015));
 
 }
 
+.modal-container {
+  background-color: #FFF;
+  border-radius: 16px;
+}
+
 .mobile-calendar {
+  overflow: hidden;
+
   .days {
     width: 100%;
     overflow: auto;
     padding-top: 30px;
     padding-bottom: 30px;
-    
+
     span {
       @include flex-all;
       flex-direction: column;

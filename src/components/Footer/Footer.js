@@ -6,72 +6,7 @@ import { Facebook, Instagram, Youtube } from 'src/icons';
 import { useAppContext } from 'src/store';
 import useWindowSize from 'src/hooks/useWindowSize';
 import Image from 'next/image';
-
-
-export function _Footer(props) {
-  const [_navigation, set] = useAppContext()
-
-  return (
-    <div className={styles.container}>
-      <div className={classNames('flx', styles.wrap)}>
-        <div className={styles.navigationArea}>
-          <div className={styles.navListBox}>
-            <div className={styles.navListTitle}>კომპანიის შესახებ</div>
-            <ul className={styles.navList}>
-              {_navigation.footerNavigation.about && _navigation.footerNavigation.about.map((n, k) => {
-                return <li className={styles.navListItem} key={k}>
-                  <Link href={n.slug}>
-                    {n.text}
-                  </Link>
-                </li>
-              })}
-            </ul>
-            <div className={styles.navListBottom}>
-              <ul className={classNames(styles.navSocialList, 'flx flxAC')}>
-                <li className={styles.navSocialItem}>
-                  <Link href={'some'}>
-                    <Youtube />
-                  </Link>
-                </li>
-                <li className={styles.navSocialItem}>
-                  <Link href={'some'}>
-                    <Instagram />
-                  </Link>
-                </li>
-                <li className={styles.navSocialItem}>
-                  <Link href={'some'}>
-                    <Facebook />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className={styles.navListBox}>
-            <div className={styles.navListTitle}>მომხმარებლებისთვის</div>
-            <ul className={styles.navList}>
-              {_navigation.footerNavigation.users && _navigation.footerNavigation.users.map((n, k) => {
-                return <li className={styles.navListItem} key={k}>
-                  <Link href={n.slug}>
-                    {n.text}
-                  </Link>
-                </li>
-              })}
-            </ul>
-            <div className={styles.navListBottom}>
-              <p>Copyright © 2022 our website. All rights reserved.</p>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div className={styles.imageBg}>
-        <div className={styles.circle}></div>
-        <img src={'/assets/images/footer.svg'} />
-      </div>
-    </div>
-  )
-}
+import { VARIABLES } from 'src/utils';
 
 export default function Footer() {
   const [_navigation, set] = useAppContext();
@@ -102,7 +37,7 @@ export default function Footer() {
 
   return <div className={styles.footerArea}>
     <div className='footer footer--wrap'>
-
+    
       <div className='nav-grid'>
 
         <div className='col'>
@@ -119,7 +54,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className='col-el md-social btm'>
+          <div className='col-el btm hidden bp-sm:block'>
             <IconNavigaation />
           </div>
 
@@ -138,7 +73,7 @@ export default function Footer() {
               })}
             </ul>
           </div>
-          {width <= 375 ?
+          {width <= VARIABLES.bp.mobile.value ?
             <IconNavigaation />
             : null}
           <div className='col-el -copy_Right btm flxAll'>
@@ -148,8 +83,6 @@ export default function Footer() {
         </div>
 
       </div>
-
-
       <div className='bgArea'>
         <div className='circle'>
           <div className='image'>
@@ -157,14 +90,16 @@ export default function Footer() {
               <Image
                 alt=''
                 layout='fill'
-                width={535}
-                height={411}
-                src={'/assets/images/footer.png'} />
+                width={610}
+                height={472}
+                src={'/assets/images/footer.svg'} />
             </div>
           </div>
         </div>
 
       </div>
+
+
     </div>
   </div>
 }

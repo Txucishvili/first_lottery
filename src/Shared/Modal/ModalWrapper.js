@@ -11,6 +11,14 @@ export const CloseAction = (props) => {
   return <div>{props.children}</div>
 }
 
+export const ModalContainer = (props) => {
+  return  <div className={classNames('modal-container', props.className)}>
+      {props.children}
+    </div>
+   
+}
+
+
 export const SimpleModal = (props) => {
   const { open, onClose, width = 200, height = 200, variant = 'center' || 'top' || 'page' } = props;
   const overlay = useAnimationControls();
@@ -101,7 +109,10 @@ export const ModalBase = (props) => {
     document.documentElement.classList.add('no-scroll');
 
     return () => {
-      document.documentElement.classList.remove('no-scroll');
+      console.log('modals', document.getElementById('modals').childElementCount)
+      if (document.getElementById('modals').childElementCount < 1) {
+        document.documentElement.classList.remove('no-scroll');
+      }
     }
   }, [])
 
@@ -190,6 +201,7 @@ export function ModalWrapper(props) {
   const [mounted, setMounted] = useState(false);
 
 
+  // handle on prop change
   useEffect(() => {
     ref.current = document.getElementById('modals');
     // setMounted(true);

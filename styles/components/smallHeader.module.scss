@@ -10,7 +10,7 @@
   }
 
   .wrap {
-    @include layoutWrap();
+    @include layoutWrap(true);
 
     @include max-min(max px($BP_MOBILE)) {
       display: none;
@@ -18,7 +18,7 @@
 
 
     @include max-min(max px($LAYOUT_WRAP_SIZE + 20) min px(390)) {
-      padding: 0 20px;
+      // padding: 0 20px;
     }
   }
 

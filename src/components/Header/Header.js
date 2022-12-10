@@ -256,7 +256,7 @@ export default function Header() {
         <div className={styles.authArea}>
           <UserInfo />
           <Link href='https://auth.pirveli.ge/realms/xracoon-demo/protocol/openid-connect/auth?response_type=code&client_id=demo-client&scope=email%20profile%20roles%20openid&state=ozej6dlmtIpneeVt7QoGPy2zXJ9e6BNPdGltyKyn3X4%3D&redirect_uri=https://lot51.pirveli.ge&nonce=KAmXCp0jHrPiUph9D2p5yVwdpT5g3qWO0iCxqJFbiv0'>
-              <Button variant="primary">
+              <Button className="gap-8" variant="primary">
                 <IconWrap className='color-white' name="User" size={22} />
                 <span>შესვლა</span>
               </Button>

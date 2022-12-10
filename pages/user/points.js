@@ -1,7 +1,7 @@
 import IconWrap from '@/components/IconWrap';
 import SimpleDropDown from 'src/Shared/SimpleDropDown';
 import classNames from 'classnames';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styles from '../../styles/components/PoinsPage.module.scss'
 import DateRangePicker from '@/components/DateRangePicker';
 import { CheckBox, Input } from '../../src/Shared/Input';
@@ -12,7 +12,7 @@ import { addMonths, compareAsc, format, getDaysInMonth, setDefaultOptions, subMo
 import { delay, isInt, numberWithSpaces, VARIABLES } from 'src/utils';
 import Badge from 'src/Shared/Badge';
 import useBreakPoint from 'src/hooks/useBreakPoint';
-import ModalWrapper, { ModalBase } from 'src/Shared/Modal/ModalWrapper';
+import ModalWrapper, { ModalBase, ModalContainer } from 'src/Shared/Modal/ModalWrapper';
 import { ka } from 'date-fns/locale'
 
 
@@ -39,17 +39,252 @@ const ListItem = ({
   </div>
 }
 
+const MobileCalendar = ({ startDate: _startDate, endDate: _endDate, onChange }) => {
+  const [date, setDate] = useState(_startDate || new Date());
 
-
-const MobileFilter = () => {
-  const [date, setDate] = useState(new Date());
-  const [selectedDate, setSelectDate] = useState(null);
+  const [startDate, setStartDate] = useState(_startDate || null);
+  const [endDate, setEndDate] = useState(_endDate || null);
 
   const days = getDaysInMonth(date);
 
-  const daysArray = Array(days).fill(null).map((d, k) => {
-    return new Date(date.getFullYear(), date.getMonth(), k + 1)
-  });
+  const daysArray = useMemo(() => {
+    return Array(days).fill(null).map((d, k) => {
+      const _day = new Date(date.getFullYear(), date.getMonth(), k + 1);
+      let isSelected;
+
+      if (compareAsc(_day, startDate) == 0 || endDate && compareAsc(_day, endDate) == 0) {
+        isSelected = true;
+      }
+
+      if (endDate) {
+        if ((compareAsc(_day, startDate) == 1 && compareAsc(_day, endDate) == -1) || compareAsc(_day, startDate) == -1 && compareAsc(_day, endDate) == 1) {
+          isSelected = true;
+        }
+      }
+
+      return {
+        isSelected: isSelected,
+        date: _day
+      }
+    })
+  }, [date, days, endDate, startDate]);
+
+  return <>
+    <div className='month flx flxAI gap-12 p-inline-16'>
+      <div>
+        {startDate ? format(startDate, 'dd LLLL yyyy') : 'აირჩიეთ თარიღი'}
+        {endDate ? ' - ' + format(endDate, 'dd LLLL yyyy') : null}
+      </div>
+      <div className='flx flxAI gap-10 toRight'>
+        <Button reset style={{ borderRadius: 4, width: 18, height: 18 }} onClick={() => {
+          setDate(subMonths(date, 1))
+        }}
+          variant={'primary'} size="normal">
+          <IconWrap size={18} className="color-white rotate-90" name='ArrowSvg' />
+        </Button>
+        <div className='text-center' style={{ minWidth: 150 }}>{format(date, 'LLLL yyyy')}</div>
+        <Button
+          reset style={{ borderRadius: 4, width: 18, height: 18 }}
+          onClick={() => {
+            setDate(addMonths(date, 1));
+            setDefaultOptions({ locale: ka })
+          }} variant={'primary'} size="normal">
+          <IconWrap size={18} className="color-white rotate-270" name='ArrowSvg' />
+        </Button>
+      </div>
+    </div>
+    <div className='days flx gap-12 p-inline-12'>
+      {daysArray.map((d, k) => {
+        return <span
+          className={classNames({
+            active: d.isSelected
+          })}
+          onClick={() => {
+            if (!startDate) {
+              setStartDate(d.date)
+              onChange([d.date, endDate].sort(compareAsc))
+            } else {
+              if (compareAsc(startDate, d.date) == 0) {
+                if (!endDate) {
+                  setStartDate(null)
+                  onChange([null, null]
+                    .sort(compareAsc))
+                }
+              } else if (compareAsc(endDate, d.date) == 0) {
+                setEndDate(null);
+                onChange([startDate, null]
+                  .sort(compareAsc))
+              } else {
+                setEndDate(d.date);
+                onChange([startDate, d.date].sort(compareAsc))
+              }
+
+            }
+          }} key={k}>
+          {/* <div>{compareAsc(startDate, d) == 0 ? 'start' : '-'}</div>
+          <div>{compareAsc(endDate, d) == 0 ? 'end' : '-'}</div> */}
+          {/* <div>{d.isSelected.toString()}</div> */}
+          <div>{format(d.date, 'dd')}</div>
+          <div>{format(d.date, 'EE')}</div>
+          {/* <div>{format(new Date(date.getFullYear(), date.getMonth(), d), 'EE')}</div> */}
+          {/* <div>{selectedDate ? format(selectedDate, 'dd') : null}</div> */}
+          {/* <div>{compareAsc(d, selectedDate) == 0 ? 'active' : null}</div> */}
+        </span>
+      })}
+    </div></>
+}
+
+const MobileFilterModal = ({ options, setFilter }) => {
+  const [modalOpen, setModal] = useState({ target: null, value: false });
+
+
+  const [selectedPlatforms, setPlatforms] = useState(options.platforms.value);
+  const rangeRef = useRef({ from_range: '', to_range: '' })
+  const [dateRange, setDateRange] = useState([options.winningDate_from.value, options.winningDate_to.value]);
+
+  const onPlatfromSelect = (e) => {
+    if (selectedPlatforms.includes(e)) {
+      setPlatforms(selectedPlatforms.filter((el) => el !== e))
+    } else {
+      setPlatforms(selectedPlatforms.concat([e]))
+    }
+  }
+
+  const onModalOpen = (target, value) => {
+    setModal({
+      target,
+      value
+    })
+  }
+
+  useEffect(() => {
+    console.log('image.png 2', dateRange)
+  }, [dateRange])
+
+  const onCalendarChange = (e) => {
+    console.log('onCalendarChange', e)
+
+    setFilter({ winningDate_from: e[0], winningDate_to: e[1] })
+
+    // setFilter({ winningDate_from: e[0], winningDate_to: e[1] })
+  }
+
+  let ModalContent = null;
+
+  if (modalOpen.target == 'platform') {
+    ModalContent = <>
+      <ListItems className='fontMT selectList'>
+        {Platforms.map((platform) => {
+          return <ListItem
+            className={classNames('selectList--item', `b-color-${platform.slug}`, {
+              [`active`]: selectedPlatforms.includes(platform.slug)
+            })} key={platform.slug}>
+            <label>
+              <div className='icon-area m-right-30'>
+                <IconWrap size={18} name={platform.icon} />
+              </div>
+              <div>{platform.name}</div>
+              <div className='toRight'>
+                <CheckBox name={platform.slug}
+                  checked={selectedPlatforms.includes(platform.slug)}
+                  onChange={(e) => {
+                    onPlatfromSelect(platform.slug)
+                  }} />
+              </div>
+            </label>
+          </ListItem>
+        })}
+      </ListItems>
+      <div className='flx flxAll p-top-24'>
+        <Button
+          style={{ fontSize: 16 }}
+          variant={'primary'}
+          size={'medium'}
+          onClick={() => {
+            setFilter({ platforms: selectedPlatforms });
+            onModalOpen('platform', false);
+          }}>
+          არჩევა
+        </Button>
+      </div></>
+  } else if (modalOpen.target == 'points') {
+    ModalContent = <div className='p-inline-24'>
+      <div className='text-center text-color-gray text-w-600 text-size-16 p-bottom-20'>დაგროვილი ქულები</div>
+      <div className='text-center text-color-gray-light text-size-15 p-bottom-20'>ქულები</div>
+      <div className='flx gap-24 font-secondary-nus'>
+        <div className='flx flxAI gap-4'>
+          <Input
+            value={options.from_range.value}
+            style={{ width: 88, height: 40 }}
+            iconPosition="bottom"
+            variant={'outline'}
+            full
+            textAlign={'center'}
+            type={'number'}
+            hideDefaultApearance
+            placeholder='0'
+            onChange={(e) => {
+              rangeRef.current.from_range = e.target.value;
+            }}
+          />
+          <div> - დან</div>
+        </div>
+        <div className='flx flxAI gap-4'>
+          <Input
+            value={options.to_range.value}
+            style={{ width: 88, height: 40 }}
+            iconPosition="bottom"
+            variant={'outline'}
+            full
+            hideDefaultApearance
+            textAlign={'center'}
+            type={'number'}
+            placeholder='100'
+            onChange={(e) => {
+              rangeRef.current.to_range = e.target.value;
+            }}
+          />
+          <div> - მდე</div>
+        </div>
+      </div>
+      <div className='flx flxAll p-top-24'>
+        <Button
+          style={{ fontSize: 16 }}
+          variant={'primary'}
+          size={'medium'}
+          onClick={() => {
+            setFilter(rangeRef.current)
+            modalRef.current.open(false);
+            onModalOpen('points', false);
+          }}>
+          <div className='flxAll gap-12'>
+            <span>არჩევა</span>
+          </div>
+        </Button>
+      </div>
+    </div>
+  } else if (modalOpen.target == 'sort') {
+    ModalContent = <ListItems className='p-block-26 flx flxCol font-secondary-nus'>
+      <ListItem>
+        <Button
+          align='left'
+          onClick={() => setFilter({ sort: ['points-from'] })}
+          reset full className='p-block-12 p-inline-24 icon-area text-color-green'>
+          <IconWrap size={18} name={'Plus'} className={'color-green m-right-12'} />
+          <p>{'შეძენილი ქულები'}</p>
+        </Button>
+      </ListItem>
+      <ListItem>
+        <Button
+          align='left'
+          onClick={() => setFilter({ sort: ['points-to'] })}
+          reset full className='p-block-12 p-inline-24 icon-area text-color-red'>
+          <IconWrap size={18} name={'Minus'} className={'color-red m-right-12'} />
+          <p>{'გახარჯული ქულები'}</p>
+        </Button>
+      </ListItem>
+    </ListItems>
+  }
 
   return <div className='bottom-paper p-top-32 p-bottom-54 mobile-calendar'>
     <div className='head flx flxAll p-bottom-32 m-inline-16 p-relative'>
@@ -58,62 +293,17 @@ const MobileFilter = () => {
       </div>
       <p className='text-center text-color-gray'>ფილტრი</p>
     </div>
-    <div className='month flx flxAI gap-12 p-inline-16'>
-      <div>
-        {selectedDate ? format(selectedDate, 'dd LLLL yyyy') : null}
-      </div>
-      <div className='flx flxAI gap-10 toRight'>
-        <Button reset className="p-inline-6 p-block-4" onClick={() => {
-          setDate(subMonths(date, 1))
-        }}
-          variant={'primary'} size="normal">
-          <IconWrap className="color-white rotate-90" name='ArrowSvg' />
-        </Button>
-        <div className='text-center' style={{ width: 100 }}>{format(date, 'LLLL')}</div>
-        <Button
-          reset
-          className="p-inline-6 p-block-4"
-          onClick={() => {
-            setDate(addMonths(date, 1));
-            setDefaultOptions({ locale: ka })
-          }} variant={'primary'} size="normal">
-          <IconWrap className="color-white rotate-270" name='ArrowSvg' />
-        </Button>
-      </div>
-    </div>
-    <div className='days flx gap-12 p-inline-12'>
-      {daysArray.map((d, k) => {
-        return <span
-          className={classNames({
-            active: compareAsc(d, selectedDate) == 0
-          })}
-          onClick={() => {
-            if (!selectedDate) {
-              setSelectDate(d)
-            } else {
-              if (compareAsc(selectedDate, d) == 0) {
-                setSelectDate(null);
-              } else {
-                setSelectDate(d)
-              }
-            }
-          }} key={k}>
-          <div>{format(d, 'dd')}</div>
-          <div>{format(d, 'EE')}</div>
-          {/* <div>{format(new Date(date.getFullYear(), date.getMonth(), d), 'EE')}</div> */}
-          {/* <div>{selectedDate ? format(selectedDate, 'dd') : null}</div> */}
-          {/* <div>{compareAsc(d, selectedDate) == 0 ? 'active' : null}</div> */}
-        </span>
-      })}
-    </div>
+    <MobileCalendar
+      startDate={dateRange[0]}
+      endDate={dateRange[1]}
+      onChange={onCalendarChange}
+    />
     <div className='btns row p-top-12 p-inline-12'>
       <div className='col-6'>
         <Button
           wide
           variant={'light'}
-          onClick={() => {
-            setMobileModal(!mobileModal)
-          }}>
+          onClick={() => onModalOpen('platform', true)}>
           <div className='flxAll gap-12'>
             <span>პლატფორმა</span>
             <IconWrap className="color-gray" name="ArrowSvg" />
@@ -124,9 +314,7 @@ const MobileFilter = () => {
         <Button
           wide
           variant={'light'}
-          onClick={() => {
-            setMobileModal(!mobileModal)
-          }}>
+          onClick={() => onModalOpen('points', true)}>
           <div className='flxAll gap-12'>
             <span>ქულები</span>
             <IconWrap className="color-gray" name="ArrowSvg" />
@@ -134,18 +322,110 @@ const MobileFilter = () => {
         </Button>
       </div>
     </div>
+
+    <ModalWrapper
+      onClose={() => {
+        console.log('--------------')
+        onModalOpen(modalOpen.target, false)
+      }}
+      open={modalOpen.value}>
+      <ModalBase align="center" >
+        <ModalContainer className="p-block-20">
+
+          {ModalContent}
+
+        </ModalContainer>
+      </ModalBase>
+    </ModalWrapper>
+
   </div>
 }
 
+const MobileFilterOptions = ({ options, onAction }) => {
+  const [mobileModal, setMobileModal] = useState(true);
+  const [sortMdal, setSortModal] = useState(false);
+
+  const setFilter = (e) => {
+    onAction && onAction('filter', e)
+  }
+
+  return <>
+
+    <div className='bp-md-s:hidden'>
+      <div className='flx row'>
+        <div className='col-6'>
+          <Button
+            wide
+            variant={'light'}
+            onClick={() => {
+              setMobileModal(!mobileModal)
+            }}>
+            <span>ფილტრაცია</span>
+            <IconWrap className={'m-left-8'} size={22} name="Filter" />
+          </Button>
+        </div>
+        <div className='col-6'>
+          <Button
+            wide
+            variant={'light'}
+            onClick={() => {
+              setSortModal(true)
+            }}>
+            <span>წყობა</span>
+            <IconWrap className={'m-left-8'} size={22} name="SortDesc" />
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <ModalWrapper
+      onClose={() => {
+        setSortModal(false);
+      }}
+      open={sortMdal}>
+      <ModalBase align="center" >
+        <ModalContainer className="p-block-20">
+
+          <ListItems className='flx flxCol font-secondary-nus'>
+            <ListItem>
+              <Button
+                align='left'
+                onClick={() => setFilter({ sort: ['points-from'] })}
+                reset full className='p-block-12 p-inline-24 icon-area text-color-green'>
+                <IconWrap size={18} name={'Plus'} className={'color-green m-right-12'} />
+                <p>{'შეძენილი ქულები'}</p>
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                align='left'
+                onClick={() => setFilter({ sort: ['points-to'] })}
+                reset full className='p-block-12 p-inline-24 icon-area text-color-red'>
+                <IconWrap size={18} name={'Minus'} className={'color-red m-right-12'} />
+                <p>{'გახარჯული ქულები'}</p>
+              </Button>
+            </ListItem>
+          </ListItems>
+
+        </ModalContainer>
+      </ModalBase>
+    </ModalWrapper>
 
 
 
+    <ModalWrapper
+      onClose={() => {
+        setMobileModal(false)
+      }}
+      open={mobileModal}>
+      <ModalBase variant="bottom" align="bottom" >
+        <MobileFilterModal setFilter={setFilter} options={options} />
+      </ModalBase>
+    </ModalWrapper>
 
+  </>
+}
 
-
-
-
-// 
 const Platforms = [
   { name: 'მედიქალი', icon: 'Medical', color: 'pink', slug: 'medical' },
   { name: 'ვაუჩერები', icon: 'TicketOutline', color: 'violet', slug: 'vouchers' },
@@ -234,12 +514,11 @@ const filters = {
 }
 
 
-const FilterOptions = ({ options, onAction }) => {
+const FilterOptions = ({ options, onAction, className }) => {
   const rangeFromRef = useRef();
   const rangeToRef = useRef();
   const datePickerDrop = useRef();
   const [dateRange, setDateRange] = useState([options.winningDate_from.value, options.winningDate_to.value]);
-  const [mobileModal, setMobileModal] = useState(true);
 
   useEffect(() => {
     if (options.winningDate_from.value == null || options.winningDate_to.value == null) {
@@ -278,7 +557,7 @@ const FilterOptions = ({ options, onAction }) => {
     }
   }
 
-  return <div className='wrapEl'>
+  return <div className={classNames('wrapEl', className)}>
     <div className={styles.filterWrap}>
       {/* <div className='filter-col-line flx flxAI'>
         <Input
@@ -426,6 +705,7 @@ const FilterOptions = ({ options, onAction }) => {
             <ListItems className='p-block-26 flx flxCol font-secondary-nus'>
               <ListItem>
                 <Button
+                  align='left'
                   onClick={() => setFilter({ sort: ['points-from'] })}
                   reset full className='p-block-12 p-inline-24 icon-area text-color-green'>
                   <IconWrap size={18} name={'Plus'} className={'color-green m-right-12'} />
@@ -434,6 +714,7 @@ const FilterOptions = ({ options, onAction }) => {
               </ListItem>
               <ListItem>
                 <Button
+                  align='left'
                   onClick={() => setFilter({ sort: ['points-to'] })}
                   reset full className='p-block-12 p-inline-24 icon-area text-color-red'>
                   <IconWrap size={18} name={'Minus'} className={'color-red m-right-12'} />
@@ -443,26 +724,9 @@ const FilterOptions = ({ options, onAction }) => {
             </ListItems>
           </SimpleDropDown.Body>
         </SimpleDropDown>
+
       </div>
     </div>
-    <Button
-      variant={'light'}
-      onClick={() => {
-        setMobileModal(!mobileModal)
-      }}>
-      <span>ფილტრაცია</span>
-      <IconWrap name="Filter" />
-    </Button>
-    <ModalWrapper
-      onClose={() => {
-        setMobileModal(false)
-      }}
-      open={mobileModal}>
-      <ModalBase variant="bottom" align="bottom" >
-        <MobileFilter />
-      </ModalBase>
-    </ModalWrapper>
-
   </div>
 }
 
@@ -472,39 +736,43 @@ const FilterList = ({
 
   const { bp, width } = useBreakPoint();
 
-  return <div className='simple-table grid' style={{ width: '100%' }}>
-    <div className='bp-md-s'>
-      <div className='grid-row-head table-row row p-block-32 bp-md'>
-        <div className='col-3'>ტრანზაქციის ID</div>
-        <div className='col-3'>პლატფორმა</div>
-        <div className='col-3'>დარიცხული ქულები</div>
-        <div className='col-1'>თარიღი</div>
+  return <div className='simple-table' style={{ width: '100%' }}>
+    <div className='hidden bp-md-s:block'>
+      <div className='grid-row-head'>
+        <div className='table-row row p-block-32 bp-md'>
+          <div className='col-sm-12 col-md-3 col-xl-3'>ტრანზაქციის ID</div>
+          <div className='col-sm-12 col-md-3 col-xl-3'>პლატფორმა</div>
+          <div className='col-sm-12 col-md-3 col-xl-3'>დარიცხული ქულები</div>
+          <div className='col-sm-12 col-md-3 col-xl-3'>თარიღი</div>
+        </div>
       </div>
     </div>
-    <div className='grid-row-body'>
+    <div className='grid-row-body '>
 
       {listItems.length ? listItems.map((item) => {
-        return <div className='table-row row' key={item.transactionId}>
-          <div className='col-3'>
-            {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>ტრანზაქციის ID: </span> : null}
-            <div>
-              <span className='m-right-8'>#</span>
-              <span className='titler'>{item.transactionId}</span>
+        return <div className='table-row' key={item.transactionId}>
+          <div className='row'>
+            <div className='col-sm-12 col-md-3 col-xl-3'>
+              {width <= VARIABLES.bp.tablet_sm.value - 1 ? <span className='bp-title'>ტრანზაქციის ID: </span> : null}
+              <div className='titler'>
+                <span className='m-right-8'>#</span>
+                <span>{item.transactionId}</span>
+              </div>
             </div>
-          </div>
-          <div className='col-3'>
-            {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>პლატფორმა: </span> : null}
-            <span className='titler'>{item.platform.name}</span>
-          </div>
-          <div className='col-3'>
-            {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>დაგროვილი ქულები: </span> : null}
-            <span
-              className={classNames(`titler, text-color-${item.points <= 0 ? 'red' : 'green'}`)}
-            >{numberWithSpaces(item.points)}</span>
-          </div>
-          <div className='col-1'>
-            {width <= VARIABLES.bp.tablet_sm.value ? <span className='bp-title'>თარიღი: </span> : null}
-            <span className='titler'>{format(new Date(item.date), 'MM/dd/yyyy')}</span>
+            <div className='col-sm-12 col-md-3 col-xl-3'>
+              {width <= VARIABLES.bp.tablet_sm.value - 1 ? <span className='bp-title'>პლატფორმა: </span> : null}
+              <span className='titler'>{item.platform.name}</span>
+            </div>
+            <div className='col-sm-12 col-md-3 col-xl-3'>
+              {width <= VARIABLES.bp.tablet_sm.value - 1 ? <span className='bp-title'>დაგროვებული ქულები: </span> : null}
+              <span
+                className={classNames(`titler text-color-${item.points <= 0 ? 'red' : 'green'}`)}
+              >{numberWithSpaces(item.points)}</span>
+            </div>
+            <div className='col-sm-12 col-md-3 col-xl-3'>
+              {width <= VARIABLES.bp.tablet_sm.value - 1 ? <span className='bp-title'>თარიღი: </span> : null}
+              <span className='titler'>{format(new Date(item.date), 'MM/dd/yyyy')}</span>
+            </div>
           </div>
         </div>
       }) : null}
@@ -589,9 +857,17 @@ export default function UserPointsPage(props) {
         <h3>ქულების რაოდენობა</h3>
       </div>
       <div className='layout--wrap'>
-        <FilterOptions onAction={onFilterAction} options={options} />
+        <FilterOptions
+          className={'hidden bp-md-s:block'}
+          onAction={onFilterAction}
+          options={options}
+        />
 
-        <div className='flx flx-wrap gap-12 m-top-20'>
+        <MobileFilterOptions
+          options={options}
+          onAction={onFilterAction}
+        />
+        <div className='flx flx-wrap gap-12 m-block-20'>
           {options.platforms.value.map((p) => {
             return <div key={p}>
               <Badge className={'flx-align-end'} clearable onClear={() => {
@@ -656,7 +932,14 @@ export default function UserPointsPage(props) {
           >
 
             <div className='flx gap-24'>
-              {options.sort.value[0] == 'points-from' ? 'შეძენილი ქულები' : 'გახარჯული ქულები'}
+              <div
+                className={classNames('p-block-12 p-inline-24 icon-area flxAll', `text-color-${options.sort.value[0] == 'points-from' ? 'green' : 'red'}`)}>
+                <IconWrap size={18}
+                  name={options.sort.value[0] == 'points-from' ? 'Plus' : 'Minus'}
+                  className={classNames('m-right-12', `color-${options.sort.value[0] == 'points-from' ? 'green' : 'red'}`)} />
+                <p>{options.sort.value[0] == 'points-from' ? 'შეძენილი ქულები' : 'გახარჯული ქულები'}</p>
+              </div>
+
             </div>
 
           </Badge> : null}
